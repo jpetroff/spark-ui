@@ -1,0 +1,70 @@
+import type { Bindable } from "../../common/zag/core/index.ts";
+import type { BindableParams } from "../../common/zag/core/index.ts";
+import { identity } from "../../common/zag/utils/index.ts";
+import { isFunction } from "../../common/zag/utils/index.ts";
+import { flushSync, onDestroy, untrack } from "svelte"
+
+export function bindable<T>(props: () => BindableParams<T>): Bindable<T> {
+  const initial = props().value ?? props().defaultValue
+  const eq = props().isEqual ?? Object.is
+
+  let value = $state(initial)
+  // Avoid a component-owned derived because bindables may be read during deferred cleanup.
+  const controlled = () => props().value !== undefined
+
+  let valueRef = { current: untrack(() => value) }
+  let prevValue = { current: undefined as T | undefined }
+
+  $effect.pre(() => {
+    const v = controlled() ? props().value : value
+    valueRef = { current: v }
+    prevValue = { current: v as T }
+  })
+
+  const setValueFn = (v: T | ((prev: T) => T)) => {
+    const next = isFunction(v) ? v(valueRef.current as T) : v
+    const prev = prevValue.current as T | undefined
+    if (props().debug) {
+      console.log(`[bindable > ${props().debug}] setValue`, { next, prev })
+    }
+
+    if (!controlled()) value = next
+    if (!eq(next, prev)) {
+      props().onChange?.(next, prev)
+    }
+  }
+
+  function get(): T {
+    return (controlled() ? props().value : value) as T
+  }
+
+  return {
+    initial,
+    ref: valueRef,
+    get,
+    set(val: T | ((prev: T) => T)) {
+      const exec = props().sync ? flushSync : identity
+      untrack(() => exec(() => setValueFn(val)))
+    },
+    invoke(nextValue: T, prevValue: T) {
+      props().onChange?.(nextValue, prevValue)
+    },
+    hash(value: T) {
+      return props().hash?.(value) ?? String(value)
+    },
+  }
+}
+
+bindable.cleanup = (fn: VoidFunction) => {
+  onDestroy(() => fn())
+}
+
+bindable.ref = <T>(defaultValue: T) => {
+  let value = defaultValue
+  return {
+    get: () => value,
+    set: (next: T) => {
+      value = next
+    },
+  }
+}

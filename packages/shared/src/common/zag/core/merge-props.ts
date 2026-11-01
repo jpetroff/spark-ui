@@ -1,0 +1,127 @@
+import { callAll } from "../utils/index.ts";
+import { isString } from "../utils/index.ts";
+
+interface Props {
+  [key: string | symbol]: any
+}
+
+const clsx = (...args: (string | undefined)[]) =>
+  args
+    .map((str) => str?.trim?.())
+    .filter(Boolean)
+    .join(" ")
+
+const ownedBy = (...args: (string | undefined)[]) =>
+  Array.from(
+    new Set(
+      clsx(...args)
+        .split(/\s+/)
+        .filter(Boolean),
+    ),
+  ).join(" ")
+
+const CSS_REGEX = /((?:--)?(?:\w+-?)+)\s*:\s*([\s\S]*)/
+
+const serialize = (style: string): Record<string, string> => {
+  const res: Record<string, string> = {}
+  const add = (declaration: string) => {
+    const match = CSS_REGEX.exec(declaration)
+    if (match) res[match[1]!] = match[2]!
+  }
+  let start = 0
+  let depth = 0
+  let quote = ""
+  let comment = false
+
+  for (let i = 0; i < style.length; i++) {
+    const char = style[i]
+
+    if (comment) {
+      if (char === "*" && style[i + 1] === "/") {
+        comment = false
+        i++
+      }
+    } else if (quote) {
+      if (char === "\\") i++
+      if (char === quote) quote = ""
+    } else if (char === "\\") {
+      i++
+    } else if (char === "/" && style[i + 1] === "*") {
+      comment = true
+      i++
+    } else if (char === '"' || char === "'") quote = char
+    else if (char === "(") depth++
+    else if (char === ")" && depth) depth--
+    else if (char === ";" && !depth) {
+      add(style.slice(start, i))
+      start = i + 1
+    }
+  }
+  add(style.slice(start))
+  return res
+}
+
+const css = (
+  a: Record<string, string> | string | undefined,
+  b: Record<string, string> | string | undefined,
+): Record<string, string> | string => {
+  if (isString(a)) {
+    if (isString(b)) return `${a};${b}`
+    a = serialize(a)
+  } else if (isString(b)) {
+    b = serialize(b)
+  }
+  return Object.assign({}, a ?? {}, b ?? {})
+}
+
+type TupleTypes<T extends any[]> = T[number]
+
+type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never
+
+export function mergeProps<T extends Props>(...args: Array<T | undefined>): UnionToIntersection<TupleTypes<T[]>> {
+  let result: Props = {}
+
+  for (let props of args) {
+    if (!props) continue
+
+    // Handle string keys
+    for (let key in result) {
+      if (key.startsWith("on") && typeof result[key] === "function" && typeof props[key] === "function") {
+        result[key] = callAll(props[key], result[key])
+        continue
+      }
+
+      if (key === "className" || key === "class") {
+        result[key] = clsx(result[key], props[key])
+        continue
+      }
+
+      if (key === "style") {
+        result[key] = css(result[key], props[key])
+        continue
+      }
+
+      if (key === "data-ownedby") {
+        result[key] = ownedBy(result[key], props[key])
+        continue
+      }
+
+      result[key] = props[key] !== undefined ? props[key] : result[key]
+    }
+
+    // Add props from b that are not in a
+    for (let key in props) {
+      if (result[key] === undefined) {
+        result[key] = props[key]
+      }
+    }
+
+    // Handle symbol keys (for Svelte attachments)
+    const symbols = Object.getOwnPropertySymbols(props)
+    for (let symbol of symbols) {
+      result[symbol] = props[symbol]
+    }
+  }
+
+  return result as any
+}

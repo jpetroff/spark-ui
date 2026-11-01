@@ -1,0 +1,17 @@
+node_modules
+dist
+storybook-static
+public/r
+pnpm-lock.yaml
+.serena
+# Preserve upstream formatting and deterministic generated hashes.
+packages/*/src/common/
+packages/*/src/react/
+packages/*/src/svelte/
+packages/shared/
+vendor.lock.json
+registry.react.json
+registry.svelte.json
+.vendor-tests/
+# The importer composes generated public items with the native Button entry.
+registry.json

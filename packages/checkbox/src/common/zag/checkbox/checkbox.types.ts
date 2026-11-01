@@ -1,0 +1,147 @@
+import type { CommonProperties } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { DirectionProperty } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { RequiredBy } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { EventObject } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { Machine } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
+
+/* -----------------------------------------------------------------------------
+ * Callback details
+ * -----------------------------------------------------------------------------*/
+
+export type CheckedState = boolean | "indeterminate"
+
+export interface CheckedChangeDetails {
+  checked: CheckedState
+}
+
+/* -----------------------------------------------------------------------------
+ * Machine context
+ * -----------------------------------------------------------------------------*/
+
+export interface ElementIds {
+  root?: string | undefined
+  hiddenInput?: string | undefined
+  control?: string | undefined
+  label?: string | undefined
+}
+
+export interface CheckboxProps extends DirectionProperty, CommonProperties {
+  /**
+   * The ids of the elements in the checkbox. Useful for composition.
+   */
+  ids?: ElementIds | undefined
+  /**
+   * Whether the checkbox is disabled
+   */
+  disabled?: boolean | undefined
+  /**
+   * Whether the checkbox is invalid
+   */
+  invalid?: boolean | undefined
+  /**
+   * Whether the checkbox is required
+   */
+  required?: boolean | undefined
+  /**
+   * The controlled checked state of the checkbox
+   */
+  checked?: CheckedState | undefined
+  /**
+   * The initial checked state of the checkbox when rendered.
+   * Use when you don't need to control the checked state of the checkbox.
+   */
+  defaultChecked?: CheckedState | undefined
+  /**
+   * Whether the checkbox is read-only
+   */
+  readOnly?: boolean | undefined
+  /**
+   * The callback invoked when the checked state changes.
+   */
+  onCheckedChange?: ((details: CheckedChangeDetails) => void) | undefined
+  /**
+   * The name of the input field in a checkbox.
+   * Useful for form submission.
+   */
+  name?: string | undefined
+  /**
+   * The id of the form that the checkbox belongs to.
+   */
+  form?: string | undefined
+  /**
+   * The value of checkbox input. Useful for form submission.
+   * @default "on"
+   */
+  value?: string | undefined
+}
+
+type PropsWithDefault = "value"
+
+export interface CheckboxSchema {
+  state: "ready"
+  props: RequiredBy<CheckboxProps, PropsWithDefault>
+  context: {
+    checked: CheckedState
+    active: boolean
+    focused: boolean
+    focusVisible: boolean
+    hovered: boolean
+    fieldsetDisabled: boolean
+  }
+  computed: {
+    indeterminate: boolean
+    checked: boolean
+    disabled: boolean
+  }
+  event: EventObject
+  action: string
+  effect: string
+  guard: string
+}
+
+export type CheckboxService = Service<CheckboxSchema>
+
+export type CheckboxMachine = Machine<CheckboxSchema>
+
+/* -----------------------------------------------------------------------------
+ * Component API
+ * -----------------------------------------------------------------------------*/
+
+export interface CheckboxApi<T extends PropTypes = PropTypes> {
+  /**
+   * Whether the checkbox is checked
+   */
+  checked: boolean
+  /**
+   * Whether the checkbox is disabled
+   */
+  disabled: boolean | undefined
+  /**
+   * Whether the checkbox is indeterminate
+   */
+  indeterminate: boolean
+  /**
+   * Whether the checkbox is focused
+   */
+  focused: boolean | undefined
+  /**
+   *  The checked state of the checkbox
+   */
+  checkedState: CheckedState
+  /**
+   * Function to set the checked state of the checkbox
+   */
+  setChecked: (checked: CheckedState) => void
+  /**
+   * Function to toggle the checked state of the checkbox
+   */
+  toggleChecked: VoidFunction
+
+  getRootProps: () => T["label"]
+  getLabelProps: () => T["element"]
+  getControlProps: () => T["element"]
+  getHiddenInputProps: () => T["input"]
+  getIndicatorProps: () => T["element"]
+}

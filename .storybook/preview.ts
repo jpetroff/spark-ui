@@ -1,0 +1,14 @@
+import type { Preview } from '@storybook/react-vite'
+import '../src/styles.css'
+
+const preview: Preview = {
+  tags: ['autodocs'],
+  parameters: {
+    layout: 'centered',
+    controls: { matchers: { color: /(background|color)$/i, date: /Date$/i } },
+    options: { storySort: { method: 'alphabetical' } },
+    a11y: { test: 'error' },
+  },
+}
+
+export default preview

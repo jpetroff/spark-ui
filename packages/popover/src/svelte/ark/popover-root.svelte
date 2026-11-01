@@ -1,0 +1,55 @@
+<script module lang="ts">
+  import type { Snippet } from 'svelte'
+  import type { UsePresenceProps } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
+  import type { UsePopoverProps } from "./use-popover.svelte.ts";
+
+  export interface PopoverRootBaseProps extends UsePopoverProps, UsePresenceProps {}
+  export interface PopoverRootProps extends PopoverRootBaseProps {
+    children?: Snippet
+  }
+</script>
+
+<script lang="ts">
+  import { PresenceProvider } from "../../../../presence/src/svelte/ark/use-presence-context.ts";
+import { usePresence } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
+  import { splitPresenceProps } from "../../../../presence/src/svelte/ark/split-presence-props.svelte.ts";
+  import { PopoverProvider } from "./use-popover-context.ts";
+  import { usePopover } from "./use-popover.svelte.ts";
+
+  let { open = $bindable(), triggerValue = $bindable<string | null>(), children, ...props }: PopoverRootProps = $props()
+
+  const providedId = $props.id()
+
+  const [presenceProps, localProps] = $derived(splitPresenceProps(props))
+
+  const machineProps = $derived.by<UsePopoverProps>(() => {
+    return {
+      ...localProps,
+      id: localProps.id ?? providedId,
+      open,
+      triggerValue,
+      onOpenChange(details) {
+        localProps.onOpenChange?.(details)
+        if (open !== undefined) open = details.open
+      },
+      onTriggerValueChange(details) {
+        localProps.onTriggerValueChange?.(details)
+        if (triggerValue !== undefined) triggerValue = details.value
+      },
+    }
+  })
+
+  const popover = usePopover(() => machineProps)
+
+  const presenceMachineProps = $derived.by<UsePresenceProps>(() => ({
+    ...presenceProps,
+    present: popover().open,
+  }))
+
+  const presence = usePresence(() => presenceMachineProps)
+
+  PopoverProvider(popover)
+  PresenceProvider(presence)
+</script>
+
+{@render children?.()}

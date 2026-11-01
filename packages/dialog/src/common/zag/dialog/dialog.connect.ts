@@ -1,0 +1,128 @@
+import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
+import { dataAttr } from "../../../../../shared/src/common/zag/dom-query/shared.ts";
+import type { JSX } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { NormalizeProps } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
+import { compact } from "../../../../../shared/src/common/zag/utils/index.ts";
+import { parts } from "./dialog.anatomy.ts";
+import * as dom from "./dialog.dom.ts"
+import type { DialogApi } from "./dialog.types.ts";
+import type { DialogSchema } from "./dialog.types.ts";
+import type { TriggerProps } from "./dialog.types.ts";
+
+export function connect<T extends PropTypes>(
+  service: Service<DialogSchema>,
+  normalize: NormalizeProps<T>,
+): DialogApi<T> {
+  const { state, send, context, prop, scope } = service
+  const ariaLabel = prop("aria-label")
+  const open = state.matches("open")
+  const triggerValue = context.get("triggerValue")
+
+  return {
+    open,
+    modal: !!prop("modal"),
+    setOpen(nextOpen) {
+      send({ type: nextOpen ? "OPEN" : "CLOSE", replaces: "open" })
+    },
+
+    triggerValue,
+    setTriggerValue(value) {
+      send({ type: "TRIGGER_VALUE.SET", value })
+    },
+
+    getTriggerProps(props: TriggerProps = {}) {
+      const { value } = props
+      const current = value == null ? false : triggerValue === value
+      return normalize.button({
+        ...parts.trigger.attrs,
+        dir: prop("dir"),
+        id: dom.getTriggerId(scope, value),
+        "data-ownedby": scope.id,
+        "data-value": value,
+        "aria-haspopup": "dialog",
+        type: "button",
+        "aria-expanded": value == null ? open : open && current,
+        "data-state": open ? "open" : "closed",
+        "aria-controls": dom.getContentId(scope),
+        "data-current": dataAttr(current),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          const shouldSwitch = open && value != null && !current
+          send({ type: shouldSwitch ? "TRIGGER_VALUE.SET" : "TOGGLE", value })
+        },
+      })
+    },
+
+    getBackdropProps() {
+      return normalize.element({
+        ...parts.backdrop.attrs,
+        dir: prop("dir"),
+        hidden: !open,
+        id: dom.getBackdropId(scope),
+        "data-state": open ? "open" : "closed",
+      })
+    },
+
+    getPositionerProps() {
+      return normalize.element({
+        ...parts.positioner.attrs,
+        dir: prop("dir"),
+        id: dom.getPositionerId(scope),
+        style: compact<JSX.CSSProperties>({
+          pointerEvents: !open || !prop("modal") ? "none" : undefined,
+        }),
+      })
+    },
+
+    getContentProps() {
+      const rendered = context.get("rendered")
+      return normalize.element({
+        ...parts.content.attrs,
+        dir: prop("dir"),
+        role: prop("role"),
+        hidden: !open,
+        id: dom.getContentId(scope),
+        tabIndex: -1,
+        "data-state": open ? "open" : "closed",
+        "aria-modal": prop("modal"),
+        "aria-label": ariaLabel || undefined,
+        "aria-labelledby": ariaLabel || !rendered.title ? undefined : dom.getTitleId(scope),
+        "aria-describedby": rendered.description ? dom.getDescriptionId(scope) : undefined,
+        style: compact<JSX.CSSProperties>({
+          pointerEvents: prop("modal") ? undefined : "auto",
+        }),
+      })
+    },
+
+    getTitleProps() {
+      return normalize.element({
+        ...parts.title.attrs,
+        dir: prop("dir"),
+        id: dom.getTitleId(scope),
+      })
+    },
+
+    getDescriptionProps() {
+      return normalize.element({
+        ...parts.description.attrs,
+        dir: prop("dir"),
+        id: dom.getDescriptionId(scope),
+      })
+    },
+
+    getCloseTriggerProps() {
+      return normalize.button({
+        ...parts.closeTrigger.attrs,
+        dir: prop("dir"),
+        id: dom.getCloseTriggerId(scope),
+        type: "button",
+        onClick(event) {
+          if (event.defaultPrevented) return
+          event.stopPropagation()
+          send({ type: "CLOSE" })
+        },
+      })
+    },
+  }
+}

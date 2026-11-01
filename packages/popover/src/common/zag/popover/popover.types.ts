@@ -1,0 +1,243 @@
+import type { EventObject } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { Machine } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { DismissableElementHandlers } from "../../../../../shared/src/common/zag/dismissable/index.ts";
+import type { PersistentElementOptions } from "../../../../../shared/src/common/zag/dismissable/index.ts";
+import type { Placement } from "../../../../../shared/src/common/zag/popper/types.ts";
+import type { PositioningOptions } from "../../../../../shared/src/common/zag/popper/types.ts";
+import type { CommonProperties } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { DirectionProperty } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { MaybeElement } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { RequiredBy } from "../../../../../shared/src/common/zag/types/index.ts";
+
+/* -----------------------------------------------------------------------------
+ * Callback details
+ * -----------------------------------------------------------------------------*/
+
+export interface OpenChangeDetails {
+  open: boolean
+}
+
+export interface TriggerValueChangeDetails {
+  /**
+   * The value of the trigger
+   */
+  value: string | null
+  /**
+   * The trigger element
+   */
+  triggerElement: HTMLElement | null
+}
+
+/* -----------------------------------------------------------------------------
+ * Machine context
+ * -----------------------------------------------------------------------------*/
+
+export interface IntlTranslations {
+  closeTriggerLabel?: string | undefined
+}
+
+export interface ElementIds {
+  anchor?: string | undefined
+  trigger?: (string | ((value?: string) => string)) | undefined
+  content?: string | undefined
+  title?: string | undefined
+  description?: string | undefined
+  closeTrigger?: string | undefined
+  positioner?: string | undefined
+  arrow?: string | undefined
+}
+
+export interface PopoverProps
+  extends CommonProperties, DirectionProperty, DismissableElementHandlers, PersistentElementOptions {
+  /**
+   * Specifies the localized strings that identifies the accessibility elements and their states
+   */
+  translations?: IntlTranslations | undefined
+  /**
+   * The ids of the elements in the popover. Useful for composition.
+   */
+  ids?: ElementIds | undefined
+  /**
+   * Whether the popover should be modal. When set to `true`:
+   * - interaction with outside elements will be disabled
+   * - only popover content will be visible to screen readers
+   * - scrolling is blocked
+   * - focus is trapped within the popover
+   *
+   * @default false
+   */
+  modal?: boolean | undefined
+  /**
+   * Whether the popover is portalled. This will proxy the tabbing behavior regardless of the DOM position
+   * of the popover content.
+   *
+   * @default true
+   */
+  portalled?: boolean | undefined
+  /**
+   * Whether to automatically set focus on the first focusable
+   * content within the popover when opened.
+   *
+   * @default true
+   */
+  autoFocus?: boolean | undefined
+  /**
+   * The element to focus on when the popover is opened.
+   * Return `false` to skip moving focus, or `null` to use the default.
+   */
+  initialFocusEl?: (() => HTMLElement | null | false) | undefined
+  /**
+   * Element to receive focus when the popover is closed.
+   */
+  finalFocusEl?: (() => MaybeElement) | undefined
+  /**
+   * Whether to restore focus to the element that had focus before the popover was opened.
+   *
+   * @default true
+   */
+  restoreFocus?: boolean | undefined
+  /**
+   * Whether to close the popover when the user clicks outside of the popover.
+   * @default true
+   */
+  closeOnInteractOutside?: boolean | undefined
+  /**
+   * Whether to close the popover when the escape key is pressed.
+   * @default true
+   */
+  closeOnEscape?: boolean | undefined
+  /**
+   * Function invoked when the popover opens or closes
+   */
+  onOpenChange?: ((details: OpenChangeDetails) => void) | undefined
+  /**
+   * The user provided options used to position the popover content
+   */
+  positioning?: PositioningOptions | undefined
+  /**
+   * The controlled open state of the popover
+   */
+  open?: boolean | undefined
+  /**
+   * The initial open state of the popover when rendered.
+   * Use when you don't need to control the open state of the popover.
+   */
+  defaultOpen?: boolean | undefined
+  /**
+   * The controlled trigger value
+   */
+  triggerValue?: string | null | undefined
+  /**
+   * The initial trigger value when rendered.
+   * Use when you don't need to control the trigger value.
+   */
+  defaultTriggerValue?: string | null | undefined
+  /**
+   * Function called when the trigger value changes.
+   */
+  onTriggerValueChange?: ((details: TriggerValueChangeDetails) => void) | undefined
+}
+
+type PropsWithDefault =
+  "closeOnInteractOutside" | "closeOnEscape" | "modal" | "portalled" | "autoFocus" | "restoreFocus" | "positioning"
+
+type ComputedContext = Readonly<{
+  /**
+   * The computed value of `portalled`
+   */
+  currentPortalled: boolean
+}>
+
+interface PrivateContext {
+  /**
+   * The elements that are rendered on mount
+   */
+  renderedElements: {
+    title: boolean
+    description: boolean
+  }
+  /**
+   * The computed placement (maybe different from initial placement)
+   */
+  currentPlacement?: Placement | undefined
+  /**
+   * The trigger value
+   */
+  triggerValue: string | null
+}
+
+export interface PopoverSchema {
+  props: RequiredBy<PopoverProps, PropsWithDefault>
+  state: "open" | "closed"
+  context: PrivateContext
+  computed: ComputedContext
+  event: EventObject
+  action: string
+  effect: string
+  guard: string
+}
+
+export type PopoverService = Service<PopoverSchema>
+
+export type PopoverMachine = Machine<PopoverSchema>
+
+/* -----------------------------------------------------------------------------
+ * Component props
+ * -----------------------------------------------------------------------------*/
+
+export interface TriggerProps {
+  /**
+   * The value that identifies this specific trigger
+   */
+  value?: string | undefined
+}
+
+/* -----------------------------------------------------------------------------
+ * Component API
+ * -----------------------------------------------------------------------------*/
+
+export interface PopoverApi<T extends PropTypes = PropTypes> {
+  /**
+   * Whether the popover is portalled.
+   */
+  portalled: boolean
+  /**
+   * Whether the popover is open
+   */
+  open: boolean
+  /**
+   * Function to open or close the popover
+   */
+  setOpen: (open: boolean) => void
+  /**
+   * The trigger value
+   */
+  triggerValue: string | null
+  /**
+   * Function to set the trigger value
+   */
+  setTriggerValue: (value: string | null) => void
+  /**
+   * Function to reposition the popover
+   */
+  reposition: (options?: Partial<PositioningOptions>) => void
+
+  getArrowProps: () => T["element"]
+  getArrowTipProps: () => T["element"]
+  getAnchorProps: () => T["element"]
+  getTriggerProps: (props?: TriggerProps) => T["button"]
+  getIndicatorProps: () => T["element"]
+  getPositionerProps: () => T["element"]
+  getContentProps: () => T["element"]
+  getTitleProps: () => T["element"]
+  getDescriptionProps: () => T["element"]
+  getCloseTriggerProps: () => T["button"]
+}
+
+/* -----------------------------------------------------------------------------
+ * Re-exported types
+ * -----------------------------------------------------------------------------*/
+
+export type { Placement, PositioningOptions }

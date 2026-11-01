@@ -1,0 +1,413 @@
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+import { getActiveElement } from "../dom-query/index.ts";
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+import { getDocument } from "../dom-query/index.ts";
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+import { getEventTarget } from "../dom-query/index.ts";
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+import { getWindow } from "../dom-query/index.ts";
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+import { isMac } from "../dom-query/index.ts";
+/**
+ * Credit: Huge props to the team at Adobe for inspiring this implementation.
+ * https://github.com/adobe/react-spectrum/blob/main/packages/%40react-aria/interactions/src/useFocusVisible.ts
+ */
+import { isVirtualClick } from "../dom-query/index.ts";
+
+function isValidKey(e: KeyboardEvent) {
+  return !(
+    e.metaKey ||
+    (!isMac() && e.altKey) ||
+    e.ctrlKey ||
+    e.key === "Control" ||
+    e.key === "Shift" ||
+    e.key === "Meta"
+  )
+}
+
+const nonTextInputTypes = new Set(["checkbox", "radio", "range", "color", "file", "image", "button", "submit", "reset"])
+
+const interactiveContentSelector = [
+  "a[href]",
+  "audio[controls]",
+  "button",
+  "details",
+  "embed",
+  "iframe",
+  "img[controls]",
+  "img[usemap]",
+  "input",
+  "select",
+  "textarea",
+  "video[controls]",
+].join(",")
+
+function isKeyboardFocusEvent(isTextInput: boolean, modality: Modality, e: HandlerEvent) {
+  const eventTarget = e ? getEventTarget<Element>(e) : null
+  const doc = getDocument(eventTarget)
+  const win = getWindow(eventTarget)
+
+  // Keys that move focus into a text input rely on the caller's isTextInput, checked against activeElement
+  const activeElement = getActiveElement(doc)
+  isTextInput =
+    isTextInput ||
+    (activeElement instanceof win.HTMLInputElement && !nonTextInputTypes.has(activeElement?.type)) ||
+    activeElement instanceof win.HTMLTextAreaElement ||
+    (activeElement instanceof win.HTMLElement && activeElement.isContentEditable)
+
+  return !(
+    isTextInput &&
+    modality === "keyboard" &&
+    e instanceof win.KeyboardEvent &&
+    !Reflect.has(FOCUS_VISIBLE_INPUT_KEYS, e.key)
+  )
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+export type Modality = "keyboard" | "pointer" | "virtual"
+
+type RootNode = Document | ShadowRoot | Node
+
+type HandlerEvent = PointerEvent | MouseEvent | KeyboardEvent | FocusEvent | null
+
+type Handler = (modality: Modality, e: HandlerEvent) => void
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+let currentModality: Modality | null = null
+
+let changeHandlers = new Set<Handler>()
+
+interface GlobalListenerData {
+  /** Unset when the prototype's `focus` could not be read */
+  focus: VoidFunction | undefined
+  /** The unreadable accessor to restore */
+  descriptor?: PropertyDescriptor | undefined
+}
+
+export let listenerMap = new Map<Window, GlobalListenerData>()
+
+let hasEventBeforeFocus = false
+let pendingLabelControl: HTMLElement | null = null
+let hasBlurredWindowRecently = false
+let lastPointerPosition: { x: number; y: number } | null = null
+
+/** Skip the next focus event, so preventFocus() doesn't show focus rings */
+export let ignoreFocusEvent = false
+
+// Only Tab or Esc keys will make focus visible on text input elements
+const FOCUS_VISIBLE_INPUT_KEYS = {
+  Tab: true,
+  Escape: true,
+}
+
+function triggerChangeHandlers(modality: Modality, e: HandlerEvent) {
+  for (let handler of changeHandlers) {
+    handler(modality, e)
+  }
+}
+
+function handleKeyboardEvent(e: KeyboardEvent) {
+  pendingLabelControl = null
+  hasEventBeforeFocus = true
+  if (isValidKey(e)) {
+    currentModality = "keyboard"
+    triggerChangeHandlers("keyboard", e)
+  }
+}
+
+function handlePointerEvent(e: PointerEvent | MouseEvent) {
+  // WebKit fires trusted moves at the same point when content scrolls under the cursor
+  const isMove = e.type === "pointermove" || e.type === "mousemove"
+  if (isMove && e.isTrusted && lastPointerPosition?.x === e.clientX && lastPointerPosition?.y === e.clientY) return
+
+  lastPointerPosition = { x: e.clientX, y: e.clientY }
+  currentModality = "pointer"
+  if (e.type === "mousedown" || e.type === "pointerdown") {
+    pendingLabelControl = null
+    hasEventBeforeFocus = true
+    triggerChangeHandlers("pointer", e)
+  }
+}
+
+function handleClickEvent(e: MouseEvent) {
+  if (isVirtualClick(e)) {
+    pendingLabelControl = null
+    hasEventBeforeFocus = true
+    currentModality = "virtual"
+    return
+  }
+
+  pendingLabelControl = null
+
+  // pointerdown may focus an ancestor before the label focuses its control; don't treat that as virtual
+  const target = getEventTarget<Element>(e)
+  const label = target?.closest<HTMLLabelElement>("label")
+  const control = label?.control
+  if (!label || !control || control.matches(":disabled")) return
+
+  // Interactive content in a label doesn't activate the label's control, unless it is the control
+  const interactive = target?.closest(interactiveContentSelector)
+  if (interactive && label.contains(interactive) && interactive !== control) return
+
+  if (control !== getActiveElement(label.ownerDocument)) pendingLabelControl = control
+}
+
+function handleFocusEvent(e: FocusEvent) {
+  // Firefox fires extra window/document focus events on the first click into an iframe
+  const target = getEventTarget(e)
+  const isLabelActivationFocus = target === pendingLabelControl
+
+  if (
+    target === getWindow(target as Element) ||
+    target === getDocument(target as Element) ||
+    ignoreFocusEvent ||
+    !e.isTrusted
+  ) {
+    return
+  }
+
+  // Focus without a prior keyboard/pointer event is virtual (e.g. iOS form next/previous buttons)
+  if (!hasEventBeforeFocus && !isLabelActivationFocus && !hasBlurredWindowRecently) {
+    currentModality = "virtual"
+    triggerChangeHandlers("virtual", e)
+  }
+
+  hasEventBeforeFocus = false
+  pendingLabelControl = null
+  hasBlurredWindowRecently = false
+}
+
+function handleWindowBlur() {
+  if (ignoreFocusEvent) return
+
+  // Reset on window blur (e.g. tabbing out), since no focus event follows
+  hasEventBeforeFocus = false
+  pendingLabelControl = null
+  hasBlurredWindowRecently = true
+}
+
+function readPrototypeFocus(proto: HTMLElement): HTMLElement["focus"] | undefined {
+  try {
+    return proto.focus
+  } catch {
+    return undefined
+  }
+}
+
+/**
+ * Patch `HTMLElement.prototype.focus` to mark focus as programmatic. If `focus` is an accessor that
+ * throws off the prototype (e.g. Storybook's), resolve it per element instead. Never throws.
+ */
+function patchFocusMethod(win: Window & typeof globalThis): GlobalListenerData {
+  const proto = win.HTMLElement.prototype
+  try {
+    const nativeFocus = readPrototypeFocus(proto)
+    const descriptor = nativeFocus ? undefined : Object.getOwnPropertyDescriptor(proto, "focus")
+    const getFocus = descriptor?.get
+    if (!nativeFocus && !getFocus) return { focus: undefined }
+
+    function patchedFocus(this: HTMLElement) {
+      // Keep the current modality on programmatic focus. Replace with `focusVisible` option once supported
+      hasEventBeforeFocus = true
+      const focus: HTMLElement["focus"] = nativeFocus ?? getFocus!.call(this)
+      focus.apply(this, arguments as unknown as [options?: FocusOptions | undefined])
+    }
+
+    // Stay writable when replacing an accessor
+    Object.defineProperty(win.HTMLElement.prototype, "focus", {
+      configurable: true,
+      writable: true,
+      value: patchedFocus,
+    })
+
+    return { focus: nativeFocus, descriptor }
+  } catch {
+    return { focus: undefined }
+  }
+}
+
+/**
+ * Setup global event listeners to control when keyboard focus style should be visible.
+ */
+function setupGlobalFocusEvents(root?: RootNode) {
+  if (typeof window === "undefined" || listenerMap.get(getWindow(root))) {
+    return
+  }
+
+  const win = getWindow(root)
+  const doc = getDocument(root)
+
+  const focusData = patchFocusMethod(win)
+
+  doc.addEventListener("keydown", handleKeyboardEvent, true)
+  doc.addEventListener("keyup", handleKeyboardEvent, true)
+  doc.addEventListener("click", handleClickEvent, true)
+
+  win.addEventListener("focus", handleFocusEvent, true)
+  win.addEventListener("blur", handleWindowBlur, false)
+
+  if (typeof win.PointerEvent !== "undefined") {
+    doc.addEventListener("pointerdown", handlePointerEvent, true)
+    doc.addEventListener("pointermove", handlePointerEvent, true)
+    doc.addEventListener("pointerup", handlePointerEvent, true)
+  } else {
+    doc.addEventListener("mousedown", handlePointerEvent, true)
+    doc.addEventListener("mousemove", handlePointerEvent, true)
+    doc.addEventListener("mouseup", handlePointerEvent, true)
+  }
+
+  win.addEventListener(
+    "beforeunload",
+    () => {
+      tearDownWindowFocusTracking(root)
+    },
+    { once: true },
+  )
+
+  listenerMap.set(win, focusData)
+}
+
+const tearDownWindowFocusTracking = (root?: RootNode, loadListener?: () => void) => {
+  const win = getWindow(root)
+  const doc = getDocument(root)
+
+  if (loadListener) {
+    doc.removeEventListener("DOMContentLoaded", loadListener)
+  }
+
+  const listenerData = listenerMap.get(win)
+  if (!listenerData) {
+    return
+  }
+
+  if (listenerData.focus || listenerData.descriptor) {
+    try {
+      Object.defineProperty(
+        win.HTMLElement.prototype,
+        "focus",
+        listenerData.descriptor ?? { configurable: true, writable: true, value: listenerData.focus },
+      )
+    } catch {}
+  }
+
+  doc.removeEventListener("keydown", handleKeyboardEvent, true)
+  doc.removeEventListener("keyup", handleKeyboardEvent, true)
+  doc.removeEventListener("click", handleClickEvent, true)
+  win.removeEventListener("focus", handleFocusEvent, true)
+  win.removeEventListener("blur", handleWindowBlur, false)
+
+  if (typeof win.PointerEvent !== "undefined") {
+    doc.removeEventListener("pointerdown", handlePointerEvent, true)
+    doc.removeEventListener("pointermove", handlePointerEvent, true)
+    doc.removeEventListener("pointerup", handlePointerEvent, true)
+  } else {
+    doc.removeEventListener("mousedown", handlePointerEvent, true)
+    doc.removeEventListener("mousemove", handlePointerEvent, true)
+    doc.removeEventListener("mouseup", handlePointerEvent, true)
+  }
+
+  listenerMap.delete(win)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+export function getInteractionModality(): Modality | null {
+  return currentModality
+}
+
+export function setInteractionModality(modality: Modality) {
+  currentModality = modality
+  triggerChangeHandlers(modality, null)
+}
+
+export interface InteractionModalityChangeDetails {
+  /** The modality of the interaction that caused the focus to be visible. */
+  modality: Modality | null
+}
+
+export interface InteractionModalityProps {
+  /** The root element to track focus visibility for. */
+  root?: RootNode | undefined
+  /** Callback to be called when the interaction modality changes. */
+  onChange: (details: InteractionModalityChangeDetails) => void
+}
+
+export function trackInteractionModality(props: InteractionModalityProps): VoidFunction {
+  const { onChange, root } = props
+
+  setupGlobalFocusEvents(root)
+
+  onChange({ modality: currentModality })
+
+  const handler = () => onChange({ modality: currentModality })
+
+  changeHandlers.add(handler)
+  return () => {
+    changeHandlers.delete(handler)
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+export function isFocusVisible(): boolean {
+  // Only keyboard and virtual (e.g. screen reader) modalities show focus
+  return currentModality === "keyboard" || currentModality === "virtual"
+}
+
+export interface FocusVisibleChangeDetails {
+  /** Whether keyboard focus is visible globally. */
+  isFocusVisible: boolean
+  /** The modality of the interaction that caused the focus to be visible. */
+  modality: Modality | null
+}
+
+export interface FocusVisibleProps {
+  /** The root element to track focus visibility for. */
+  root?: RootNode | undefined
+  /** Whether the element is a text input. */
+  isTextInput?: boolean | undefined
+  /** Whether the element will be auto focused. */
+  autoFocus?: boolean | undefined
+  /** Callback to be called when the focus visibility changes. */
+  onChange?: ((details: FocusVisibleChangeDetails) => void) | undefined
+}
+
+export function trackFocusVisible(props: FocusVisibleProps = {}): VoidFunction {
+  const { isTextInput, autoFocus, onChange, root } = props
+
+  setupGlobalFocusEvents(root)
+
+  onChange?.({ isFocusVisible: autoFocus || isFocusVisible(), modality: currentModality })
+
+  const handler = (modality: Modality, e: HandlerEvent) => {
+    if (!isKeyboardFocusEvent(!!isTextInput, modality, e)) return
+    onChange?.({ isFocusVisible: isFocusVisible(), modality })
+  }
+
+  changeHandlers.add(handler)
+
+  return () => {
+    changeHandlers.delete(handler)
+  }
+}

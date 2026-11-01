@@ -1,0 +1,209 @@
+import type { Machine } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { DismissableElementHandlers } from "../../../../../shared/src/common/zag/dismissable/index.ts";
+import type { PersistentElementOptions } from "../../../../../shared/src/common/zag/dismissable/index.ts";
+import type { CommonProperties } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { DirectionProperty } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { MaybeElement } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { RequiredBy } from "../../../../../shared/src/common/zag/types/index.ts";
+
+/* -----------------------------------------------------------------------------
+ * Callback details
+ * -----------------------------------------------------------------------------*/
+
+export interface OpenChangeDetails {
+  open: boolean
+}
+
+export interface TriggerValueChangeDetails {
+  /**
+   * The value of the trigger that activated the dialog
+   */
+  value: string | null
+  /**
+   * The trigger element
+   */
+  triggerElement: HTMLElement | null
+}
+
+/* -----------------------------------------------------------------------------
+ * Machine context
+ * -----------------------------------------------------------------------------*/
+
+export interface ElementIds {
+  trigger?: (string | ((value?: string) => string)) | undefined
+  positioner?: string | undefined
+  backdrop?: string | undefined
+  content?: string | undefined
+  closeTrigger?: string | undefined
+  title?: string | undefined
+  description?: string | undefined
+}
+
+export interface DialogProps
+  extends DirectionProperty, CommonProperties, DismissableElementHandlers, PersistentElementOptions {
+  /**
+   * The ids of the elements in the dialog. Useful for composition.
+   */
+  ids?: ElementIds | undefined
+  /**
+   * Whether to trap focus inside the dialog when it's opened
+   * @default true
+   */
+  trapFocus?: boolean | undefined
+  /**
+   * Whether to prevent scrolling behind the dialog when it's opened
+   * @default true
+   */
+  preventScroll?: boolean | undefined
+  /**
+   * Whether to prevent pointer interaction outside the element and hide all content below it
+   * @default true
+   */
+  modal?: boolean | undefined
+  /**
+   * Element to receive focus when the dialog is opened.
+   * Return `false` to skip moving focus, or `null` to use the default.
+   */
+  initialFocusEl?: (() => MaybeElement | false) | undefined
+  /**
+   * Element to receive focus when the dialog is closed
+   */
+  finalFocusEl?: (() => MaybeElement) | undefined
+  /**
+   * Whether to restore focus to the element that had focus before the dialog was opened
+   */
+  restoreFocus?: boolean | undefined
+  /**
+   * Whether to close the dialog when the outside is clicked
+   * @default `true` for modal dialogs, `false` for non-modal dialogs
+   */
+  closeOnInteractOutside?: boolean | undefined
+  /**
+   * Whether to close the dialog when the escape key is pressed
+   * @default true
+   */
+  closeOnEscape?: boolean | undefined
+  /**
+   * Human readable label for the dialog, in event the dialog title is not rendered
+   */
+  "aria-label"?: string | undefined
+  /**
+   * The dialog's role
+   * @default "dialog"
+   */
+  role?: "dialog" | "alertdialog" | undefined
+  /**
+   * The controlled open state of the dialog
+   */
+  open?: boolean | undefined
+  /**
+   * The initial open state of the dialog when rendered.
+   * Use when you don't need to control the open state of the dialog.
+   * @default false
+   */
+  defaultOpen?: boolean | undefined
+  /**
+   * Function to call when the dialog's open state changes
+   */
+  onOpenChange?: ((details: OpenChangeDetails) => void) | undefined
+  /**
+   * The controlled active trigger value
+   */
+  triggerValue?: string | null | undefined
+  /**
+   * The initial active trigger value when rendered.
+   * Use when you don't need to control the active trigger value.
+   */
+  defaultTriggerValue?: string | null | undefined
+  /**
+   * Function to call when the active trigger changes
+   */
+  onTriggerValueChange?: ((details: TriggerValueChangeDetails) => void) | undefined
+}
+
+type PropsWithDefault =
+  | "closeOnInteractOutside"
+  | "closeOnEscape"
+  | "role"
+  | "modal"
+  | "trapFocus"
+  | "restoreFocus"
+  | "preventScroll"
+  | "initialFocusEl"
+
+export interface DialogSchema {
+  props: RequiredBy<DialogProps, PropsWithDefault>
+  state: "open" | "closed"
+  context: {
+    rendered: { title: boolean; description: boolean }
+    triggerValue: string | null
+  }
+  refs: {
+    returnFocusEl: HTMLElement | null
+  }
+  guard: "isOpenControlled"
+  effect: "trackDismissableElement" | "preventScroll" | "trapFocus" | "hideContentBelow"
+  action:
+    | "checkRenderedElements"
+    | "setInitialFocus"
+    | "invokeOnClose"
+    | "invokeOnOpen"
+    | "toggleVisibility"
+    | "setTriggerValue"
+    | "setReturnFocusEl"
+    | "setFinalFocus"
+  event: {
+    type: "CONTROLLED.OPEN" | "CONTROLLED.CLOSE" | "OPEN" | "CLOSE" | "TOGGLE" | "TRIGGER_VALUE.SET"
+    value?: string | null | undefined
+    restoreFocus?: boolean | undefined
+    previousEvent?: any
+  }
+}
+
+export type DialogService = Service<DialogSchema>
+
+export type DialogMachine = Machine<DialogSchema>
+
+/* -----------------------------------------------------------------------------
+ * Component props
+ * -----------------------------------------------------------------------------*/
+
+export interface TriggerProps {
+  /**
+   * The value that identifies this specific trigger
+   */
+  value?: string
+}
+
+export interface DialogApi<T extends PropTypes = PropTypes> {
+  /**
+   * Whether the dialog is open
+   */
+  open: boolean
+  /**
+   * Whether the dialog is modal
+   */
+  modal: boolean
+  /**
+   * Function to open or close the dialog
+   */
+  setOpen: (open: boolean) => void
+  /**
+   * The active trigger value
+   */
+  triggerValue: string | null
+  /**
+   * Function to set the active trigger value
+   */
+  setTriggerValue: (value: string | null) => void
+
+  getTriggerProps: (props?: TriggerProps) => T["button"]
+  getBackdropProps: () => T["element"]
+  getPositionerProps: () => T["element"]
+  getContentProps: () => T["element"]
+  getTitleProps: () => T["element"]
+  getDescriptionProps: () => T["element"]
+  getCloseTriggerProps: () => T["button"]
+}

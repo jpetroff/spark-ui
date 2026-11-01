@@ -147,3 +147,13 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Generated Storybook and shadcn registry output
+storybook-static/
+public/r/
+# Framework registry catalogs are regenerated from vendor.lock.json.
+registry.react.json
+registry.svelte.json
+.vendor-tests/
+# Local code-navigation metadata is not part of the source baseline.
+.serena/

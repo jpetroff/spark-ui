@@ -1,0 +1,107 @@
+import { getWindow } from "./node.ts";
+import { isFirefox } from "./platform.ts";
+import { isIPad } from "./platform.ts";
+import { isMac } from "./platform.ts";
+import { isWebKit } from "./platform.ts";
+import { queueBeforeEvent } from "./raf.ts";
+
+export interface NavigateOptions {
+  key?: string
+  orientation?: "both" | "vertical" | "horizontal"
+  loop?: boolean
+  dir?: "ltr" | "rtl"
+}
+
+export function navigate<T extends HTMLElement>(
+  items: T[],
+  current: T | null,
+  options: NavigateOptions = {},
+): T | null {
+  if (!current) return null
+
+  const { orientation = "both", loop = true, dir = "ltr", key } = options
+
+  if (!items.length || !key) return null
+  const isVertical = key === "ArrowUp" || key === "ArrowDown"
+  const isHorizontal = key === "ArrowLeft" || key === "ArrowRight"
+
+  if (!isVertical && !isHorizontal && key !== "Home" && key !== "End") return null
+  if ((orientation === "vertical" && isHorizontal) || (orientation === "horizontal" && isVertical)) return null
+
+  if (key === "Home") return items[0] || null
+  if (key === "End") return items[items.length - 1] || null
+
+  const idx = items.indexOf(current)
+  if (idx === -1) return null
+
+  let isForward: boolean
+  if (orientation === "both") {
+    // When orientation is both, treat ArrowDown/Right as forward and ArrowUp/Left as backward
+    isForward = key === "ArrowDown" || (dir === "ltr" ? key === "ArrowRight" : key === "ArrowLeft")
+  } else {
+    isForward = isVertical ? key === "ArrowDown" : dir === "ltr" ? key === "ArrowRight" : key === "ArrowLeft"
+  }
+
+  const nextIdx = isForward
+    ? loop
+      ? (idx + 1) % items.length
+      : Math.min(idx + 1, items.length - 1)
+    : loop
+      ? (idx - 1 + items.length) % items.length
+      : Math.max(0, idx - 1)
+
+  return items[nextIdx] || null
+}
+
+export interface ModifierKeys {
+  /**
+   * Whether the meta key (Cmd on macOS) is pressed
+   */
+  metaKey: boolean
+  /**
+   * Whether the ctrl key is pressed
+   */
+  ctrlKey: boolean
+  /**
+   * Whether the shift key is pressed
+   */
+  shiftKey: boolean
+  /**
+   * Whether the alt key (Option on macOS) is pressed
+   */
+  altKey: boolean
+}
+
+export function getModifierKeys(event?: Partial<ModifierKeys> | null): ModifierKeys {
+  return {
+    metaKey: !!event?.metaKey,
+    ctrlKey: !!event?.ctrlKey,
+    shiftKey: !!event?.shiftKey,
+    altKey: !!event?.altKey,
+  }
+}
+
+export function hasModifierKey(modifiers: ModifierKeys) {
+  return modifiers.metaKey || modifiers.ctrlKey || modifiers.shiftKey || modifiers.altKey
+}
+
+export function clickIfLink(el: HTMLAnchorElement, modifiers?: ModifierKeys) {
+  const init = getModifierKeys(modifiers)
+  const hasModifier = hasModifierKey(init)
+
+  const click = () => {
+    const win = getWindow(el)
+    // WebKit on macOS ignores modifiers on synthetic clicks, but honors them on a synthetic Enter keydown
+    if (hasModifier && isWebKit() && isMac() && !isIPad()) {
+      el.dispatchEvent(new win.KeyboardEvent("keydown", { keyIdentifier: "Enter", ...init } as KeyboardEventInit))
+    } else {
+      el.dispatchEvent(new win.MouseEvent("click", init))
+    }
+  }
+
+  if (isFirefox()) {
+    queueBeforeEvent(el, "keyup", click)
+  } else {
+    queueMicrotask(click)
+  }
+}

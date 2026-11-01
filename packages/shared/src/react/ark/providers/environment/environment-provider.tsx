@@ -1,0 +1,37 @@
+'use client'
+
+import { getDocument, getWindow } from '../../../../common/zag/dom-query/index.ts'
+import { type ReactNode, useMemo, useState } from 'react'
+import { runIfFn } from "../../utils/run-if-fn.ts";
+import { EnvironmentContextProvider } from "./use-environment-context.ts";
+import { type RootNode } from "./use-environment-context.ts";
+
+export interface EnvironmentProviderProps {
+  children?: ReactNode | undefined
+  value?: RootNode | (() => RootNode) | undefined
+}
+
+export const EnvironmentProvider = (props: EnvironmentProviderProps) => {
+  const { value, children } = props
+  const [spanRef, setSpanRef] = useState<HTMLSpanElement | null>()
+
+  const getRootNode = useMemo(() => {
+    return () => runIfFn(value) ?? spanRef?.getRootNode() ?? document
+  }, [value, spanRef])
+
+  const environment = useMemo(
+    () => ({
+      getRootNode,
+      getWindow: () => getWindow(getRootNode()),
+      getDocument: () => getDocument(getRootNode()),
+    }),
+    [getRootNode],
+  )
+
+  return (
+    <EnvironmentContextProvider value={environment}>
+      {children}
+      {!value && <span hidden ref={setSpanRef} />}
+    </EnvironmentContextProvider>
+  )
+}
