@@ -1,6 +1,6 @@
 # Spark UI
 
-A pnpm workspace for React components distributed as source through a [shadcn registry](https://ui.shadcn.com/docs/registry). Each component is a private development package. Consumers copy components into their own codebase with the shadcn CLI.
+A pnpm workspace for React components distributed as source through a [shadcn registry](https://ui.shadcn.com/docs/registry). Components live in source directories and share the root project dependencies and TypeScript aliases. Consumers copy components into their own codebase with the shadcn CLI.
 
 ## Getting started
 
@@ -18,12 +18,11 @@ pnpm storybook  # All component stories: http://localhost:6006
 .storybook/                  Shared Storybook configuration
 packages/
   button/
-    package.json             @spark-ui/button, private, source exports
     tsconfig.json
     src/
       button.tsx             Source copied into consumer projects
       button.stories.tsx      Stories colocated with the component
-      index.ts               Local workspace entry point
+      index.ts               Local source entry point
   utils/                     @spark-ui/utils, shared source utilities
 src/                         Vite playground and shared preview styles
 components.json              Local shadcn aliases and Tailwind configuration
@@ -31,9 +30,9 @@ registry.json                Installable items and their source files
 public/r/                    Generated registry JSON (gitignored)
 ```
 
-Workspace package exports resolve `@spark-ui/button` and `@spark-ui/utils` directly to TypeScript source. Declare new workspace dependencies with `workspace:*` in the importing package. The playground declares its dependencies in the root `package.json`.
+Component directories do not need package manifests: local imports use TypeScript source aliases, and registry consumers copy the source. Button originally used a private `@spark-ui/button` workspace package; it now follows the same source import convention as the imported components. `utils` retains a private workspace manifest for `clsx` and `tailwind-merge`; `vendor-tools` isolates the Svelte tooling dependencies. Shared development and framework dependencies belong in the root `package.json`.
 
-TypeScript `paths` also provide `@/*` for playground source, `@/components/ui/<name>` for component package entry points, and `@/lib/spark-utils` for the shared utility. Vite's `resolve.tsconfigPaths` reads those same mappings, including in Storybook; keep mappings in `tsconfig.json` rather than duplicating them in Vite.
+TypeScript `paths` provide `@/*` for playground source, `@/components/ui/<name>` for component package entry points, and `@/lib/spark-utils` for the shared utility. Vite's `resolve.tsconfigPaths` reads those same mappings, including in Storybook; keep mappings in `tsconfig.json` rather than duplicating them in Vite.
 
 Cross-component implementation imports use `@spark/<name>/…`, which resolves to `packages/<name>/src/…`. For example:
 
@@ -42,7 +41,7 @@ import { mergeProps } from '@spark/shared/react/zag/index.ts'
 import { useFieldContext } from '@spark/field/react/ark/use-field-context.ts'
 ```
 
-Keep relative imports within the same component's `src` tree, including `../`. The `@spark/<name>/*` mappings are generated in the root `tsconfig.json` from all `packages/<name>/src` directories, including internal dependencies such as Presence. Run `pnpm aliases:sync` after adding or removing a source root; `pnpm aliases:check` detects missing, incorrect, or stale mappings and runs as part of `pnpm check`. Unrelated aliases remain unchanged. Component imports synchronize aliases automatically. Vite derives explicit aliases from the same entries so files outside the root tsconfig's `include` resolve in both the playground and Storybook.
+Keep relative imports within the same component's `src` tree, including `../`. The `@spark/<name>/*` mappings are generated in the root `tsconfig.json` from all `packages/<name>/src` directories, including internal dependencies such as Presence. Run `pnpm aliases:sync` after adding or removing a source root; `pnpm aliases:check` detects missing, incorrect, or stale mappings and runs as part of `pnpm check`. Unrelated aliases remain unchanged. Component imports synchronize aliases automatically. Each source directory has a `tsconfig.json` extending `../../tsconfig.json` with `include: ["src"]`, so editors inherit these aliases even for files outside the root project include. These configs provide editor project boundaries; use the root React and Svelte checks for framework-aware validation. Vite derives explicit aliases from the same entries so files outside the root tsconfig's `include` resolve in both the playground and Storybook.
 
 ## Registry installation
 
@@ -72,13 +71,12 @@ The registry homepage initially points to the local playground. No public hostin
 
 ## Adding a component
 
-1. Create `packages/<name>/package.json` with `name: "@spark-ui/<name>"`, `private: true`, `type: "module"`, and an export pointing to `./src/index.ts`. Declare runtime dependencies and React peer dependencies there.
-2. Extend `../../tsconfig.json` from the package's `tsconfig.json`, include `src`, and add a `typecheck` script (`tsc --noEmit`).
-3. Add `src/<name>.tsx`, its exports in `src/index.ts`, and `src/<name>.stories.tsx`. Storybook automatically discovers all package stories and generates component documentation.
-4. Add an item to `registry.json` listing every source file and external dependency required by the copied component. Exclude package manifests, barrels used only for development, and stories. Use `registry:ui`, `registry:lib`, or `registry:hook` file types to choose consumer destinations.
-5. Keep distributed imports consumer-compatible: use `@/components/ui/<name>` for other components and `@/lib/...` for utilities, with matching TypeScript paths. Include dependent source files or declare `registryDependencies` using a full item URL or a configured namespace. Bare dependency names resolve to the official shadcn registry.
-6. Declare `"@spark-ui/<name>": "workspace:*"` in any workspace package or playground that imports it, then run `pnpm install`.
-7. Run the checks below and install the generated item into a separate shadcn project to verify aliases and dependencies.
+1. Create `packages/<name>/src` and a component-root `tsconfig.json` extending `../../tsconfig.json` with `include: ["src"]`. A component package manifest is unnecessary.
+2. Add the public entry files and any colocated stories. Storybook automatically discovers all package stories and generates component documentation. Keep imports within a component relative, including explicit file extensions; use `@spark/<name>/…` for local cross-component imports.
+3. Run `pnpm aliases:sync` to add the new source alias. Declare shared development and framework dependencies in the root `package.json`.
+4. Add an item to `registry.json` listing every source file and external dependency required by the copied component. Exclude development configs, barrels used only for development, and stories. Use `registry:ui`, `registry:lib`, or `registry:hook` file types to choose consumer destinations.
+5. Keep distributed native imports consumer-compatible: use `@/components/ui/<name>` for other components and `@/lib/...` for utilities, with matching TypeScript paths. Include dependent source files or declare `registryDependencies` using a full item URL or a configured namespace. Bare dependency names resolve to the official shadcn registry.
+6. Run the checks below and install the generated item into a separate shadcn project to verify aliases and dependencies.
 
 Native registry sources must use consumer-compatible imports. Vendored Ark/Zag implementation sources may use `@spark/` imports because the vendor registry builder resolves them and rewrites them to portable relative paths before distribution.
 

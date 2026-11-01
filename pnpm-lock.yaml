@@ -175,9 +175,6 @@ importers:
       '@playwright/test':
         specifier: 1.61.1
         version: 1.61.1
-      '@spark-ui/button':
-        specifier: workspace:*
-        version: link:packages/button
       '@spark-ui/utils':
         specifier: workspace:*
         version: link:packages/utils
@@ -250,15 +247,6 @@ importers:
       vite:
         specifier: 8.3.5
         version: 8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)
-
-  packages/button:
-    dependencies:
-      '@spark-ui/utils':
-        specifier: workspace:*
-        version: link:../utils
-      react:
-        specifier: '>=18.0.0 <20'
-        version: 19.3.1
 
   packages/utils:
     dependencies:

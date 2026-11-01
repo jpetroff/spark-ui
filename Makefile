@@ -1,5 +1,4 @@
-serena:
-	uvx --from git+https://github.com/oraios/serena serena start-mcp-server --transport streamable-http --port 9121 --project-from-cwd --context codex
+
 .PHONY: import update-upstream verify-imports bootstrap-upstream
 # Accept exactly one positional component; unrelated unknown targets remain errors.
 ifeq ($(firstword $(MAKECMDGOALS)),import)
@@ -16,6 +15,9 @@ $(IMPORT_POSITIONAL): import
 	@:
 endif
 endif
+
+serena:
+	uvx --from git+https://github.com/oraios/serena serena start-mcp-server --transport streamable-http --port 9121 --project-from-cwd --context codex
 
 import:
 	@test -n "$(COMPONENT)" || (echo 'Usage: make import <component>'; exit 1)

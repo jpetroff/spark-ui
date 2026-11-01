@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import { Button } from '@spark-ui/button'
+import { Button } from './button.tsx'
 
 const meta = {
   title: 'Components/Button',

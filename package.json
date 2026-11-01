@@ -33,7 +33,6 @@
     "@floating-ui/dom": "1.7.6",
     "@internationalized/date": "3.12.4",
     "@playwright/test": "1.61.1",
-    "@spark-ui/button": "workspace:*",
     "@spark-ui/utils": "workspace:*",
     "@storybook/addon-a11y": "10.6.5",
     "@storybook/addon-docs": "10.6.5",

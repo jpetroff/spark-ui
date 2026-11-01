@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@spark-ui/button'
+import { Button } from '@spark/button/index.ts'
 
 export function App() {
   const [count, setCount] = useState(0)
