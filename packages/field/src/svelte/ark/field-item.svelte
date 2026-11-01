@@ -11,7 +11,7 @@
 </script>
 
 <script lang="ts">
-  import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
+  import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
   import { parts } from "./field.anatomy.ts";
   import { FieldProvider } from "./use-field-context.ts";
 import { useFieldContext } from "./use-field-context.ts";

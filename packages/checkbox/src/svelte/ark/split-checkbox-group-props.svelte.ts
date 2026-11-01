@@ -1,4 +1,4 @@
-import { createSplitProps } from "../../../../shared/src/svelte/ark/utils/create-split-props.ts";
+import { createSplitProps } from "@spark/shared/svelte/ark/utils/create-split-props.ts";
 import type { UseCheckboxGroupProps } from "./use-checkbox-group.svelte.ts";
 
 const splitFn = createSplitProps<UseCheckboxGroupProps>()

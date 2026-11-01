@@ -1,15 +1,15 @@
-import type { EventObject } from "../../../../../shared/src/common/zag/core/index.ts";
-import type { Machine } from "../../../../../shared/src/common/zag/core/index.ts";
-import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
-import type { DismissableElementHandlers } from "../../../../../shared/src/common/zag/dismissable/index.ts";
-import type { PersistentElementOptions } from "../../../../../shared/src/common/zag/dismissable/index.ts";
-import type { Placement } from "../../../../../shared/src/common/zag/popper/types.ts";
-import type { PositioningOptions } from "../../../../../shared/src/common/zag/popper/types.ts";
-import type { CommonProperties } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { DirectionProperty } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { MaybeElement } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { RequiredBy } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { EventObject } from "@spark/shared/common/zag/core/index.ts";
+import type { Machine } from "@spark/shared/common/zag/core/index.ts";
+import type { Service } from "@spark/shared/common/zag/core/index.ts";
+import type { DismissableElementHandlers } from "@spark/shared/common/zag/dismissable/index.ts";
+import type { PersistentElementOptions } from "@spark/shared/common/zag/dismissable/index.ts";
+import type { Placement } from "@spark/shared/common/zag/popper/types.ts";
+import type { PositioningOptions } from "@spark/shared/common/zag/popper/types.ts";
+import type { CommonProperties } from "@spark/shared/common/zag/types/index.ts";
+import type { DirectionProperty } from "@spark/shared/common/zag/types/index.ts";
+import type { MaybeElement } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+import type { RequiredBy } from "@spark/shared/common/zag/types/index.ts";
 
 /* -----------------------------------------------------------------------------
  * Callback details

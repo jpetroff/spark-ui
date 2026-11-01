@@ -1,4 +1,4 @@
-export type { FocusOutsideEvent, InteractOutsideEvent, PointerDownOutsideEvent } from "../../../../../shared/src/common/zag/dismissable/index.ts"
+export type { FocusOutsideEvent, InteractOutsideEvent, PointerDownOutsideEvent } from "@spark/shared/common/zag/dismissable/index.ts"
 export { anatomy } from "./dialog.anatomy.ts"
 export { connect } from "./dialog.connect.ts"
 export { machine } from "./dialog.machine.ts"

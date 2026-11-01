@@ -1,9 +1,9 @@
-import { useEnvironmentContext } from "../../../../shared/src/svelte/ark/providers/index.ts";
-import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
-import { runIfFn } from "../../../../shared/src/svelte/ark/utils/run-if-fn.ts";
-import { type MaybeFunction, ensureProps } from '../../../../shared/src/common/zag/utils/index.ts'
+import { useEnvironmentContext } from "@spark/shared/svelte/ark/providers/index.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import { runIfFn } from "@spark/shared/svelte/ark/utils/run-if-fn.ts";
+import { type MaybeFunction, ensureProps } from '@spark/shared/common/zag/utils/index.ts'
 import { onMount } from 'svelte'
-import { dataAttr } from '../../../../shared/src/svelte/ark/utils/attr.ts'
+import { dataAttr } from '@spark/shared/svelte/ark/utils/attr.ts'
 import { parts } from "./fieldset.anatomy.ts";
 
 export interface UseFieldsetProps {

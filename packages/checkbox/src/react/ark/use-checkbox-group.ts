@@ -1,8 +1,8 @@
 'use client'
 
-import { useControllableState } from "../../../../shared/src/react/ark/utils/use-controllable-state.ts";
-import { useEvent } from "../../../../shared/src/react/ark/utils/use-event.ts";
-import { useFieldsetContext } from "../../../../fieldset/src/react/ark/use-fieldset-context.ts";
+import { useControllableState } from "@spark/shared/react/ark/utils/use-controllable-state.ts";
+import { useEvent } from "@spark/shared/react/ark/utils/use-event.ts";
+import { useFieldsetContext } from "@spark/fieldset/react/ark/use-fieldset-context.ts";
 
 export interface UseCheckboxGroupProps {
   /**

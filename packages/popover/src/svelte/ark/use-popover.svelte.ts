@@ -1,10 +1,10 @@
-import { useEnvironmentContext } from "../../../../shared/src/svelte/ark/providers/environment/use-environment-context.ts";
-import { useLocaleContext } from "../../../../shared/src/svelte/ark/providers/locale/use-locale-context.ts";
-import type { Accessor } from "../../../../shared/src/svelte/ark/types.ts";
-import type { Optional } from "../../../../shared/src/svelte/ark/types.ts";
+import { useEnvironmentContext } from "@spark/shared/svelte/ark/providers/environment/use-environment-context.ts";
+import { useLocaleContext } from "@spark/shared/svelte/ark/providers/locale/use-locale-context.ts";
+import type { Accessor } from "@spark/shared/svelte/ark/types.ts";
+import type { Optional } from "@spark/shared/svelte/ark/types.ts";
 import * as popover from '../../common/zag/popover/index.ts'
-import { type PropTypes, normalizeProps, useMachine } from '../../../../shared/src/svelte/zag/index.ts'
-import { type MaybeFunction, runIfFn } from '../../../../shared/src/common/zag/utils/index.ts'
+import { type PropTypes, normalizeProps, useMachine } from '@spark/shared/svelte/zag/index.ts'
+import { type MaybeFunction, runIfFn } from '@spark/shared/common/zag/utils/index.ts'
 
 export interface UsePopoverProps extends Optional<Omit<popover.Props, 'dir' | 'getRootNode'>, 'id'> {}
 

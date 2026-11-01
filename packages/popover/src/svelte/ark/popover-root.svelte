@@ -1,6 +1,6 @@
 <script module lang="ts">
   import type { Snippet } from 'svelte'
-  import type { UsePresenceProps } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
+  import type { UsePresenceProps } from "@spark/presence/svelte/ark/use-presence.svelte.ts";
   import type { UsePopoverProps } from "./use-popover.svelte.ts";
 
   export interface PopoverRootBaseProps extends UsePopoverProps, UsePresenceProps {}
@@ -10,9 +10,9 @@
 </script>
 
 <script lang="ts">
-  import { PresenceProvider } from "../../../../presence/src/svelte/ark/use-presence-context.ts";
-import { usePresence } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
-  import { splitPresenceProps } from "../../../../presence/src/svelte/ark/split-presence-props.svelte.ts";
+  import { PresenceProvider } from "@spark/presence/svelte/ark/use-presence-context.ts";
+import { usePresence } from "@spark/presence/svelte/ark/use-presence.svelte.ts";
+  import { splitPresenceProps } from "@spark/presence/svelte/ark/split-presence-props.svelte.ts";
   import { PopoverProvider } from "./use-popover-context.ts";
   import { usePopover } from "./use-popover.svelte.ts";
 

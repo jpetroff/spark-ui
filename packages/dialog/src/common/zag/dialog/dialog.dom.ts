@@ -1,7 +1,7 @@
-import type { Scope } from "../../../../../shared/src/common/zag/core/index.ts";
-import { getByOwnerId } from "../../../../../shared/src/common/zag/dom-query/shared.ts";
-import { queryAll } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { isFunction } from "../../../../../shared/src/common/zag/utils/index.ts";
+import type { Scope } from "@spark/shared/common/zag/core/index.ts";
+import { getByOwnerId } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { queryAll } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isFunction } from "@spark/shared/common/zag/utils/index.ts";
 
 export const getPositionerId = (ctx: Scope) => ctx.ids?.positioner ?? `dialog:${ctx.id}:positioner`
 export const getBackdropId = (ctx: Scope) => ctx.ids?.backdrop ?? `dialog:${ctx.id}:backdrop`

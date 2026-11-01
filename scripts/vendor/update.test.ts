@@ -3,10 +3,17 @@ import assert from 'node:assert/strict'
 import fs from 'node:fs'
 import path from 'node:path'
 import { execFileSync } from 'node:child_process'
-import { git } from './graph.ts'
+import { git, hash, rewriteModules } from './graph.ts'
+import { relative, resolveSourceImport, syncAliases } from './aliases.ts'
 import { root } from './import.ts'
 
-for (const scenario of ['preserve', 'overlap', 'delete-modified', 'add-delete']) {
+for (const scenario of [
+  'preserve',
+  'overlap',
+  'delete-modified',
+  'add-delete',
+  'alias-migration',
+]) {
   test(`complete updater workflow: ${scenario}`, () => {
     const base = fs.mkdtempSync(path.join(root, '.vendor-tests/update-'))
     const dirs = Object.fromEntries(
@@ -46,6 +53,14 @@ for (const scenario of ['preserve', 'overlap', 'delete-modified', 'add-delete'])
         )
         put('ark', `${folder}/value.ts`, 'export const value = 1\n')
         put('ark', `${folder}/obsolete.ts`, 'export const obsolete = 1\n')
+        if (scenario === 'alias-migration') {
+          put(
+            'ark',
+            `${folder}/index.ts`,
+            "export { shared } from '../dependency/index.ts'\nexport { value } from './value.ts'\nexport { obsolete } from './obsolete.ts'\n",
+          )
+          put('ark', `${folder}/../dependency/index.ts`, 'export const shared = 1\n')
+        }
       }
       put('ark', 'LICENSE', 'Ark fixture license\n')
       put('zag', 'LICENSE', 'Zag fixture license\n')
@@ -67,6 +82,7 @@ for (const scenario of ['preserve', 'overlap', 'delete-modified', 'add-delete'])
         'node_modules\npublic/\nregistry.react.json\nregistry.svelte.json\n',
       )
       put('spark', 'registry.json', '{"name":"fixture","items":[]}\n')
+      put('spark', 'tsconfig.json', '{"compilerOptions":{"paths":{"@/*":["./src/*"]}}}\n')
       const env = { ...process.env, ARK_SOURCE: dirs.ark, ZAG_SOURCE: dirs.zag }
       const run = (script: string, args: string[] = [], extra = {}) =>
         execFileSync(process.execPath, [`scripts/vendor/${script}.ts`, ...args], {
@@ -75,9 +91,39 @@ for (const scenario of ['preserve', 'overlap', 'delete-modified', 'add-delete'])
           stdio: 'pipe',
         })
       run('import', ['import', 'sample', '--apply'])
+      if (scenario === 'alias-migration') {
+        // Recreate a v1 baseline, then migrate only the integration branch.
+        const lock = JSON.parse(fs.readFileSync(path.join(dirs.spark!, 'vendor.lock.json'), 'utf8'))
+        const paths = syncAliases(dirs.spark!)
+        for (const entry of Object.values(lock.files) as any[]) {
+          const content = fs.readFileSync(path.join(dirs.spark!, entry.destination), 'utf8')
+          const legacy = rewriteModules(entry.destination, content, (specifier) => {
+            const target = resolveSourceImport(entry.destination, specifier, paths)
+            return target === undefined ? specifier : relative(entry.destination, target)
+          })
+          put('spark', entry.destination, legacy)
+          entry.generatedHash = hash(legacy)
+        }
+        lock.importerVersion = 1
+        put('spark', 'vendor.lock.json', JSON.stringify(lock, null, 2) + '\n')
+        put(
+          'spark',
+          'tsconfig.json',
+          JSON.stringify({ compilerOptions: { paths: { '@/*': ['./src/*'] } } }, null, 2) + '\n',
+        )
+      }
       commit('spark', 'initial import')
       run('update', ['--bootstrap'])
       const original = git(dirs.spark!, 'rev-parse', 'vendor/upstream')
+      if (scenario === 'alias-migration') {
+        run('import', ['import', 'sample', '--apply'])
+        commit('spark', 'migrate aliases')
+        put(
+          'spark',
+          'packages/dependency/src/react/ark/index.ts',
+          'export const shared = 1\nexport const custom = true\n',
+        )
+      }
       if (scenario === 'overlap')
         put('spark', 'packages/sample/src/react/ark/value.ts', 'export const value = 99\n')
       else if (scenario === 'delete-modified')
@@ -94,6 +140,14 @@ for (const scenario of ['preserve', 'overlap', 'delete-modified', 'add-delete'])
           "export { value } from './value.ts'\nexport { added } from './added.ts'\n",
         )
         put('ark', 'packages/react/src/components/sample/added.ts', 'export const added = 3\n')
+      }
+      if (scenario === 'add-delete') {
+        put(
+          'ark',
+          'packages/react/src/components/sample/added.ts',
+          "export { extra } from '../extra/index.ts'\nexport const added = 3\n",
+        )
+        put('ark', 'packages/react/src/components/extra/index.ts', 'export const extra = 1\n')
       }
       commit('ark', 'upstream change')
       const refs = {
@@ -124,6 +178,26 @@ for (const scenario of ['preserve', 'overlap', 'delete-modified', 'add-delete'])
           assert.ok(fs.existsSync(path.join(dirs.spark!, 'packages/sample/src/react/ark/added.ts')))
         }
       }
+      if (scenario === 'alias-migration') {
+        assert.match(
+          fs.readFileSync(
+            path.join(dirs.spark!, 'packages/dependency/src/react/ark/index.ts'),
+            'utf8',
+          ),
+          /custom = true/,
+        )
+        assert.match(
+          fs.readFileSync(path.join(dirs.spark!, 'packages/sample/src/react/ark/index.ts'), 'utf8'),
+          /@spark\/dependency\//,
+        )
+      }
+      syncAliases(dirs.spark!, true)
+      if (scenario === 'add-delete') {
+        const config = JSON.parse(fs.readFileSync(path.join(dirs.spark!, 'tsconfig.json'), 'utf8'))
+        assert.deepEqual(config.compilerOptions.paths['@spark/extra/*'], ['./packages/extra/src/*'])
+      }
+      if (scenario !== 'overlap' && scenario !== 'delete-modified')
+        assert.equal(git(dirs.spark!, 'status', '--porcelain'), '')
       assert.equal(git(dirs.spark!, 'rev-parse', 'main'), local)
       assert.notEqual(git(dirs.spark!, 'rev-parse', 'vendor/upstream'), original)
       assert.match(git(dirs.spark!, 'branch', '--show-current'), /^update\/upstream-/)

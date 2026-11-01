@@ -1,7 +1,7 @@
 <script module lang="ts">
-  import type { Assign } from "../../../../shared/src/svelte/ark/types.ts";
-import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { PolymorphicProps } from "../../../../shared/src/svelte/ark/types.ts";
+  import type { Assign } from "@spark/shared/svelte/ark/types.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
   import type { UseFieldReturn } from "./use-field.svelte.ts";
 
   export interface FieldRootProviderBaseProps extends PolymorphicProps<'div'> {
@@ -11,8 +11,8 @@ import type { PolymorphicProps } from "../../../../shared/src/svelte/ark/types.t
 </script>
 
 <script lang="ts">
-  import { mergeProps } from '../../../../shared/src/svelte/zag/index.ts'
-  import { default as Ark } from "../../../../shared/src/svelte/ark/components/factory/factory.svelte";
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+  import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
   import { FieldProvider } from "./use-field-context.ts";
 
   const { value, ...props }: FieldRootProviderProps = $props()

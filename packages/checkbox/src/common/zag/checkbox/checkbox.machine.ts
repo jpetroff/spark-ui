@@ -1,10 +1,10 @@
-import { createGuards } from "../../../../../shared/src/common/zag/core/index.ts";
-import { createMachine } from "../../../../../shared/src/common/zag/core/index.ts";
-import { dispatchInputCheckedEvent } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { setElementChecked } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { trackFormControl } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { trackPress } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { trackFocusVisible } from "../../../../../shared/src/common/zag/focus-visible/index.ts";
+import { createGuards } from "@spark/shared/common/zag/core/index.ts";
+import { createMachine } from "@spark/shared/common/zag/core/index.ts";
+import { dispatchInputCheckedEvent } from "@spark/shared/common/zag/dom-query/index.ts";
+import { setElementChecked } from "@spark/shared/common/zag/dom-query/index.ts";
+import { trackFormControl } from "@spark/shared/common/zag/dom-query/index.ts";
+import { trackPress } from "@spark/shared/common/zag/dom-query/index.ts";
+import { trackFocusVisible } from "@spark/shared/common/zag/focus-visible/index.ts";
 import * as dom from "./checkbox.dom.ts"
 import type { CheckboxSchema } from "./checkbox.types.ts";
 import type { CheckedState } from "./checkbox.types.ts";

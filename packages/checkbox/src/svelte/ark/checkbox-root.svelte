@@ -1,8 +1,8 @@
 <script module lang="ts">
-  import type { Assign } from "../../../../shared/src/svelte/ark/types.ts";
-import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { PolymorphicProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
+  import type { Assign } from "@spark/shared/svelte/ark/types.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
+import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   import type { UseCheckboxProps } from "./use-checkbox.svelte.ts";
 
   export interface CheckboxRootBaseProps extends UseCheckboxProps, PolymorphicProps<'label'>, RefAttribute {}
@@ -10,8 +10,8 @@ import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
 </script>
 
 <script lang="ts">
-  import { mergeProps } from '../../../../shared/src/svelte/zag/index.ts'
-  import { default as Ark } from "../../../../shared/src/svelte/ark/components/factory/factory.svelte";
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+  import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
   import { CheckboxProvider } from "./use-checkbox-context.ts";
   import { splitCheckboxProps } from "./split-checkbox-props.svelte.ts";
   import { useCheckbox } from "./use-checkbox.svelte.ts";

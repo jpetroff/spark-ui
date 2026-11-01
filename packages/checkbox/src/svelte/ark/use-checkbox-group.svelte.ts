@@ -1,7 +1,7 @@
-import type { Accessor } from "../../../../shared/src/svelte/ark/types.ts";
-import { type MaybeFunction, runIfFn } from '../../../../shared/src/common/zag/utils/index.ts'
+import type { Accessor } from "@spark/shared/svelte/ark/types.ts";
+import { type MaybeFunction, runIfFn } from '@spark/shared/common/zag/utils/index.ts'
 import { untrack } from 'svelte'
-import { useFieldsetContext } from "../../../../fieldset/src/svelte/ark/use-fieldset-context.ts";
+import { useFieldsetContext } from "@spark/fieldset/svelte/ark/use-fieldset-context.ts";
 
 export interface UseCheckboxGroupProps {
   /**

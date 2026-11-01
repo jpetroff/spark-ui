@@ -1,10 +1,10 @@
-import { createMachine } from "../../../../../shared/src/common/zag/core/index.ts";
-import { getComputedStyle } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { getEventTarget } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { getWindow } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { nextTick } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { raf } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { setStyle } from "../../../../../shared/src/common/zag/dom-query/index.ts";
+import { createMachine } from "@spark/shared/common/zag/core/index.ts";
+import { getComputedStyle } from "@spark/shared/common/zag/dom-query/index.ts";
+import { getEventTarget } from "@spark/shared/common/zag/dom-query/index.ts";
+import { getWindow } from "@spark/shared/common/zag/dom-query/index.ts";
+import { nextTick } from "@spark/shared/common/zag/dom-query/index.ts";
+import { raf } from "@spark/shared/common/zag/dom-query/index.ts";
+import { setStyle } from "@spark/shared/common/zag/dom-query/index.ts";
 import type { PresenceSchema } from "./presence.types.ts";
 
 export const machine = createMachine<PresenceSchema>({

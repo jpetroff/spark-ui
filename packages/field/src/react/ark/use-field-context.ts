@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext } from "../../../../shared/src/react/ark/utils/create-context.ts";
+import { createContext } from "@spark/shared/react/ark/utils/create-context.ts";
 import type { UseFieldReturn } from "./use-field.ts";
 
 export interface UseFieldContext extends UseFieldReturn {}

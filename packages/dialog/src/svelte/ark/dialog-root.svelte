@@ -1,6 +1,6 @@
 <script module lang="ts">
   import type { Snippet } from 'svelte'
-  import type { UsePresenceProps } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
+  import type { UsePresenceProps } from "@spark/presence/svelte/ark/use-presence.svelte.ts";
   import type { UseDialogProps } from "./use-dialog.svelte.ts";
 
   export interface DialogRootBaseProps extends UseDialogProps, UsePresenceProps {}
@@ -10,11 +10,11 @@
 </script>
 
 <script lang="ts">
-  import { PresenceProvider } from "../../../../presence/src/svelte/ark/use-presence-context.ts";
-import { usePresence } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
-  import { splitPresenceProps } from "../../../../presence/src/svelte/ark/split-presence-props.svelte.ts";
-  import { RenderStrategyPropsProvider } from "../../../../shared/src/svelte/ark/utils/render-strategy.ts";
-import { splitRenderStrategyProps } from "../../../../shared/src/svelte/ark/utils/render-strategy.ts";
+  import { PresenceProvider } from "@spark/presence/svelte/ark/use-presence-context.ts";
+import { usePresence } from "@spark/presence/svelte/ark/use-presence.svelte.ts";
+  import { splitPresenceProps } from "@spark/presence/svelte/ark/split-presence-props.svelte.ts";
+  import { RenderStrategyPropsProvider } from "@spark/shared/svelte/ark/utils/render-strategy.ts";
+import { splitRenderStrategyProps } from "@spark/shared/svelte/ark/utils/render-strategy.ts";
   import { DialogProvider } from "./use-dialog-context.ts";
   import { useDialog } from "./use-dialog.svelte.ts";
 

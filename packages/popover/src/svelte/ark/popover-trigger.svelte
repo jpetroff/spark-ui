@@ -1,8 +1,8 @@
 <script module lang="ts">
-  import type { Assign } from "../../../../shared/src/svelte/ark/types.ts";
-import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { PolymorphicProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
+  import type { Assign } from "@spark/shared/svelte/ark/types.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
+import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   import type { TriggerProps } from '../../common/zag/popover/index.ts'
 
   export interface PopoverTriggerBaseProps extends TriggerProps, PolymorphicProps<'button'>, RefAttribute {}
@@ -10,10 +10,10 @@ import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
 </script>
 
 <script lang="ts">
-  import { mergeProps } from '../../../../shared/src/svelte/zag/index.ts'
-  import { createSplitProps } from "../../../../shared/src/svelte/ark/utils/create-split-props.ts";
-  import { default as Ark } from "../../../../shared/src/svelte/ark/components/factory/factory.svelte";
-  import { usePresenceContext } from "../../../../presence/src/svelte/ark/use-presence-context.ts";
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+  import { createSplitProps } from "@spark/shared/svelte/ark/utils/create-split-props.ts";
+  import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
+  import { usePresenceContext } from "@spark/presence/svelte/ark/use-presence-context.ts";
   import { usePopoverContext } from "./use-popover-context.ts";
 
   let { ref = $bindable(null), ...props }: PopoverTriggerProps = $props()

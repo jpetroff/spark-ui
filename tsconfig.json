@@ -4,6 +4,7 @@
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
     "strict": true,
     "noEmit": true,
@@ -18,7 +19,18 @@
     "paths": {
       "@/*": ["./src/*"],
       "@/components/ui/*": ["./packages/*/src/index.ts"],
-      "@/lib/spark-utils": ["./packages/utils/src/spark-utils.ts"]
+      "@/lib/spark-utils": ["./packages/utils/src/spark-utils.ts"],
+      "@spark/button/*": ["./packages/button/src/*"],
+      "@spark/checkbox/*": ["./packages/checkbox/src/*"],
+      "@spark/dialog/*": ["./packages/dialog/src/*"],
+      "@spark/environment/*": ["./packages/environment/src/*"],
+      "@spark/field/*": ["./packages/field/src/*"],
+      "@spark/fieldset/*": ["./packages/fieldset/src/*"],
+      "@spark/locale/*": ["./packages/locale/src/*"],
+      "@spark/popover/*": ["./packages/popover/src/*"],
+      "@spark/presence/*": ["./packages/presence/src/*"],
+      "@spark/shared/*": ["./packages/shared/src/*"],
+      "@spark/utils/*": ["./packages/utils/src/*"]
     }
   },
   "include": [

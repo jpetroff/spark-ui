@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext } from "../../../../shared/src/react/ark/utils/create-context.ts";
+import { createContext } from "@spark/shared/react/ark/utils/create-context.ts";
 import type { UseDialogReturn } from "./use-dialog.ts";
 
 export interface UseDialogContext extends UseDialogReturn {}

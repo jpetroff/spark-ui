@@ -1,11 +1,11 @@
-import { ariaHidden } from "../../../../../shared/src/common/zag/aria-hidden/index.ts";
-import { createMachine } from "../../../../../shared/src/common/zag/core/index.ts";
-import { trackDismissableElement } from "../../../../../shared/src/common/zag/dismissable/index.ts";
-import { getInitialFocus } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { isFocusOutside } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { raf } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { trapFocus } from "../../../../../shared/src/common/zag/focus-trap/index.ts";
-import { preventBodyScroll } from "../../../../../shared/src/common/zag/remove-scroll/index.ts";
+import { ariaHidden } from "@spark/shared/common/zag/aria-hidden/index.ts";
+import { createMachine } from "@spark/shared/common/zag/core/index.ts";
+import { trackDismissableElement } from "@spark/shared/common/zag/dismissable/index.ts";
+import { getInitialFocus } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isFocusOutside } from "@spark/shared/common/zag/dom-query/index.ts";
+import { raf } from "@spark/shared/common/zag/dom-query/index.ts";
+import { trapFocus } from "@spark/shared/common/zag/focus-trap/index.ts";
+import { preventBodyScroll } from "@spark/shared/common/zag/remove-scroll/index.ts";
 import * as dom from "./dialog.dom.ts"
 import type { DialogSchema } from "./dialog.types.ts";
 

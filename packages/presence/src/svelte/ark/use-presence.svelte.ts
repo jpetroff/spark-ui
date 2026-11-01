@@ -1,9 +1,9 @@
-import type { Optional } from "../../../../shared/src/svelte/ark/types.ts";
-import { type RenderStrategyProps } from "../../../../shared/src/svelte/ark/utils/render-strategy.ts";
-import { splitRenderStrategyProps } from "../../../../shared/src/svelte/ark/utils/render-strategy.ts";
+import type { Optional } from "@spark/shared/svelte/ark/types.ts";
+import { type RenderStrategyProps } from "@spark/shared/svelte/ark/utils/render-strategy.ts";
+import { splitRenderStrategyProps } from "@spark/shared/svelte/ark/utils/render-strategy.ts";
 import * as presence from '../../common/zag/presence/index.ts'
-import { normalizeProps, useMachine } from '../../../../shared/src/svelte/zag/index.ts'
-import { type MaybeFunction, runIfFn } from '../../../../shared/src/common/zag/utils/index.ts'
+import { normalizeProps, useMachine } from '@spark/shared/svelte/zag/index.ts'
+import { type MaybeFunction, runIfFn } from '@spark/shared/common/zag/utils/index.ts'
 
 export interface UsePresenceProps extends Optional<presence.Props, 'present'>, RenderStrategyProps {
   /**

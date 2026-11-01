@@ -1,6 +1,6 @@
-import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
-import type { NormalizeProps } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
+import type { Service } from "@spark/shared/common/zag/core/index.ts";
+import type { NormalizeProps } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
 import type { PresenceApi } from "./presence.types.ts";
 import type { PresenceSchema } from "./presence.types.ts";
 

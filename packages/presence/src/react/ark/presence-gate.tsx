@@ -1,7 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { Activity } from "../../../../shared/src/react/ark/utils/react-activity.ts";
+import { Activity } from "@spark/shared/react/ark/utils/react-activity.ts";
 import type { UsePresenceReturn } from "./use-presence.ts";
 
 export interface PresenceGateProps {

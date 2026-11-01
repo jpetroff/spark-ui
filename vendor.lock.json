@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "importerVersion": 1,
+  "importerVersion": 2,
   "upstream": {
     "ark": {
       "commit": "9a3f857e79d5e891afb928781c2c8a0559f49181",
@@ -1682,7 +1682,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-control.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-control.tsx",
       "upstreamHash": "bc1653ae857704103d185e16dedcd498772b4b320077d269786ec17b78e53c2d",
-      "generatedHash": "76e75a32efb60253cd6af3e2801e33bac7e9ede5d412aae1258878581aeb3ccc",
+      "generatedHash": "1ac6469e39e40a282606b4e14345655986276dbbd538cf5bef817d4ed7efa1e0",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1695,7 +1695,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-group-provider.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-group-provider.tsx",
       "upstreamHash": "c41e6812c8550e0b01b84fd4ca483130b5c15e73b87cb968badb63a100ddaa87",
-      "generatedHash": "c1a045523ed4d6ab75e63315fcaa38bdfaa62aca564b1dd40ddedc5bf6efb8f5",
+      "generatedHash": "95b73c5f60ff6ef942b3d84cc95c01036d437587d955fe600b5577b187daa12d",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/checkbox.anatomy.ts",
         "ark:packages/react/src/components/checkbox/use-checkbox-group-context.tsx",
@@ -1710,7 +1710,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-group.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-group.tsx",
       "upstreamHash": "b7befbfde5883dd9ff560d876429462377bae0b92a5b5dfc0755f5f496715c14",
-      "generatedHash": "4ff11a097cf7f4f3ae0cf937859da9fc96687150451e72c2fa631d0f45ba6ba2",
+      "generatedHash": "65dbc86892f403ac87970237b25204ca49895086e8f34688d84183f92ad2fde9",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/checkbox.anatomy.ts",
         "ark:packages/react/src/components/checkbox/use-checkbox-group-context.tsx",
@@ -1726,7 +1726,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-hidden-input.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-hidden-input.tsx",
       "upstreamHash": "c2fada1608bb890d9ed9b2e7a75c559480336954807372c1533e31853a8b7785",
-      "generatedHash": "6c5ce721d5aed37f59432201d175411f76183bdcf8f4712783d1e16d0b18f87f",
+      "generatedHash": "73448fd42cc5d1a44ad422473b464259a738a10690dbe571fdb833311d873e2e",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1740,7 +1740,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-indicator.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-indicator.tsx",
       "upstreamHash": "4dc5aecdf2fd4ed9cd486a39a78b6921671c3c80f046b586d3d548968a22542e",
-      "generatedHash": "8fe9ad13b27343a8679ed4c8d78d9ff4a83bf7a9b32c2ec74ae21527ffab3db4",
+      "generatedHash": "de022b8f2e93deba6e4316b7c421c0c17417fafc0ec699073983ea074d50d008",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1753,7 +1753,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-label.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-label.tsx",
       "upstreamHash": "6796e0ca8ecc7396e6acdeabc66d6963e91388e29eb8f1ef8a453cf4fb745e14",
-      "generatedHash": "d0c69f6073ab01ab839857bb3500ac6e9810b7fceffd005022013d692fd94020",
+      "generatedHash": "37ed9cf1657a10c88724c64125627217e20e48551ff00fa508db289912d7fae3",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1766,7 +1766,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-root-provider.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-root-provider.tsx",
       "upstreamHash": "f88a7f41ba49a453e7d63b46418e393697d5b5485de1b130bf69b60f119ff3f0",
-      "generatedHash": "ca6a6f9451222a8935cddd3c79054f5c37829cfafb2d35ced80e46702c45b19a",
+      "generatedHash": "9f9972bef4210a1e1e595dc6dbe3d0f20ee040051aafe69da480183d2dcd2d0d",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-context.ts",
         "ark:packages/react/src/components/checkbox/use-checkbox.ts",
@@ -1781,7 +1781,7 @@
     "ark:packages/react/src/components/checkbox/checkbox-root.tsx": {
       "destination": "packages/checkbox/src/react/ark/checkbox-root.tsx",
       "upstreamHash": "da53dc51d2e416bc1b93e1e243c475b1fd74ea0f4606b7c6f9b6af127b2f25e8",
-      "generatedHash": "51315fb4eaba2a830bed20e9bc96f9ddc44e934d9444386f4859120c6fefe72d",
+      "generatedHash": "50ae349cb6ac539b41964f34d0998fd6cad68f1487fc76066ae407dfd72a8cf1",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-context.ts",
         "ark:packages/react/src/components/checkbox/use-checkbox.ts",
@@ -1848,7 +1848,7 @@
     "ark:packages/react/src/components/checkbox/use-checkbox-context.ts": {
       "destination": "packages/checkbox/src/react/ark/use-checkbox-context.ts",
       "upstreamHash": "78609d501385245cd11cba1385f64d8344cc92b1a6b148bd490a3665098af4ec",
-      "generatedHash": "5c16c805d39d6682f7612dc04b069a1820e2dd7f9ef046638fd50b947b67e270",
+      "generatedHash": "90b3298cd4b88f0935eb510dd00d77530ad8eff7957de831fd2d245aec9e08e5",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -1858,7 +1858,7 @@
     "ark:packages/react/src/components/checkbox/use-checkbox-group-context.tsx": {
       "destination": "packages/checkbox/src/react/ark/use-checkbox-group-context.tsx",
       "upstreamHash": "0bcbbd75f4999b7839367d7da8af9e702fb933da657f4b37a397012a79b2816e",
-      "generatedHash": "5f2df5a09769dec1242a4104890155e940165353ac60ea4c7802f9db07380d2d",
+      "generatedHash": "89e4ade40f76dcd779c28d1d584c5a0b4b5b05c69aca6274fcd06ad2f6b8e0f1",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-group.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -1868,7 +1868,7 @@
     "ark:packages/react/src/components/checkbox/use-checkbox-group.ts": {
       "destination": "packages/checkbox/src/react/ark/use-checkbox-group.ts",
       "upstreamHash": "aa90c06c45b3ec9e4ef11ca00632e0b63dc3bb4d783393c66d0e5529f99749f0",
-      "generatedHash": "a41be8f7676549bd44623506db01eada2d406e9e0829fd6dd1b9593b30722f9a",
+      "generatedHash": "2b9f2e3b9de805de06bd0769451a9d2fa43989377ea9baaa4b7ac71bfe29ad0c",
       "dependencies": [
         "ark:packages/react/src/components/fieldset/use-fieldset-context.ts",
         "ark:packages/react/src/utils/use-controllable-state.ts",
@@ -1879,7 +1879,7 @@
     "ark:packages/react/src/components/checkbox/use-checkbox.ts": {
       "destination": "packages/checkbox/src/react/ark/use-checkbox.ts",
       "upstreamHash": "6030a379dbeb47034c534b715b89018e924c7815226bb704e3d05eb9357b3a24",
-      "generatedHash": "e04fb86bad8b4ffc178c2437573681afa68e8a89fcb679c1a675b2172a3e16f7",
+      "generatedHash": "5a1b82fe8eba0a1c7eb4d2b2e5f9d003571390e22304d1f8f2f58ee70e29a3db",
       "dependencies": [
         "ark:packages/react/src/components/checkbox/use-checkbox-group-context.tsx",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -1895,7 +1895,7 @@
     "ark:packages/react/src/components/dialog/dialog-backdrop.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-backdrop.tsx",
       "upstreamHash": "ec2df149b61c824b80f674715dcab51160e7973a56f42a7c3227a0bcb9a34038",
-      "generatedHash": "29b592617fb84b463fd2e54c8d61bc399072051bbd05046ba08a0d2a379125ed",
+      "generatedHash": "6a41a7c27870f4ef1fa99048acafb386be717579a14bc09908eb5be72455131b",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1912,7 +1912,7 @@
     "ark:packages/react/src/components/dialog/dialog-close-trigger.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-close-trigger.tsx",
       "upstreamHash": "f74bff725d72eeaf1a99838df20139361ff003effc0b1e1730e658aa909f1a9d",
-      "generatedHash": "a6735a2ec3c30ee924b0be59552c750228202542aa7126519d298ed3f1dc5d6c",
+      "generatedHash": "5121cf6af8d977efad6c9adb2700640223d89e63aa421f3eb6740f4b593365f4",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1925,7 +1925,7 @@
     "ark:packages/react/src/components/dialog/dialog-content.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-content.tsx",
       "upstreamHash": "eb6b7c2fbb23dfe4ca48af16f04749a904ccaa298c524f065ae3f7d1988c629e",
-      "generatedHash": "cd048cc8e3a822604d349b9a663958726d6a450bc9d276306fc37b57e7045a81",
+      "generatedHash": "7da46740372b964d8ae0d32e0a7fd0811bf44c0f9b0c1032c92b42705b7ba05c",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1952,7 +1952,7 @@
     "ark:packages/react/src/components/dialog/dialog-description.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-description.tsx",
       "upstreamHash": "df9179b68961460afda0031eec1de4630e7b5357d6c3cb444a7c885b1305d527",
-      "generatedHash": "5b4271a2245b6dc7a76be53a1770dc3d7663d52abddcc8ac8228b9666225a3dd",
+      "generatedHash": "fcb1bc3fd5dcc9c82beff0037fc93ea9cec5258d8202eea6b6b6119b675ea89a",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1965,7 +1965,7 @@
     "ark:packages/react/src/components/dialog/dialog-positioner.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-positioner.tsx",
       "upstreamHash": "f76f9aefb6fca07b1b7745fbb787216934811f6897ec03306c5764734f62eee7",
-      "generatedHash": "b15741280321fc39e8f9ec124f42176838a75a633624d3db3fe5063f177dde57",
+      "generatedHash": "a257259ec3f8d96028a7cef0799d6297d2d61fe10ac85fb28b9185fd9b28fd98",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -1979,7 +1979,7 @@
     "ark:packages/react/src/components/dialog/dialog-root-provider.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-root-provider.tsx",
       "upstreamHash": "60570da0c6f213bccb483775ef47d9d7227f73049eb959ba473d4427401dc6c6",
-      "generatedHash": "7255bb8929930cddab6a7443f59396a62e8cd060ecb72346bf5e73709ea1c514",
+      "generatedHash": "6452d4d5e3030dad7821e2d67b73ad91477835e3b6816527851a048ba5619e9f",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/dialog/use-dialog.ts",
@@ -1997,7 +1997,7 @@
     "ark:packages/react/src/components/dialog/dialog-root.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-root.tsx",
       "upstreamHash": "b97f860d012c18a6c55248a38c83f36b13a210005cc3990647ee886fd4e33d4b",
-      "generatedHash": "a92b36d20f95e2cf62dc634fbb4b8361b03fe215cd7e62e23019c6ffa93f28fb",
+      "generatedHash": "3f46691f1f5903255a4e484e1225340d905649c3c01f98699e335a186f7e218f",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/dialog/use-dialog.ts",
@@ -2014,7 +2014,7 @@
     "ark:packages/react/src/components/dialog/dialog-title.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-title.tsx",
       "upstreamHash": "c0551d89ebda56bab4c2e8178701a5f5b22afe6df9f9b55242c3887aa6b176b7",
-      "generatedHash": "54d85a5f70ad3e3102a835c927f6a4b5341ed4ba05ebc9198e8888f4a48377d0",
+      "generatedHash": "f9e869115772575c9c46976c56d3ce566241e3c6fea528b50c9c65ca6fdbb5f4",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -2027,7 +2027,7 @@
     "ark:packages/react/src/components/dialog/dialog-trigger.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-trigger.tsx",
       "upstreamHash": "fdbf4a5989da1a9bf727ab00aafbe43a384f6f7260857b679059843d9e6ccd85",
-      "generatedHash": "6a763d076e08e75491530483cb6947a097568d74a6b0d8150902a6eec56630a0",
+      "generatedHash": "2d94ef7ca8a9d407191b70b85b483b53aceda567dac78826ce371d4912713585",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog-context.ts",
         "ark:packages/react/src/components/factory.ts",
@@ -2095,7 +2095,7 @@
     "ark:packages/react/src/components/dialog/use-dialog-context.ts": {
       "destination": "packages/dialog/src/react/ark/use-dialog-context.ts",
       "upstreamHash": "1915c6c57be68d4ed1bc79d03a39f6b8fa62126fd99998ad9bba849c11894497",
-      "generatedHash": "c86028f9b0b085a8cd0e2623ccac36d7dce08f576f023b31ffcd82a039877bfd",
+      "generatedHash": "eb0127bec16595e9cca143e2534dffb8b3c3197a82de3b41de9853409081ead9",
       "dependencies": [
         "ark:packages/react/src/components/dialog/use-dialog.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -2105,7 +2105,7 @@
     "ark:packages/react/src/components/dialog/use-dialog.ts": {
       "destination": "packages/dialog/src/react/ark/use-dialog.ts",
       "upstreamHash": "a1d6dca355c8d4d8ed9f9ea3782edb4bf9b344b0f1aa7674c3972404b5e58614",
-      "generatedHash": "304c1240c84b5fdcbfe48d35a1ee61696fafd4b234b8ce74935e5f60a8894b1e",
+      "generatedHash": "7ab28d623f0eaa2de771eccf2678769c5f0966ad4f1d817d705d39eb225ab689",
       "dependencies": [
         "ark:packages/react/src/providers/index.ts",
         "ark:packages/react/src/types.ts",
@@ -2142,7 +2142,7 @@
     "ark:packages/react/src/components/field/field-error-text.tsx": {
       "destination": "packages/field/src/react/ark/field-error-text.tsx",
       "upstreamHash": "11daaa09d11ff1471168ec7aecf9296a087dc38bd5859b553210adb769c57573",
-      "generatedHash": "8de44e7fba2e30202e4034bbd11fdbfa6196f1bcf463f6ca25c362d2b5df85e7",
+      "generatedHash": "3243f17ec836e1819194030f618dc244e3bb6f78e0f2ac5593edfc4c5b705b1f",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2155,7 +2155,7 @@
     "ark:packages/react/src/components/field/field-helper-text.tsx": {
       "destination": "packages/field/src/react/ark/field-helper-text.tsx",
       "upstreamHash": "cdedf01c2aa6ceadc09fd909beb57dadfba5d0c03b8b0c8ba933513a6fd36e46",
-      "generatedHash": "e6befe991803eec3da42ed027d75d9395852f40d7d77aaeb0ef84eddb421cf10",
+      "generatedHash": "dea8c2ebc5bee1db17df21fa5cea73737ce86716dfb3006c7b121a8ab1c906ae",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2168,7 +2168,7 @@
     "ark:packages/react/src/components/field/field-input.tsx": {
       "destination": "packages/field/src/react/ark/field-input.tsx",
       "upstreamHash": "480518a96888cf12c0e2f940e3bb916a8b8cdec491cab8a85f04531c7f3dcdfa",
-      "generatedHash": "5b05d630cec12ea98f72ee28674d1fd4986405e16f9ff30309e2f19dfce2d42b",
+      "generatedHash": "955056dbf8134f0c9e10295b28c12630d53ca88bcc2ed37ffa4311ffd2a447cb",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2181,7 +2181,7 @@
     "ark:packages/react/src/components/field/field-item.tsx": {
       "destination": "packages/field/src/react/ark/field-item.tsx",
       "upstreamHash": "1e193a946d3dfff9fe90bb3b724832d97dcae69b9dd40b52efb6f045129c78b7",
-      "generatedHash": "6d49f6811f1da345eb3da91b083a3f00612dd5aa03a7ede2fa70507eb31483f4",
+      "generatedHash": "302304e9153454a4cbbd5781f660066cfa50edf95382d8391b99912f4bf81713",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/field.anatomy.ts",
@@ -2194,7 +2194,7 @@
     "ark:packages/react/src/components/field/field-label.tsx": {
       "destination": "packages/field/src/react/ark/field-label.tsx",
       "upstreamHash": "4c38d75ef547cfd0df58c75a322bedff42ca32796cbf745977f3de3f51bad0fc",
-      "generatedHash": "688769d7d30d8e616c452ee70569b2ccaa6809f1697bd7e9b59058ee542e7004",
+      "generatedHash": "17ea91972fe5ab0a3060f7e9f15a182fd97b2891385db0f2527ae1d22cd345db",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2207,7 +2207,7 @@
     "ark:packages/react/src/components/field/field-required-indicator.tsx": {
       "destination": "packages/field/src/react/ark/field-required-indicator.tsx",
       "upstreamHash": "edbcaf1ab8ca6ef711ef7542641723fe09d5fc44abbe5cfaa8a59d5b46a96bc6",
-      "generatedHash": "6d1afe59305ddde1aee896456a16e3e39a898f50ec63c4a7e253d922cea41590",
+      "generatedHash": "bac5f0acf67b3e735db63217a345159d74b2cb8d06cd0c389164efafe654e5e2",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2220,7 +2220,7 @@
     "ark:packages/react/src/components/field/field-root-provider.tsx": {
       "destination": "packages/field/src/react/ark/field-root-provider.tsx",
       "upstreamHash": "767b5a0100f69b2c0578e26970480e07dedb57fe32a23bba1e84b4c5fe39c7a2",
-      "generatedHash": "b711636e42bd1f956d49b3cd19171eddd8aa9599a1ab7d94b84f32d5b76bcb9d",
+      "generatedHash": "23131ed1bd11473b4a29798c58f246299fcbc8788cf0a1fda1e3f275c5367e8f",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2235,7 +2235,7 @@
     "ark:packages/react/src/components/field/field-root.tsx": {
       "destination": "packages/field/src/react/ark/field-root.tsx",
       "upstreamHash": "253525066a1737ef2d9841882fa393c742528338dd2e0ace9d4d600c85d33886",
-      "generatedHash": "8e9fcc210c63c8485aa1aedbc958f512adc66ce44fd042a5e76d190af8cf3740",
+      "generatedHash": "060130f0ca23582e9aedb26cb2bad69ade20af0ac0fb27bbdbfd35c8b9ec2a18",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2251,7 +2251,7 @@
     "ark:packages/react/src/components/field/field-select.tsx": {
       "destination": "packages/field/src/react/ark/field-select.tsx",
       "upstreamHash": "c1ad19dc3d8ec10c47768a725d797fc9cb6c77ec20619b4219acdc84dab8e376",
-      "generatedHash": "f4b267f42f89157fbda3880cb2970181cfb6d89c01548d8cafb9a84ecf60e5ab",
+      "generatedHash": "c43fcc5382505f1ed365f73b3571381d27da82867af9993e155cfc60a1d4a85d",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2264,7 +2264,7 @@
     "ark:packages/react/src/components/field/field-textarea.tsx": {
       "destination": "packages/field/src/react/ark/field-textarea.tsx",
       "upstreamHash": "27a1d18820392f788691246fc05f47e249534391d738cce235fcff26c108ac82",
-      "generatedHash": "70e715a4a1498413024f5fd533f4db40ce37f4d90e9b57a20792f70adb226f38",
+      "generatedHash": "3006e70eafbe42ee53789fac0e62273c0f88873cd07fc475e8f994c13b16d1b7",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/use-field-context.ts",
@@ -2279,7 +2279,7 @@
     "ark:packages/react/src/components/field/field.anatomy.ts": {
       "destination": "packages/field/src/react/ark/field.anatomy.ts",
       "upstreamHash": "290b70d1a59a32f7cc837377f0c5590adf5517163b08d63e59a537e30f417799",
-      "generatedHash": "ae95d73b317ea7d02be1e090b3c32646e602d191f36e452c8e66668b99a1408c",
+      "generatedHash": "31479ad178f3e79584620f3064208b93d8e7240fda016cb5740cff38eb9e9420",
       "dependencies": [
         "zag:packages/anatomy/src/index.ts"
       ],
@@ -2330,7 +2330,7 @@
     "ark:packages/react/src/components/field/use-field-context.ts": {
       "destination": "packages/field/src/react/ark/use-field-context.ts",
       "upstreamHash": "2910b66e0a51046a1604a7ec84b32b386dac3f80a18434c015b320fe3b78ec5a",
-      "generatedHash": "b7ae1c7824436569cc2400d89308fa9a7f70a8dd8ad70899f4ea6d52e6ec346c",
+      "generatedHash": "81981795f5aedb2c2ca1ecf96c8ce2542721ccac6ae4d86b35e40920bc695f93",
       "dependencies": [
         "ark:packages/react/src/components/field/use-field.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -2340,7 +2340,7 @@
     "ark:packages/react/src/components/field/use-field.ts": {
       "destination": "packages/field/src/react/ark/use-field.ts",
       "upstreamHash": "e3305e734b5ccac938c069b4cd14f7e91ddb453fb666b72b6e503209fd06d24f",
-      "generatedHash": "1a5506b33adf5d806c2a5dec29f2e9c1ad59b39864b66099fe800689e699b6c0",
+      "generatedHash": "1af7edf936d6ab4d1a7a44a17435bc150fa7704764c5a2e4d5487b58d9a2dbd6",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/field/field.anatomy.ts",
@@ -2356,7 +2356,7 @@
     "ark:packages/react/src/components/fieldset/fieldset.anatomy.ts": {
       "destination": "packages/fieldset/src/react/ark/fieldset.anatomy.ts",
       "upstreamHash": "5cb9b325f32cc308d9af61324559f9f4970280bbacfaf009d109ed762c4c22de",
-      "generatedHash": "9332bb4c9cb12ac6229d427baa93377bd62a35e837541185ba96b11c949d4798",
+      "generatedHash": "74f177744cc28a7c8022b7812658f907819e376a125c47283ea8e92c076ab00f",
       "dependencies": [
         "zag:packages/anatomy/src/index.ts"
       ],
@@ -2365,7 +2365,7 @@
     "ark:packages/react/src/components/fieldset/use-fieldset-context.ts": {
       "destination": "packages/fieldset/src/react/ark/use-fieldset-context.ts",
       "upstreamHash": "aaabbbc41911b37f7a3fb2ca196d51c2150aa325547261d626ed65de6a99dc59",
-      "generatedHash": "114a60233b834dda4d254805b541376fd404a405f290aa7f706b79b1acdfe08f",
+      "generatedHash": "cc638b191f27b4ff081111384c14cddf88ed4337d2423e05bc4b8f502e643463",
       "dependencies": [
         "ark:packages/react/src/components/fieldset/use-fieldset.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -2375,7 +2375,7 @@
     "ark:packages/react/src/components/fieldset/use-fieldset.ts": {
       "destination": "packages/fieldset/src/react/ark/use-fieldset.ts",
       "upstreamHash": "2c60aa7e1f915f6c99aa043475f2cd4d90c1600949eaf003643ba4a53b31140e",
-      "generatedHash": "e4ffbcfb51887f9e8ae5a3efb1274cfa19b4ba039a7f3f12420181f81b0c4f34",
+      "generatedHash": "6af1e6d8636a2a4e8068810103d69ed728902cd58cc618b840ad21aade6ec466",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/fieldset/fieldset.anatomy.ts",
@@ -2416,7 +2416,7 @@
     "ark:packages/react/src/components/popover/popover-anchor.tsx": {
       "destination": "packages/popover/src/react/ark/popover-anchor.tsx",
       "upstreamHash": "20becee710850f3a6355de370b0c170eb984feed439cea3ecc623a73ce0c6998",
-      "generatedHash": "b858c89234d0218f0fc391095f7f75af3160499f6d6066c15d79658ac8c0ee95",
+      "generatedHash": "b4147cd84c1c75875a7ff654002465fb258b914e1d810b27c2d72bd9b99f94c9",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2429,7 +2429,7 @@
     "ark:packages/react/src/components/popover/popover-arrow-tip.tsx": {
       "destination": "packages/popover/src/react/ark/popover-arrow-tip.tsx",
       "upstreamHash": "df3a9d0fba7b6555e4a93e8da4dcd34520b223b7f096027aa3e1042cbe873e23",
-      "generatedHash": "3ee8e0d35682fec90e64e05fd175b36284c700d82ff330453e12fb17850587e8",
+      "generatedHash": "daeb690d2a07302672583b34bffdb887214d06aac252489d274d3c51a440e519",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2442,7 +2442,7 @@
     "ark:packages/react/src/components/popover/popover-arrow.tsx": {
       "destination": "packages/popover/src/react/ark/popover-arrow.tsx",
       "upstreamHash": "6b4299d3cb54e7529fecd64920d4f2e9667fde4f2b573f4eb03c0aec585dd821",
-      "generatedHash": "1530f9782fb129dfcecc772e84c47d3866db5e79983c4e6e8ea778f02fe46cab",
+      "generatedHash": "949926c5ae84a0a64cba6e24bfa91c53cee7e1f099e8199d8f2cc99383556f3e",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2455,7 +2455,7 @@
     "ark:packages/react/src/components/popover/popover-close-trigger.tsx": {
       "destination": "packages/popover/src/react/ark/popover-close-trigger.tsx",
       "upstreamHash": "77e4db2d5c85b894cad435a7b694c1f0f902eecaa9a8a6266810c2cc523e6592",
-      "generatedHash": "0084ef1d71f30a0da42b1b920342cf254382bc2013046bf108819f61a42dae43",
+      "generatedHash": "735ffe99a5121e385bb1fbdffaf4e0d5d3ff127bc4c28250b7c79f92b1a19aa5",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2468,7 +2468,7 @@
     "ark:packages/react/src/components/popover/popover-content.tsx": {
       "destination": "packages/popover/src/react/ark/popover-content.tsx",
       "upstreamHash": "5d889da5c8314661a678bc7ada965157f1bffccb3a65f2f51ac33cb580a0f698",
-      "generatedHash": "4ab686e6c48dbb0a06e182e671b5e07aed58eb23ed2918921d9d440387b9f29d",
+      "generatedHash": "6898d2e4355269152647e3e4cdfa45d704a0f4fe089e31fe329efaac99c233ec",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2495,7 +2495,7 @@
     "ark:packages/react/src/components/popover/popover-description.tsx": {
       "destination": "packages/popover/src/react/ark/popover-description.tsx",
       "upstreamHash": "0734bf232685658a87a021b9ec1ec21afb1e160b0e6d34c02cd0943950266dbf",
-      "generatedHash": "58f76aacca0278eec626d392b0a433eaea1fa214e9ab0a385d56c798bf0ff91f",
+      "generatedHash": "0515178e6419a8335b6d207b1cea4c96bc441654d227b069209fdb481525f531",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2508,7 +2508,7 @@
     "ark:packages/react/src/components/popover/popover-indicator.tsx": {
       "destination": "packages/popover/src/react/ark/popover-indicator.tsx",
       "upstreamHash": "7d78efb08fd68ec2f6231a3f37209ba59629601268f7a3eb2ad7a97615a6d1ff",
-      "generatedHash": "386e25fa48c9db7b44ffdc8c7731408443c357ac1a69e649118a80614669566a",
+      "generatedHash": "cc51f36d670fae7a52e56821a5eac64eec47c18eed407351b338298a2934a3c0",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2521,7 +2521,7 @@
     "ark:packages/react/src/components/popover/popover-positioner.tsx": {
       "destination": "packages/popover/src/react/ark/popover-positioner.tsx",
       "upstreamHash": "f41f6b322986ed301cd7a58c5f59787cf8ae449f3fa3bc45267408ca3796984d",
-      "generatedHash": "c33bb458fd930cfbcb2a6cf3dec23512f10ae0e36a47b64ff182969a31b0fef7",
+      "generatedHash": "b8631cb0715e64efbe4f5bfc675772f65262b3594ad1e560fb1643b1712c5682",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2535,7 +2535,7 @@
     "ark:packages/react/src/components/popover/popover-root-provider.tsx": {
       "destination": "packages/popover/src/react/ark/popover-root-provider.tsx",
       "upstreamHash": "8a4dbbdade0400146bfad492dd3a4e780e8f2951b6d08ee03d24fc187b36af17",
-      "generatedHash": "4feae2f0679635035ab06990948fd0bae10f20ac67bed85a89a7279618f84f71",
+      "generatedHash": "15558b80c3c304c5f7cf18d7eb6383bf320bc327804e8455c4158687503a80ea",
       "dependencies": [
         "ark:packages/react/src/components/popover/use-popover-context.ts",
         "ark:packages/react/src/components/popover/use-popover.ts",
@@ -2551,7 +2551,7 @@
     "ark:packages/react/src/components/popover/popover-root.tsx": {
       "destination": "packages/popover/src/react/ark/popover-root.tsx",
       "upstreamHash": "06b11a529de8944a60a6d14cf10f3df51e8cc0af7b3cce6a8abc9d3f8d4206d0",
-      "generatedHash": "b7b0bb923f5a94633d969ab2986b7d690ff269dc0ce7690c30f5711ea24381c7",
+      "generatedHash": "22a0022c7174ca915318c39ba99b6a7e1c3d4c82d53b857a8ca4c5e9c78ad4ec",
       "dependencies": [
         "ark:packages/react/src/components/popover/use-popover-context.ts",
         "ark:packages/react/src/components/popover/use-popover.ts",
@@ -2567,7 +2567,7 @@
     "ark:packages/react/src/components/popover/popover-title.tsx": {
       "destination": "packages/popover/src/react/ark/popover-title.tsx",
       "upstreamHash": "9321a9adbfdc73bfd87f5c492848b80637327033f505b8211aa7e7705c4597e0",
-      "generatedHash": "51be901634a44aa654f3d447e411cbe917f34c2a673a79c56cdae99454a13d7f",
+      "generatedHash": "c07d8fd4e7ecf281f3cb16f0c0dae972f2a3d2faea17e7ce1756aacc5fd775af",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2580,7 +2580,7 @@
     "ark:packages/react/src/components/popover/popover-trigger.tsx": {
       "destination": "packages/popover/src/react/ark/popover-trigger.tsx",
       "upstreamHash": "0cf3c4790890765cb0406978e3f9f7325a09241f0fb9d90a56df02004cc9fd63",
-      "generatedHash": "95a11d0157cccb950940f7f2b1e22b8f7b4faf97184b620d59004756645d61a3",
+      "generatedHash": "aa8243967f8555831c593a9803d1bc511baa9eb36c4b8b99b8ac7cab3adb8d70",
       "dependencies": [
         "ark:packages/react/src/components/factory.ts",
         "ark:packages/react/src/components/popover/use-popover-context.ts",
@@ -2628,7 +2628,7 @@
     "ark:packages/react/src/components/popover/use-popover-context.ts": {
       "destination": "packages/popover/src/react/ark/use-popover-context.ts",
       "upstreamHash": "4689b5d8f14e374ce4eb39c441496f5697ed4f87e6e0abc711468602e682ded7",
-      "generatedHash": "1fd654f4b645bc353c736f3c483281946e9f3ec7c31cc0b37287cdfee6dceb75",
+      "generatedHash": "e6d18226b97d2acae8ba571148bd0f6cb32396cc5fe49479da5a76f0c7f9f158",
       "dependencies": [
         "ark:packages/react/src/components/popover/use-popover.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -2638,7 +2638,7 @@
     "ark:packages/react/src/components/popover/use-popover.ts": {
       "destination": "packages/popover/src/react/ark/use-popover.ts",
       "upstreamHash": "46d0ef4ca78470065b040c7786144af3abeedb1153cfbd1dec12581876c09aa9",
-      "generatedHash": "941b1194380ab0add66aa494b4d710f2dfe804ccf823a3788399205b94d32da6",
+      "generatedHash": "ed03a72ab40c3a41e7526b63c713a4700c88a28c6e507b1523d8f44eff8fb613",
       "dependencies": [
         "ark:packages/react/src/providers/index.ts",
         "ark:packages/react/src/types.ts",
@@ -2652,7 +2652,7 @@
     "ark:packages/react/src/components/presence/presence-gate.tsx": {
       "destination": "packages/presence/src/react/ark/presence-gate.tsx",
       "upstreamHash": "d8474e131e14cbae379d001f0288249ce94a13fa6e7a743543563cd0cb022aa8",
-      "generatedHash": "aef330ad7fc9bf8963bcca281a2fef0cfd268029f6678c8c2a11721de4fa2b07",
+      "generatedHash": "07febcb90f1ea8768b7ccf8bffcf252d3b43c7a67aef5dc59daa4866f352d89b",
       "dependencies": [
         "ark:packages/react/src/components/presence/use-presence.ts",
         "ark:packages/react/src/utils/react-activity.ts"
@@ -2664,7 +2664,7 @@
     "ark:packages/react/src/components/presence/split-presence-props.ts": {
       "destination": "packages/presence/src/react/ark/split-presence-props.ts",
       "upstreamHash": "5c57d0e929d86fed8b86a3160ebe4fe01651b14b1f5a4729c1386c1905a5ac5e",
-      "generatedHash": "260db7860c81f8fea7e7edfb2786140744895c5750632418cb1a9dd47cedee82",
+      "generatedHash": "3ea2f69a01b08deb991e90ecad9a0014f0bd1d2c23e10e9e2d34cb54723bd0dc",
       "dependencies": [
         "ark:packages/react/src/components/presence/use-presence.ts",
         "ark:packages/react/src/utils/create-split-props.ts"
@@ -2674,7 +2674,7 @@
     "ark:packages/react/src/components/presence/use-presence-context.ts": {
       "destination": "packages/presence/src/react/ark/use-presence-context.ts",
       "upstreamHash": "5338bd328d46aea86b2809c7e0f41f3f1ae993d7887b310f7c9a01f01071b83a",
-      "generatedHash": "bb3be301e6cde3d4b5489e80d809b3ef9e208d03ee4e955222c738205bb3b264",
+      "generatedHash": "de14e21f4d88cfec30d02f8941a7d38ca438fd5c6df173d66e9d87d58da2a163",
       "dependencies": [
         "ark:packages/react/src/components/presence/use-presence.ts",
         "ark:packages/react/src/utils/create-context.ts"
@@ -2684,7 +2684,7 @@
     "ark:packages/react/src/components/presence/use-presence.ts": {
       "destination": "packages/presence/src/react/ark/use-presence.ts",
       "upstreamHash": "d144e72f715ca2c838ec3fbd5b92803113c124cd34537acc034fc34635813a3b",
-      "generatedHash": "a7667e4994cda07a54097afc59818f38bed3e6102da3d5cbcaf380563796df6d",
+      "generatedHash": "33a66ed89b8ce68ae43e5c4395335ae0252a3afded7dd5fa8e451580e493ab4c",
       "dependencies": [
         "ark:packages/react/src/types.ts",
         "ark:packages/react/src/utils/react-activity.ts",
@@ -3090,7 +3090,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-control.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-control.svelte",
       "upstreamHash": "d2b69f1a56a6894d75c41dd6a21545300723d6dfa0378371014ab72c8789fc1f",
-      "generatedHash": "fcde60410dd9712356af314c28a26ba638234e55b481858eb22e03190d322e7e",
+      "generatedHash": "11bd48a05d7ae2346344729333f4afe75e3c20a2f33302cd6121f4919dcdbab2",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3102,7 +3102,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-group-provider.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-group-provider.svelte",
       "upstreamHash": "89883f1b2b6e2af8c4840d50642ef6fcc541fd197233080e18d226b57753a2fb",
-      "generatedHash": "4dedabd89933bf531d26a7294cf9e1ac9071642becb2ea63b466327a2e888807",
+      "generatedHash": "932eb5c8a541ea63805b93128c758aefa23a68b71f6ecc40cd8e62aecf29a242",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/checkbox.anatomy.ts",
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-group-context.ts",
@@ -3116,7 +3116,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-group.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-group.svelte",
       "upstreamHash": "df0815059c7de5a61210862bfb3c9d10d51f9813426c6d84a59591dd00d17221",
-      "generatedHash": "165fabcfe37e1ce9af2bf1a5664f5916d3ab84ff965be64679b1f79d48fe4f23",
+      "generatedHash": "615111331238bcf83d01ac0438693d312fcba169ab0013dd77528b0073abce00",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/checkbox.anatomy.ts",
         "ark:packages/svelte/src/lib/components/checkbox/split-checkbox-group-props.svelte.ts",
@@ -3130,7 +3130,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-hidden-input.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-hidden-input.svelte",
       "upstreamHash": "401d0b65a525e2b03ad1f3a3986becd83281024edb21782ff0721f3e544c86ad",
-      "generatedHash": "9b9d39c9503325c1180c7b3c075fc963a13cc999885115c9ee7203a784feac03",
+      "generatedHash": "d92d46cc962c390a9ddb0ee3e2637f1d12e80b16e739b5475461e1425d245a38",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3143,7 +3143,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-indicator.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-indicator.svelte",
       "upstreamHash": "856b1aa5bcf64076f4a0ddbe97ec4b0042975fce45362f8a46c8537ce978b915",
-      "generatedHash": "cd39cb6a6ebddfd2f17af3839cd8d2dc4018eaafba1ea7846b36ddc856394c44",
+      "generatedHash": "fe49543621817324d79d45382aaa98fa341e20f53493d920e6ea2bc785ccf414",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3155,7 +3155,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-label.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-label.svelte",
       "upstreamHash": "1fc10c450ccf422d9c43158780989acc8c0b6266401f97b8a1e5aa1993f7698d",
-      "generatedHash": "b705a671856295bee8ad1663fa7f542be7553a0fa90509f5534c1d1456501acf",
+      "generatedHash": "4c65af68efed44818d4095d3b665ecc01f572e217ea98392337920fb78f04e82",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3167,7 +3167,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-root-provider.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-root-provider.svelte",
       "upstreamHash": "d916612db8186044958e3fc7ac9a1c5709c5730b7422debe089b731707974c29",
-      "generatedHash": "994eebaa3adef98d5dd810e6b8d0f9cd4fafc4e4ce10138c0c3098a6fea72926",
+      "generatedHash": "6f69961d37234058e94099f90786e42dda8d19c619161d12debad6aef5655acc",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-context.ts",
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox.svelte.ts",
@@ -3180,7 +3180,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/checkbox-root.svelte": {
       "destination": "packages/checkbox/src/svelte/ark/checkbox-root.svelte",
       "upstreamHash": "77124711c18314e723e78691af0453eb0882fbef3faf04174bdbef9a2bd8f733",
-      "generatedHash": "6523959ac743dfc64305d0b2520480bb5284ddff87c1262b06f470dd22925225",
+      "generatedHash": "3b10b960b7abde27496547ed3cd87ddab285aa521974c77e35fa5b9bed2e29ce",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/split-checkbox-props.svelte.ts",
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-context.ts",
@@ -3245,7 +3245,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/split-checkbox-group-props.svelte.ts": {
       "destination": "packages/checkbox/src/svelte/ark/split-checkbox-group-props.svelte.ts",
       "upstreamHash": "077faf18b8ce083cf1b5277c61fd1bea9b9a4286ecc1c10ba6e5055205bad592",
-      "generatedHash": "1a2086b5958a2740acf33bd246967c794f8cab90188a87dfa1809bc84ef27998",
+      "generatedHash": "526b0589f14918631d17059711f18334d6f372d7a8b189bdfb93bddfcff9eb04",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-group.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-split-props.ts"
@@ -3255,7 +3255,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/split-checkbox-props.svelte.ts": {
       "destination": "packages/checkbox/src/svelte/ark/split-checkbox-props.svelte.ts",
       "upstreamHash": "bce6d4009e796cf9114f68ef5deaa76603bdb38447c878f5a03c9c5421be0d30",
-      "generatedHash": "b4091b56fd10e1c3c9be4a2844b04749e2b2a2038e120f50703fea4598121228",
+      "generatedHash": "2d68b99e4d53c407a8fe79b004ac41517bfe2315af2be45819d015635791cfc0",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-split-props.ts"
@@ -3276,7 +3276,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-group-context.ts": {
       "destination": "packages/checkbox/src/svelte/ark/use-checkbox-group-context.ts",
       "upstreamHash": "5349c04bbce3775b7010c7c0878962ae3339b2f3b6881d1605edaa4cfe414f9a",
-      "generatedHash": "c0759c0cf641842355f7396411f68c1f1cb7ea576c4622a96e7a860dd1eb1622",
+      "generatedHash": "5c3b7b8b1461fb890857c42c85e90d4e9871eca96cafb4fe1b22926f51072d2a",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-group.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-context.ts"
@@ -3286,7 +3286,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-group.svelte.ts": {
       "destination": "packages/checkbox/src/svelte/ark/use-checkbox-group.svelte.ts",
       "upstreamHash": "088fad3688d6c7afd44f361e5e0663d5a017231223078b66d65eb28990f33963",
-      "generatedHash": "daf52ce61fe0f4640c4b5fccd7fb7ce245d4a92e56139e504b5e173f028c2048",
+      "generatedHash": "1978ee8d7185e3ff5f98b5abbc64f30766f1fefa9a4684eabd0bf310b317b9da",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/fieldset/use-fieldset-context.ts",
         "ark:packages/svelte/src/lib/types.ts",
@@ -3299,7 +3299,7 @@
     "ark:packages/svelte/src/lib/components/checkbox/use-checkbox.svelte.ts": {
       "destination": "packages/checkbox/src/svelte/ark/use-checkbox.svelte.ts",
       "upstreamHash": "f1517649e97875adfc4f300a44aa082872070fc6edb4a335355265212ad8f232",
-      "generatedHash": "e4e103faa68e3688e851edbfb559938e0b68e561ca947c0a777a8a1c00e6672b",
+      "generatedHash": "275c10011690dffcb4b3f96d1a0f23bb62ce14bac37184341dd2efe4ba25c579",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/checkbox/use-checkbox-group-context.ts",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3315,7 +3315,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-backdrop.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-backdrop.svelte",
       "upstreamHash": "e8487eb6fe265c70259222199c1e900a85637767ea177b4d28818921b846572d",
-      "generatedHash": "d91029dc43de30b614f93cf2e4eb64812ad59fd877816b9d2c92c679fbe1e08d",
+      "generatedHash": "f3f5c9d77f85fe3a0efbab4f8817980a1b4ace8d575840fd32f69e4d1f8e3c0d",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3329,7 +3329,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-close-trigger.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-close-trigger.svelte",
       "upstreamHash": "7083a4e39a4dd78410ef4999d5fd884ce47f1742dec6dccf82b3d8c7a7c37574",
-      "generatedHash": "3b473006a32fa10d6c1e310f1e0c94b81f4ed8f0860faeb2195042c554b078e0",
+      "generatedHash": "a5eea70ba4e3a862d70b26a33c0bd5cbeb9a013fab7c72bdcf635a5e21860cb7",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3341,7 +3341,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-content.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-content.svelte",
       "upstreamHash": "684791da61d82cce243ddae76ecc4fd4caeddebf0e3f9a1a0ae65aca7cb81578",
-      "generatedHash": "c6da6a4b10647769fb5ebd21d64ae4341b2ab0d4ff8965f5bdc5761400108d7e",
+      "generatedHash": "1073a62caf16c8406c63aba715ee32a852b2ad93c9c75708fd490bae74a70058",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3365,7 +3365,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-description.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-description.svelte",
       "upstreamHash": "2c317a645bb14d2996e0638dc49ef70e1e3e3bdbefcaa9a6dfb2afd567c2f313",
-      "generatedHash": "06b654552378f35bc5c47ea78e04c6526ed1717b732887f8f7f2b6dadc4b0af2",
+      "generatedHash": "90bdbfc9941ae7608b805c9262a07a76846caf3cde4dd740c7c43447f8add557",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3377,7 +3377,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-positioner.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-positioner.svelte",
       "upstreamHash": "bf15c80e7efb8bfef652369a6963ad6f0eee8e5baf9325156961326f4ebf4184",
-      "generatedHash": "c7b52eab24f5c7e432f132f734624e4d5afb48c9acf430396da037c7502a3b1e",
+      "generatedHash": "b707c035615ed88290f0931b608c1b885e88a0540cd7eeaac6bbe4c06d1071c8",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3390,7 +3390,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-root-provider.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-root-provider.svelte",
       "upstreamHash": "1ccc7d7d0b358677415ab2de35026970b24ca3408cdcec7220345bfb12c0dc10",
-      "generatedHash": "883f6cb94f8fe7e614b2dac7f998d3e0044df07a5ef38627e879fafefecee0e5",
+      "generatedHash": "43126c2d00ba2e6d9ddd02f469a33ef9a6f10fe1f1867838c5d15ca03561bbc3",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/dialog/use-dialog.svelte.ts",
@@ -3406,7 +3406,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-root.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-root.svelte",
       "upstreamHash": "85935a654df1a18caccf931d78f57c6a460ef80b761cad49ca0edd7411358a21",
-      "generatedHash": "8a6aced155650762af39423e7b2da24773e8fcfe3c0b26c25888e5a3374484b0",
+      "generatedHash": "002efa77c41ad9f6df533f9b84f584487d8c02da771bd5a0acdbc3016e87039a",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/dialog/use-dialog.svelte.ts",
@@ -3422,7 +3422,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-title.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-title.svelte",
       "upstreamHash": "b1634639c3ba4bff4b3b923f70684876ea134116b2c98b31a88d0b7351cf7cc9",
-      "generatedHash": "66f85acb25fed1eedd1758c66ba5ec89f8274091ba29e864a224fed855955071",
+      "generatedHash": "4c59a94453fbcc4adbae8818b7eed29906a1e9c8987462632466aa8675464b93",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3434,7 +3434,7 @@
     "ark:packages/svelte/src/lib/components/dialog/dialog-trigger.svelte": {
       "destination": "packages/dialog/src/svelte/ark/dialog-trigger.svelte",
       "upstreamHash": "017d7f81a10f30a518f83d9d2d205b4d2348f2b163321c1423794cc0e957a8af",
-      "generatedHash": "2383113943a35a919fa325d11551e37581bc3e94323b02e7e2d4e085462e84ef",
+      "generatedHash": "5e02a02da8ca6ff0eec628eaa23bf2927f8c3221630dc0016e36ddbae493ad1a",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts",
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
@@ -3500,7 +3500,7 @@
     "ark:packages/svelte/src/lib/components/dialog/use-dialog-context.ts": {
       "destination": "packages/dialog/src/svelte/ark/use-dialog-context.ts",
       "upstreamHash": "cf1cc3983b5c947524b4fde287ff268b3e291126676e8b4c710c08443a833b65",
-      "generatedHash": "5fd50ed7c91825d36abac9e0be3444bc70dec6cdc19055b80c072dfab193522b",
+      "generatedHash": "ec3bd13074b555c99897e13712b5b55b4c655a900cfaa1daee9dbe53bd56a0ad",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/dialog/use-dialog.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-context.ts"
@@ -3510,7 +3510,7 @@
     "ark:packages/svelte/src/lib/components/dialog/use-dialog.svelte.ts": {
       "destination": "packages/dialog/src/svelte/ark/use-dialog.svelte.ts",
       "upstreamHash": "f8d3e9a7de0ecdbd0023308e3d5807474ce03b0ce92f7039ae7213cc58fb808e",
-      "generatedHash": "1c0983c5839caa26c9b0f6f892ecdee24cab231ddf783c73c7d252abe977f6f2",
+      "generatedHash": "96775580bc1d9df914175266db2d1c0ac8c5c5dc02f384362c6d0caf44d603ad",
       "dependencies": [
         "ark:packages/svelte/src/lib/providers/environment/use-environment-context.ts",
         "ark:packages/svelte/src/lib/providers/locale/use-locale-context.ts",
@@ -3560,7 +3560,7 @@
     "ark:packages/svelte/src/lib/components/field/field-error-text.svelte": {
       "destination": "packages/field/src/svelte/ark/field-error-text.svelte",
       "upstreamHash": "7f9bf8a602023039c96a8ece7109fd36d9034a86c8bdf59baf5f047b442e845f",
-      "generatedHash": "e641cc4e2ffd7a2e3f74d6b70fcf67a3eeaff440f4650568037abd5846e03fc2",
+      "generatedHash": "814ab0e4a4b05d670bc14fca9cf3957d24f24d8bc8a33a2afbfa68cd16c19c97",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3572,7 +3572,7 @@
     "ark:packages/svelte/src/lib/components/field/field-helper-text.svelte": {
       "destination": "packages/field/src/svelte/ark/field-helper-text.svelte",
       "upstreamHash": "c9a1eb3ce9f98b5ad6b23b716d6b854bfeb3a4dda3b70f3c0f164ec8e3135237",
-      "generatedHash": "5e6bdf0bb1558949ff084f8912377b750cbd42d0320eb3f335ef51cccb3bfb57",
+      "generatedHash": "90d91fbd26e78544fa3522b0fd0f25b74c8618567b8fe5cc7485ffe03c1fbead",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3584,7 +3584,7 @@
     "ark:packages/svelte/src/lib/components/field/field-input.svelte": {
       "destination": "packages/field/src/svelte/ark/field-input.svelte",
       "upstreamHash": "a3e17abb246689d3690f43a25ed9f596991d84fd1906b3e696c942d77c7bf054",
-      "generatedHash": "e393721a4236bacb45ba24740d07a8954f45169b82f96b263fc5dc082ec64dc3",
+      "generatedHash": "8befc8d6a1df0b4112e56cf25285948d80e552dbd4a7ce7fc41d6a3212659884",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3598,7 +3598,7 @@
     "ark:packages/svelte/src/lib/components/field/field-item.svelte": {
       "destination": "packages/field/src/svelte/ark/field-item.svelte",
       "upstreamHash": "7549288d25be7b81ca8907b8db0566393f6e7295a8feb9c8fa3b87396ee36f12",
-      "generatedHash": "cf6ce53d8aa6deab2b72b925c530154341322a2d4ac84f444f7bbc7338ad1b1e",
+      "generatedHash": "34d1c4ada1c3ea644e3fd528c769c3b982933e20c5d46766da14c5f854c878e1",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/field/field.anatomy.ts",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3611,7 +3611,7 @@
     "ark:packages/svelte/src/lib/components/field/field-label.svelte": {
       "destination": "packages/field/src/svelte/ark/field-label.svelte",
       "upstreamHash": "ec39feec36eba3c93ff8957d1c4e89ca69ed25fc62783bc9f5561309b0179780",
-      "generatedHash": "9a6dd4d789622d636d55c52fe4e91e3267bf55ddca41815b3b6543e00a94551b",
+      "generatedHash": "57762c0082b76d56005284182f6e4b5b5eee5d9bfb22dbb7f76c8047f960e9e3",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3623,7 +3623,7 @@
     "ark:packages/svelte/src/lib/components/field/field-required-indicator.svelte": {
       "destination": "packages/field/src/svelte/ark/field-required-indicator.svelte",
       "upstreamHash": "10578b0293fa112505b0646c3349840267e71ce383343c0b5743e6fc4a07ae12",
-      "generatedHash": "33b84f16bffb309b9fa3f8204b729a45be5533cb60e9e3ead003396953a212cb",
+      "generatedHash": "5ff566ccacf6ff180465ad693cf4b1b31548a28e303609b4dd11834aaccc6101",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3637,7 +3637,7 @@
     "ark:packages/svelte/src/lib/components/field/field-root-provider.svelte": {
       "destination": "packages/field/src/svelte/ark/field-root-provider.svelte",
       "upstreamHash": "a0508703bb1e838a69e436d827c999fa0bbae4b21cc42d2acdf00d338fe5d8bd",
-      "generatedHash": "8a2d91ccb52a46c180156e83437303feca9d9d7829e544f07615f75949684950",
+      "generatedHash": "602e72715639e1e4dba474ccc56afece3a02cafde5699eb4c4469b4b87208f31",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3650,7 +3650,7 @@
     "ark:packages/svelte/src/lib/components/field/field-root.svelte": {
       "destination": "packages/field/src/svelte/ark/field-root.svelte",
       "upstreamHash": "d742fd55c45b4c0e088b474a55ed2e442b3c5c3db62d59a4bfd39e045654d79b",
-      "generatedHash": "0e987711240888add3afc7cae5ea57b1b430021764316b68885958f5119d832b",
+      "generatedHash": "b4619e00c7e7981867963025d6b936153e6d1dece5ea961a07e5691ceb884921",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3664,7 +3664,7 @@
     "ark:packages/svelte/src/lib/components/field/field-select.svelte": {
       "destination": "packages/field/src/svelte/ark/field-select.svelte",
       "upstreamHash": "ac06764466fbade836856446135b82637103c0b17cee3187c7fe6043a0c8bfae",
-      "generatedHash": "cac3a2c849487a0f2dc39b658bf9bd084b2f78e3934f6f3e109e2094f6328cdc",
+      "generatedHash": "122918ea011e9bad1861b871b8786e47a6287b34bfec702a91e47f15cae60d80",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3676,7 +3676,7 @@
     "ark:packages/svelte/src/lib/components/field/field-textarea.svelte": {
       "destination": "packages/field/src/svelte/ark/field-textarea.svelte",
       "upstreamHash": "c50a89bdeb7221b78bc8f7105a8a6ffa5f22d81dbcae0d7405a558b6091558f0",
-      "generatedHash": "91596cc11af1d901c55d22f973150f8eded821e6ada6975d69dc7bcbf2217f78",
+      "generatedHash": "38e1b472090478599c869df53afd42d3ecd5f877442d59c333ee6c4497acc2e8",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/field/use-field-context.ts",
@@ -3689,7 +3689,7 @@
     "ark:packages/svelte/src/lib/components/field/field.anatomy.ts": {
       "destination": "packages/field/src/svelte/ark/field.anatomy.ts",
       "upstreamHash": "5655389ff7207d168646e2a294803928e7e3f70272fba1458998083c744e17f1",
-      "generatedHash": "910de6c88ddf1a29f7fa664d537d79309381fa1c6391719b2650693be45006fc",
+      "generatedHash": "ece90ac827544031f90d0574c1b03ae93e2273f47ec38233f763dec7b2e043ae",
       "dependencies": [
         "zag:packages/anatomy/src/index.ts"
       ],
@@ -3740,7 +3740,7 @@
     "ark:packages/svelte/src/lib/components/field/use-field-context.ts": {
       "destination": "packages/field/src/svelte/ark/use-field-context.ts",
       "upstreamHash": "4a0d202e62469709a8206bbef0fdb6bce87408680f65178b899b0b20a18d9dc3",
-      "generatedHash": "389e7e158d7985d6973bc6f529fd49ebbee2f9e3f9f6aed679cb1ce2a535cbf4",
+      "generatedHash": "cecb7be8e84a2153eff2f9c4660331909c1f3aa4e6beca74fc040cdbcc62ad83",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/field/use-field.svelte.ts",
         "ark:packages/svelte/src/lib/types.ts",
@@ -3751,7 +3751,7 @@
     "ark:packages/svelte/src/lib/components/field/use-field.svelte.ts": {
       "destination": "packages/field/src/svelte/ark/use-field.svelte.ts",
       "upstreamHash": "514467898f305a4c25e51ca6ce008d948eedacafa8f997ce44977af9369807a3",
-      "generatedHash": "dc9aafbba49befaf91927b45cf6839b667b4a01ce1b43fd63467884105d0ba02",
+      "generatedHash": "b6e3a7f35ff3f8beb74d3fc03aeb42db191b2335e0c58ba29cf0d5939a9eb4fa",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/field/field.anatomy.ts",
         "ark:packages/svelte/src/lib/components/fieldset/use-fieldset-context.ts",
@@ -3767,7 +3767,7 @@
     "ark:packages/svelte/src/lib/components/fieldset/fieldset.anatomy.ts": {
       "destination": "packages/fieldset/src/svelte/ark/fieldset.anatomy.ts",
       "upstreamHash": "23e523f887e9597cc687ba409fb1eafa7caf3a7b4ff92f12351015069d7febb6",
-      "generatedHash": "ea1ffb9adde79e09cde9cb6ee21acdf5a2b1077c400fbeb067d5075208a9eefa",
+      "generatedHash": "6b63b870fc0d464d028af97e364b1254ba80e246a733ea169ff05916cc8ef248",
       "dependencies": [
         "zag:packages/anatomy/src/index.ts"
       ],
@@ -3776,7 +3776,7 @@
     "ark:packages/svelte/src/lib/components/fieldset/use-fieldset-context.ts": {
       "destination": "packages/fieldset/src/svelte/ark/use-fieldset-context.ts",
       "upstreamHash": "397a45d6646b536d388cca70352de10958351ebe13a833fd28fcfed7ba1edfc6",
-      "generatedHash": "b3e735bec01cbbb19124b1f9a8c92dff7cdf59ca7c32e025f69d4d7c1ee3f9b0",
+      "generatedHash": "7b5e2e09314aeec584ecd65df2257923fa8f62dab9d1e6ac5c74898f47471ea9",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/fieldset/use-fieldset.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-context.ts"
@@ -3786,7 +3786,7 @@
     "ark:packages/svelte/src/lib/components/fieldset/use-fieldset.svelte.ts": {
       "destination": "packages/fieldset/src/svelte/ark/use-fieldset.svelte.ts",
       "upstreamHash": "27e6fa929d758aa0e0021b41a11dfcce014eccb5acdb0e10f7f6fd24acf33556",
-      "generatedHash": "e0bd2b96578d6530aa0f5757122492f13046bb74a423a12b41f5e31cb6067f2f",
+      "generatedHash": "3f99b6f11a272e7c72db758e7b88cfca082f382d0bdad718e60f2cbfb64e1211",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/fieldset/fieldset.anatomy.ts",
         "ark:packages/svelte/src/lib/providers/index.ts",
@@ -3828,7 +3828,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-anchor.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-anchor.svelte",
       "upstreamHash": "5a57a1dfe83c02f971412b1e711e52ca90bbcb4045f336e3f8f8486e4dc6e2e9",
-      "generatedHash": "9af2e0024b57f31e4d16937c88b9302f7db705ca25fd714b8c73a39e884a2f27",
+      "generatedHash": "fd229c904bdf08077205ec6c93fd96051a9108a8b2e0e6b6b05d70c609a9e7be",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3840,7 +3840,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-arrow-tip.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-arrow-tip.svelte",
       "upstreamHash": "c220d159228ca5e9c85f1c13a3d8bd3e2d8e6c0658c0af66d33cd6ecff8d82f1",
-      "generatedHash": "b8455f3dd125c01ef764f2768b3c821a67b9ab82d69d7623ea1c061858290945",
+      "generatedHash": "bed29ae7989114dc102164a84f114f48a0aa10e5e0df35049dfde431fb11bc09",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3852,7 +3852,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-arrow.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-arrow.svelte",
       "upstreamHash": "ae63a69634ea2f88233fb87af0e2cffe332f84bb30ed97a3feeee5702dc7ae84",
-      "generatedHash": "1293fdc00d0a855e5da3536df68a370e5c072725e1ca6444393bf6ce2c39d332",
+      "generatedHash": "77f5018d683e48cba71d475e4699b7135273abb4db7abfcd13d8e22e7fcdb37a",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3864,7 +3864,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-close-trigger.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-close-trigger.svelte",
       "upstreamHash": "fce39b92479c34615b9dd63d5c31fb95eaa9fff17aa11734c92e9ac7b164b72f",
-      "generatedHash": "c60382969c7bcd00c4036644a3bdda2abbba1b10d1e8a8046b0884b8aa9f2eb2",
+      "generatedHash": "675150a707da9844e406fbf50b86e19b07a494c855cd578a46ed40339ec01d57",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3876,7 +3876,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-content.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-content.svelte",
       "upstreamHash": "468e2119ebdac9cc5407a67a9a16ac12127ccf3db5c6c3a92fcc12baa0663c50",
-      "generatedHash": "f15dd2cb4db662339af5d0d9c186253bfa70824e07940d03a6ba29c64f75c634",
+      "generatedHash": "aff6e7ef6f83a5928146e7db4bd6458541eec37942f614b66dc4cba3a037bf61",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3900,7 +3900,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-description.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-description.svelte",
       "upstreamHash": "61c77a6816d716f3f2f7f2b84ec89e29893d209dd5859020423182280902c3a5",
-      "generatedHash": "445ad5e45a89b2876537d875deff9b75e183fb3a313dc86970a97b1a397583c9",
+      "generatedHash": "8a86cd4983bc8a28b384d8b3661548d8b39f0e9c95ba72121a1cc60c3af9f905",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3912,7 +3912,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-indicator.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-indicator.svelte",
       "upstreamHash": "3f201ab8af4a4e7446ad70057fd44127903e12c24a79146b71e7b7960af5086a",
-      "generatedHash": "79ede0d5606d9740c2501ca0032fd4e4938eeef189a47d5e91dffabb8e54896d",
+      "generatedHash": "94b5b06ca8e9537121def6d3dd46beaf77d9504835f03034454137c1c4cfbbab",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3924,7 +3924,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-positioner.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-positioner.svelte",
       "upstreamHash": "229bba0559aea27bd869752497d3134b3481f3208c98a3cbef252bf2befccf36",
-      "generatedHash": "3db8c63e250e44c1e1d16b89f4f32a864e05224863de4411e3d33ddbf8d4b2ee",
+      "generatedHash": "59a7fcf3ed9f3534c7d360b5a73288f883b1e72cf5ee8311c922841a822d944e",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3937,7 +3937,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-root-provider.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-root-provider.svelte",
       "upstreamHash": "9d20ac3e78546dd976c0db5b086d2ead2719f31d0967bb704baa514a64a6dfc1",
-      "generatedHash": "a6c4730d4481d211a08b70981179433d7438002d3970e9e6fbc1ff9c639a459f",
+      "generatedHash": "4b2d7714fa5be9fcd37fece61e694975e6e5976d2de635cbcd2f6615be62c7e7",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
         "ark:packages/svelte/src/lib/components/popover/use-popover.svelte.ts",
@@ -3952,7 +3952,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-root.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-root.svelte",
       "upstreamHash": "1536eb3761d0ed6781bcdd3507e025dad04af56810d087b4ad73ef95f6253e86",
-      "generatedHash": "66f14255ffd43472b1d81a782bfddcf349d27dc0582534d15b6a3d68d8c3d663",
+      "generatedHash": "c13979fcfd6d4e1957349825fc2b48ae7e3cdd11e3c39498570f025224acec18",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
         "ark:packages/svelte/src/lib/components/popover/use-popover.svelte.ts",
@@ -3967,7 +3967,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-title.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-title.svelte",
       "upstreamHash": "0603ad5f4e00c6d785f332ae647f8eb5d76319764bdfc54505527ccb9d384829",
-      "generatedHash": "9dbec11cc7e33d51f19e832d67b7dc7d0f81e9b209a16bec8074b152eae3b087",
+      "generatedHash": "d4cfac682229232141f1de191635b5d52690a5cfe69f1c7d1903dc87b84d55b8",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -3979,7 +3979,7 @@
     "ark:packages/svelte/src/lib/components/popover/popover-trigger.svelte": {
       "destination": "packages/popover/src/svelte/ark/popover-trigger.svelte",
       "upstreamHash": "185a6ddda0bab7a6245d319f1353e7bcceb0e906b2e8ba8cf65f14b14c5b987b",
-      "generatedHash": "a6bfa8ac0d1e177f63949d260e11c7789963dd265ade4984114087a13b62726d",
+      "generatedHash": "672f91e269686235899720adeabb3f91f0e0debd6b1c697a676e9f68c2d5e937",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/factory/factory.svelte",
         "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts",
@@ -4025,7 +4025,7 @@
     "ark:packages/svelte/src/lib/components/popover/use-popover-context.ts": {
       "destination": "packages/popover/src/svelte/ark/use-popover-context.ts",
       "upstreamHash": "43818a3f074f2e61bb84c3b6d5f9386b41fabc5be1401c15c0dc9c89bc477b68",
-      "generatedHash": "39b638b2658c66e0a41915201ad905520bbf07d80b5e29248fe47e34939ae5ef",
+      "generatedHash": "4c29bc3c6ba8671bffb4f6a04975dcd2f7526aa2ecc021ac48336c3085453ac4",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/popover/use-popover.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-context.ts"
@@ -4035,7 +4035,7 @@
     "ark:packages/svelte/src/lib/components/popover/use-popover.svelte.ts": {
       "destination": "packages/popover/src/svelte/ark/use-popover.svelte.ts",
       "upstreamHash": "9df3f2905eeb71a8d8b469b89fcf32dd9538e7b3ffe0dd633bfa9fb2c059fd94",
-      "generatedHash": "d177e87bee5bd5ddabc0d34854cd427248744d431f5cadaae57fb21b61c8b6a0",
+      "generatedHash": "6814ed74f7227bf0346c9059f775bd69f252981afe003c3034c82203d17c2827",
       "dependencies": [
         "ark:packages/svelte/src/lib/providers/environment/use-environment-context.ts",
         "ark:packages/svelte/src/lib/providers/locale/use-locale-context.ts",
@@ -4049,7 +4049,7 @@
     "ark:packages/svelte/src/lib/components/presence/split-presence-props.svelte.ts": {
       "destination": "packages/presence/src/svelte/ark/split-presence-props.svelte.ts",
       "upstreamHash": "4d7f6e13f136501065db665759ca43bb4a21df747d30d9f68458fcdf67f08d5d",
-      "generatedHash": "9c2ba4355687814965c34af8db808178501454809fb0b2bf3fa3386daf81c707",
+      "generatedHash": "0f298bfc17adc90295653eb440849ef3d6307471e0cab449430f8be45c006ca2",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/presence/use-presence.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-split-props.ts"
@@ -4059,7 +4059,7 @@
     "ark:packages/svelte/src/lib/components/presence/use-presence-context.ts": {
       "destination": "packages/presence/src/svelte/ark/use-presence-context.ts",
       "upstreamHash": "b5c253381b7b92bee03f107032a15976123d6a6b4c48c9352f7a541fb7b26b5f",
-      "generatedHash": "65776b6aebec286d5331ce3b1b422bd8b37fdb43a6d16cde212faeb385331d53",
+      "generatedHash": "5e6e5920be04f3b9a1c1500ccda5d67e50c0223bdc17d18d3879442a45589e1b",
       "dependencies": [
         "ark:packages/svelte/src/lib/components/presence/use-presence.svelte.ts",
         "ark:packages/svelte/src/lib/utils/create-context.ts"
@@ -4069,7 +4069,7 @@
     "ark:packages/svelte/src/lib/components/presence/use-presence.svelte.ts": {
       "destination": "packages/presence/src/svelte/ark/use-presence.svelte.ts",
       "upstreamHash": "93132418be58a8701032825161dfe702520453c49f533631ff181d7e1eccd6ed",
-      "generatedHash": "aa88deb86ac67a39ce0cd240a0be7b2840a2c60b0e122b77da5590d8b3622295",
+      "generatedHash": "5dd7f7b16258190d74e1df81f8b118e4d9257c832a95c79149f402bc873da08a",
       "dependencies": [
         "ark:packages/svelte/src/lib/types.ts",
         "ark:packages/svelte/src/lib/utils/render-strategy.ts",
@@ -4718,7 +4718,7 @@
     "zag:packages/machines/checkbox/src/checkbox.anatomy.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.anatomy.ts",
       "upstreamHash": "c6dbc17d40e13ce27652d5bc4cad6eb760c043535d4e88d58794ad17ae67e817",
-      "generatedHash": "c878ba64a0eb48ec038c966979c1d5ca22c7c727a78105f3229ed99f6c0f0999",
+      "generatedHash": "57c61f78c7d2987a301ca8309107de887052bc84445a407f0cf12598406163a2",
       "dependencies": [
         "zag:packages/anatomy/src/create-anatomy.ts"
       ],
@@ -4727,7 +4727,7 @@
     "zag:packages/machines/checkbox/src/checkbox.connect.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.connect.ts",
       "upstreamHash": "7caddcec6c48cd768ac0d7c770ea15516771e72fe8389987f9cf64230327ca29",
-      "generatedHash": "798e40d35eefff40c890e4dc13a57d3af117a4f2cc7858f210071e99e343efef",
+      "generatedHash": "7b5579a40e8209857880ab169c21e7786684972c6ea5411dea3c1c043b4a7005",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/checkbox/src/checkbox.anatomy.ts",
@@ -4743,7 +4743,7 @@
     "zag:packages/machines/checkbox/src/checkbox.dom.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.dom.ts",
       "upstreamHash": "52f7b9976afbe7b60e4b93d7c61ca9efb3b9ebba48ff38308d43d3324be5c75e",
-      "generatedHash": "3e94af64e60fb9a695154265562c91d5b6c9bf3845b98d387825adc3446d4801",
+      "generatedHash": "d0c6c89257be0f8ca15d23e586c94b6eafd40517d8872dedbb0c8a536a624b27",
       "dependencies": [
         "zag:packages/core/src/index.ts"
       ],
@@ -4752,7 +4752,7 @@
     "zag:packages/machines/checkbox/src/checkbox.machine.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.machine.ts",
       "upstreamHash": "a0798001fff5b9ed4df8d7f0a784835bdc22ed1c208dc8187e4b1959922d91c8",
-      "generatedHash": "720723ea2949cad1525e81fdaa80cdd3e3bde71c1c66894b5b356acee9e1f329",
+      "generatedHash": "474221245c43c48e9a17dccd755a99d748f543c577dec0d551ea1e6bc9e72fc7",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/checkbox/src/checkbox.dom.ts",
@@ -4765,7 +4765,7 @@
     "zag:packages/machines/checkbox/src/checkbox.props.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.props.ts",
       "upstreamHash": "c3b9fc3d36c9c7c9dc7074d96c38d7c8d3dbc315f4102cef35998e6192becc99",
-      "generatedHash": "69bd1a6bb76079400f4d115b6e27274b667a146866b7430e8198d2df138be450",
+      "generatedHash": "200f4c27b9aa5d7742d98e35c9d378a29ed36a87aa214220cb04affac5416349",
       "dependencies": [
         "zag:packages/machines/checkbox/src/checkbox.types.ts",
         "zag:packages/types/src/index.ts",
@@ -4776,7 +4776,7 @@
     "zag:packages/machines/checkbox/src/checkbox.types.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.types.ts",
       "upstreamHash": "5b632603a93ac5fed62cc2b79654e4f72e031098fbc6faf04eb24fed36f50468",
-      "generatedHash": "05f095ab70a595fc533e26b2b158fbcd28ab750b4e31eaefb5e9a18d1f5614fe",
+      "generatedHash": "be85b441afa74036b45976d743511bdd66c2c97d24b1a11be6d8ca05e85989fd",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/types/src/index.ts"
@@ -4799,7 +4799,7 @@
     "zag:packages/machines/dialog/src/dialog.anatomy.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.anatomy.ts",
       "upstreamHash": "487f25e9beb0f7797c21fabf2b91fca44bfd0c99178d562372ea91eb57c82903",
-      "generatedHash": "2a0fcd18c1b70b7b1fbb4daf4f35b45e21b0a52ad573e69cf1474fbd02cb949e",
+      "generatedHash": "be30ada2832c62e0130c5ea0c7ad7387f28d4f113cfc789bcc20a529590549a3",
       "dependencies": [
         "zag:packages/anatomy/src/create-anatomy.ts"
       ],
@@ -4808,7 +4808,7 @@
     "zag:packages/machines/dialog/src/dialog.connect.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.connect.ts",
       "upstreamHash": "6c6b492e1a3a3ecd66439f6621bc3b7d235849945343275a4468587c4a2694d9",
-      "generatedHash": "32c5cadf2b89576667b1c4a950a31995abe2a16f15b810a8c1a34578c9eb9082",
+      "generatedHash": "5822863d4d68726d962cf8487d9e49a2b5c25af873acfb278c4da897925ffe5d",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/dialog/src/dialog.anatomy.ts",
@@ -4823,7 +4823,7 @@
     "zag:packages/machines/dialog/src/dialog.dom.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.dom.ts",
       "upstreamHash": "8e59903fb8629fb5b5d1172c1ec4cb008bcf476b17b0e809d487f2af148be668",
-      "generatedHash": "51910197aee1050dd29c83ec2343c1c7b21df4a180595c405e658e88e0fa6bfb",
+      "generatedHash": "95b600f9697f8d725f40a722fc3a9c33be6582dfc4b21437e52414b17652295c",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/utilities/core/src/index.ts",
@@ -4835,7 +4835,7 @@
     "zag:packages/machines/dialog/src/dialog.machine.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.machine.ts",
       "upstreamHash": "dc90dbd223bd489c55410f11d1d99446ee30a65aa98611c7ca6163e242101e7e",
-      "generatedHash": "d81faccf2d5e24d4be28a9e2cecc35fbe62b1ffd07591ebd4af97bb627f69bd4",
+      "generatedHash": "38f9a51f56a50f662f5c5fb939fe8daec5953146fca7759a1390b6d5584cf376",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/dialog/src/dialog.dom.ts",
@@ -4851,7 +4851,7 @@
     "zag:packages/machines/dialog/src/dialog.props.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.props.ts",
       "upstreamHash": "22bbe87fbcdc5b0ddd6a053625c17219a2d2291367162e5726f708a02231c1aa",
-      "generatedHash": "c1cdcdfbc93389b15e9c586cfdc6161f467dbf50d2489287b3482c46b20fc76d",
+      "generatedHash": "911a57bb67c9cfad14510a3ebdbb0ef436e0a837b9964231a6179550eb26fe54",
       "dependencies": [
         "zag:packages/machines/dialog/src/dialog.types.ts",
         "zag:packages/types/src/index.ts",
@@ -4862,7 +4862,7 @@
     "zag:packages/machines/dialog/src/dialog.types.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.types.ts",
       "upstreamHash": "47392535c80bcdc83a274441f1939f9a16599a840712c9703d483c5ca5bf7adc",
-      "generatedHash": "b35f9f35ca9451d7538c6882774a4acfd2c70a3f1ac6443a183086d8ef4aaa38",
+      "generatedHash": "752f10734dcc20da73dbb1e12f8e5c5ea8c117ecb0a423275aff1d4bcfef66e2",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/types/src/index.ts",
@@ -4873,7 +4873,7 @@
     "zag:packages/machines/dialog/src/index.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/index.ts",
       "upstreamHash": "094966180cf453f5ee570e5e4341591bc38f3fe653373e1b986cff1362080f7a",
-      "generatedHash": "1a7a2f8010c3ae0fb91482a5d8558bd903dca185f1957beea3a61ef9f651d52b",
+      "generatedHash": "84bc99bba145c2afe1cf9d369903a0a1fb269ad5c5b58d3cbc3ca6ed125cd7a1",
       "dependencies": [
         "zag:packages/machines/dialog/src/dialog.anatomy.ts",
         "zag:packages/machines/dialog/src/dialog.connect.ts",
@@ -4887,7 +4887,7 @@
     "zag:packages/machines/popover/src/index.ts": {
       "destination": "packages/popover/src/common/zag/popover/index.ts",
       "upstreamHash": "5632ee980890b92ea6f49f0fbd4a82bd69a715cb16f15701b3e50cccb8bdbcf9",
-      "generatedHash": "65535f4c6a6b0e9b64dc937106c3f0fa52fde10aabbc5ac9293ca6c66217e9f4",
+      "generatedHash": "46bc10dd83e9bd981f07de8904979439d77523edd91c52ba1d9b8a6aef357289",
       "dependencies": [
         "zag:packages/machines/popover/src/popover.anatomy.ts",
         "zag:packages/machines/popover/src/popover.connect.ts",
@@ -4901,7 +4901,7 @@
     "zag:packages/machines/popover/src/popover.anatomy.ts": {
       "destination": "packages/popover/src/common/zag/popover/popover.anatomy.ts",
       "upstreamHash": "e1a6f9d8511bd9a44bd3b8ae45b503e95c9900ebccb89093ca3a5412b1b70e0f",
-      "generatedHash": "98fa933f51d39a3b035a0442c5864e4ae6245930c87eca8e36bc1067ef6dea0a",
+      "generatedHash": "416fc98ccd02ec0b1acaaa8fb53a344e86f539a3e2d958abaeef89b1f77f7993",
       "dependencies": [
         "zag:packages/anatomy/src/create-anatomy.ts"
       ],
@@ -4910,7 +4910,7 @@
     "zag:packages/machines/popover/src/popover.connect.ts": {
       "destination": "packages/popover/src/common/zag/popover/popover.connect.ts",
       "upstreamHash": "16ffbe7e1283d0222a13a8f7d9a9efb2e3b56279dfdc998a1ec1645c80c445d1",
-      "generatedHash": "6e05f4f6479e1663d346d03c102152808d234ac9f9dce5fc8b59e02e5f8aed33",
+      "generatedHash": "c3ceeb25bdb0e7d51dcedb12f3ea5d0547cb5b1ae2db927f5eaceceb32bb388a",
       "dependencies": [
         "zag:packages/machines/popover/src/popover.anatomy.ts",
         "zag:packages/machines/popover/src/popover.dom.ts",
@@ -4927,7 +4927,7 @@
     "zag:packages/machines/popover/src/popover.dom.ts": {
       "destination": "packages/popover/src/common/zag/popover/popover.dom.ts",
       "upstreamHash": "ca29ae2d23a79894e9fc6c3754ded88ad9a6dc8d9dc95e0949167fbacdc0df5a",
-      "generatedHash": "c8f66f78bfc5e66e9b9444386c3ee13ee95d150b4bc89598b2b86d6808bd72e8",
+      "generatedHash": "0cf11ded9c65c31553b67eb7108dfc53b8e15b041bae5f25e23fd2f87642f669",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/utilities/core/src/index.ts",
@@ -4939,7 +4939,7 @@
     "zag:packages/machines/popover/src/popover.machine.ts": {
       "destination": "packages/popover/src/common/zag/popover/popover.machine.ts",
       "upstreamHash": "2d8cdb8fdfbf0b69714200a8020ef46bd4b4dc7db908177f9b4cc81e542b0d4f",
-      "generatedHash": "947b0eeb6586f08f9a4a16d2e5986c5e69f94c0d9813e27839ffe7893bed8649",
+      "generatedHash": "b78aa13b46d0829a79b16c5e7815698b95749b071bee72beb46d06af155cbf9f",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/popover/src/popover.dom.ts",
@@ -4956,7 +4956,7 @@
     "zag:packages/machines/popover/src/popover.props.ts": {
       "destination": "packages/popover/src/common/zag/popover/popover.props.ts",
       "upstreamHash": "a40a067d47619cdfedd608a5d58677289c996c4d5fd1e2705b8e6735f2a91a33",
-      "generatedHash": "e5a62b6c4b328f294e35108bda1abd6ca4320f273a774037025e32476c773467",
+      "generatedHash": "11d45fd3e89487932d986554054adfa03e0ee261b176959e2d8b7173edd9701e",
       "dependencies": [
         "zag:packages/machines/popover/src/popover.types.ts",
         "zag:packages/types/src/index.ts",
@@ -4967,7 +4967,7 @@
     "zag:packages/machines/popover/src/popover.types.ts": {
       "destination": "packages/popover/src/common/zag/popover/popover.types.ts",
       "upstreamHash": "c5dd442c8f75ca1413f7b0407058faeecc0e145062bd4a6fedf687c9627d3b3c",
-      "generatedHash": "40189296878d0f657150430d0be01c79f175b13dd064c6edba34c0fdecdfe56d",
+      "generatedHash": "36624a103aad6fff9ef908a08a03d94d5f519201e66b280602fdef63334ddd60",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/types/src/index.ts",
@@ -4991,7 +4991,7 @@
     "zag:packages/machines/presence/src/presence.connect.ts": {
       "destination": "packages/presence/src/common/zag/presence/presence.connect.ts",
       "upstreamHash": "49143b97dbd408a7dca54fd4e8bab892487d3ed53e14fe68e861be0592d6cfb9",
-      "generatedHash": "72e4432383950294ea0c718977611f6a835d71d961c7f49a41dfc247ca46f052",
+      "generatedHash": "c9db46abd354ce5b8bf9c54d3fb0dc8becafc785eea5853acdaf43ee2d003f6c",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/presence/src/presence.types.ts",
@@ -5002,7 +5002,7 @@
     "zag:packages/machines/presence/src/presence.machine.ts": {
       "destination": "packages/presence/src/common/zag/presence/presence.machine.ts",
       "upstreamHash": "1b65ae25d6ee787445150c744deefdd1a92d113b5dbff924101ff68bf757a243",
-      "generatedHash": "3dc736d1145b9053f35d6225540e16ba4bf91179b4fa63828a14470ddfeb5d3e",
+      "generatedHash": "3489f01c591d3c763c00b82702affd90890bdd4c1984c7e85488abeaa88d3d4d",
       "dependencies": [
         "zag:packages/core/src/index.ts",
         "zag:packages/machines/presence/src/presence.types.ts",
@@ -5013,7 +5013,7 @@
     "zag:packages/machines/presence/src/presence.props.ts": {
       "destination": "packages/presence/src/common/zag/presence/presence.props.ts",
       "upstreamHash": "3e5192e3377fa8a2f6a4e23003e1102656984d0de7b8b9e376de670fed833c9b",
-      "generatedHash": "1e72b78ff3f002b2f8a0e9bc87092264fab73d59087341ebeaf8c3b006d5eea9",
+      "generatedHash": "095a002b6761513cbaa1b35e3f653280379912d1df5079d56b447739e983f1a8",
       "dependencies": [
         "zag:packages/machines/presence/src/presence.types.ts",
         "zag:packages/types/src/index.ts"
@@ -5023,7 +5023,7 @@
     "zag:packages/machines/presence/src/presence.types.ts": {
       "destination": "packages/presence/src/common/zag/presence/presence.types.ts",
       "upstreamHash": "5483234a74b672c6b2c5f9414da8be9cc1b3637bb766ad4e9e01c4425638c9cb",
-      "generatedHash": "6aa725b336c2e081a61f7d601c6a241a2b32eb17e178895ef99fac99af4db340",
+      "generatedHash": "9bd56cc6f51b81a45cf941c903ed3ef76ad467344eb2bf8826f1f706adefaf0e",
       "dependencies": [
         "zag:packages/core/src/index.ts"
       ],

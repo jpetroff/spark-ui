@@ -4,13 +4,11 @@ import { createHash } from 'node:crypto'
 import ts from 'typescript-parser'
 import semver from 'semver'
 import { parse } from 'svelte/compiler'
+import { relative, sourceImport } from './aliases.ts'
+export { relative } from './aliases.ts'
 
 export const hash = (value: string) => createHash('sha256').update(value).digest('hex')
 export const slash = (value: string) => value.split(path.sep).join('/')
-export const relative = (from: string, to: string) => {
-  const value = slash(path.relative(path.dirname(from), to))
-  return value.startsWith('.') ? value : `./${value}`
-}
 export const git = (cwd: string, ...args: string[]) =>
   execFileSync('git', ['-C', cwd, ...args], {
     encoding: 'utf8',
@@ -363,7 +361,7 @@ export class Graph {
       const target = this.resolve(source, specifier)
       if (target) {
         node.dependencies.push(this.visit(target))
-        return relative(destination, this.destination(target))
+        return sourceImport(destination, this.destination(target))
       }
       const name = specifier.startsWith('@')
         ? specifier.split('/').slice(0, 2).join('/')

@@ -1,17 +1,17 @@
 <script module lang="ts">
-  import type { Assign } from "../../../../shared/src/svelte/ark/types.ts";
-import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { PolymorphicProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
+  import type { Assign } from "@spark/shared/svelte/ark/types.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
+import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   export interface CheckboxHiddenInputBaseProps extends PolymorphicProps<'input'>, RefAttribute {}
   export interface CheckboxHiddenInputProps extends Assign<HTMLProps<'input'>, CheckboxHiddenInputBaseProps> {}
 </script>
 
 <script lang="ts">
-  import { mergeProps } from '../../../../shared/src/svelte/zag/index.ts'
-  import { default as Ark } from "../../../../shared/src/svelte/ark/components/factory/factory.svelte";
-  import { useFieldContext } from "../../../../field/src/svelte/ark/use-field-context.ts";
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+  import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
+  import { useFieldContext } from "@spark/field/svelte/ark/use-field-context.ts";
   import { useCheckboxContext } from "./use-checkbox-context.ts";
 
   let { ref = $bindable(null), ...props }: CheckboxHiddenInputProps = $props()

@@ -1,13 +1,13 @@
 'use client'
 
-import { mergeProps } from '../../../../shared/src/react/zag/index.ts'
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
 import type { ReactNode } from 'react'
-import { RenderStrategyPropsProvider } from "../../../../shared/src/react/ark/utils/render-strategy.ts";
-import { splitRenderStrategyProps } from "../../../../shared/src/react/ark/utils/render-strategy.ts";
-import type { UsePresenceProps } from "../../../../presence/src/react/ark/use-presence.ts";
-import { PresenceProvider } from "../../../../presence/src/react/ark/use-presence-context.ts";
-import { usePresence } from "../../../../presence/src/react/ark/use-presence.ts";
-import { splitPresenceProps } from "../../../../presence/src/react/ark/split-presence-props.ts";
+import { RenderStrategyPropsProvider } from "@spark/shared/react/ark/utils/render-strategy.ts";
+import { splitRenderStrategyProps } from "@spark/shared/react/ark/utils/render-strategy.ts";
+import type { UsePresenceProps } from "@spark/presence/react/ark/use-presence.ts";
+import { PresenceProvider } from "@spark/presence/react/ark/use-presence-context.ts";
+import { usePresence } from "@spark/presence/react/ark/use-presence.ts";
+import { splitPresenceProps } from "@spark/presence/react/ark/split-presence-props.ts";
 import { type UseDialogProps } from "./use-dialog.ts";
 import { useDialog } from "./use-dialog.ts";
 import { DialogProvider } from "./use-dialog-context.ts";

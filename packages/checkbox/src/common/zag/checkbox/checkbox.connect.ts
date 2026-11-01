@@ -1,10 +1,10 @@
-import { dataAttr } from "../../../../../shared/src/common/zag/dom-query/shared.ts";
-import { getEventTarget } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { visuallyHiddenStyle } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { isFocusVisible } from "../../../../../shared/src/common/zag/focus-visible/index.ts";
-import type { NormalizeProps } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
+import { dataAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { getEventTarget } from "@spark/shared/common/zag/dom-query/index.ts";
+import { visuallyHiddenStyle } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isFocusVisible } from "@spark/shared/common/zag/focus-visible/index.ts";
+import type { NormalizeProps } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+import type { Service } from "@spark/shared/common/zag/core/index.ts";
 import { parts } from "./checkbox.anatomy.ts";
 import * as dom from "./checkbox.dom.ts"
 import type { CheckboxApi } from "./checkbox.types.ts";

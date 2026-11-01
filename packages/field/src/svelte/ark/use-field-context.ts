@@ -1,5 +1,5 @@
-import type { Accessor } from "../../../../shared/src/svelte/ark/types.ts";
-import { createContext } from "../../../../shared/src/svelte/ark/utils/create-context.ts";
+import type { Accessor } from "@spark/shared/svelte/ark/types.ts";
+import { createContext } from "@spark/shared/svelte/ark/utils/create-context.ts";
 import type { UseFieldReturn } from "./use-field.svelte.ts";
 
 export type UseFieldApi = ReturnType<UseFieldReturn>

@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext } from "../../../../shared/src/react/ark/utils/create-context.ts";
+import { createContext } from "@spark/shared/react/ark/utils/create-context.ts";
 import type { UseCheckboxGroupReturn } from "./use-checkbox-group.ts";
 
 export interface UseCheckboxGroupContext extends UseCheckboxGroupReturn {}

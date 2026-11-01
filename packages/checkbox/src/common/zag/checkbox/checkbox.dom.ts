@@ -1,4 +1,4 @@
-import type { Scope } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { Scope } from "@spark/shared/common/zag/core/index.ts";
 
 export const getRootId = (ctx: Scope) => ctx.ids?.root ?? `checkbox:${ctx.id}`
 export const getLabelId = (ctx: Scope) => ctx.ids?.label ?? `checkbox:${ctx.id}:label`

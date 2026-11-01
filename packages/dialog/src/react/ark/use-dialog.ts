@@ -1,11 +1,11 @@
 'use client'
 
 import * as dialog from '../../common/zag/dialog/index.ts'
-import { type PropTypes, normalizeProps, useMachine } from '../../../../shared/src/react/zag/index.ts'
+import { type PropTypes, normalizeProps, useMachine } from '@spark/shared/react/zag/index.ts'
 import { useId } from 'react'
-import { useEnvironmentContext } from "../../../../shared/src/react/ark/providers/index.ts";
-import { useLocaleContext } from "../../../../shared/src/react/ark/providers/index.ts";
-import type { Optional } from "../../../../shared/src/react/ark/types.ts";
+import { useEnvironmentContext } from "@spark/shared/react/ark/providers/index.ts";
+import { useLocaleContext } from "@spark/shared/react/ark/providers/index.ts";
+import type { Optional } from "@spark/shared/react/ark/types.ts";
 
 export interface UseDialogProps extends Optional<Omit<dialog.Props, 'getRootNode' | 'dir'>, 'id'> {}
 

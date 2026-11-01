@@ -183,7 +183,7 @@ try {
       )
       assert.doesNotMatch(
         fs.readFileSync(file, 'utf8'),
-        /from\s+['"](?:@ark-ui\/|@zag-js\/|\$lib\/|@spark-ui\/)/,
+        /from\s+['"](?:@ark-ui\/|@zag-js\/|\$lib\/|@spark-ui\/|@spark\/)/,
       )
     }
     const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))

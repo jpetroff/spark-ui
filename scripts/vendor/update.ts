@@ -59,7 +59,7 @@ export async function update(args: string[]) {
   try {
     await generate(names, { apply: true, baseline: true, ark, zag })
     // Only importer-owned paths enter the baseline commit. Custom entrypoints are seeded once.
-    run('add', '--', 'packages', 'vendor.lock.json')
+    run('add', '--', 'packages', 'vendor.lock.json', 'tsconfig.json')
     if (git(root, 'diff', '--cached', '--name-only'))
       run('commit', '-m', `Update imported Ark/Zag baseline (${suffix})`)
     committed = true

@@ -1,11 +1,11 @@
 'use client'
 
 import { useId, useMemo, useRef, useState } from 'react'
-import { useEnvironmentContext } from "../../../../shared/src/react/ark/providers/index.ts";
-import { ariaAttr, dataAttr } from '../../../../shared/src/react/ark/utils/attr.ts'
-import { useSafeLayoutEffect } from "../../../../shared/src/react/ark/utils/use-safe-layout-effect.ts";
-import type { HTMLProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { useFieldsetContext } from "../../../../fieldset/src/react/ark/use-fieldset-context.ts";
+import { useEnvironmentContext } from "@spark/shared/react/ark/providers/index.ts";
+import { ariaAttr, dataAttr } from '@spark/shared/react/ark/utils/attr.ts'
+import { useSafeLayoutEffect } from "@spark/shared/react/ark/utils/use-safe-layout-effect.ts";
+import type { HTMLProps } from "@spark/shared/react/ark/components/factory.ts";
+import { useFieldsetContext } from "@spark/fieldset/react/ark/use-fieldset-context.ts";
 import { parts } from "./field.anatomy.ts";
 
 export interface ElementIds {

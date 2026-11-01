@@ -3,6 +3,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 import semver from 'semver'
+import { resolveSourceImport, syncAliases } from './aliases.ts'
 import {
   Graph,
   Snapshot,
@@ -132,7 +133,7 @@ export async function generate(
   }
   const manifest = {
     version: 1,
-    importerVersion: 1,
+    importerVersion: 2,
     upstream: {
       ark: { commit: ark.commit, version: graph.packages.get('@ark-ui/react')!.manifest.version },
       zag: { commit: zag.commit, version: graph.packages.get('@zag-js/core')!.manifest.version },
@@ -193,6 +194,7 @@ export async function generate(
   for (const file of removed) fs.rmSync(path.join(root, file), { force: true })
   for (const [file, content] of Object.entries(starters))
     if (!fs.existsSync(path.join(root, file))) write(file, content)
+  syncAliases(root)
   write(lockPath, stringify(manifest))
   return manifest
 }
@@ -207,6 +209,7 @@ export function installed(file: string) {
 export function buildRegistry() {
   if (!fs.existsSync(path.join(root, lockPath))) return
   const lock = json(lockPath)
+  const paths = syncAliases(root, true)
   const sourceFiles = Object.values(lock.files).map((f: any) => f.destination) as string[]
   const licenses = [
     'packages/shared/src/licenses/ark-LICENSE',
@@ -215,7 +218,7 @@ export function buildRegistry() {
   const all = [...new Set([...sourceFiles, ...lock.starters, ...licenses])].sort()
   const release = hash(
     JSON.stringify(lock) +
-      '\0registry-v2\0' +
+      '\0registry-v3\0' +
       (process.env.REGISTRY_BASE_URL ?? 'http://localhost:5173/r') +
       '\0' +
       all.map((file) => `${file}\0${fs.readFileSync(path.join(root, file), 'utf8')}`).join('\0'),
@@ -229,8 +232,8 @@ export function buildRegistry() {
     type: framework === 'react' ? 'registry:file' : 'registry:ui',
     target: framework === 'react' ? `@ui/${installed(file)}` : installed(file),
     content: rewriteModules(file, fs.readFileSync(path.join(root, file), 'utf8'), (specifier) => {
-      if (!specifier.startsWith('.')) return specifier
-      const target = path.posix.normalize(path.posix.join(path.posix.dirname(file), specifier))
+      const target = resolveSourceImport(file, specifier, paths)
+      if (target === undefined) return specifier
       if (!all.includes(target))
         throw new Error(`Unresolved installed source ${file}: ${specifier}`)
       return relative(installed(file), installed(target))
@@ -317,6 +320,7 @@ export function buildRegistry() {
 }
 export function verify() {
   const lock = json(lockPath)
+  const paths = syncAliases(root, true)
   const files = new Set<string>([
     ...Object.values(lock.files).map((f: any) => f.destination),
     ...lock.starters,
@@ -326,8 +330,8 @@ export function verify() {
     rewriteModules(file, content, (specifier) => {
       if (/^(@ark-ui\/|@zag-js\/|\$lib\/|@spark-ui\/)/.test(specifier))
         throw new Error(`Unvendored import ${file}: ${specifier}`)
-      if (specifier.startsWith('.')) {
-        const target = path.posix.normalize(path.posix.join(path.posix.dirname(file), specifier))
+      const target = resolveSourceImport(file, specifier, paths)
+      if (target !== undefined) {
         if (!files.has(target)) throw new Error(`Unresolved import ${file}: ${specifier}`)
         if (file.includes('/common/') && /\/(react|svelte)\//.test(target))
           throw new Error(`Framework dependency in common source: ${file}`)

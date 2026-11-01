@@ -1,11 +1,11 @@
 'use client'
 
 import { forwardRef } from 'react'
-import type { Assign } from "../../../../shared/src/react/ark/types.ts";
-import { createSplitProps } from "../../../../shared/src/react/ark/utils/create-split-props.ts";
-import { type HTMLProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { type PolymorphicProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { ark } from "../../../../shared/src/react/ark/components/factory.ts";
+import type { Assign } from "@spark/shared/react/ark/types.ts";
+import { createSplitProps } from "@spark/shared/react/ark/utils/create-split-props.ts";
+import { type HTMLProps } from "@spark/shared/react/ark/components/factory.ts";
+import { type PolymorphicProps } from "@spark/shared/react/ark/components/factory.ts";
+import { ark } from "@spark/shared/react/ark/components/factory.ts";
 import { checkboxAnatomy } from "./checkbox.anatomy.ts";
 import { CheckboxGroupContextProvider } from "./use-checkbox-group-context.tsx";
 import { type UseCheckboxGroupContext } from "./use-checkbox-group-context.tsx";

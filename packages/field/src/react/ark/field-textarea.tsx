@@ -1,12 +1,12 @@
 'use client'
 
-import { autoresizeTextarea } from '../../../../shared/src/common/zag/auto-resize/index.ts'
-import { mergeProps } from '../../../../shared/src/react/zag/index.ts'
+import { autoresizeTextarea } from '@spark/shared/common/zag/auto-resize/index.ts'
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
 import { forwardRef, useEffect, useRef } from 'react'
-import { useComposedRefs } from "../../../../shared/src/react/ark/utils/compose-refs.ts";
-import { type HTMLProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { type PolymorphicProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { ark } from "../../../../shared/src/react/ark/components/factory.ts";
+import { useComposedRefs } from "@spark/shared/react/ark/utils/compose-refs.ts";
+import { type HTMLProps } from "@spark/shared/react/ark/components/factory.ts";
+import { type PolymorphicProps } from "@spark/shared/react/ark/components/factory.ts";
+import { ark } from "@spark/shared/react/ark/components/factory.ts";
 import { useFieldContext } from "./use-field-context.ts";
 
 export interface FieldTextareaBaseProps extends PolymorphicProps {

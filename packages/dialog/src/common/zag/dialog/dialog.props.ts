@@ -1,5 +1,5 @@
-import { createProps } from "../../../../../shared/src/common/zag/types/index.ts";
-import { createSplitProps } from "../../../../../shared/src/common/zag/utils/index.ts";
+import { createProps } from "@spark/shared/common/zag/types/index.ts";
+import { createSplitProps } from "@spark/shared/common/zag/utils/index.ts";
 import type { DialogProps } from "./dialog.types.ts";
 
 export const props = createProps<DialogProps>()([

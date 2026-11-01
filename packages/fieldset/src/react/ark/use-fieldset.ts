@@ -1,10 +1,10 @@
 'use client'
 
 import { useId, useRef, useState } from 'react'
-import { useEnvironmentContext } from "../../../../shared/src/react/ark/providers/index.ts";
-import { dataAttr } from '../../../../shared/src/react/ark/utils/attr.ts'
-import { useSafeLayoutEffect } from "../../../../shared/src/react/ark/utils/use-safe-layout-effect.ts";
-import type { HTMLProps } from "../../../../shared/src/react/ark/components/factory.ts";
+import { useEnvironmentContext } from "@spark/shared/react/ark/providers/index.ts";
+import { dataAttr } from '@spark/shared/react/ark/utils/attr.ts'
+import { useSafeLayoutEffect } from "@spark/shared/react/ark/utils/use-safe-layout-effect.ts";
+import type { HTMLProps } from "@spark/shared/react/ark/components/factory.ts";
 import { parts } from "./fieldset.anatomy.ts";
 
 export interface UseFieldsetProps {

@@ -1,13 +1,13 @@
-import { ariaAttr } from "../../../../../shared/src/common/zag/dom-query/shared.ts";
-import { dataAttr } from "../../../../../shared/src/common/zag/dom-query/shared.ts";
-import { isLeftClick } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { isSafari } from "../../../../../shared/src/common/zag/dom-query/index.ts";
-import { getPlacementSide } from "../../../../../shared/src/common/zag/popper/placement.ts";
-import { getPlacementStyles } from "../../../../../shared/src/common/zag/popper/get-styles.ts";
-import type { NormalizeProps } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { Required } from "../../../../../shared/src/common/zag/types/index.ts";
-import { mergeWithDefault } from "../../../../../shared/src/common/zag/utils/index.ts";
+import { ariaAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { dataAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { isLeftClick } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isSafari } from "@spark/shared/common/zag/dom-query/index.ts";
+import { getPlacementSide } from "@spark/shared/common/zag/popper/placement.ts";
+import { getPlacementStyles } from "@spark/shared/common/zag/popper/get-styles.ts";
+import type { NormalizeProps } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+import type { Required } from "@spark/shared/common/zag/types/index.ts";
+import { mergeWithDefault } from "@spark/shared/common/zag/utils/index.ts";
 import { parts } from "./popover.anatomy.ts";
 import * as dom from "./popover.dom.ts"
 import type { IntlTranslations } from "./popover.types.ts";

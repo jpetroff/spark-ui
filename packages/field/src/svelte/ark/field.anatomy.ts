@@ -1,4 +1,4 @@
-import { createAnatomy } from '../../../../shared/src/common/zag/anatomy/index.ts'
+import { createAnatomy } from '@spark/shared/common/zag/anatomy/index.ts'
 
 export const fieldAnatomy = createAnatomy('field').parts(
   'root',

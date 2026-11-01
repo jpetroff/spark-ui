@@ -1,4 +1,4 @@
-export type { FocusOutsideEvent, InteractOutsideEvent, PointerDownOutsideEvent } from "../../../../../shared/src/common/zag/dismissable/index.ts"
+export type { FocusOutsideEvent, InteractOutsideEvent, PointerDownOutsideEvent } from "@spark/shared/common/zag/dismissable/index.ts"
 export { anatomy } from "./popover.anatomy.ts"
 export { connect } from "./popover.connect.ts"
 export { machine } from "./popover.machine.ts"

@@ -35,6 +35,15 @@ Workspace package exports resolve `@spark-ui/button` and `@spark-ui/utils` direc
 
 TypeScript `paths` also provide `@/*` for playground source, `@/components/ui/<name>` for component package entry points, and `@/lib/spark-utils` for the shared utility. Vite's `resolve.tsconfigPaths` reads those same mappings, including in Storybook; keep mappings in `tsconfig.json` rather than duplicating them in Vite.
 
+Cross-component implementation imports use `@spark/<name>/…`, which resolves to `packages/<name>/src/…`. For example:
+
+```ts
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
+import { useFieldContext } from '@spark/field/react/ark/use-field-context.ts'
+```
+
+Keep relative imports within the same component's `src` tree, including `../`. The `@spark/<name>/*` mappings are generated in the root `tsconfig.json` from all `packages/<name>/src` directories, including internal dependencies such as Presence. Run `pnpm aliases:sync` after adding or removing a source root; `pnpm aliases:check` detects missing, incorrect, or stale mappings and runs as part of `pnpm check`. Unrelated aliases remain unchanged. Component imports synchronize aliases automatically. Vite derives explicit aliases from the same entries so files outside the root tsconfig's `include` resolve in both the playground and Storybook.
+
 ## Registry installation
 
 Start `pnpm dev`, then run this from a consumer project already initialized with shadcn and Tailwind CSS v4:
@@ -71,7 +80,7 @@ The registry homepage initially points to the local playground. No public hostin
 6. Declare `"@spark-ui/<name>": "workspace:*"` in any workspace package or playground that imports it, then run `pnpm install`.
 7. Run the checks below and install the generated item into a separate shadcn project to verify aliases and dependencies.
 
-Do not introduce workspace-only imports into files listed in `registry.json`; those files must work after copying into the consumer's repository.
+Native registry sources must use consumer-compatible imports. Vendored Ark/Zag implementation sources may use `@spark/` imports because the vendor registry builder resolves them and rewrites them to portable relative paths before distribution.
 
 ## Commands
 
@@ -83,7 +92,9 @@ Do not introduce workspace-only imports into files listed in `registry.json`; th
 | `pnpm storybook:build` | Build registry JSON and static Storybook into `storybook-static/`        |
 | `pnpm registry:build`  | Rebuild installable JSON in `public/r/` after source or metadata changes |
 | `pnpm typecheck`       | Check playground, config, stories, and workspace packages                |
-| `pnpm check`           | Run TypeScript and formatting checks                                     |
+| `pnpm check`           | Check alias drift, TypeScript, and formatting                            |
+| `pnpm aliases:sync`    | Regenerate `@spark` mappings from component source roots                 |
+| `pnpm aliases:check`   | Verify `@spark` mappings without changing configuration                  |
 | `pnpm format`          | Format repository source and configuration                               |
 | `pnpm preview`         | Preview the production playground build                                  |
 
@@ -115,7 +126,7 @@ pnpm dlx shadcn-svelte add http://localhost:5173/r/svelte/checkbox-svelte.json
 
 Replace the component name with `field`, `dialog`, `popover`, `locale`, or `environment`. React public items are also included in the root `registry.json`. `registry.react.json` and `registry.svelte.json` are generated catalogs.
 
-The installed layout is `<ui alias>/<component>/index.tsx` (React) or `index.ts` (Svelte), `styles.css`, `react/` or `svelte/`, and `common/`. Shared files install under `<ui alias>/_spark/`. Sources retain normal relative imports; no Spark workspace aliases, Ark packages, or Zag packages are required. Each source module has one canonical target and one internal registry item; a public item explicitly lists its complete dependency closure, avoiding registry cycles. Installing another component reuses the same context/store/layer-stack files.
+The installed layout is `<ui alias>/<component>/index.tsx` (React) or `index.ts` (Svelte), `styles.css`, `react/` or `svelte/`, and `common/`. Shared files install under `<ui alias>/_spark/`. Workspace `@spark/` imports are rewritten to normal relative imports during registry generation; consumers need no Spark aliases, Ark packages, or Zag packages. Each source module has one canonical target and one internal registry item; a public item explicitly lists its complete dependency closure, avoiding registry cycles. Installing another component reuses the same context/store/layer-stack files.
 
 Third-party packages such as Floating UI, Internationalized Date, and framework runtimes remain npm dependencies. Node ambient types are declared because upstream sources reference `process` and `Error.captureStackTrace`. Preserve the included Ark/Zag license notices when redistributing.
 
@@ -150,7 +161,7 @@ Generated commits use your Git identity when configured, otherwise the explicit 
 ```sh
 pnpm test:importer       # parsing, dependency closure, version constraints, Git merge conflicts
 pnpm verify-imports
-pnpm check              # app, imported React/Svelte types, authored formatting
+pnpm check              # alias drift, app, imported React/Svelte types, authored formatting
 pnpm build
 pnpm storybook:build
 pnpm test:registry       # real CLIs, isolated installs, reversed installation order, type checks

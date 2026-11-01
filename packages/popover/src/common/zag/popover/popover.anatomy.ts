@@ -1,4 +1,4 @@
-import { createAnatomy } from "../../../../../shared/src/common/zag/anatomy/create-anatomy.ts";
+import { createAnatomy } from "@spark/shared/common/zag/anatomy/create-anatomy.ts";
 
 export const anatomy = createAnatomy("popover").parts(
   "arrow",

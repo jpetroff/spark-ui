@@ -1,6 +1,6 @@
-import type { EventObject } from "../../../../../shared/src/common/zag/core/index.ts";
-import type { Machine } from "../../../../../shared/src/common/zag/core/index.ts";
-import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
+import type { EventObject } from "@spark/shared/common/zag/core/index.ts";
+import type { Machine } from "@spark/shared/common/zag/core/index.ts";
+import type { Service } from "@spark/shared/common/zag/core/index.ts";
 
 /* -----------------------------------------------------------------------------
  * Machine context

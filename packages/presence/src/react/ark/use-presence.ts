@@ -1,13 +1,13 @@
 'use client'
 
 import * as presence from '../../common/zag/presence/index.ts'
-import { normalizeProps, useMachine } from '../../../../shared/src/react/zag/index.ts'
+import { normalizeProps, useMachine } from '@spark/shared/react/zag/index.ts'
 import { useRef } from 'react'
-import type { Optional } from "../../../../shared/src/react/ark/types.ts";
-import { supportsActivity } from "../../../../shared/src/react/ark/utils/react-activity.ts";
-import type { HideMode } from "../../../../shared/src/react/ark/utils/render-strategy.ts";
-import type { RenderStrategyProps } from "../../../../shared/src/react/ark/utils/render-strategy.ts";
-import { useEvent } from "../../../../shared/src/react/ark/utils/use-event.ts";
+import type { Optional } from "@spark/shared/react/ark/types.ts";
+import { supportsActivity } from "@spark/shared/react/ark/utils/react-activity.ts";
+import type { HideMode } from "@spark/shared/react/ark/utils/render-strategy.ts";
+import type { RenderStrategyProps } from "@spark/shared/react/ark/utils/render-strategy.ts";
+import { useEvent } from "@spark/shared/react/ark/utils/use-event.ts";
 
 export interface UsePresenceProps extends Optional<presence.Props, 'present'>, RenderStrategyProps {
   /**

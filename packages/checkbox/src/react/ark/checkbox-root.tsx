@@ -1,12 +1,12 @@
 'use client'
 
-import { mergeProps } from '../../../../shared/src/react/zag/index.ts'
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
 import { forwardRef } from 'react'
-import type { Assign } from "../../../../shared/src/react/ark/types.ts";
-import { createSplitProps } from "../../../../shared/src/react/ark/utils/create-split-props.ts";
-import { type HTMLProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { type PolymorphicProps } from "../../../../shared/src/react/ark/components/factory.ts";
-import { ark } from "../../../../shared/src/react/ark/components/factory.ts";
+import type { Assign } from "@spark/shared/react/ark/types.ts";
+import { createSplitProps } from "@spark/shared/react/ark/utils/create-split-props.ts";
+import { type HTMLProps } from "@spark/shared/react/ark/components/factory.ts";
+import { type PolymorphicProps } from "@spark/shared/react/ark/components/factory.ts";
+import { ark } from "@spark/shared/react/ark/components/factory.ts";
 import { type UseCheckboxProps } from "./use-checkbox.ts";
 import { useCheckbox } from "./use-checkbox.ts";
 import { CheckboxProvider } from "./use-checkbox-context.ts";

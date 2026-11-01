@@ -1,8 +1,8 @@
 <script module lang="ts">
-  import type { Assign } from "../../../../shared/src/svelte/ark/types.ts";
-import type { HTMLProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { PolymorphicProps } from "../../../../shared/src/svelte/ark/types.ts";
-import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
+  import type { Assign } from "@spark/shared/svelte/ark/types.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
+import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   export interface DialogBackdropBaseProps extends PolymorphicProps<'div'>, RefAttribute {
     ref?: Element | null
@@ -11,10 +11,10 @@ import type { RefAttribute } from "../../../../shared/src/svelte/ark/types.ts";
 </script>
 
 <script lang="ts">
-  import { useRenderStrategyPropsContext } from "../../../../shared/src/svelte/ark/utils/render-strategy.ts";
-  import { mergeProps } from '../../../../shared/src/svelte/zag/index.ts'
-  import { default as Ark } from "../../../../shared/src/svelte/ark/components/factory/factory.svelte";
-  import { usePresence } from "../../../../presence/src/svelte/ark/use-presence.svelte.ts";
+  import { useRenderStrategyPropsContext } from "@spark/shared/svelte/ark/utils/render-strategy.ts";
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+  import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
+  import { usePresence } from "@spark/presence/svelte/ark/use-presence.svelte.ts";
   import { useDialogContext } from "./use-dialog-context.ts";
 
   let { ref = $bindable(null), ...props }: DialogBackdropProps = $props()

@@ -1,9 +1,9 @@
-import type { Service } from "../../../../../shared/src/common/zag/core/index.ts";
-import { dataAttr } from "../../../../../shared/src/common/zag/dom-query/shared.ts";
-import type { JSX } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { NormalizeProps } from "../../../../../shared/src/common/zag/types/index.ts";
-import type { PropTypes } from "../../../../../shared/src/common/zag/types/index.ts";
-import { compact } from "../../../../../shared/src/common/zag/utils/index.ts";
+import type { Service } from "@spark/shared/common/zag/core/index.ts";
+import { dataAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import type { JSX } from "@spark/shared/common/zag/types/index.ts";
+import type { NormalizeProps } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+import { compact } from "@spark/shared/common/zag/utils/index.ts";
 import { parts } from "./dialog.anatomy.ts";
 import * as dom from "./dialog.dom.ts"
 import type { DialogApi } from "./dialog.types.ts";
