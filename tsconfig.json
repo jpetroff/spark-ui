@@ -37,7 +37,7 @@
     "src",
     "src/**/*.css",
     "packages/button/src/react.tsx",
-    "packages/button/src/button.stories.tsx",
+    "packages/*/src/*.stories.tsx",
     "packages/utils",
     ".storybook",
     "vite.config.ts"
