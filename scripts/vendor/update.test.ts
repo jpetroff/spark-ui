@@ -7,14 +7,13 @@ import { git, hash, rewriteModules } from './graph.ts'
 import { relative, resolveSourceImport, syncAliases } from './aliases.ts'
 import { root } from './import.ts'
 
-for (const scenario of [
-  'preserve',
-  'overlap',
-  'delete-modified',
-  'add-delete',
-  'alias-migration',
-]) {
-  test(`complete updater workflow: ${scenario}`, () => {
+for (const { mode, scenario } of ['local', 'refs'].flatMap((mode) =>
+  ['preserve', 'overlap', 'delete-modified', 'add-delete', 'alias-migration'].map((scenario) => ({
+    mode,
+    scenario,
+  })),
+)) {
+  test(`complete updater workflow: ${scenario} (${mode})`, () => {
     const base = fs.mkdtempSync(path.join(root, '.vendor-tests/update-'))
     const dirs = Object.fromEntries(
       ['ark', 'zag', 'spark'].map((name) => [name, path.join(base, name)]),
@@ -74,6 +73,7 @@ for (const scenario of [
       fs.cpSync(path.join(root, 'scripts/vendor'), path.join(dirs.spark!, 'scripts/vendor'), {
         recursive: true,
       })
+      fs.copyFileSync(path.join(root, 'Makefile'), path.join(dirs.spark!, 'Makefile'))
       fs.symlinkSync(path.join(root, 'node_modules'), path.join(dirs.spark!, 'node_modules'), 'dir')
       put('spark', 'package.json', '{"type":"module"}\n')
       put(
@@ -83,7 +83,9 @@ for (const scenario of [
       )
       put('spark', 'registry.json', '{"name":"fixture","items":[]}\n')
       put('spark', 'tsconfig.json', '{"compilerOptions":{"paths":{"@/*":["./src/*"]}}}\n')
-      const env = { ...process.env, ARK_SOURCE: dirs.ark, ZAG_SOURCE: dirs.zag }
+      const env = { ...process.env }
+      for (const key of ['ARK_SOURCE', 'ZAG_SOURCE', 'ARK_REF', 'ZAG_REF']) delete env[key]
+      if (mode === 'refs') Object.assign(env, { ARK_SOURCE: dirs.ark, ZAG_SOURCE: dirs.zag })
       const run = (script: string, args: string[] = [], extra = {}) =>
         execFileSync(process.execPath, [`scripts/vendor/${script}.ts`, ...args], {
           cwd: dirs.spark,
@@ -154,15 +156,40 @@ for (const scenario of [
         ARK_REF: git(dirs.ark!, 'rev-parse', 'HEAD'),
         ZAG_REF: git(dirs.zag!, 'rev-parse', 'HEAD'),
       }
+      if (mode === 'refs') {
+        // Explicit commits must win even when the checked-out branches have moved on.
+        put('ark', 'packages/react/src/components/sample/value.ts', 'export const value = 3\n')
+        put('zag', 'LICENSE', 'Later Zag license\n')
+        commit('ark', 'later upstream change')
+        commit('zag', 'later upstream change')
+      }
+      const heads = Object.fromEntries(
+        ['ark', 'zag'].map((repo) => [repo, git(dirs[repo]!, 'rev-parse', 'HEAD')]),
+      )
+      const makeUpdate = (args: string[] = []) =>
+        execFileSync('make', ['update', ...args], {
+          cwd: dirs.spark,
+          env,
+          stdio: 'pipe',
+        })
+      const makeArgs = mode === 'refs' ? Object.entries(refs).map(([k, v]) => `${k}=${v}`) : []
+      if (scenario === 'preserve') {
+        assert.throws(() => makeUpdate(['ARK_REF=missing-commit']))
+        assert.equal(git(dirs.spark!, 'branch', '--show-current'), 'main')
+        assert.equal(git(dirs.spark!, 'rev-parse', 'vendor/upstream'), original)
+      }
       if (scenario === 'overlap' || scenario === 'delete-modified') {
-        assert.throws(() => run('update', [], refs))
+        assert.throws(() => makeUpdate(makeArgs))
         assert.ok(
           git(dirs.spark!, 'diff', '--name-only', '--diff-filter=U').includes(
             scenario === 'overlap' ? 'value.ts' : 'obsolete.ts',
           ),
         )
       } else {
-        run('update', [], refs)
+        makeUpdate(makeArgs)
+        const lock = JSON.parse(fs.readFileSync(path.join(dirs.spark!, 'vendor.lock.json'), 'utf8'))
+        assert.equal(lock.upstream.ark.commit, refs.ARK_REF)
+        assert.equal(lock.upstream.zag.commit, refs.ZAG_REF)
         assert.equal(
           fs.readFileSync(path.join(dirs.spark!, 'packages/sample/src/styles.css'), 'utf8'),
           '.custom { color: red; }\n',
@@ -201,6 +228,11 @@ for (const scenario of [
       assert.equal(git(dirs.spark!, 'rev-parse', 'main'), local)
       assert.notEqual(git(dirs.spark!, 'rev-parse', 'vendor/upstream'), original)
       assert.match(git(dirs.spark!, 'branch', '--show-current'), /^update\/upstream-/)
+      for (const repo of ['ark', 'zag']) {
+        assert.equal(git(dirs[repo]!, 'rev-parse', 'HEAD'), heads[repo])
+        assert.equal(git(dirs[repo]!, 'branch', '--show-current'), 'main')
+        assert.equal(git(dirs[repo]!, 'status', '--porcelain'), '')
+      }
     } finally {
       fs.rmSync(base, { recursive: true, force: true })
     }

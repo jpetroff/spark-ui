@@ -18,7 +18,7 @@
     "types": ["vite/client", "node"],
     "paths": {
       "@/*": ["./src/*"],
-      "@/components/ui/*": ["./packages/*/src/index.ts"],
+      "@/components/ui/*": ["./packages/*/src/react.tsx"],
       "@/lib/spark-utils": ["./packages/utils/src/spark-utils.ts"],
       "@spark/button/*": ["./packages/button/src/*"],
       "@spark/checkbox/*": ["./packages/checkbox/src/*"],
@@ -36,7 +36,8 @@
   "include": [
     "src",
     "src/**/*.css",
-    "packages/button",
+    "packages/button/src/react.tsx",
+    "packages/button/src/button.stories.tsx",
     "packages/utils",
     ".storybook",
     "vite.config.ts"

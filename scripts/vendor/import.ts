@@ -215,10 +215,21 @@ export function buildRegistry() {
     'packages/shared/src/licenses/ark-LICENSE',
     'packages/shared/src/licenses/zag-LICENSE',
   ]
-  const all = [...new Set([...sourceFiles, ...lock.starters, ...licenses])].sort()
+  const native = json('registry.json').items.filter(
+    (item: any) => item.meta?.framework === 'react' || item.meta?.framework === 'svelte',
+  ) as any[]
+  const all = [
+    ...new Set([
+      ...sourceFiles,
+      ...lock.starters,
+      ...licenses,
+      ...native.flatMap((item) => item.files.map((file: any) => file.path)),
+    ]),
+  ].sort()
   const release = hash(
     JSON.stringify(lock) +
-      '\0registry-v3\0' +
+      '\0registry-v4\0' +
+      JSON.stringify(native) +
       (process.env.REGISTRY_BASE_URL ?? 'http://localhost:5173/r') +
       '\0' +
       all.map((file) => `${file}\0${fs.readFileSync(path.join(root, file), 'utf8')}`).join('\0'),
@@ -281,6 +292,14 @@ export function buildRegistry() {
         ],
       })
     }
+    items.push(
+      ...native
+        .filter((item) => item.meta.framework === framework)
+        .map(({ files, ...item }) => ({
+          ...item,
+          files: files.map((file: any) => fileEntry(file.path, framework)),
+        })),
+    )
     if (framework === 'react') {
       const catalog = json('registry.json')
       const generatedNames = new Set(Object.keys(lock.entries))
@@ -311,8 +330,7 @@ export function buildRegistry() {
       write(`public/r/${release}/${framework}/${item.name}.json`, content)
       if (!item.name.startsWith('source-')) {
         write(`public/r/${framework}/${item.name}.json`, content)
-        if (framework === 'react' && item.name !== 'upstream-licenses')
-          write(`public/r/${item.name}.json`, content)
+        if (item.name !== 'upstream-licenses') write(`public/r/${item.name}.json`, content)
       }
     }
   }

@@ -49,8 +49,19 @@ export async function update(args: string[]) {
   git(root, 'rev-parse', '--verify', 'vendor/upstream')
   const existing = json('vendor.lock.json').components as string[]
   const names = [...new Set([...existing, ...args.filter((a) => !a.startsWith('--'))])]
-  const ark = process.env.ARK_REF || json('vendor.lock.json').upstream.ark.commit
-  const zag = process.env.ZAG_REF || json('vendor.lock.json').upstream.zag.commit
+  const lock = json('vendor.lock.json')
+  const ark = git(
+    path.resolve(root, process.env.ARK_SOURCE ?? '../ark'),
+    'rev-parse',
+    '--verify',
+    `${process.env.ARK_REF || lock.upstream.ark.commit}^{commit}`,
+  )
+  const zag = git(
+    path.resolve(root, process.env.ZAG_SOURCE ?? '../zag'),
+    'rev-parse',
+    '--verify',
+    `${process.env.ZAG_REF || lock.upstream.zag.commit}^{commit}`,
+  )
   const suffix = `${Date.now()}-${hash(`${ark}:${zag}:${names}`).slice(0, 8)}`
   const candidate = `vendor/candidate-${suffix}`
   const integration = `update/upstream-${suffix}`

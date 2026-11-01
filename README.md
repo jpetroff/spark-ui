@@ -20,9 +20,13 @@ packages/
   button/
     tsconfig.json
     src/
-      button.tsx             Source copied into consumer projects
+      react.tsx              Public React entry point
+      svelte.ts              Public Svelte entry point
+      styles.css             Component stylesheet
+      react/button.tsx       Native React implementation
+      svelte/button.svelte   Native Svelte implementation
+      common/variants.ts     Shared classes, variants, and sizes
       button.stories.tsx      Stories colocated with the component
-      index.ts               Local source entry point
   utils/                     @spark-ui/utils, shared source utilities
 src/                         Vite playground and shared preview styles
 components.json              Local shadcn aliases and Tailwind configuration
@@ -30,7 +34,7 @@ registry.json                Installable items and their source files
 public/r/                    Generated registry JSON (gitignored)
 ```
 
-Component directories do not need package manifests: local imports use TypeScript source aliases, and registry consumers copy the source. Button originally used a private `@spark-ui/button` workspace package; it now follows the same source import convention as the imported components. `utils` retains a private workspace manifest for `clsx` and `tailwind-merge`; `vendor-tools` isolates the Svelte tooling dependencies. Shared development and framework dependencies belong in the root `package.json`.
+Component directories do not need package manifests: local imports use TypeScript source aliases, and registry consumers copy the source. `utils` retains a private workspace manifest for `clsx` and `tailwind-merge`; `vendor-tools` isolates the Svelte tooling dependencies. Shared development and framework dependencies belong in the root `package.json`.
 
 TypeScript `paths` provide `@/*` for playground source, `@/components/ui/<name>` for component package entry points, and `@/lib/spark-utils` for the shared utility. Vite's `resolve.tsconfigPaths` reads those same mappings, including in Storybook; keep mappings in `tsconfig.json` rather than duplicating them in Vite.
 
@@ -51,7 +55,7 @@ Start `pnpm dev`, then run this from a consumer project already initialized with
 pnpm dlx shadcn@latest add http://localhost:5173/r/button.json
 ```
 
-The registry copies `button.tsx` into the consumer's UI directory and `spark-utils.ts` into its lib directory, rewriting aliases to match the consumer's `components.json`. It also installs `clsx` and `tailwind-merge`. The copied files have no `@spark-ui/*` imports. The component uses the consumer's standard shadcn theme tokens; playground styles are not shipped with it.
+Button uses the same framework layout as the other components: `button/index.tsx` for React or `button/index.ts` for Svelte, plus its framework implementation, shared variants, and stylesheet. The registry also includes `utils/spark-utils.ts` and installs `clsx` and `tailwind-merge`. Imports are rewritten to relative paths; consumers need no Spark aliases. The existing `button.json` URL remains a React alias for `button-react.json`. The component uses the consumer's standard shadcn theme tokens; playground styles are not shipped with it.
 
 Registry JSON is also served by Storybook at `http://localhost:6006/r/button.json`. To publish, set `homepage` in `registry.json` to your production URL, run a build, and host either `dist/` or `storybook-static/` as static files. Consumers can then use the deployed item URL or configure their own namespace:
 
@@ -75,10 +79,10 @@ The registry homepage initially points to the local playground. No public hostin
 2. Add the public entry files and any colocated stories. Storybook automatically discovers all package stories and generates component documentation. Keep imports within a component relative, including explicit file extensions; use `@spark/<name>/…` for local cross-component imports.
 3. Run `pnpm aliases:sync` to add the new source alias. Declare shared development and framework dependencies in the root `package.json`.
 4. Add an item to `registry.json` listing every source file and external dependency required by the copied component. Exclude development configs, barrels used only for development, and stories. Use `registry:ui`, `registry:lib`, or `registry:hook` file types to choose consumer destinations.
-5. Keep distributed native imports consumer-compatible: use `@/components/ui/<name>` for other components and `@/lib/...` for utilities, with matching TypeScript paths. Include dependent source files or declare `registryDependencies` using a full item URL or a configured namespace. Bare dependency names resolve to the official shadcn registry.
+5. For native items without framework metadata, keep distributed imports consumer-compatible: use `@/components/ui/<name>` for other components and `@/lib/...` for utilities, with matching TypeScript paths. Include dependent source files or declare `registryDependencies` using a full item URL or a configured namespace. Bare dependency names resolve to the official shadcn registry.
 6. Run the checks below and install the generated item into a separate shadcn project to verify aliases and dependencies.
 
-Native registry sources must use consumer-compatible imports. Vendored Ark/Zag implementation sources may use `@spark/` imports because the vendor registry builder resolves them and rewrites them to portable relative paths before distribution.
+Native framework items declare `meta.framework` (`react` or `svelte`) in `registry.json` and list their complete source files and npm dependencies. The framework registry builder resolves their `@spark/` imports to portable relative paths, just as it does for vendored Ark/Zag sources. Native entries without framework metadata must use consumer-compatible imports.
 
 ## Commands
 
@@ -118,11 +122,11 @@ Public entry files and CSS are seeded once. Add wrappers and exports there, or e
 ### Registry installation
 
 ```sh
-pnpm dlx shadcn add http://localhost:5173/r/react/checkbox-react.json
-pnpm dlx shadcn-svelte add http://localhost:5173/r/svelte/checkbox-svelte.json
+pnpm dlx shadcn add http://localhost:5173/r/react/button-react.json
+pnpm dlx shadcn-svelte add http://localhost:5173/r/svelte/button-svelte.json
 ```
 
-Replace the component name with `field`, `dialog`, `popover`, `locale`, or `environment`. React public items are also included in the root `registry.json`. `registry.react.json` and `registry.svelte.json` are generated catalogs.
+Replace the component name with `checkbox`, `field`, `dialog`, `popover`, `locale`, or `environment`. React public items and native framework items are included in the root `registry.json`. `registry.react.json` and `registry.svelte.json` are generated catalogs.
 
 The installed layout is `<ui alias>/<component>/index.tsx` (React) or `index.ts` (Svelte), `styles.css`, `react/` or `svelte/`, and `common/`. Shared files install under `<ui alias>/_spark/`. Workspace `@spark/` imports are rewritten to normal relative imports during registry generation; consumers need no Spark aliases, Ark packages, or Zag packages. Each source module has one canonical target and one internal registry item; a public item explicitly lists its complete dependency closure, avoiding registry cycles. Installing another component reuses the same context/store/layer-stack files.
 
@@ -147,10 +151,18 @@ make bootstrap-upstream
 This creates `vendor/upstream` from the clean committed baseline. It intentionally refuses a dirty checkout or implementation files that no longer match their generated hashes.
 
 ```sh
-make update-upstream ARK_REF=<ark-commit> ZAG_REF=<zag-commit>
+make update
 ```
 
-The command regenerates all previously imported components on a `vendor/candidate-*` branch, advances `vendor/upstream`, then merges it into a new `update/upstream-*` branch based on your current branch. Once bootstrapped, `make import <new-component>` uses this same workflow. Compatible Ark/Zag versions are required; the importer checks Ark's declared Zag requirements against the selected source versions.
+By default, this uses the committed `HEAD` of the sibling `../ark` and `../zag` folders. Check out the desired compatible branches in those repositories first; tracked changes must be committed or stashed. The updater never switches or modifies their branches. Set `ARK_SOURCE` / `ZAG_SOURCE` to override the folders.
+
+To select specific commits instead, pass either or both refs (an omitted ref still defaults to its local `HEAD`):
+
+```sh
+make update ARK_REF=<ark-commit> ZAG_REF=<zag-commit>
+```
+
+`make update-upstream` remains an alias with the same options. The command regenerates all previously imported components on a `vendor/candidate-*` branch, advances `vendor/upstream`, then merges it into a new `update/upstream-*` branch based on your current branch. Once bootstrapped, `make import <new-component>` uses this same workflow at the revisions pinned in `vendor.lock.json`. Compatible Ark/Zag versions are required; the importer checks Ark's declared Zag requirements against the selected source versions.
 
 Generated commits use your Git identity when configured, otherwise the explicit automation identity `Spark UI Importer <spark-ui-importer@localhost>` without changing Git configuration. No automatic conflict resolution favors upstream. Resolve source conflicts and commit, then run `pnpm registry:build`, commit the regenerated `registry.json`, and validate before merging the update branch. `git merge --abort` aborts a conflicted integration. A generation failure leaves the candidate branch available for inspection and preserves your original branch. Do not merge candidate branches directly or delete the permanent baseline branch. This v1 workflow updates Spark; it does not update customized copies in consuming projects.
 

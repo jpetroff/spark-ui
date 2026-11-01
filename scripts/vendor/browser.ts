@@ -59,6 +59,19 @@ try {
         'rtl',
       )
       const overflow = await page.locator('body').evaluate((node) => node.style.overflow)
+      const nativeButton = page.getByRole('button', { name: 'Native clicks 0', exact: true })
+      await expect(nativeButton).toHaveAttribute('type', 'button')
+      await expect(nativeButton).toHaveAttribute('data-slot', 'button')
+      await expect(nativeButton).toHaveAttribute('data-ref-ready', 'true')
+      await expect(nativeButton).toHaveClass(/bg-secondary/)
+      await expect(nativeButton).toHaveClass(/h-10/)
+      await expect(nativeButton).toHaveClass(/px-8/)
+      await expect(nativeButton).not.toHaveClass(/px-6/)
+      await expect(
+        page.getByRole('button', { name: 'Native disabled', exact: true }),
+      ).toBeDisabled()
+      await nativeButton.click()
+      await expect(page.getByRole('button', { name: 'Native clicks 1', exact: true })).toBeVisible()
       const trigger = page.getByRole('button', { name: 'Open dialog', exact: true })
       await trigger.click()
       const dialog = page.getByRole('dialog', { name: 'Settings', exact: true })
