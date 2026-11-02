@@ -10,4 +10,4 @@
  * This provider has no visual parts or optional CSS recipe.
  */
 import './styles.css'
-export * from '../../shared/src/react/ark/providers/locale/index.ts'
+export * from '@spark/shared/react/ark/providers/locale/index.ts'

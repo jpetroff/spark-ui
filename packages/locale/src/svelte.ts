@@ -8,4 +8,4 @@
  * This provider has no visual parts or optional CSS recipe.
  */
 import './styles.css'
-export * from '../../shared/src/svelte/ark/providers/locale/index.ts'
+export * from '@spark/shared/svelte/ark/providers/locale/index.ts'
