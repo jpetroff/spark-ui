@@ -1,0 +1,26 @@
+<script module lang="ts">
+  import type { PresetTriggerProps } from '../../common/zag/date-picker/index.ts'
+  import type { Assign } from "@spark/shared/svelte/ark/types.ts";
+import type { HTMLProps } from "@spark/shared/svelte/ark/types.ts";
+import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
+import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
+
+  export interface DatePickerPresetTriggerBaseProps
+    extends PresetTriggerProps, PolymorphicProps<'button'>, RefAttribute {}
+  export interface DatePickerPresetTriggerProps extends Assign<HTMLProps<'button'>, DatePickerPresetTriggerBaseProps> {}
+</script>
+
+<script lang="ts">
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+  import { createSplitProps } from "@spark/shared/svelte/ark/utils/create-split-props.ts";
+  import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
+  import { useDatePickerContext } from "./use-date-picker-context.ts";
+
+  let { ref = $bindable(null), ...props }: DatePickerPresetTriggerProps = $props()
+
+  const [presetTriggerProps, localProps] = $derived(createSplitProps<PresetTriggerProps>()(props, ['value']))
+  const datePicker = useDatePickerContext()
+  const mergedProps = $derived(mergeProps(datePicker().getPresetTriggerProps(presetTriggerProps), localProps))
+</script>
+
+<Ark as="button" bind:ref {...mergedProps} />

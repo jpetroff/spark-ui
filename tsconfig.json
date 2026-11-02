@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -15,22 +19,56 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vite/client", "node"],
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/ui/*": ["./packages/*/src/react.tsx"],
-      "@/lib/spark-utils": ["./packages/utils/src/spark-utils.ts"],
-      "@spark/button/*": ["./packages/button/src/*"],
-      "@spark/checkbox/*": ["./packages/checkbox/src/*"],
-      "@spark/dialog/*": ["./packages/dialog/src/*"],
-      "@spark/environment/*": ["./packages/environment/src/*"],
-      "@spark/field/*": ["./packages/field/src/*"],
-      "@spark/fieldset/*": ["./packages/fieldset/src/*"],
-      "@spark/locale/*": ["./packages/locale/src/*"],
-      "@spark/popover/*": ["./packages/popover/src/*"],
-      "@spark/presence/*": ["./packages/presence/src/*"],
-      "@spark/shared/*": ["./packages/shared/src/*"],
-      "@spark/utils/*": ["./packages/utils/src/*"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/ui/*": [
+        "./packages/*/src/react.tsx"
+      ],
+      "@/lib/spark-utils": [
+        "./packages/utils/src/spark-utils.ts"
+      ],
+      "@spark/button/*": [
+        "./packages/button/src/*"
+      ],
+      "@spark/checkbox/*": [
+        "./packages/checkbox/src/*"
+      ],
+      "@spark/date-picker/*": [
+        "./packages/date-picker/src/*"
+      ],
+      "@spark/dialog/*": [
+        "./packages/dialog/src/*"
+      ],
+      "@spark/environment/*": [
+        "./packages/environment/src/*"
+      ],
+      "@spark/field/*": [
+        "./packages/field/src/*"
+      ],
+      "@spark/fieldset/*": [
+        "./packages/fieldset/src/*"
+      ],
+      "@spark/locale/*": [
+        "./packages/locale/src/*"
+      ],
+      "@spark/popover/*": [
+        "./packages/popover/src/*"
+      ],
+      "@spark/presence/*": [
+        "./packages/presence/src/*"
+      ],
+      "@spark/shared/*": [
+        "./packages/shared/src/*"
+      ],
+      "@spark/utils/*": [
+        "./packages/utils/src/*"
+      ]
     }
   },
   "include": [

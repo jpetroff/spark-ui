@@ -13,6 +13,7 @@
   },
   "components": [
     "checkbox",
+    "date-picker",
     "dialog",
     "environment",
     "field",
@@ -356,6 +357,455 @@
       ],
       "dependencies": [
         "@internationalized/date@3.12.4",
+        "csstype@3.2.3",
+        "svelte@>=5.29.0"
+      ]
+    },
+    "date-picker-react": {
+      "component": "date-picker",
+      "framework": "react",
+      "root": "ark:packages/react/src/components/date-picker/index.ts",
+      "files": [
+        "ark:packages/react/src/components/date-picker/date-picker-clear-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-content.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-context.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-control.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-input.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-label.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-month-select.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-next-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-positioner.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-preset-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-prev-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-range-text.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-root-provider.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-root.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-body.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-cell-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-head.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-header.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-row.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-value-text.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view-control.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-week-number-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-week-number-header-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-year-select.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/react/src/components/date-picker/date-picker.ts",
+        "ark:packages/react/src/components/date-picker/index.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-cell-props-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/presence/presence-gate.tsx",
+        "ark:packages/react/src/components/presence/split-presence-props.ts",
+        "ark:packages/react/src/components/presence/use-presence-context.ts",
+        "ark:packages/react/src/components/presence/use-presence.ts",
+        "ark:packages/react/src/providers/environment/environment-provider.tsx",
+        "ark:packages/react/src/providers/environment/index.ts",
+        "ark:packages/react/src/providers/environment/use-environment-context.ts",
+        "ark:packages/react/src/providers/hotkeys/index.ts",
+        "ark:packages/react/src/providers/hotkeys/use-format-hotkey.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey-recorder.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey-registrations.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey-store.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkeys.ts",
+        "ark:packages/react/src/providers/hotkeys/use-is-key-pressed.ts",
+        "ark:packages/react/src/providers/hotkeys/use-platform.ts",
+        "ark:packages/react/src/providers/hotkeys/use-pressed-keys.ts",
+        "ark:packages/react/src/providers/hotkeys/use-store-snapshot.ts",
+        "ark:packages/react/src/providers/index.ts",
+        "ark:packages/react/src/providers/interaction/index.ts",
+        "ark:packages/react/src/providers/interaction/use-focus-visible.ts",
+        "ark:packages/react/src/providers/interaction/use-interaction-modality.ts",
+        "ark:packages/react/src/providers/locale/index.ts",
+        "ark:packages/react/src/providers/locale/locale-provider.tsx",
+        "ark:packages/react/src/providers/locale/use-collator.ts",
+        "ark:packages/react/src/providers/locale/use-date-formatter.ts",
+        "ark:packages/react/src/providers/locale/use-filter.ts",
+        "ark:packages/react/src/providers/locale/use-locale-context.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/compose-refs.ts",
+        "ark:packages/react/src/utils/create-context.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "ark:packages/react/src/utils/react-activity.ts",
+        "ark:packages/react/src/utils/render-strategy.ts",
+        "ark:packages/react/src/utils/run-if-fn.ts",
+        "ark:packages/react/src/utils/use-event.ts",
+        "ark:packages/react/src/utils/use-safe-layout-effect.ts",
+        "zag:packages/anatomy/src/create-anatomy.ts",
+        "zag:packages/core/src/create-machine.ts",
+        "zag:packages/core/src/index.ts",
+        "zag:packages/core/src/memo.ts",
+        "zag:packages/core/src/merge-props.ts",
+        "zag:packages/core/src/replace-tracker.ts",
+        "zag:packages/core/src/scope.ts",
+        "zag:packages/core/src/state.ts",
+        "zag:packages/core/src/types.ts",
+        "zag:packages/frameworks/react/src/bindable.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/frameworks/react/src/machine.ts",
+        "zag:packages/frameworks/react/src/normalize-props.ts",
+        "zag:packages/frameworks/react/src/portal.tsx",
+        "zag:packages/frameworks/react/src/refs.ts",
+        "zag:packages/frameworks/react/src/stable.ts",
+        "zag:packages/frameworks/react/src/track.ts",
+        "zag:packages/frameworks/react/src/use-layout-effect.ts",
+        "zag:packages/machines/date-picker/src/date-picker.anatomy.ts",
+        "zag:packages/machines/date-picker/src/date-picker.connect.ts",
+        "zag:packages/machines/date-picker/src/date-picker.dom.ts",
+        "zag:packages/machines/date-picker/src/date-picker.machine.ts",
+        "zag:packages/machines/date-picker/src/date-picker.parse.ts",
+        "zag:packages/machines/date-picker/src/date-picker.props.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/machines/date-picker/src/date-picker.utils.ts",
+        "zag:packages/machines/date-picker/src/index.ts",
+        "zag:packages/machines/presence/src/index.ts",
+        "zag:packages/machines/presence/src/presence.connect.ts",
+        "zag:packages/machines/presence/src/presence.machine.ts",
+        "zag:packages/machines/presence/src/presence.props.ts",
+        "zag:packages/machines/presence/src/presence.types.ts",
+        "zag:packages/types/src/create-props.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/types/src/jsx.ts",
+        "zag:packages/types/src/prop-types.ts",
+        "zag:packages/utilities/core/src/array.ts",
+        "zag:packages/utilities/core/src/equal.ts",
+        "zag:packages/utilities/core/src/functions.ts",
+        "zag:packages/utilities/core/src/guard.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/core/src/number.ts",
+        "zag:packages/utilities/core/src/object.ts",
+        "zag:packages/utilities/core/src/store.ts",
+        "zag:packages/utilities/core/src/timers.ts",
+        "zag:packages/utilities/core/src/warning.ts",
+        "zag:packages/utilities/date-utils/src/align.ts",
+        "zag:packages/utilities/date-utils/src/assertion.ts",
+        "zag:packages/utilities/date-utils/src/constrain.ts",
+        "zag:packages/utilities/date-utils/src/date-month.ts",
+        "zag:packages/utilities/date-utils/src/date-year.ts",
+        "zag:packages/utilities/date-utils/src/duration.ts",
+        "zag:packages/utilities/date-utils/src/format.ts",
+        "zag:packages/utilities/date-utils/src/formatter.ts",
+        "zag:packages/utilities/date-utils/src/get-era-format.ts",
+        "zag:packages/utilities/date-utils/src/index.ts",
+        "zag:packages/utilities/date-utils/src/locale.ts",
+        "zag:packages/utilities/date-utils/src/mutation.ts",
+        "zag:packages/utilities/date-utils/src/pagination.ts",
+        "zag:packages/utilities/date-utils/src/parse-date.ts",
+        "zag:packages/utilities/date-utils/src/preset.ts",
+        "zag:packages/utilities/date-utils/src/types.ts",
+        "zag:packages/utilities/dismissable/src/dismissable-layer.ts",
+        "zag:packages/utilities/dismissable/src/escape-keydown.ts",
+        "zag:packages/utilities/dismissable/src/index.ts",
+        "zag:packages/utilities/dismissable/src/layer-stack.ts",
+        "zag:packages/utilities/dismissable/src/pointer-event-outside.ts",
+        "zag:packages/utilities/dom-query/src/caret.ts",
+        "zag:packages/utilities/dom-query/src/computed-style.ts",
+        "zag:packages/utilities/dom-query/src/controller.ts",
+        "zag:packages/utilities/dom-query/src/data-url.ts",
+        "zag:packages/utilities/dom-query/src/event.ts",
+        "zag:packages/utilities/dom-query/src/form.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/dom-query/src/initial-focus.ts",
+        "zag:packages/utilities/dom-query/src/mutation-observer.ts",
+        "zag:packages/utilities/dom-query/src/navigate.ts",
+        "zag:packages/utilities/dom-query/src/node.ts",
+        "zag:packages/utilities/dom-query/src/overflow.ts",
+        "zag:packages/utilities/dom-query/src/platform.ts",
+        "zag:packages/utilities/dom-query/src/point.ts",
+        "zag:packages/utilities/dom-query/src/pointer-lock.ts",
+        "zag:packages/utilities/dom-query/src/pointer-move.ts",
+        "zag:packages/utilities/dom-query/src/press.ts",
+        "zag:packages/utilities/dom-query/src/proxy-tab-focus.ts",
+        "zag:packages/utilities/dom-query/src/query.ts",
+        "zag:packages/utilities/dom-query/src/raf.ts",
+        "zag:packages/utilities/dom-query/src/resize-observer.ts",
+        "zag:packages/utilities/dom-query/src/scale.ts",
+        "zag:packages/utilities/dom-query/src/scope.ts",
+        "zag:packages/utilities/dom-query/src/scroll.ts",
+        "zag:packages/utilities/dom-query/src/searchable.ts",
+        "zag:packages/utilities/dom-query/src/set.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts",
+        "zag:packages/utilities/dom-query/src/tabbable.ts",
+        "zag:packages/utilities/dom-query/src/text-selection.ts",
+        "zag:packages/utilities/dom-query/src/timeout.ts",
+        "zag:packages/utilities/dom-query/src/typeahead.ts",
+        "zag:packages/utilities/dom-query/src/types.ts",
+        "zag:packages/utilities/dom-query/src/visual-viewport.ts",
+        "zag:packages/utilities/dom-query/src/visually-hidden.ts",
+        "zag:packages/utilities/dom-query/src/wait-for.ts",
+        "zag:packages/utilities/dom-query/src/when-node.ts",
+        "zag:packages/utilities/focus-visible/src/index.ts",
+        "zag:packages/utilities/hotkeys/src/format.ts",
+        "zag:packages/utilities/hotkeys/src/index.ts",
+        "zag:packages/utilities/hotkeys/src/key-to-code.ts",
+        "zag:packages/utilities/hotkeys/src/modifier.ts",
+        "zag:packages/utilities/hotkeys/src/normalize.ts",
+        "zag:packages/utilities/hotkeys/src/parser.ts",
+        "zag:packages/utilities/hotkeys/src/recorder.ts",
+        "zag:packages/utilities/hotkeys/src/store.ts",
+        "zag:packages/utilities/hotkeys/src/types.ts",
+        "zag:packages/utilities/hotkeys/src/utils.ts",
+        "zag:packages/utilities/hotkeys/src/validate.ts",
+        "zag:packages/utilities/i18n-utils/src/cache.ts",
+        "zag:packages/utilities/i18n-utils/src/collator.ts",
+        "zag:packages/utilities/i18n-utils/src/filter.ts",
+        "zag:packages/utilities/i18n-utils/src/format-bytes.ts",
+        "zag:packages/utilities/i18n-utils/src/format-date.ts",
+        "zag:packages/utilities/i18n-utils/src/format-list.ts",
+        "zag:packages/utilities/i18n-utils/src/format-number.ts",
+        "zag:packages/utilities/i18n-utils/src/format-relative-time.ts",
+        "zag:packages/utilities/i18n-utils/src/format-time.ts",
+        "zag:packages/utilities/i18n-utils/src/index.ts",
+        "zag:packages/utilities/i18n-utils/src/is-rtl.ts",
+        "zag:packages/utilities/i18n-utils/src/locale.ts",
+        "zag:packages/utilities/i18n-utils/src/track-locale.ts",
+        "zag:packages/utilities/interact-outside/src/frame-utils.ts",
+        "zag:packages/utilities/interact-outside/src/index.ts",
+        "zag:packages/utilities/live-region/src/index.ts",
+        "zag:packages/utilities/popper/src/get-anchor.ts",
+        "zag:packages/utilities/popper/src/get-placement.ts",
+        "zag:packages/utilities/popper/src/get-styles.ts",
+        "zag:packages/utilities/popper/src/middleware.ts",
+        "zag:packages/utilities/popper/src/placement.ts",
+        "zag:packages/utilities/popper/src/types.ts"
+      ],
+      "dependencies": [
+        "@floating-ui/dom@>=1.7.6 <2.0.0-0",
+        "@internationalized/date@3.12.4 >=3.0.0",
+        "csstype@3.2.3",
+        "react@>=18.0.0",
+        "react-dom@>=18.0.0"
+      ]
+    },
+    "date-picker-svelte": {
+      "component": "date-picker",
+      "framework": "svelte",
+      "root": "ark:packages/svelte/src/lib/components/date-picker/index.ts",
+      "files": [
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-clear-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-content.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-context.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-control.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-input.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-label.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-month-select.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-next-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-positioner.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-preset-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-prev-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-range-text.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-root.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-body.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-head.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-header.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-row.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-value-text.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-control.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-header-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-year-select.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/index.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-cell-props-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker.svelte.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/factory/svg-factory.svelte",
+        "ark:packages/svelte/src/lib/components/presence/split-presence-props.svelte.ts",
+        "ark:packages/svelte/src/lib/components/presence/use-presence-context.ts",
+        "ark:packages/svelte/src/lib/components/presence/use-presence.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/environment/environment-provider.svelte",
+        "ark:packages/svelte/src/lib/providers/environment/index.ts",
+        "ark:packages/svelte/src/lib/providers/environment/use-environment-context.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/index.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-format-hotkey.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-hotkey-recorder.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-hotkey-registrations.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-hotkey-store.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-hotkey.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-hotkeys.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-is-key-pressed.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-platform.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/hotkeys/use-pressed-keys.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/index.ts",
+        "ark:packages/svelte/src/lib/providers/interaction/index.ts",
+        "ark:packages/svelte/src/lib/providers/interaction/use-focus-visible.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/interaction/use-interaction-modality.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/locale/index.ts",
+        "ark:packages/svelte/src/lib/providers/locale/locale-provider.svelte",
+        "ark:packages/svelte/src/lib/providers/locale/use-collator.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/locale/use-date-formatter.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/locale/use-filter.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/locale/use-locale-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "ark:packages/svelte/src/lib/utils/render-strategy.ts",
+        "ark:packages/svelte/src/lib/utils/run-if-fn.ts",
+        "ark:packages/svelte/src/lib/utils/tags.ts",
+        "zag:packages/anatomy/src/create-anatomy.ts",
+        "zag:packages/core/src/create-machine.ts",
+        "zag:packages/core/src/index.ts",
+        "zag:packages/core/src/memo.ts",
+        "zag:packages/core/src/merge-props.ts",
+        "zag:packages/core/src/replace-tracker.ts",
+        "zag:packages/core/src/scope.ts",
+        "zag:packages/core/src/state.ts",
+        "zag:packages/core/src/types.ts",
+        "zag:packages/frameworks/svelte/src/bindable.svelte.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/frameworks/svelte/src/machine.svelte.ts",
+        "zag:packages/frameworks/svelte/src/merge-props.ts",
+        "zag:packages/frameworks/svelte/src/normalize-props.ts",
+        "zag:packages/frameworks/svelte/src/portal.ts",
+        "zag:packages/frameworks/svelte/src/reflect.ts",
+        "zag:packages/frameworks/svelte/src/refs.svelte.ts",
+        "zag:packages/frameworks/svelte/src/style.ts",
+        "zag:packages/frameworks/svelte/src/track.svelte.ts",
+        "zag:packages/frameworks/svelte/src/use-sync-external-store.svelte.ts",
+        "zag:packages/machines/date-picker/src/date-picker.anatomy.ts",
+        "zag:packages/machines/date-picker/src/date-picker.connect.ts",
+        "zag:packages/machines/date-picker/src/date-picker.dom.ts",
+        "zag:packages/machines/date-picker/src/date-picker.machine.ts",
+        "zag:packages/machines/date-picker/src/date-picker.parse.ts",
+        "zag:packages/machines/date-picker/src/date-picker.props.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/machines/date-picker/src/date-picker.utils.ts",
+        "zag:packages/machines/date-picker/src/index.ts",
+        "zag:packages/machines/presence/src/index.ts",
+        "zag:packages/machines/presence/src/presence.connect.ts",
+        "zag:packages/machines/presence/src/presence.machine.ts",
+        "zag:packages/machines/presence/src/presence.props.ts",
+        "zag:packages/machines/presence/src/presence.types.ts",
+        "zag:packages/types/src/create-props.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/types/src/jsx.ts",
+        "zag:packages/types/src/prop-types.ts",
+        "zag:packages/utilities/core/src/array.ts",
+        "zag:packages/utilities/core/src/equal.ts",
+        "zag:packages/utilities/core/src/functions.ts",
+        "zag:packages/utilities/core/src/guard.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/core/src/number.ts",
+        "zag:packages/utilities/core/src/object.ts",
+        "zag:packages/utilities/core/src/store.ts",
+        "zag:packages/utilities/core/src/timers.ts",
+        "zag:packages/utilities/core/src/warning.ts",
+        "zag:packages/utilities/date-utils/src/align.ts",
+        "zag:packages/utilities/date-utils/src/assertion.ts",
+        "zag:packages/utilities/date-utils/src/constrain.ts",
+        "zag:packages/utilities/date-utils/src/date-month.ts",
+        "zag:packages/utilities/date-utils/src/date-year.ts",
+        "zag:packages/utilities/date-utils/src/duration.ts",
+        "zag:packages/utilities/date-utils/src/format.ts",
+        "zag:packages/utilities/date-utils/src/formatter.ts",
+        "zag:packages/utilities/date-utils/src/get-era-format.ts",
+        "zag:packages/utilities/date-utils/src/index.ts",
+        "zag:packages/utilities/date-utils/src/locale.ts",
+        "zag:packages/utilities/date-utils/src/mutation.ts",
+        "zag:packages/utilities/date-utils/src/pagination.ts",
+        "zag:packages/utilities/date-utils/src/parse-date.ts",
+        "zag:packages/utilities/date-utils/src/preset.ts",
+        "zag:packages/utilities/date-utils/src/types.ts",
+        "zag:packages/utilities/dismissable/src/dismissable-layer.ts",
+        "zag:packages/utilities/dismissable/src/escape-keydown.ts",
+        "zag:packages/utilities/dismissable/src/index.ts",
+        "zag:packages/utilities/dismissable/src/layer-stack.ts",
+        "zag:packages/utilities/dismissable/src/pointer-event-outside.ts",
+        "zag:packages/utilities/dom-query/src/caret.ts",
+        "zag:packages/utilities/dom-query/src/computed-style.ts",
+        "zag:packages/utilities/dom-query/src/controller.ts",
+        "zag:packages/utilities/dom-query/src/data-url.ts",
+        "zag:packages/utilities/dom-query/src/event.ts",
+        "zag:packages/utilities/dom-query/src/form.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/dom-query/src/initial-focus.ts",
+        "zag:packages/utilities/dom-query/src/mutation-observer.ts",
+        "zag:packages/utilities/dom-query/src/navigate.ts",
+        "zag:packages/utilities/dom-query/src/node.ts",
+        "zag:packages/utilities/dom-query/src/overflow.ts",
+        "zag:packages/utilities/dom-query/src/platform.ts",
+        "zag:packages/utilities/dom-query/src/point.ts",
+        "zag:packages/utilities/dom-query/src/pointer-lock.ts",
+        "zag:packages/utilities/dom-query/src/pointer-move.ts",
+        "zag:packages/utilities/dom-query/src/press.ts",
+        "zag:packages/utilities/dom-query/src/proxy-tab-focus.ts",
+        "zag:packages/utilities/dom-query/src/query.ts",
+        "zag:packages/utilities/dom-query/src/raf.ts",
+        "zag:packages/utilities/dom-query/src/resize-observer.ts",
+        "zag:packages/utilities/dom-query/src/scale.ts",
+        "zag:packages/utilities/dom-query/src/scope.ts",
+        "zag:packages/utilities/dom-query/src/scroll.ts",
+        "zag:packages/utilities/dom-query/src/searchable.ts",
+        "zag:packages/utilities/dom-query/src/set.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts",
+        "zag:packages/utilities/dom-query/src/tabbable.ts",
+        "zag:packages/utilities/dom-query/src/text-selection.ts",
+        "zag:packages/utilities/dom-query/src/timeout.ts",
+        "zag:packages/utilities/dom-query/src/typeahead.ts",
+        "zag:packages/utilities/dom-query/src/types.ts",
+        "zag:packages/utilities/dom-query/src/visual-viewport.ts",
+        "zag:packages/utilities/dom-query/src/visually-hidden.ts",
+        "zag:packages/utilities/dom-query/src/wait-for.ts",
+        "zag:packages/utilities/dom-query/src/when-node.ts",
+        "zag:packages/utilities/focus-visible/src/index.ts",
+        "zag:packages/utilities/hotkeys/src/format.ts",
+        "zag:packages/utilities/hotkeys/src/index.ts",
+        "zag:packages/utilities/hotkeys/src/key-to-code.ts",
+        "zag:packages/utilities/hotkeys/src/modifier.ts",
+        "zag:packages/utilities/hotkeys/src/normalize.ts",
+        "zag:packages/utilities/hotkeys/src/parser.ts",
+        "zag:packages/utilities/hotkeys/src/recorder.ts",
+        "zag:packages/utilities/hotkeys/src/store.ts",
+        "zag:packages/utilities/hotkeys/src/types.ts",
+        "zag:packages/utilities/hotkeys/src/utils.ts",
+        "zag:packages/utilities/hotkeys/src/validate.ts",
+        "zag:packages/utilities/i18n-utils/src/cache.ts",
+        "zag:packages/utilities/i18n-utils/src/collator.ts",
+        "zag:packages/utilities/i18n-utils/src/filter.ts",
+        "zag:packages/utilities/i18n-utils/src/format-bytes.ts",
+        "zag:packages/utilities/i18n-utils/src/format-date.ts",
+        "zag:packages/utilities/i18n-utils/src/format-list.ts",
+        "zag:packages/utilities/i18n-utils/src/format-number.ts",
+        "zag:packages/utilities/i18n-utils/src/format-relative-time.ts",
+        "zag:packages/utilities/i18n-utils/src/format-time.ts",
+        "zag:packages/utilities/i18n-utils/src/index.ts",
+        "zag:packages/utilities/i18n-utils/src/is-rtl.ts",
+        "zag:packages/utilities/i18n-utils/src/locale.ts",
+        "zag:packages/utilities/i18n-utils/src/track-locale.ts",
+        "zag:packages/utilities/interact-outside/src/frame-utils.ts",
+        "zag:packages/utilities/interact-outside/src/index.ts",
+        "zag:packages/utilities/live-region/src/index.ts",
+        "zag:packages/utilities/popper/src/get-anchor.ts",
+        "zag:packages/utilities/popper/src/get-placement.ts",
+        "zag:packages/utilities/popper/src/get-styles.ts",
+        "zag:packages/utilities/popper/src/middleware.ts",
+        "zag:packages/utilities/popper/src/placement.ts",
+        "zag:packages/utilities/popper/src/types.ts"
+      ],
+      "dependencies": [
+        "@floating-ui/dom@>=1.7.6 <2.0.0-0",
+        "@internationalized/date@3.12.4 >=3.0.0",
         "csstype@3.2.3",
         "svelte@>=5.29.0"
       ]
@@ -1892,6 +2342,570 @@
         "react": ">=18.0.0"
       }
     },
+    "ark:packages/react/src/components/date-picker/date-picker-clear-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-clear-trigger.tsx",
+      "upstreamHash": "f149e042e982f53798521cc73bed9975ff4d373de560915461462aae6bdf0a27",
+      "generatedHash": "0101907e04ad434f3120c55d44b88df5d76cd33930cf207682b0be209a776bce",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-content.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-content.tsx",
+      "upstreamHash": "844f8ee0bfbfa08ee38e9f6203e5e5c290aba59a4b165fd0293b51e7ef30dfc5",
+      "generatedHash": "429e15f317e77d5c28027ce987fce7d32d5411261110e934bc511f0ec3385564",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/presence/presence-gate.tsx",
+        "ark:packages/react/src/components/presence/use-presence-context.ts",
+        "ark:packages/react/src/utils/compose-refs.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-context.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-context.tsx",
+      "upstreamHash": "5442d58851735ff82fed279af278c62b47ebe3163c67e48731383fafea6cf6c9",
+      "generatedHash": "4394876dcbae48cbf287dbbf51486d4c2c18b897bf4b5c00a6ae28605aec47d4",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-control.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-control.tsx",
+      "upstreamHash": "ac1e8dde5d531d11d8f6a062e0f906d9ded5c00dc8e5997cc7016c2d62681d6e",
+      "generatedHash": "58a6a4fc195dc4672e0231a91eee029406cf9aa7c77b4a8f96ad85ff40c397f3",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-input.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-input.tsx",
+      "upstreamHash": "a39ab88c1b369286e9eeb585ce16ef4b532837a567479df4190a60d179df99ae",
+      "generatedHash": "2a337cc558a83b2fb63500f92f7aa96d39449ec2ace1780819b2a40f2e8aec00",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-label.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-label.tsx",
+      "upstreamHash": "5b554af6855031a578396f05c69c5093b2c033a8c99fd7cf7d8363a757c5c6a0",
+      "generatedHash": "372a8f006f7909315acd3fc2fd7602a2febdb5d0639c8cba3f7c67bc32c88520",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-month-select.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-month-select.tsx",
+      "upstreamHash": "8268a237df8b2fb7324f24d42c7fd6747072b692d863405349190e8210170003",
+      "generatedHash": "e179b753c9296015a48ac48bfcd74e8fd01cb871b4e604ceab9f4edccb34060d",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-next-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-next-trigger.tsx",
+      "upstreamHash": "e34eb3e3852a616884be60447c6bd9ff21c4c80880e91307f131a6790ac25eb5",
+      "generatedHash": "4a78361e05c7a8c26f6a97315e4217f33e47258da492c9b28e48f91483127dc2",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-positioner.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-positioner.tsx",
+      "upstreamHash": "d884d3f006933d52ba67b3dfcd9a9471c025455bb7cd9afc6cea4a109e8acff5",
+      "generatedHash": "1b37f550699621db91371ccef11c30d7308cbe18b64e2f3fe9555291ad221bfa",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/presence/use-presence-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-preset-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-preset-trigger.tsx",
+      "upstreamHash": "1ec3321581dd59230a85f106673199c9516258cb4fa76f59f8c2eb8fb8012e71",
+      "generatedHash": "6da95afd622fcae38a020f5e9c866a2e620479db2cb00d8c681e1093906e509a",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-prev-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-prev-trigger.tsx",
+      "upstreamHash": "28211d994711e7a85335c72dae0c800f4b98cb8641ee7174994e7a02fa16fd39",
+      "generatedHash": "5d9646707307b98e7d5cec24c1c6d64534b63cd96a3b66523be38db313cf3bb9",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-range-text.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-range-text.tsx",
+      "upstreamHash": "2debd2107c4c97efe358ed371050741fcea197f86c25e63a0db68c09e1338721",
+      "generatedHash": "e6a36d441a5a1082041018a5e95e309684018e11bd41ccbd82c560169b91c25e",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-root-provider.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-root-provider.tsx",
+      "upstreamHash": "c04e752e85a3f1b14296d5d0cce95a269b067afcc335b51d9425ab7481b8ab08",
+      "generatedHash": "f9c484c9cf0f18748f33e58f6a3c6dbf95008949b4b521e4073ed99e9eb6063a",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/presence/split-presence-props.ts",
+        "ark:packages/react/src/components/presence/use-presence-context.ts",
+        "ark:packages/react/src/components/presence/use-presence.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-root.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-root.tsx",
+      "upstreamHash": "e4e5ef969cfff5d5f437461828e55796d78f320e022199fb51b2241ebef6d171",
+      "generatedHash": "cf2ed4f50f33a2b2a0a58e211c07e53dd03a2dc60924435238d906a88e5aa0a7",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/presence/split-presence-props.ts",
+        "ark:packages/react/src/components/presence/use-presence-context.ts",
+        "ark:packages/react/src/components/presence/use-presence.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table-body.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table-body.tsx",
+      "upstreamHash": "80ca1420ce04b933131ed6b067a9155ec82a0a0838b36259ea4b955bfda62e28",
+      "generatedHash": "ee7c6f2e494648852581c782c4913e19d79154df8cc3998be6817906b347d522",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table-cell-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table-cell-trigger.tsx",
+      "upstreamHash": "67b99afac7e086dde21dd374a4f17292048bf05cf37567a2652dd54a961b03d2",
+      "generatedHash": "44a20613887a54bc10dcde5609c9cb5e557a9ee27d0796e11e5a9923e0b9caf4",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-cell-props-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table-cell.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table-cell.tsx",
+      "upstreamHash": "cc43d9f04ca14fbafca1a8f69ecd7b590d2f9b2a895b073c53baeaf88e5ebd57",
+      "generatedHash": "0a576777abeb2d6d3a40b9d16a1038ea44fee9c86f83619b5c73b6e363a2957a",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-cell-props-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table-head.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table-head.tsx",
+      "upstreamHash": "ea91243cc6121db61509ee9819b738548ec29b7af6fbd87ea757a5399ec4ae04",
+      "generatedHash": "1396155bf014af17ea3049d16c3fe3dc52f19f09149db25f35ae501573ad80b1",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table-header.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table-header.tsx",
+      "upstreamHash": "c680fcc4bca6ec341c222478cb81cfda5f9271550c2a28154fde72ec3a5c5d91",
+      "generatedHash": "9d4da7ab4a12344b5e4efb8904caa17e022dfe6e42130f8251843b6c7ab0fb31",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table-row.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table-row.tsx",
+      "upstreamHash": "d315bde26e6049d0ab7dbc4a56a0405341aa483c5f873cf5b300c0c2c0c258af",
+      "generatedHash": "3cb7962467b4c698c9d5ff4bc26c5d4dcc06e0d090a9451e8775318acc780c4e",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-table.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-table.tsx",
+      "upstreamHash": "3c1af97eb98b15298e4e8430bf5e5a84d395359f0df74ba35bb47987eb57ba20",
+      "generatedHash": "19cc2ec20b20abd9ef85f9f800ba20cec4bfa83ffeaf082a1dece807e6c81bd8",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-trigger.tsx",
+      "upstreamHash": "f516f7281ce89afd570a78d141cdad9e093dd1489a9b0645a93025fe48c17786",
+      "generatedHash": "d8c1b2919566ec8e77660916f7e6d9635ba0b7fe835ffb256caaacdf3fb137c5",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-value-text.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-value-text.tsx",
+      "upstreamHash": "c1ec71bd05298a0950c23db45660382b99039f552ca0dbed88eefcf017f87279",
+      "generatedHash": "ebe984d7c2f47030a7d0a424393c8a23266d2cab7ff41a8e24bcb6a7380c9111",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/types.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-view-control.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-view-control.tsx",
+      "upstreamHash": "f67a8c6c5a9d1c8148c11eea634bb4e2dcbaa09bbb4e23cbd0f5bc056a3ba362",
+      "generatedHash": "ce3f07a844012324c8423d5d8e60a1c6d66d1ee8cf07416b61f50f719ee76f58",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-view-trigger.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-view-trigger.tsx",
+      "upstreamHash": "b3160ed7187cd57a76a356885180ee716c06e4a842d3704e9a96b80b1a90d371",
+      "generatedHash": "51c2541f1dd757371bf478a4a03598abce9cfc80f4c60e904cc8ef68861307f9",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-view.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-view.tsx",
+      "upstreamHash": "ac2dad907e14b5e307cc5b75f59dd4f5620d965259ebfe9c33653436a21a2bde",
+      "generatedHash": "35280b9befbf2bbd33724242e59d3a381d23ec098d3ec17ad0eff5cdc1b42945",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-week-number-cell.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-week-number-cell.tsx",
+      "upstreamHash": "f7507cba8eea6520c49fdaddd27775cd0ff031651089857458d4a8e4891d3679",
+      "generatedHash": "aed617bb8104cca7e42e192d0ac6b7d68018016d78f479be9b8285522fa7e6f9",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-week-number-header-cell.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-week-number-header-cell.tsx",
+      "upstreamHash": "69ee3a3a2585dafd33487a866c65580b6945560736e5a191f376aea61aa184aa",
+      "generatedHash": "cc4839e6a47b2632df3bf0d583360afd6049d219a1b00565ea87212bd070e723",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker-year-select.tsx": {
+      "destination": "packages/date-picker/src/react/ark/date-picker-year-select.tsx",
+      "upstreamHash": "785cc31e14b69e4e1a5eaacc40d831d4f9022e7a150147d4814650e92f2982ca",
+      "generatedHash": "e60fba3748dde0377efdc7bd89e83b2c13357fbff974c17ed95bbb04aeca9687",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/date-picker/date-picker.anatomy.ts": {
+      "destination": "packages/date-picker/src/react/ark/date-picker.anatomy.ts",
+      "upstreamHash": "c5dd0353b956a66eff48606a61a2695dcc7227ec761f8e77cdbc534c85dcbd4e",
+      "generatedHash": "f20b2effc8dabafe6ba75d24092abf9323e556bbd9e093c6183ff3cedd63ffed",
+      "dependencies": [
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/date-picker.ts": {
+      "destination": "packages/date-picker/src/react/ark/date-picker.ts",
+      "upstreamHash": "15c5f007934b06aa650cc1f945d89a4742c9a13a0987dc97cd863950bfc7a934",
+      "generatedHash": "7d8436ace9111aa8b308508c3c8098cd233bad807ca290a48d9ad4d2880509d1",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/date-picker-clear-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-content.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-context.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-control.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-input.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-label.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-month-select.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-next-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-positioner.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-preset-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-prev-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-range-text.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-root-provider.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-root.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-body.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-cell-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-head.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-header.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-row.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-value-text.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view-control.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-week-number-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-week-number-header-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-year-select.tsx",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/index.ts": {
+      "destination": "packages/date-picker/src/react/ark/index.ts",
+      "upstreamHash": "bec09a39c850787f2d66dd0f0bd86f3b79c3d09cfa840ecb4d7d78d82eef3172",
+      "generatedHash": "6b85a858649bb6d757bce3a5cb1da82d168ea9079244045dde2af166630c628f",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/date-picker-clear-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-content.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-context.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-control.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-input.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-label.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-month-select.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-next-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-positioner.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-preset-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-prev-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-range-text.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-root-provider.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-root.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-body.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-cell-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-head.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-header.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table-row.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-table.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-value-text.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view-control.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view-trigger.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-view.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-week-number-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-week-number-header-cell.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker-year-select.tsx",
+        "ark:packages/react/src/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/react/src/components/date-picker/date-picker.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/react/src/components/date-picker/use-date-picker.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/use-date-picker-context.ts": {
+      "destination": "packages/date-picker/src/react/ark/use-date-picker-context.ts",
+      "upstreamHash": "54baed3d45b2c9b59f00318ddb6765c6ba103ab6a48ae43f179952c25f5f6af2",
+      "generatedHash": "caf8e29510cdd3de9a1500207cd51cf81224e43677ecf66251f4378c8353cc9a",
+      "dependencies": [
+        "ark:packages/react/src/components/date-picker/use-date-picker.ts",
+        "ark:packages/react/src/utils/create-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/use-date-picker-table-cell-props-context.ts": {
+      "destination": "packages/date-picker/src/react/ark/use-date-picker-table-cell-props-context.ts",
+      "upstreamHash": "8c399421c6ba1f7f9112f8f3e6fe5d17dabd6e5e128a0c862d83897c11e27e17",
+      "generatedHash": "822813270726d013eb4304cb2987b127ab5297066e5311d355d8afce7cd53bff",
+      "dependencies": [
+        "ark:packages/react/src/utils/create-context.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/use-date-picker-table-props-context.ts": {
+      "destination": "packages/date-picker/src/react/ark/use-date-picker-table-props-context.ts",
+      "upstreamHash": "dc464da6024625db750ac486514e68c56ef8009d0466fe40d2bde2377832d8c4",
+      "generatedHash": "9c830e0a8c0f6588eaee925606ff5d1963db99122c69f980dcf8741349d7ddcc",
+      "dependencies": [
+        "ark:packages/react/src/utils/create-context.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/use-date-picker-view-props-context.ts": {
+      "destination": "packages/date-picker/src/react/ark/use-date-picker-view-props-context.ts",
+      "upstreamHash": "347895d32ce7ef13afa3f22a8deb6e0ba706cf7ac3528d81fa8ed4106c271d2a",
+      "generatedHash": "3661752b738eb971fad1af1238f097915dea946507f021ef7311f9841becd1c2",
+      "dependencies": [
+        "ark:packages/react/src/utils/create-context.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/date-picker/use-date-picker.ts": {
+      "destination": "packages/date-picker/src/react/ark/use-date-picker.ts",
+      "upstreamHash": "caaf59b987270e4f7894e3b06f7f6dc9e2ac672fb52a45d44150a6ab30e3d72d",
+      "generatedHash": "792c659646090da43b502ebc93be6bc72b2cf31fe2e672b313e0525a294857be",
+      "dependencies": [
+        "ark:packages/react/src/providers/index.ts",
+        "ark:packages/react/src/types.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
     "ark:packages/react/src/components/dialog/dialog-backdrop.tsx": {
       "destination": "packages/dialog/src/react/ark/dialog-backdrop.tsx",
       "upstreamHash": "ec2df149b61c824b80f674715dcab51160e7973a56f42a7c3227a0bcb9a34038",
@@ -3308,6 +4322,539 @@
         "ark:packages/svelte/src/lib/types.ts",
         "zag:packages/frameworks/svelte/src/index.ts",
         "zag:packages/machines/checkbox/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-clear-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-clear-trigger.svelte",
+      "upstreamHash": "816aa769029b10f0e20bdb045270cc6358f93fa9702ba1749362b08a117e7b44",
+      "generatedHash": "2106ff16e1e3d05a38ea557a255071fbb41001ee25ddd9e946891e2e707f723a",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-content.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-content.svelte",
+      "upstreamHash": "ae7821134a4fa072822723cd4572099e87007a4670ddd2f5659827aef5afb160",
+      "generatedHash": "b663a46b5de81281f65ebb47dbc46b12e485bc43a4629c3184bc58b6a65b7639",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/presence/use-presence-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-context.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-context.svelte",
+      "upstreamHash": "c18ea611b593aeb73551ba98dc9ce19847232fe4e632208ce99b3a9a567c21cc",
+      "generatedHash": "8b3d57b4079bcfbf7ac9eb875cbe49a3aafe580a1092dfcff91bc59de99b291e",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-control.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-control.svelte",
+      "upstreamHash": "8815bbb6d060baceae748826ce92d3e96b6cfbc1290fde31c2c7bd68922030fd",
+      "generatedHash": "6fa9640579fb3d252d4330e289e96101714a888abbaaf3efb9dc976b26c6f32f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-input.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-input.svelte",
+      "upstreamHash": "37ca4f27fd66cc41aa38603ee3837c56d1fa4e436e75b9d62243c2fdcef73a6b",
+      "generatedHash": "02b31f560d2df34db130375a6c4d5baf57e93e37262ad5f93f29f5cbd886e0bf",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-label.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-label.svelte",
+      "upstreamHash": "3669f7d69acb2475b39c747fde9347eddabc4915862ad0c1415d66720dca731e",
+      "generatedHash": "4c027a7a11e5a1c7a95554fc804a04598727b442f356751b2d4b392c461f222c",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-month-select.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-month-select.svelte",
+      "upstreamHash": "c1e056ec5740db4843b2b32fb826bb93eb13d68d4a43e98a4062d5a055492c6d",
+      "generatedHash": "7681b0b930ede45c177fa291f43cf62883f030ee85da6cb2f669541686700eab",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-next-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-next-trigger.svelte",
+      "upstreamHash": "2ca83173596f8a40bb5774bd42a15185279df7f2a462ce5b7a42221c74fe0081",
+      "generatedHash": "516280cdc3f6ad4c2dbc07f26b520e16adb086764b55d1c3f4d32bb9207481ec",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-positioner.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-positioner.svelte",
+      "upstreamHash": "e5197dea4090880d366a31f0d8f3bf27ccfe513608a1df95ecac45f4713868e5",
+      "generatedHash": "30d796d6e529ff3dba0512299b1a682f12a29b7256841d07b2bbcb767bdba558",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/presence/use-presence-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-preset-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-preset-trigger.svelte",
+      "upstreamHash": "3e95dccbe8dc8dca0c390c4d490af32a0bf46fec731a5521a4439075611f69bf",
+      "generatedHash": "832ccc1169ca579db715134ebdc74acdd5108ca3241ab73ea3b669ad5c8baca4",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-prev-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-prev-trigger.svelte",
+      "upstreamHash": "72e5cf3a7abf28af09ffaa5a64c3c62d26b22c25ff44d92277237937be3f747d",
+      "generatedHash": "8d8af335eaa1b606ebbb560af6e39616051350e31e571d80925b96989af3e715",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-range-text.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-range-text.svelte",
+      "upstreamHash": "1b1e5d7a9eb334184bd4add178285ed6e9f4e831f17992c6695ef6dd37461234",
+      "generatedHash": "5b81b136f33fadab7cb5d32029ded0aeeecc822f2dffcbdae5db29f083ddcdd1",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-root-provider.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-root-provider.svelte",
+      "upstreamHash": "720752ce23cbd951e63fb37af876abe535f57615be4cf3acc9ba95cd5d7a149c",
+      "generatedHash": "f5a8381138f78ef06d0d2442404eee1e6dd151d67b9ca8a8f98d74a5bf77c5f8",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker.svelte.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/presence/split-presence-props.svelte.ts",
+        "ark:packages/svelte/src/lib/components/presence/use-presence-context.ts",
+        "ark:packages/svelte/src/lib/components/presence/use-presence.svelte.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-root.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-root.svelte",
+      "upstreamHash": "a42e74b4ed048e876e815883997548919e63f33f417b9cd24a8376e082e06b99",
+      "generatedHash": "c8861241b4ee93024f09b61d4002f1108bdc7abd5bbb6731ae02a33653ca6a2f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker.svelte.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/presence/split-presence-props.svelte.ts",
+        "ark:packages/svelte/src/lib/components/presence/use-presence-context.ts",
+        "ark:packages/svelte/src/lib/components/presence/use-presence.svelte.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-body.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table-body.svelte",
+      "upstreamHash": "286eb5fd6d5d39c8c04cd137049cdec83255bd0c963a2e1848d9a5f8b714c795",
+      "generatedHash": "46674a91db6c6f78bafcfa1ffd84bf66c4af48440d12ef4f2ac3be0ac804395d",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table-cell-trigger.svelte",
+      "upstreamHash": "30443187c6eac2a364146612d4b2ca21ffdeb7159b3dbc1baef268a468fbae60",
+      "generatedHash": "08ae87c35a6ce3021037e429ffc1c0305f389f8db7cb641d9b413f4124bf7661",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-cell-props-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table-cell.svelte",
+      "upstreamHash": "d25d8f0d31fdb3fc1d9d3c690c04ea7fef7d5db3e407276c9eb532307b1ff0a0",
+      "generatedHash": "6a1491cd208cc017907da549c704c8ddd2db3a6019dcaa1f6637b3484f6e756d",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-cell-props-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-head.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table-head.svelte",
+      "upstreamHash": "837bac62a97500fcd98d6b61337eade1856bf84da520692b5558798a58399973",
+      "generatedHash": "547be853859aba5197cdfe1557d79c56a4440a12fa15bc3412b60b7c469a0ffa",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-header.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table-header.svelte",
+      "upstreamHash": "a15feeab73bf8d89b1572a75b843972170ab99638591bc9dd19fa5fe52490c25",
+      "generatedHash": "ed1b4262001b874c4bdbeba3831c3a65df742ef30bef6537b015982a40cd800a",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-row.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table-row.svelte",
+      "upstreamHash": "c11037f630f05c6c20dad6320eff660fe8f79956ee73bc4e9a60d249542d7bbf",
+      "generatedHash": "98e34c0730fd6e6ab06bdd422d095d023e055eda261f43301e749fd59e750da1",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-table.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-table.svelte",
+      "upstreamHash": "f20be8c250b83c787c7995ff9d6f46c7148280a8557057d51e6706012505a82c",
+      "generatedHash": "31fce51de7c7da46b21dcc5bdf740a8f98dc23eae1ce41b89364a5a7b1e5a17f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-trigger.svelte",
+      "upstreamHash": "f8d6662bb0f84295e05af1358fe23899664d7667674c0c008711a9bbb35409f8",
+      "generatedHash": "5a069fa3631e8bdaab086832436dc50da7588a6e89b318467bd9d5deaab15e76",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-value-text.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-value-text.svelte",
+      "upstreamHash": "031551935fda3dd4879e56e0efc2e20320cd0671acd1ddcea6985b1ae989c071",
+      "generatedHash": "205b351b44fb22f5a43ed94a4364fb14b8157b798c025d9a07c7d252b0ed4b14",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-control.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-view-control.svelte",
+      "upstreamHash": "1317bab94410e219167f64d7a764dfe8acaf13a5f23aae8b2a02d6e907301433",
+      "generatedHash": "9cbddda4b121b26dcf971287082fdc84f0b5ef42d35035adaef66b9a1dfd362c",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-trigger.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-view-trigger.svelte",
+      "upstreamHash": "cab885b27ffbd2b13b75bc650675ed5d8bb668804bb835266ee5b291a581a1fc",
+      "generatedHash": "a63f44d068201d6e3062649adf0015c327b81a5ac5aaa37ad1ed228338c4ed63",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-view.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-view.svelte",
+      "upstreamHash": "502f85596d9154527a5301f9b989db8057be9921705e5a9808b22eb8a23d0bcb",
+      "generatedHash": "6625c519e5a3720b4984665474eaf8a2cd9232bdef527787184401c0ff5511d9",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-cell.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-week-number-cell.svelte",
+      "upstreamHash": "2862e8a92e5434514313c76e44b2401e7c17264131441c2d90c9df7c60b17a4a",
+      "generatedHash": "35506b328550c968479533dc47af063e39b0176c4192de2a1fe14257559166f5",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-header-cell.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-week-number-header-cell.svelte",
+      "upstreamHash": "d7416a8164251d43e1bbaa67feb85c317fab7b217dcaa0a32a801cad3f6a7bd1",
+      "generatedHash": "442e399afeacf1f247bb863b4c35cc72bd150d7683c06a455ed9a34d619e9156",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker-year-select.svelte": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker-year-select.svelte",
+      "upstreamHash": "7d1a4c9a036174c6a3db359f148b0eb6675c09a2eb7ee20339a1ebac9c475278",
+      "generatedHash": "7b41ef89c8078ca7393b0c6380318a979db4dfad3c4348bacfaa6f2a18ff2892",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker.anatomy.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker.anatomy.ts",
+      "upstreamHash": "9cd0a2c0d3f11006af9a27f95b0215a3e91593efb1d76ed3b5a6eb45406a305f",
+      "generatedHash": "beba8fb2b04ed2f8c7fb0e38613ecfabd8a441d3018ab63857175b1115ebfe5c",
+      "dependencies": [
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/date-picker.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/date-picker.ts",
+      "upstreamHash": "47ec5b865bc028a659eef8f18fa98ef0eed1bba9496e776f16737b10bf705419",
+      "generatedHash": "88ef506dafe6d8a17230a80c5d1d3efb9eb4938bf2bde6e5ef84b44686300ec0",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-clear-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-content.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-context.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-control.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-input.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-label.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-month-select.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-next-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-positioner.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-preset-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-prev-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-range-text.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-root.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-body.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-head.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-header.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-row.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-value-text.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-control.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-header-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-year-select.svelte",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/index.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/index.ts",
+      "upstreamHash": "351d1d8e06a9111eabaa76270536b5fa701ae4ed671c65c16bf303f394d0203d",
+      "generatedHash": "eedded9c4aaf8ff94209f11262f29f32663d406e00d0e7ca9496624f14ceba49",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-clear-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-content.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-context.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-control.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-input.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-label.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-month-select.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-next-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-positioner.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-preset-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-prev-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-range-text.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-root.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-body.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-head.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-header.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table-row.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-table.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-value-text.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-control.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-view.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-week-number-header-cell.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker-year-select.svelte",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/date-picker.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts",
+        "ark:packages/svelte/src/lib/components/date-picker/use-date-picker.svelte.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-context.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/use-date-picker-context.ts",
+      "upstreamHash": "a5b9e07ed5d797e2b1e77def6b295225ecb4e48d5c198a2280e60cc854c84360",
+      "generatedHash": "3a83c2ceb6c67ecd80683b9ac5c222691293a84135f3f972ba215dca6683e834",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-cell-props-context.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/use-date-picker-table-cell-props-context.ts",
+      "upstreamHash": "f34392964b60e51a6ae82daa6d831c36044a5bad5f6ddf325084e050dbf378a8",
+      "generatedHash": "5014b5a78828020f2a9aea7cb6c9bed6e979f321a62299b18d88b1755c6cd131",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-table-props-context.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/use-date-picker-table-props-context.ts",
+      "upstreamHash": "bc560fc97f0872932ece5ca877603167eb0464e19238f0bec961affbede8ff7e",
+      "generatedHash": "8ba89150c6cbf4f5348e4f27174209fb8f40476e18edfb6f7a7794b1e57f7f68",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/use-date-picker-view-props-context.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/use-date-picker-view-props-context.ts",
+      "upstreamHash": "53f3c91826a4afa8a74cc5d50d62d6ffd4c81c77032f8e9bcf7f8db8e9ee4999",
+      "generatedHash": "9fdee623301888107ffa4891bfba86dc093905f1995f18f20a86807c78694f66",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/machines/date-picker/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/date-picker/use-date-picker.svelte.ts": {
+      "destination": "packages/date-picker/src/svelte/ark/use-date-picker.svelte.ts",
+      "upstreamHash": "f27ba2afa792b5ff40e7cbb9d5e526bc282de74f1efef1ea526e37c33a551301",
+      "generatedHash": "06a4eb9fe2f665bb1b2ece797f1e3605e8bec67aba99e3903e18fb2d075c06ac",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/providers/index.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/date-picker/src/index.ts",
         "zag:packages/utilities/core/src/index.ts"
       ],
       "external": {}
@@ -4796,6 +6343,135 @@
       ],
       "external": {}
     },
+    "zag:packages/machines/date-picker/src/date-picker.anatomy.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.anatomy.ts",
+      "upstreamHash": "0be67483cabb8280a917c152c2eb1f69446a00391f0b78810b7bb168f1913445",
+      "generatedHash": "d12bbb157322d2cc76d34224f6702dbd6f4375376422a48547a5dcb0014a545e",
+      "dependencies": [
+        "zag:packages/anatomy/src/create-anatomy.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/date-picker/src/date-picker.connect.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.connect.ts",
+      "upstreamHash": "915f0be7b31d76935f8b2b96ec6552f0ccfabd24e10230a254db5bacd73e98ed",
+      "generatedHash": "9c3011f0536afa65181c92e4097ce69275a9ebf03164732307fef6bd7567e2e1",
+      "dependencies": [
+        "zag:packages/machines/date-picker/src/date-picker.anatomy.ts",
+        "zag:packages/machines/date-picker/src/date-picker.dom.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/machines/date-picker/src/date-picker.utils.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/date-utils/src/index.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts",
+        "zag:packages/utilities/popper/src/get-styles.ts",
+        "zag:packages/utilities/popper/src/placement.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/machines/date-picker/src/date-picker.dom.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.dom.ts",
+      "upstreamHash": "ce703e668e0390d9dc964749059d369a6a94d0a9c733dbdae1d00c8493293ac6",
+      "generatedHash": "a07829f8eed3d303335281365e1ba82a635017ce2ee4ed9694af8f4a7bf57514",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/utilities/dom-query/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/date-picker/src/date-picker.machine.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.machine.ts",
+      "upstreamHash": "11dd9a1d089f54fce4d6d0becfaf616ba6f9f927810ef4a67e1ee33db0e984a0",
+      "generatedHash": "24bb9ab86c09e779db8b595f8156a31f1ba172d2abb3e033f3a1df17f66d4572",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/date-picker/src/date-picker.dom.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/machines/date-picker/src/date-picker.utils.ts",
+        "zag:packages/utilities/date-utils/src/index.ts",
+        "zag:packages/utilities/dismissable/src/index.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/live-region/src/index.ts",
+        "zag:packages/utilities/popper/src/get-placement.ts",
+        "zag:packages/utilities/popper/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/machines/date-picker/src/date-picker.parse.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.parse.ts",
+      "upstreamHash": "cf8e404a90011da83cb0e7834bb51da083769b8fb64909fca05ba7e3b7d1cd2d",
+      "generatedHash": "b3377bcbd8f07488b5ea75316dc12561462bd53fd432aa7a8c3797232e0c5047",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/machines/date-picker/src/date-picker.props.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.props.ts",
+      "upstreamHash": "19e5837e3c54aa21754e0d4ca09d95f5c33140808b159857497b29baa333f03a",
+      "generatedHash": "e6be5c5dbc213042c08a0a7c3d1196973e44318a37e791bd33d13420869d9a36",
+      "dependencies": [
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/date-picker/src/date-picker.types.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.types.ts",
+      "upstreamHash": "253e4bab10d24ae3d78cd5edf6dd394cdfe62531e28a9d6d75a16d99691a5a72",
+      "generatedHash": "b46ab0cba15286f2772e1b5ca649bdaad0f3cd8b116ae6bdc77c4e9c7c331e76",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/date-utils/src/types.ts",
+        "zag:packages/utilities/live-region/src/index.ts",
+        "zag:packages/utilities/popper/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/machines/date-picker/src/date-picker.utils.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/date-picker.utils.ts",
+      "upstreamHash": "0ebb4294f89437155d89d08d0cdf549a90e4ba3b6542b7f3b26334836200e6c7",
+      "generatedHash": "8ed82f883d0814be374670116f01234e6fc42ea93bf2cc03ed1b5318841acf73",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/date-utils/src/index.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/machines/date-picker/src/index.ts": {
+      "destination": "packages/date-picker/src/common/zag/date-picker/index.ts",
+      "upstreamHash": "5b841e582d9bdef23b6472b391cd991b2e18d404c5c924ccfa625e20fde1cde5",
+      "generatedHash": "681ca1c49ead12bef993b1b3c8cc1e34e269f33807f056bf35129b24236134e4",
+      "dependencies": [
+        "zag:packages/machines/date-picker/src/date-picker.anatomy.ts",
+        "zag:packages/machines/date-picker/src/date-picker.connect.ts",
+        "zag:packages/machines/date-picker/src/date-picker.machine.ts",
+        "zag:packages/machines/date-picker/src/date-picker.parse.ts",
+        "zag:packages/machines/date-picker/src/date-picker.props.ts",
+        "zag:packages/machines/date-picker/src/date-picker.types.ts",
+        "zag:packages/utilities/dismissable/src/index.ts"
+      ],
+      "external": {}
+    },
     "zag:packages/machines/dialog/src/dialog.anatomy.ts": {
       "destination": "packages/dialog/src/common/zag/dialog/dialog.anatomy.ts",
       "upstreamHash": "487f25e9beb0f7797c21fabf2b91fca44bfd0c99178d562372ea91eb57c82903",
@@ -5213,6 +6889,186 @@
       "generatedHash": "3d190b9381cf7cb6688e334048f05880cfef8d17ffe1cd4c577a87978d55352b",
       "dependencies": [],
       "external": {}
+    },
+    "zag:packages/utilities/date-utils/src/align.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/align.ts",
+      "upstreamHash": "6e6b8a0f06c9de329774b0392581fb61ebb2d5ee65bcd144c115630094cf760b",
+      "generatedHash": "1db57868df34822d13e0f4910ff98caa3692c4f584be55485722b465b493c1ef",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/constrain.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/assertion.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/assertion.ts",
+      "upstreamHash": "d11a57ae4a418613a08d5edc180af6fce3292c857ef0a70047b2ceae8aafdb72",
+      "generatedHash": "e825dfb43ac23c7a3d3c1ffe27d9825179b63e1162cb7b229b86610897c27af8",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/constrain.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/constrain.ts",
+      "upstreamHash": "3df35b2c113225b585a34029aecd5a52235b81699d966630661b1514d58030a4",
+      "generatedHash": "3df35b2c113225b585a34029aecd5a52235b81699d966630661b1514d58030a4",
+      "dependencies": [],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/date-month.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/date-month.ts",
+      "upstreamHash": "d75b7d13103c41ac2ca1ad5a2283d7ecc29ba8752286a38d4591d64c80794143",
+      "generatedHash": "d75b7d13103c41ac2ca1ad5a2283d7ecc29ba8752286a38d4591d64c80794143",
+      "dependencies": [],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/date-year.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/date-year.ts",
+      "upstreamHash": "eaef0d8a97dc713970572f23a6251f54524eca12908dced1fe6274533c3b13cb",
+      "generatedHash": "eaef0d8a97dc713970572f23a6251f54524eca12908dced1fe6274533c3b13cb",
+      "dependencies": [],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/duration.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/duration.ts",
+      "upstreamHash": "853759b7c884c29cb183d770a0b39c05964ec707fa5b55ba95870c1b67d079c8",
+      "generatedHash": "5d35074f9fd2fe9b57d1dfe0382397e838b4fa658f38ce1280d21cbe29bdbed3",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/format.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/format.ts",
+      "upstreamHash": "76de562047878c37abc92928d4d5aa7df6cd1785988b3f4dcd8abe0676c9c95b",
+      "generatedHash": "c3254b0f2edd3d48ec9b730f4b4933af71ca56b943fc5ef5371367a7a93383a2",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/formatter.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/formatter.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/formatter.ts",
+      "upstreamHash": "1c5a615ed7794e8551ad5d05da81756fd10b6c6ed1f6a9d48453f333c645d4e4",
+      "generatedHash": "5687927120068ac05039e73c3b01a89d205796588da8a638fa517197051690bf",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/get-era-format.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/get-era-format.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/get-era-format.ts",
+      "upstreamHash": "fce07b83f9c61e4a3554aee47b0269f7dcaa3c39123297a7c2645d4b8abe1f92",
+      "generatedHash": "5f005d3a58f3477a9a0775cac91b7b67ad69d6a3deae0192557d0038a1f61fb4",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/date-utils/src/index.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/index.ts",
+      "upstreamHash": "eb7c0417efcccf38a1c63c5b7ebc757d12be28c10ada165a9d532979826b5296",
+      "generatedHash": "e8a72011f3eca15b75d3bde888d31d65d296642d6f12b16e89c124e1c276cb3b",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/align.ts",
+        "zag:packages/utilities/date-utils/src/assertion.ts",
+        "zag:packages/utilities/date-utils/src/constrain.ts",
+        "zag:packages/utilities/date-utils/src/date-month.ts",
+        "zag:packages/utilities/date-utils/src/date-year.ts",
+        "zag:packages/utilities/date-utils/src/duration.ts",
+        "zag:packages/utilities/date-utils/src/format.ts",
+        "zag:packages/utilities/date-utils/src/formatter.ts",
+        "zag:packages/utilities/date-utils/src/locale.ts",
+        "zag:packages/utilities/date-utils/src/mutation.ts",
+        "zag:packages/utilities/date-utils/src/pagination.ts",
+        "zag:packages/utilities/date-utils/src/parse-date.ts",
+        "zag:packages/utilities/date-utils/src/preset.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/date-utils/src/locale.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/locale.ts",
+      "upstreamHash": "638b776ca7a386b2314b266a629b9627efe3938bab701431edbf348c3e2d44b4",
+      "generatedHash": "638b776ca7a386b2314b266a629b9627efe3938bab701431edbf348c3e2d44b4",
+      "dependencies": [],
+      "external": {}
+    },
+    "zag:packages/utilities/date-utils/src/mutation.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/mutation.ts",
+      "upstreamHash": "e7441dd5ff23710859eec643eb80655eb1de202c0544ec0290bec8de9a55b2cd",
+      "generatedHash": "cab057e4b2dde8a32af3d8c9a07d83c6c2f26b0af06c2c8ca7bbeb7d5a4568b1",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/constrain.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/pagination.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/pagination.ts",
+      "upstreamHash": "88ac67a78c7f390cf87be6e9f56544400329000a2389c64f55ee276e24d03046",
+      "generatedHash": "44ae6688a0f12d9652caf59eb5020db929e7900246419afcd4ef1c5c0b181d37",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/assertion.ts",
+        "zag:packages/utilities/date-utils/src/constrain.ts",
+        "zag:packages/utilities/date-utils/src/duration.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/parse-date.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/parse-date.ts",
+      "upstreamHash": "6f948b7bbae44dc1c94569553c8b5c3d539348b965785e4c3b0733d79cfebbbd",
+      "generatedHash": "798745f88113e305bf5ecddda5e3bbede84b722cf0323add2b38a19e8d271de1",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/date-year.ts",
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/preset.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/preset.ts",
+      "upstreamHash": "b65d538aca9d755533852ef99b3a9501d4cb81ab95cabef623c64689c2259240",
+      "generatedHash": "ff973a5a3a6bc5c67b09ca49262fd0a9ae4b6b8ad5bc2a5b37e06e685033088a",
+      "dependencies": [
+        "zag:packages/utilities/date-utils/src/types.ts"
+      ],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
+    },
+    "zag:packages/utilities/date-utils/src/types.ts": {
+      "destination": "packages/shared/src/common/zag/date-utils/types.ts",
+      "upstreamHash": "b0b44d22c3794b01ec8cc6318da5b50fef5cb7379920c58a4f4e96c1eecff22b",
+      "generatedHash": "b0b44d22c3794b01ec8cc6318da5b50fef5cb7379920c58a4f4e96c1eecff22b",
+      "dependencies": [],
+      "external": {
+        "@internationalized/date": ">=3.0.0"
+      }
     },
     "zag:packages/utilities/dismissable/src/dismissable-layer.ts": {
       "destination": "packages/shared/src/common/zag/dismissable/dismissable-layer.ts",
@@ -5938,6 +7794,13 @@
       ],
       "external": {}
     },
+    "zag:packages/utilities/live-region/src/index.ts": {
+      "destination": "packages/shared/src/common/zag/live-region/index.ts",
+      "upstreamHash": "49e4c10cd992ddd97183f82798d9c02480f8f62e1d81f7d97e0912c26fe4d901",
+      "generatedHash": "49e4c10cd992ddd97183f82798d9c02480f8f62e1d81f7d97e0912c26fe4d901",
+      "dependencies": [],
+      "external": {}
+    },
     "zag:packages/utilities/popper/src/get-anchor.ts": {
       "destination": "packages/shared/src/common/zag/popper/get-anchor.ts",
       "upstreamHash": "6a4e4c35e84013a8b35c8a807ed64c67ba20d343f548abed4b221edc43d6609b",
@@ -6023,6 +7886,9 @@
     "packages/checkbox/src/react.tsx",
     "packages/checkbox/src/styles.css",
     "packages/checkbox/src/svelte.ts",
+    "packages/date-picker/src/react.tsx",
+    "packages/date-picker/src/styles.css",
+    "packages/date-picker/src/svelte.ts",
     "packages/dialog/src/react.tsx",
     "packages/dialog/src/styles.css",
     "packages/dialog/src/svelte.ts",

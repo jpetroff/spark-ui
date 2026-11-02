@@ -1,0 +1,192 @@
+import { DateFormatter } from "@internationalized/date"
+import { memo } from "@spark/shared/common/zag/core/index.ts";
+import type { DateValue } from "@spark/shared/common/zag/date-utils/types.ts";
+import { getDecadeRange } from "@spark/shared/common/zag/date-utils/index.ts";
+import type { Required } from "@spark/shared/common/zag/types/index.ts";
+import { clampValue } from "@spark/shared/common/zag/utils/index.ts";
+import { match } from "@spark/shared/common/zag/utils/index.ts";
+import type { DateView } from "./date-picker.types.ts";
+import type { IntlTranslations } from "./date-picker.types.ts";
+import type { SelectionMode } from "./date-picker.types.ts";
+import type { VisibleRangeText } from "./date-picker.types.ts";
+
+export function adjustStartAndEndDate(value: Array<DateValue | null | undefined>): DateValue[] {
+  const [startDate, endDate] = value
+  let result: Array<DateValue | null | undefined>
+  if (!startDate || !endDate) result = value
+  else result = startDate.compare(endDate) <= 0 ? value : [endDate, startDate]
+  return result as DateValue[]
+}
+
+export function isDateWithinRange(date: DateValue, value: Array<DateValue | null | undefined>) {
+  const [startDate, endDate] = value
+  if (!startDate || !endDate) return false
+  return startDate.compare(date) <= 0 && endDate.compare(date) >= 0
+}
+
+export function sortDates(values: Array<DateValue | null | undefined>) {
+  return values
+    .slice()
+    .filter((date): date is DateValue => date != null)
+    .sort((a, b) => a.compare(b))
+}
+
+export function getInputPlaceholder(
+  locale: string,
+  placeholder: ReturnType<Required<IntlTranslations>["placeholder"]>,
+) {
+  return new DateFormatter(locale)
+    .formatToParts(new Date())
+    .map((item) => placeholder[item.type as keyof typeof placeholder] ?? item.value)
+    .join("")
+}
+
+export const isValidDate = (value: DateValue) => {
+  return !Number.isNaN(value.day) && !Number.isNaN(value.month) && !Number.isNaN(value.year)
+}
+
+export const defaultTranslations: Required<IntlTranslations> = {
+  dayCell(state) {
+    if (state.unavailable) return `Not available. ${state.valueText}`
+    if (state.firstInRange) return `Starting range from ${state.valueText}`
+    if (state.lastInRange) return `Range ending at ${state.valueText}`
+    if (state.inRange) return `In range. ${state.valueText}`
+    if (state.selected) return `Selected date. ${state.valueText}`
+    return `Choose ${state.valueText}`
+  },
+  trigger(open) {
+    return open ? "Close calendar" : "Open calendar"
+  },
+  viewTrigger(view, nextView) {
+    if (!nextView) return `${view} view`
+    return `Switch to ${nextView} view`
+  },
+  presetTrigger(value) {
+    const [start = "", end = ""] = value
+    return `select ${start} to ${end}`
+  },
+  prevTrigger(view) {
+    return match(view, {
+      year: "Switch to previous decade",
+      month: "Switch to previous year",
+      day: "Switch to previous month",
+    })
+  },
+  nextTrigger(view) {
+    return match(view, {
+      year: "Switch to next decade",
+      month: "Switch to next year",
+      day: "Switch to next month",
+    })
+  },
+  // TODO: Revisit this
+  placeholder() {
+    return { day: "dd", month: "mm", year: "yyyy" }
+  },
+  content: "calendar",
+  monthSelect: "Select month",
+  yearSelect: "Select year",
+  clearTrigger: "Clear selected dates",
+  weekColumnHeader: "Wk",
+  weekNumberCell(weekNumber) {
+    return `Week ${weekNumber}`
+  },
+}
+
+// 0 – day, 1 – month, 2 – year;
+type DateViewNumber = 0 | 1 | 2
+
+function viewToNumber(view: DateView | undefined, fallback: DateViewNumber | undefined): DateViewNumber {
+  if (!view) return fallback || 0
+  return view === "day" ? 0 : view === "month" ? 1 : 2
+}
+
+function viewNumberToView(viewNumber: DateViewNumber | undefined): DateView {
+  return viewNumber === 0 ? "day" : viewNumber === 1 ? "month" : "year"
+}
+
+export function clampView(
+  view: DateView | undefined,
+  minView: DateView | undefined,
+  maxView: DateView | undefined,
+): DateView {
+  return viewNumberToView(
+    clampValue(viewToNumber(view, 0), viewToNumber(minView, 0), viewToNumber(maxView, 2)) as DateViewNumber,
+  )
+}
+
+export function isAboveMinView(view: DateView, minView: DateView) {
+  return viewToNumber(view, 0) > viewToNumber(minView, 0)
+}
+
+export function isBelowMinView(view: DateView, minView: DateView) {
+  return viewToNumber(view, 0) < viewToNumber(minView, 0)
+}
+
+export function getNextView(view: DateView, minView: DateView, maxView: DateView) {
+  const nextViewNumber = (viewToNumber(view, 0) + 1) as DateViewNumber
+  return clampView(viewNumberToView(nextViewNumber), minView, maxView)
+}
+
+export function getPreviousView(view: DateView, minView: DateView, maxView: DateView) {
+  const prevViewNumber = (viewToNumber(view, 0) - 1) as DateViewNumber
+  return clampView(viewNumberToView(prevViewNumber), minView, maxView)
+}
+
+const views: DateView[] = ["day", "month", "year"]
+export function eachView(cb: (view: DateView) => void) {
+  views.forEach((view) => cb(view))
+}
+
+interface VisibleRangeTextOptions {
+  view: DateView
+  startValue: DateValue
+  endValue: DateValue
+  locale: string
+  timeZone: string
+  selectionMode: SelectionMode
+}
+
+export const getVisibleRangeText = memo(
+  (opts: VisibleRangeTextOptions) => [
+    opts.view,
+    opts.startValue.toString(),
+    opts.endValue.toString(),
+    opts.locale,
+    opts.timeZone,
+    opts.selectionMode,
+  ],
+  ([view], opts): VisibleRangeText => {
+    const { startValue, endValue, locale, timeZone, selectionMode } = opts
+
+    if (view === "year") {
+      const years = getDecadeRange(startValue.year)
+      const start = years.at(0)!.toString()
+      const end = years.at(-1)!.toString()
+      return { start, end, formatted: `${start} - ${end}` }
+    }
+
+    if (view === "month") {
+      const formatter = new DateFormatter(locale, {
+        year: "numeric",
+        timeZone,
+        calendar: startValue.calendar.identifier,
+      })
+      const start = formatter.format(startValue.toDate(timeZone))
+      const end = formatter.format(endValue.toDate(timeZone))
+      const formatted = selectionMode === "range" ? `${start} - ${end}` : start
+      return { start, end, formatted }
+    }
+
+    const formatter = new DateFormatter(locale, {
+      month: "long",
+      year: "numeric",
+      timeZone,
+      calendar: startValue.calendar.identifier,
+    })
+    const start = formatter.format(startValue.toDate(timeZone))
+    const end = formatter.format(endValue.toDate(timeZone))
+    const formatted = selectionMode === "range" ? `${start} - ${end}` : start
+    return { start, end, formatted }
+  },
+)
