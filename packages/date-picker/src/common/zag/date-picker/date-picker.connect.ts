@@ -1,0 +1,1047 @@
+import {
+  DateFormatter,
+  isEqualDay,
+  isEqualMonth,
+  isEqualYear,
+  isSameDay,
+  isToday,
+  isWeekend,
+  toCalendarDateTime,
+  type DateValue,
+} from "@internationalized/date"
+import { constrainValue } from "@spark/shared/common/zag/date-utils/index.ts";
+import { ensureValidCharacters } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getDateRangePreset } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getDayFormatter } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getDaysInWeek } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getDecadeRange } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getLocaleSeparator } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getMonthDays } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getMonthFormatter } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getMonthNames } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getTodayDate } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getUnitDuration } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getWeekDays } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getWeekOfYear } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getDefaultYearRange } from "@spark/shared/common/zag/date-utils/index.ts";
+import { getYearsRange } from "@spark/shared/common/zag/date-utils/index.ts";
+import { isDateOutsideRange } from "@spark/shared/common/zag/date-utils/index.ts";
+import { isDateUnavailable } from "@spark/shared/common/zag/date-utils/index.ts";
+import { isValidCharacter } from "@spark/shared/common/zag/date-utils/index.ts";
+import { ariaAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { dataAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { getEventKey } from "@spark/shared/common/zag/dom-query/index.ts";
+import { getNativeEvent } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isComposingEvent } from "@spark/shared/common/zag/dom-query/index.ts";
+import { getPlacementSide } from "@spark/shared/common/zag/popper/placement.ts";
+import { getPlacementStyles } from "@spark/shared/common/zag/popper/get-styles.ts";
+import type { EventKeyMap } from "@spark/shared/common/zag/types/index.ts";
+import type { NormalizeProps } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+import { chunk } from "@spark/shared/common/zag/utils/index.ts";
+import { isValueWithinRange } from "@spark/shared/common/zag/utils/index.ts";
+import { mergeWithDefault } from "@spark/shared/common/zag/utils/index.ts";
+import { parts } from "./date-picker.anatomy.ts";
+import * as dom from "./date-picker.dom.ts"
+import type { DatePickerApi } from "./date-picker.types.ts";
+import type { DatePickerService } from "./date-picker.types.ts";
+import type { DayTableCellProps } from "./date-picker.types.ts";
+import type { DayTableCellState } from "./date-picker.types.ts";
+import type { TableCellProps } from "./date-picker.types.ts";
+import type { TableCellState } from "./date-picker.types.ts";
+import type { TableProps } from "./date-picker.types.ts";
+import type { WeekNumberCellProps } from "./date-picker.types.ts";
+import { adjustStartAndEndDate } from "./date-picker.utils.ts";
+import { defaultTranslations } from "./date-picker.utils.ts";
+import { getInputPlaceholder } from "./date-picker.utils.ts";
+import { getNextView } from "./date-picker.utils.ts";
+import { isDateWithinRange } from "./date-picker.utils.ts";
+
+export function connect<T extends PropTypes>(
+  service: DatePickerService,
+  normalize: NormalizeProps<T>,
+): DatePickerApi<T> {
+  const { state, context, prop, send, computed, scope } = service
+
+  const startValue = context.get("startValue")
+  const endValue = computed("endValue")
+  const selectedValue = context.get("value")
+  const focusedValue = context.get("focusedValue")
+
+  const hoveredValue = context.get("hoveredValue")
+  const hoveredRangeValue = hoveredValue ? adjustStartAndEndDate([selectedValue[0], hoveredValue]) : []
+
+  const disabled = Boolean(prop("disabled"))
+  const readOnly = Boolean(prop("readOnly"))
+  const invalid = Boolean(prop("invalid"))
+  const interactive = computed("isInteractive")
+
+  const empty = selectedValue.length === 0
+
+  const min = prop("min")
+  const max = prop("max")
+  const locale = prop("locale")
+  const timeZone = prop("timeZone")
+  const startOfWeek = prop("startOfWeek")
+
+  const focused = state.matches("focused")
+  const open = state.matches("open")
+
+  const isRangePicker = prop("selectionMode") === "range"
+  const isMultiPicker = prop("selectionMode") === "multiple"
+  const isDateUnavailableFn = prop("isDateUnavailable")
+  const maxSelectedDates = prop("maxSelectedDates")
+  const isMaxSelected = isMultiPicker && maxSelectedDates != null && selectedValue.length >= maxSelectedDates
+
+  const currentPlacement = context.get("currentPlacement")
+  const currentPlacementSide = currentPlacement ? getPlacementSide(currentPlacement) : undefined
+  const popperStyles = getPlacementStyles({
+    ...prop("positioning"),
+    placement: currentPlacement,
+  })
+
+  const separator = getLocaleSeparator(locale)
+  const translations = mergeWithDefault(defaultTranslations, prop("translations"))
+
+  function getMonthWeeks(from = startValue) {
+    const numOfWeeks = prop("fixedWeeks") ? 6 : undefined
+    return getMonthDays(from, locale, numOfWeeks, startOfWeek)
+  }
+
+  function getMonths(props: { format?: "short" | "long" | undefined } = {}) {
+    const { format } = props
+    return getMonthNames(locale, format, focusedValue).map((label, index) => {
+      const value = index + 1
+      const dateValue = focusedValue.set({ month: value })
+      const disabled = isDateOutsideRange(dateValue, min, max)
+      return { label, value, disabled }
+    })
+  }
+
+  function getYears() {
+    const defaultRange = getDefaultYearRange(focusedValue, min, max)
+    const range = getYearsRange(defaultRange)
+    return range.map((year) => ({
+      label: year.toString(),
+      value: year,
+      disabled: !isValueWithinRange(year, min?.year, max?.year),
+    }))
+  }
+
+  function isUnavailable(date: DateValue) {
+    return isDateUnavailable(date, isDateUnavailableFn, locale, min, max)
+  }
+
+  function focusMonth(month: number) {
+    const date = startValue ?? getTodayDate(timeZone, focusedValue.calendar)
+    send({ type: "FOCUS.SET", value: date.set({ month }) })
+  }
+
+  function focusYear(year: number) {
+    const date = startValue ?? getTodayDate(timeZone, focusedValue.calendar)
+    send({ type: "FOCUS.SET", value: date.set({ year }) })
+  }
+
+  function getYearTableCellState(props: TableCellProps): TableCellState {
+    const { value, disabled } = props
+    const dateValue = focusedValue.set({ year: value })
+
+    const decadeYears = getDecadeRange(startValue.year)
+    const isOutsideVisibleRange = !decadeYears.includes(value)
+    const isWithinMinMax = isValueWithinRange(value, min?.year, max?.year)
+
+    const isInSelectedRange = isRangePicker && isDateWithinRange(dateValue, selectedValue)
+    const isFirstInSelectedRange = isRangePicker && selectedValue[0] && isEqualYear(dateValue, selectedValue[0])
+    const isLastInSelectedRange = isRangePicker && selectedValue[1] && isEqualYear(dateValue, selectedValue[1])
+
+    const hasHoveredRange = isRangePicker && hoveredRangeValue.length > 0
+    const isInHoveredRange = hasHoveredRange && isDateWithinRange(dateValue, hoveredRangeValue)
+    const isFirstInHoveredRange =
+      hasHoveredRange && hoveredRangeValue[0] && isEqualYear(dateValue, hoveredRangeValue[0])
+    const isLastInHoveredRange = hasHoveredRange && hoveredRangeValue[1] && isEqualYear(dateValue, hoveredRangeValue[1])
+
+    const cellState = {
+      focused: focusedValue.year === props.value,
+      selectable: isWithinMinMax,
+      outsideRange: isOutsideVisibleRange,
+      selected: !!selectedValue.find((date) => date && date.year === value),
+      valueText: value.toString(),
+      inRange: isInSelectedRange || isInHoveredRange,
+      firstInRange: !!isFirstInSelectedRange,
+      lastInRange: !!isLastInSelectedRange,
+      inHoveredRange: !!isInHoveredRange,
+      firstInHoveredRange: !!isFirstInHoveredRange,
+      lastInHoveredRange: !!isLastInHoveredRange,
+      value: dateValue,
+      get disabled() {
+        return disabled || !cellState.selectable
+      },
+    }
+    return cellState
+  }
+
+  function getMonthTableCellState(props: TableCellProps): TableCellState {
+    const { value, disabled } = props
+    const dateValue = focusedValue.set({ month: value })
+    const formatter = getMonthFormatter(locale, timeZone, focusedValue)
+
+    const isInSelectedRange = isRangePicker && isDateWithinRange(dateValue, selectedValue)
+    const isFirstInSelectedRange = isRangePicker && selectedValue[0] && isEqualMonth(dateValue, selectedValue[0])
+    const isLastInSelectedRange = isRangePicker && selectedValue[1] && isEqualMonth(dateValue, selectedValue[1])
+
+    const hasHoveredRange = isRangePicker && hoveredRangeValue.length > 0
+    const isInHoveredRange = hasHoveredRange && isDateWithinRange(dateValue, hoveredRangeValue)
+    const isFirstInHoveredRange =
+      hasHoveredRange && hoveredRangeValue[0] && isEqualMonth(dateValue, hoveredRangeValue[0])
+    const isLastInHoveredRange =
+      hasHoveredRange && hoveredRangeValue[1] && isEqualMonth(dateValue, hoveredRangeValue[1])
+
+    const cellState = {
+      focused: focusedValue.month === props.value,
+      selectable: !isDateOutsideRange(dateValue, min, max),
+      selected: !!selectedValue.find((date) => date && date.month === value && date.year === focusedValue.year),
+      valueText: formatter.format(dateValue.toDate(timeZone)),
+      inRange: isInSelectedRange || isInHoveredRange,
+      firstInRange: !!isFirstInSelectedRange,
+      lastInRange: !!isLastInSelectedRange,
+      inHoveredRange: !!isInHoveredRange,
+      firstInHoveredRange: !!isFirstInHoveredRange,
+      lastInHoveredRange: !!isLastInHoveredRange,
+      outsideRange: false,
+      value: dateValue,
+      get disabled() {
+        return disabled || !cellState.selectable
+      },
+    }
+    return cellState
+  }
+
+  function getDayTableCellState(props: DayTableCellProps): DayTableCellState {
+    const { value, disabled, visibleRange = computed("visibleRange") } = props
+
+    const formatter = getDayFormatter(locale, timeZone, focusedValue)
+    const unitDuration = getUnitDuration(computed("visibleDuration"))
+    const outsideDaySelectable = prop("outsideDaySelectable")
+
+    const end = visibleRange.start.add(unitDuration).subtract({ days: 1 })
+    const isOutsideRange = isDateOutsideRange(value, visibleRange.start, end)
+
+    // Calculate range states
+    const isInSelectedRange = isRangePicker && isDateWithinRange(value, selectedValue)
+    const isFirstInSelectedRange = isRangePicker && selectedValue[0] && isSameDay(value, selectedValue[0])
+    const isLastInSelectedRange = isRangePicker && selectedValue[1] && isSameDay(value, selectedValue[1])
+
+    // Calculate hover range states
+    const hasHoveredRange = isRangePicker && hoveredRangeValue.length > 0
+    const isInHoveredRange = hasHoveredRange && isDateWithinRange(value, hoveredRangeValue)
+    const isFirstInHoveredRange = hasHoveredRange && hoveredRangeValue[0] && isSameDay(value, hoveredRangeValue[0])
+    const isLastInHoveredRange = hasHoveredRange && hoveredRangeValue[1] && isSameDay(value, hoveredRangeValue[1])
+
+    // Check if max number of dates has been reached (for multiple selection mode)
+    const isSelected = selectedValue.some((date) => date != null && isSameDay(value, date))
+
+    const cellState = {
+      invalid: isDateOutsideRange(value, min, max),
+      disabled:
+        disabled ||
+        (!outsideDaySelectable && isOutsideRange) ||
+        isDateOutsideRange(value, min, max) ||
+        // Disable unselected dates when max is reached in multiple selection mode
+        (isMaxSelected && !isSelected),
+      selected: isSelected,
+      unavailable: isDateUnavailable(value, isDateUnavailableFn, locale, min, max) && !disabled,
+      outsideRange: isOutsideRange,
+      today: isToday(value, timeZone),
+      weekend: isWeekend(value, locale),
+      value,
+      valueText: formatter.format(value.toDate(timeZone)),
+      get focused() {
+        return (
+          focusedValue != null && isSameDay(value, focusedValue) && (!cellState.outsideRange || outsideDaySelectable)
+        )
+      },
+      get selectable() {
+        return !cellState.disabled && !cellState.unavailable
+      },
+
+      // Range states
+      inRange: isInSelectedRange || isInHoveredRange,
+      firstInRange: isFirstInSelectedRange,
+      lastInRange: isLastInSelectedRange,
+
+      // Preview range states
+      inHoveredRange: isInHoveredRange,
+      firstInHoveredRange: isFirstInHoveredRange,
+      lastInHoveredRange: isLastInHoveredRange,
+    }
+
+    return cellState
+  }
+
+  function getTableId(props: TableProps) {
+    const { view = "day", id } = props
+    return [view, id].filter(Boolean).join(" ")
+  }
+
+  return {
+    focused,
+    open,
+    disabled,
+    invalid,
+    readOnly,
+    inline: !!prop("inline"),
+    numOfMonths: prop("numOfMonths"),
+    showWeekNumbers: !!prop("showWeekNumbers"),
+    selectionMode: prop("selectionMode"),
+    maxSelectedDates,
+    isMaxSelected,
+    view: context.get("view"),
+    getRangePresetValue(preset) {
+      return getDateRangePreset(preset, locale, timeZone)
+    },
+    getWeekNumber(week: DateValue[]) {
+      const firstDay = week[0]
+      return firstDay ? getWeekOfYear(firstDay, locale) : 0
+    },
+    getDaysInWeek(week, from = startValue) {
+      return getDaysInWeek(week, from, locale, startOfWeek)
+    },
+    getOffset(duration) {
+      const from = startValue.add(duration)
+      const end = endValue.add(duration)
+      const formatter = getMonthFormatter(locale, timeZone, focusedValue)
+      return {
+        visibleRange: { start: from, end },
+        weeks: getMonthWeeks(from),
+        visibleRangeText: {
+          start: formatter.format(from.toDate(timeZone)),
+          end: formatter.format(end.toDate(timeZone)),
+        },
+      }
+    },
+    getMonthWeeks,
+    isUnavailable,
+    weeks: getMonthWeeks(),
+    weekDays: getWeekDays(startValue, startOfWeek, timeZone, locale),
+    visibleRangeText: computed("visibleRangeText"),
+    value: selectedValue,
+    valueAsDate: selectedValue.filter((date) => date != null).map((date) => date.toDate(timeZone)),
+    valueAsString: computed("valueAsString"),
+    focusedValue,
+    focusedValueAsDate: focusedValue?.toDate(timeZone),
+    focusedValueAsString: prop("format")(focusedValue, { locale, timeZone }),
+    visibleRange: computed("visibleRange"),
+    selectToday() {
+      const value = constrainValue(getTodayDate(timeZone, focusedValue.calendar), min, max)
+      send({ type: "VALUE.SET", value: [value] })
+    },
+    setValue(values) {
+      const computedValue = values.map((date) => constrainValue(date, min, max))
+      send({ type: "VALUE.SET", value: computedValue })
+    },
+    setTime(time, index = 0) {
+      const values = Array.from(selectedValue)
+      let dateValue = values[index]
+      if (!dateValue) return
+
+      // Convert CalendarDate to CalendarDateTime/ZonedDateTime if needed
+      if (!("hour" in dateValue)) {
+        // Use the machine's timeZone prop if we need to create a ZonedDateTime
+        // For now, default to CalendarDateTime (no timezone)
+        dateValue = toCalendarDateTime(dateValue)
+      }
+
+      // Set time components
+      dateValue = dateValue.set({
+        hour: time.hour ?? ("hour" in dateValue ? dateValue.hour : 0),
+        minute: time.minute ?? ("minute" in dateValue ? dateValue.minute : 0),
+        second: time.second ?? ("second" in dateValue ? dateValue.second : 0),
+        millisecond: time.millisecond ?? ("millisecond" in dateValue ? dateValue.millisecond : 0),
+      })
+
+      values[index] = constrainValue(dateValue, min, max)
+      send({ type: "VALUE.SET", value: values })
+    },
+    clearValue(options = {}) {
+      const { focus = true } = options
+      send({ type: "VALUE.CLEAR", focus })
+    },
+    setFocusedValue(value) {
+      send({ type: "FOCUS.SET", value })
+    },
+    setOpen(nextOpen) {
+      if (prop("inline")) return
+      send({ type: nextOpen ? "OPEN" : "CLOSE", replaces: "open" })
+    },
+    focusMonth,
+    focusYear,
+    getYears,
+    getMonths,
+    getYearsGrid(props = {}) {
+      const { columns = 1 } = props
+      const years = getDecadeRange(startValue.year).map((year) => ({
+        label: year.toString(),
+        value: year,
+        disabled: !isValueWithinRange(year, min?.year, max?.year),
+      }))
+      return chunk(years, columns)
+    },
+    getDecade() {
+      const years = getDecadeRange(startValue.year)
+      return { start: years.at(0), end: years.at(-1) }
+    },
+    getMonthsGrid(props = {}) {
+      const { columns = 1, format } = props
+      return chunk(getMonths({ format }), columns)
+    },
+    format(value, opts = { month: "long", year: "numeric" }) {
+      return new DateFormatter(locale, {
+        ...opts,
+        calendar: value.calendar.identifier,
+      }).format(value.toDate(timeZone))
+    },
+    setView(view) {
+      send({ type: "VIEW.SET", view })
+    },
+    goToNext() {
+      send({ type: "GOTO.NEXT", view: context.get("view") })
+    },
+    goToPrev() {
+      send({ type: "GOTO.PREV", view: context.get("view") })
+    },
+
+    getRootProps() {
+      return normalize.element({
+        ...parts.root.attrs,
+        dir: prop("dir"),
+        id: dom.getRootId(scope),
+        "data-state": open ? "open" : "closed",
+        "data-disabled": dataAttr(disabled),
+        "data-readonly": dataAttr(readOnly),
+        "data-empty": dataAttr(empty),
+      })
+    },
+
+    getLabelProps(props = {}) {
+      const { index = 0 } = props
+      return normalize.label({
+        ...parts.label.attrs,
+        id: dom.getLabelId(scope, index),
+        dir: prop("dir"),
+        htmlFor: dom.getInputId(scope, index),
+        "data-state": open ? "open" : "closed",
+        "data-index": index,
+        "data-disabled": dataAttr(disabled),
+        "data-readonly": dataAttr(readOnly),
+        "data-invalid": dataAttr(invalid),
+      })
+    },
+
+    getControlProps() {
+      return normalize.element({
+        ...parts.control.attrs,
+        dir: prop("dir"),
+        id: dom.getControlId(scope),
+        "data-disabled": dataAttr(disabled),
+        "data-placeholder-shown": dataAttr(empty),
+        "data-invalid": dataAttr(invalid),
+      })
+    },
+
+    getRangeTextProps() {
+      return normalize.element({
+        ...parts.rangeText.attrs,
+        dir: prop("dir"),
+      })
+    },
+
+    getContentProps() {
+      return normalize.element({
+        ...parts.content.attrs,
+        hidden: !open,
+        dir: prop("dir"),
+        "data-state": open ? "open" : "closed",
+        "data-placement": currentPlacement,
+        "data-side": currentPlacementSide,
+        "data-inline": dataAttr(prop("inline")),
+        id: dom.getContentId(scope),
+        tabIndex: -1,
+        role: "application",
+        "aria-label": translations.content,
+      })
+    },
+
+    getTableProps(props = {}) {
+      const { view = "day", columns = view === "day" ? 7 : 4 } = props
+      const uid = getTableId(props)
+      return normalize.element({
+        ...parts.table.attrs,
+        role: "grid",
+        "data-columns": columns,
+        "aria-label": computed("visibleRangeText").formatted,
+        id: dom.getTableId(scope, uid),
+        "aria-readonly": ariaAttr(readOnly),
+        "aria-disabled": ariaAttr(disabled),
+        "aria-multiselectable": ariaAttr(prop("selectionMode") !== "single"),
+        "data-view": view,
+        dir: prop("dir"),
+        tabIndex: -1,
+        onKeyDown(event) {
+          if (event.defaultPrevented) return
+          // readOnly still allows roving-focus navigation
+          if (disabled) return
+
+          const keyMap: EventKeyMap = {
+            Enter() {
+              if (!interactive) return
+              if (view === "day" && isUnavailable(focusedValue)) return
+              if (view === "month") {
+                const cellState = getMonthTableCellState({ value: focusedValue.month })
+                if (!cellState.selectable) return
+              }
+              if (view === "year") {
+                const cellState = getYearTableCellState({ value: focusedValue.year })
+                if (!cellState.selectable) return
+              }
+              send({ type: "TABLE.ENTER", view, columns, focus: true })
+            },
+            Space(event) {
+              keyMap.Enter?.(event)
+            },
+            ArrowLeft() {
+              send({ type: "TABLE.ARROW_LEFT", view, columns, focus: true })
+            },
+            ArrowRight() {
+              send({ type: "TABLE.ARROW_RIGHT", view, columns, focus: true })
+            },
+            ArrowUp() {
+              send({ type: "TABLE.ARROW_UP", view, columns, focus: true })
+            },
+            ArrowDown() {
+              send({ type: "TABLE.ARROW_DOWN", view, columns, focus: true })
+            },
+            PageUp(event) {
+              send({ type: "TABLE.PAGE_UP", larger: event.shiftKey, view, columns, focus: true })
+            },
+            PageDown(event) {
+              send({ type: "TABLE.PAGE_DOWN", larger: event.shiftKey, view, columns, focus: true })
+            },
+            Home() {
+              send({ type: "TABLE.HOME", view, columns, focus: true })
+            },
+            End() {
+              send({ type: "TABLE.END", view, columns, focus: true })
+            },
+          }
+
+          const exec =
+            keyMap[
+              getEventKey(event, {
+                dir: prop("dir"),
+              })
+            ]
+
+          if (exec) {
+            exec(event)
+            event.preventDefault()
+            event.stopPropagation()
+          }
+        },
+        onPointerLeave() {
+          send({ type: "TABLE.POINTER_LEAVE" })
+        },
+        onPointerDown() {
+          send({ type: "TABLE.POINTER_DOWN", view })
+        },
+        onPointerUp() {
+          send({ type: "TABLE.POINTER_UP", view })
+        },
+      })
+    },
+
+    getTableHeadProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.tableHead.attrs,
+        "aria-hidden": true,
+        dir: prop("dir"),
+        "data-view": view,
+        "data-disabled": dataAttr(disabled),
+      })
+    },
+
+    getTableHeaderProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.tableHeader.attrs,
+        dir: prop("dir"),
+        "data-view": view,
+        "data-disabled": dataAttr(disabled),
+      })
+    },
+
+    getTableBodyProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.tableBody.attrs,
+        "data-view": view,
+        "data-disabled": dataAttr(disabled),
+      })
+    },
+
+    getTableRowProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.tableRow.attrs,
+        "aria-disabled": ariaAttr(disabled),
+        "data-disabled": dataAttr(disabled),
+        "data-view": view,
+      })
+    },
+
+    getWeekNumberHeaderCellProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.tableCell.attrs,
+        scope: "col",
+        "aria-label": translations.weekColumnHeader,
+        "data-view": view,
+        "data-type": "week-number",
+        "data-disabled": dataAttr(disabled),
+      })
+    },
+
+    getWeekNumberCellProps(props: WeekNumberCellProps) {
+      const { weekIndex, week } = props
+      const weekNumber = week[0] ? getWeekOfYear(week[0], locale) : 0
+      return normalize.element({
+        ...parts.tableCell.attrs,
+        role: "rowheader",
+        "aria-label": translations.weekNumberCell?.(weekNumber),
+        "data-view": "day",
+        "data-week-index": weekIndex,
+        "data-type": "week-number",
+        "data-disabled": dataAttr(disabled),
+      })
+    },
+
+    getDayTableCellState,
+
+    getDayTableCellProps(props) {
+      const { value } = props
+      const cellState = getDayTableCellState(props)
+      return normalize.element({
+        ...parts.tableCell.attrs,
+        role: "gridcell",
+        "aria-disabled": ariaAttr(!cellState.selectable),
+        "aria-selected": cellState.selected || cellState.inRange,
+        "aria-invalid": ariaAttr(cellState.invalid),
+        "aria-current": cellState.today ? "date" : undefined,
+        "data-value": value.toString(),
+      })
+    },
+
+    getDayTableCellTriggerProps(props) {
+      const { value } = props
+      const cellState = getDayTableCellState(props)
+      return normalize.element({
+        ...parts.tableCellTrigger.attrs,
+        id: dom.getCellTriggerId(scope, value.toString()),
+        role: "button",
+        dir: prop("dir"),
+        tabIndex: disabled ? -1 : cellState.focused ? 0 : -1,
+        "aria-label": translations.dayCell(cellState),
+        "aria-disabled": ariaAttr(!cellState.selectable),
+        "aria-invalid": ariaAttr(cellState.invalid),
+        "data-disabled": dataAttr(!cellState.selectable),
+        "data-selectable": dataAttr(cellState.selectable),
+        "data-selected": dataAttr(cellState.selected),
+        "data-value": value.toString(),
+        "data-view": "day",
+        "data-today": dataAttr(cellState.today),
+        "data-focus": dataAttr(cellState.focused),
+        "data-unavailable": dataAttr(cellState.unavailable),
+        "data-range-start": dataAttr(cellState.firstInRange),
+        "data-range-end": dataAttr(cellState.lastInRange),
+        "data-in-range": dataAttr(cellState.inRange),
+        "data-outside-range": dataAttr(cellState.outsideRange),
+        "data-weekend": dataAttr(cellState.weekend),
+        "data-in-hover-range": dataAttr(cellState.inHoveredRange),
+        "data-hover-range-start": dataAttr(cellState.firstInHoveredRange),
+        "data-hover-range-end": dataAttr(cellState.lastInHoveredRange),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          if (!cellState.selectable) return
+          send({ type: "CELL.CLICK", cell: "day", value })
+        },
+        onPointerMove: isRangePicker
+          ? (event) => {
+              if (event.pointerType === "touch") return
+              if (!cellState.selectable) return
+              const focus = !scope.isActiveElement(event.currentTarget)
+              if (hoveredValue && isEqualDay(value, hoveredValue)) return
+              send({
+                type: "CELL.POINTER_MOVE",
+                cell: "day",
+                value,
+                focus,
+                outsideRange: cellState.outsideRange,
+              })
+            }
+          : undefined,
+      })
+    },
+
+    getMonthTableCellState,
+
+    getMonthTableCellProps(props) {
+      const { value, columns } = props
+      const cellState = getMonthTableCellState(props)
+      return normalize.element({
+        ...parts.tableCell.attrs,
+        dir: prop("dir"),
+        colSpan: columns,
+        role: "gridcell",
+        "aria-selected": ariaAttr(cellState.selected || cellState.inRange),
+        "data-selected": dataAttr(cellState.selected),
+        "aria-disabled": ariaAttr(!cellState.selectable),
+        "data-value": value,
+      })
+    },
+
+    getMonthTableCellTriggerProps(props) {
+      const { value } = props
+      const cellState = getMonthTableCellState(props)
+      return normalize.element({
+        ...parts.tableCellTrigger.attrs,
+        id: dom.getCellTriggerId(scope, value.toString()),
+        role: "button",
+        dir: prop("dir"),
+        tabIndex: disabled ? -1 : cellState.focused ? 0 : -1,
+        "aria-label": cellState.valueText,
+        "aria-disabled": ariaAttr(!cellState.selectable),
+        "data-disabled": dataAttr(!cellState.selectable),
+        "data-selectable": dataAttr(cellState.selectable),
+        "data-selected": dataAttr(cellState.selected),
+        "data-value": value,
+        "data-view": "month",
+        "data-focus": dataAttr(cellState.focused),
+        "data-outside-range": dataAttr(cellState.outsideRange),
+        "data-range-start": dataAttr(cellState.firstInRange),
+        "data-range-end": dataAttr(cellState.lastInRange),
+        "data-in-range": dataAttr(cellState.inRange),
+        "data-in-hover-range": dataAttr(cellState.inHoveredRange),
+        "data-hover-range-start": dataAttr(cellState.firstInHoveredRange),
+        "data-hover-range-end": dataAttr(cellState.lastInHoveredRange),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          if (!cellState.selectable) return
+          send({ type: "CELL.CLICK", cell: "month", value })
+        },
+        onPointerMove: isRangePicker
+          ? (event) => {
+              if (event.pointerType === "touch") return
+              if (!cellState.selectable) return
+              const focus = !scope.isActiveElement(event.currentTarget)
+              if (hoveredValue && cellState.value && isEqualMonth(cellState.value, hoveredValue)) return
+              send({ type: "CELL.POINTER_MOVE", cell: "month", value: cellState.value, focus })
+            }
+          : undefined,
+      })
+    },
+
+    getYearTableCellState,
+
+    getYearTableCellProps(props) {
+      const { value, columns } = props
+      const cellState = getYearTableCellState(props)
+      return normalize.element({
+        ...parts.tableCell.attrs,
+        dir: prop("dir"),
+        colSpan: columns,
+        role: "gridcell",
+        "aria-selected": ariaAttr(cellState.selected || cellState.inRange),
+        "data-selected": dataAttr(cellState.selected),
+        "aria-disabled": ariaAttr(!cellState.selectable),
+        "data-value": value,
+      })
+    },
+
+    getYearTableCellTriggerProps(props) {
+      const { value } = props
+      const cellState = getYearTableCellState(props)
+      return normalize.element({
+        ...parts.tableCellTrigger.attrs,
+        id: dom.getCellTriggerId(scope, value.toString()),
+        role: "button",
+        dir: prop("dir"),
+        tabIndex: disabled ? -1 : cellState.focused ? 0 : -1,
+        "aria-label": cellState.valueText,
+        "aria-disabled": ariaAttr(!cellState.selectable),
+        "data-disabled": dataAttr(!cellState.selectable),
+        "data-selectable": dataAttr(cellState.selectable),
+        "data-selected": dataAttr(cellState.selected),
+        "data-value": value,
+        "data-view": "year",
+        "data-focus": dataAttr(cellState.focused),
+        "data-outside-range": dataAttr(cellState.outsideRange),
+        "data-range-start": dataAttr(cellState.firstInRange),
+        "data-range-end": dataAttr(cellState.lastInRange),
+        "data-in-range": dataAttr(cellState.inRange),
+        "data-in-hover-range": dataAttr(cellState.inHoveredRange),
+        "data-hover-range-start": dataAttr(cellState.firstInHoveredRange),
+        "data-hover-range-end": dataAttr(cellState.lastInHoveredRange),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          if (!cellState.selectable) return
+          send({ type: "CELL.CLICK", cell: "year", value })
+        },
+        onPointerMove: isRangePicker
+          ? (event) => {
+              if (event.pointerType === "touch") return
+              if (!cellState.selectable || cellState.outsideRange) return
+              const focus = !scope.isActiveElement(event.currentTarget)
+              if (hoveredValue && cellState.value && isEqualYear(cellState.value, hoveredValue)) return
+              send({ type: "CELL.POINTER_MOVE", cell: "year", value: cellState.value, focus })
+            }
+          : undefined,
+      })
+    },
+
+    getNextTriggerProps(props = {}) {
+      const { view = "day" } = props
+      const isDisabled = disabled || !computed("isNextVisibleRangeValid")
+      return normalize.button({
+        ...parts.nextTrigger.attrs,
+        dir: prop("dir"),
+        id: dom.getNextTriggerId(scope, view),
+        type: "button",
+        "aria-label": translations.nextTrigger(view),
+        disabled: isDisabled,
+        "data-disabled": dataAttr(isDisabled),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          send({ type: "GOTO.NEXT", view })
+        },
+      })
+    },
+
+    getPrevTriggerProps(props = {}) {
+      const { view = "day" } = props
+      const isDisabled = disabled || !computed("isPrevVisibleRangeValid")
+      return normalize.button({
+        ...parts.prevTrigger.attrs,
+        dir: prop("dir"),
+        id: dom.getPrevTriggerId(scope, view),
+        type: "button",
+        "aria-label": translations.prevTrigger(view),
+        disabled: isDisabled,
+        "data-disabled": dataAttr(isDisabled),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          send({ type: "GOTO.PREV", view })
+        },
+      })
+    },
+
+    getClearTriggerProps() {
+      return normalize.button({
+        ...parts.clearTrigger.attrs,
+        id: dom.getClearTriggerId(scope),
+        dir: prop("dir"),
+        type: "button",
+        "aria-label": translations.clearTrigger,
+        hidden: !selectedValue.length,
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          send({ type: "VALUE.CLEAR" })
+        },
+      })
+    },
+
+    getTriggerProps() {
+      return normalize.button({
+        ...parts.trigger.attrs,
+        id: dom.getTriggerId(scope),
+        dir: prop("dir"),
+        type: "button",
+        "data-placement": currentPlacement,
+        "data-side": currentPlacementSide,
+        "aria-label": translations.trigger(open),
+        "aria-controls": dom.getContentId(scope),
+        "aria-expanded": open,
+        "data-state": open ? "open" : "closed",
+        "data-placeholder-shown": dataAttr(empty),
+        "aria-haspopup": "grid",
+        disabled,
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          send({ type: "TRIGGER.CLICK" })
+        },
+      })
+    },
+
+    getViewProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.view.attrs,
+        "data-view": view,
+        hidden: context.get("view") !== view,
+      })
+    },
+
+    getViewTriggerProps(props = {}) {
+      const { view = "day" } = props
+      const nextView = getNextView(view, prop("minView"), prop("maxView"))
+      const hasNextView = nextView !== view
+      const isDisabled = disabled || !hasNextView
+      return normalize.button({
+        ...parts.viewTrigger.attrs,
+        "data-view": view,
+        dir: prop("dir"),
+        id: dom.getViewTriggerId(scope, view),
+        type: "button",
+        disabled: isDisabled,
+        "data-disabled": dataAttr(isDisabled),
+        "aria-label": translations.viewTrigger(view, hasNextView ? nextView : undefined),
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          send({ type: "VIEW.TOGGLE", src: "viewTrigger" })
+        },
+      })
+    },
+
+    getViewControlProps(props = {}) {
+      const { view = "day" } = props
+      return normalize.element({
+        ...parts.viewControl.attrs,
+        "data-view": view,
+        dir: prop("dir"),
+      })
+    },
+
+    getInputProps(props = {}) {
+      const { index = 0, fixOnBlur = true } = props
+
+      return normalize.input({
+        ...parts.input.attrs,
+        id: dom.getInputId(scope, index),
+        autoComplete: "off",
+        autoCorrect: "off",
+        spellCheck: "false",
+        dir: prop("dir"),
+        name: prop("name"),
+        "data-index": index,
+        "data-state": open ? "open" : "closed",
+        "data-placeholder-shown": dataAttr(empty),
+        readOnly,
+        disabled,
+        required: prop("required"),
+        "aria-invalid": ariaAttr(invalid),
+        "data-invalid": dataAttr(invalid),
+        placeholder: prop("placeholder") || getInputPlaceholder(locale, translations.placeholder(locale)),
+        defaultValue: computed("valueAsString")[index],
+        onBeforeInput(event) {
+          const { data } = getNativeEvent(event)
+          if (!isValidCharacter(data, separator, locale)) {
+            event.preventDefault()
+          }
+        },
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!prop("openOnClick")) return
+          if (!interactive) return
+          send({ type: "OPEN", src: "input.click" })
+        },
+        onFocus() {
+          send({ type: "INPUT.FOCUS", index })
+        },
+        onBlur(event) {
+          const value = event.currentTarget.value.trim()
+          send({ type: "INPUT.BLUR", value, index, fixOnBlur })
+        },
+        onKeyDown(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          const keyMap: EventKeyMap<HTMLInputElement> = {
+            Enter(event) {
+              // TODO: consider form submission (with enter key)
+              if (isComposingEvent(event)) return
+              if (isUnavailable(focusedValue)) return
+              if (event.currentTarget.value.trim() === "") return
+              send({ type: "INPUT.ENTER", value: event.currentTarget.value, index })
+            },
+          }
+
+          const exec = keyMap[event.key]
+          if (exec) {
+            exec(event)
+            event.preventDefault()
+          }
+        },
+        onInput(event) {
+          const value = event.currentTarget.value
+          send({ type: "INPUT.CHANGE", value: ensureValidCharacters(value, separator, locale), index })
+        },
+      })
+    },
+
+    getMonthSelectProps() {
+      return normalize.select({
+        ...parts.monthSelect.attrs,
+        id: dom.getMonthSelectId(scope),
+        "aria-label": translations.monthSelect,
+        disabled,
+        dir: prop("dir"),
+        defaultValue: startValue.month,
+        onChange(event) {
+          focusMonth(Number(event.currentTarget.value))
+        },
+      })
+    },
+
+    getYearSelectProps() {
+      return normalize.select({
+        ...parts.yearSelect.attrs,
+        id: dom.getYearSelectId(scope),
+        disabled,
+        "aria-label": translations.yearSelect,
+        dir: prop("dir"),
+        defaultValue: startValue.year,
+        onChange(event) {
+          focusYear(Number(event.currentTarget.value))
+        },
+      })
+    },
+
+    getPositionerProps() {
+      return normalize.element({
+        id: dom.getPositionerId(scope),
+        ...parts.positioner.attrs,
+        dir: prop("dir"),
+        style: popperStyles.floating,
+      })
+    },
+
+    getPresetTriggerProps(props) {
+      const value = Array.isArray(props.value) ? props.value : getDateRangePreset(props.value, locale, timeZone)
+      const valueAsString = value.filter((item) => item != null).map((item) => item.toDate(timeZone).toDateString())
+      return normalize.button({
+        ...parts.presetTrigger.attrs,
+        "aria-label": translations.presetTrigger(valueAsString),
+        type: "button",
+        onClick(event) {
+          if (event.defaultPrevented) return
+          if (!interactive) return
+          send({ type: "PRESET.CLICK", value })
+        },
+      })
+    },
+  }
+}
