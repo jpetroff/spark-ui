@@ -109,6 +109,9 @@ Ark and Zag are read-only upstream sources in sibling `../ark` and `../zag` chec
 ```sh
 make import checkbox DRY_RUN=1  # dependency/file/change report, no writes
 make import checkbox            # equivalent: make import COMPONENT=checkbox
+make import dialog popover      # import a batch; duplicate names are ignored
+make import COMPONENTS="dialog popover"
+pnpm vendor:import dialog popover
 make verify-imports
 pnpm registry:build
 ```
@@ -118,6 +121,10 @@ Node 22.18+ with built-in TypeScript stripping is required for importer commands
 Each component has editable `react.tsx`, `svelte.ts`, and `styles.css` entry files under `packages/<name>/src`. Ark implementation lives in the framework folders; Zag machines live in `common/zag`. Framework adapters, providers, and shared utilities live in `packages/shared/src`. Provider entrypoints reference those same shared context modules. Internal cross-component sources, such as Presence, are included automatically without forcing a public styled component installation.
 
 Public entry files and CSS are seeded once. Add wrappers and exports there, or edit implementation files directly. The importer rejects direct regeneration over locally modified/deleted implementation files; use the merge workflow below. Keep registered source paths stable. The registry verifier rejects unregistered file imports: register additional source files in the import tooling before publishing new local modules. Installed consumer copies are entirely owned by the consumer and have no such generation constraint.
+
+Batch imports validate every requested component before writing sources. If any component has no upstream implementation, the entire batch fails. Missing React or Svelte implementations produce warnings when the other framework is available. Imports also create missing package `tsconfig.json` files for public components, internal dependencies, and shared sources, preserving existing configs. Do not combine positional names with `COMPONENT` or `COMPONENTS`.
+
+Applying imports creates a local, Git-ignored `.import.lock.json` ledger. It retains requested/resulting components, upstream revisions, generation reports, branch names and commits, operation phases, command output, warnings, errors, and merge/cleanup results across runs. `vendor.lock.json` remains the committed source manifest. Dry runs change neither ledger nor sources. Keep the local ledger until you finish merging and cleaning up its recorded operations.
 
 ### Registry installation
 
@@ -162,9 +169,22 @@ To select specific commits instead, pass either or both refs (an omitted ref sti
 make update ARK_REF=<ark-commit> ZAG_REF=<zag-commit>
 ```
 
-`make update-upstream` remains an alias with the same options. The command regenerates all previously imported components on a `vendor/candidate-*` branch, advances `vendor/upstream`, then merges it into a new `update/upstream-*` branch based on your current branch. Once bootstrapped, `make import <new-component>` uses this same workflow at the revisions pinned in `vendor.lock.json`. Compatible Ark/Zag versions are required; the importer checks Ark's declared Zag requirements against the selected source versions.
+`make update-upstream` remains an alias with the same options. The command regenerates all previously imported components on a `vendor/candidate-*` branch, advances `vendor/upstream`, then merges it into a new `update/upstream-*` branch based on your current branch. Both temporary branch names include the requested component name or deduplicated batch count, followed by a timestamp/hash (for example, `update/upstream-date-picker-<suffix>` or `update/upstream-2-components-<suffix>`). Updates without explicit names label the set of existing components. Once bootstrapped, `make import <new-component...>` uses this same workflow at the revisions pinned in `vendor.lock.json`. Compatible Ark/Zag versions are required; the importer checks Ark's declared Zag requirements against the selected source versions.
 
 Generated commits use your Git identity when configured, otherwise the explicit automation identity `Spark UI Importer <spark-ui-importer@localhost>` without changing Git configuration. No automatic conflict resolution favors upstream. Resolve source conflicts and commit, then run `pnpm registry:build`, commit the regenerated `registry.json`, and validate before merging the update branch. `git merge --abort` aborts a conflicted integration. A generation failure leaves the candidate branch available for inspection and preserves your original branch. Do not merge candidate branches directly or delete the permanent baseline branch. This v1 workflow updates Spark; it does not update customized copies in consuming projects.
+
+After reviewing and validating the import, switch to the branch that should receive it:
+
+```sh
+git switch main                 # or your current development/release branch
+pnpm vendor:merge                # selects the sole pending review branch
+pnpm vendor:merge update/upstream-date-picker-<suffix>
+make merge-import BRANCH=update/upstream-date-picker-<suffix>
+```
+
+The merge command uses the ledger and merges into the branch checked out at invocation. If several operations are pending, specify the review branch explicitly. It requires a clean checkout and a normal target branch. A successful merge deletes that operation's candidate and review branches after confirming their commits are included in the target; it preserves `vendor/upstream` and unrelated branches. Branches changed since recording or checked out in another worktree are retained with a reason in the ledger. No remote branches are changed.
+
+If the target merge conflicts, resolve and commit on the target, then rerun the same merge command to finish cleanup. You can also abort with `git merge --abort` and retry later. Interrupted cleanup can be retried without repeating the merge. If a branch was retained, inspect and preserve any extra work before restoring its recorded tip or deleting it manually, then retry. Missing or malformed ledger data blocks automated merging and cleanup; restore the local ledger before continuing. Direct imports before bootstrap are logged but do not create review branches.
 
 ### Importer validation
 

@@ -13,5 +13,7 @@ vendor.lock.json
 registry.react.json
 registry.svelte.json
 .vendor-tests/
+.import.lock.json
+.import.lock.json.*.tmp
 # The importer composes generated public items with the native Button entry.
 registry.json

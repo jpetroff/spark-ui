@@ -22,6 +22,7 @@
     "aliases:sync": "node scripts/vendor/aliases.ts sync",
     "aliases:check": "node scripts/vendor/aliases.ts check",
     "vendor:import": "node scripts/vendor/command.ts",
+    "vendor:merge": "node scripts/vendor/merge.ts",
     "verify-imports": "node scripts/vendor/import.ts verify",
     "test:importer": "node --test scripts/vendor/*.test.ts",
     "typecheck:vendor": "tsc -p tsconfig.vendor-react.json && node packages/vendor-tools/node_modules/svelte-check/bin/svelte-check --tsconfig ./tsconfig.vendor-svelte.json",

@@ -155,5 +155,7 @@ public/r/
 registry.react.json
 registry.svelte.json
 .vendor-tests/
+.import.lock.json
+.import.lock.json.*.tmp
 # Local code-navigation metadata is not part of the source baseline.
 .serena/

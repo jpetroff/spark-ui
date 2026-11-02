@@ -3,7 +3,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execFileSync } from 'node:child_process'
 import semver from 'semver'
+import { format, resolveConfig } from 'prettier'
 import { resolveSourceImport, syncAliases } from './aliases.ts'
+import { startOperation, saveOperation, failOperation, generationOptions } from './ledger.ts'
 import {
   Graph,
   Snapshot,
@@ -23,6 +25,10 @@ export const write = (file: string, content: string) => {
   fs.writeFileSync(path.join(root, file), content)
 }
 export const stringify = (value: unknown) => `${JSON.stringify(value, null, 2)}\n`
+async function formatConfig(file: string, content: string) {
+  const filepath = path.join(root, file)
+  return format(content, { ...(await resolveConfig(filepath)), filepath })
+}
 export function constraints(values: string[]) {
   let sets = ['*']
   for (const value of [...new Set(values)].sort()) {
@@ -39,7 +45,15 @@ export function constraints(values: string[]) {
 }
 export async function generate(
   names: string[],
-  options: { ark?: string; zag?: string; apply?: boolean; baseline?: boolean } = {},
+  options: {
+    ark?: string
+    zag?: string
+    apply?: boolean
+    baseline?: boolean
+    onDiagnostic?: (level: 'warning', message: string) => void
+    onUpstream?: (upstream: Record<string, { commit: string }>) => void
+    onReport?: (report: Record<string, any>) => void
+  } = {},
 ) {
   const old = fs.existsSync(path.join(root, lockPath)) ? json(lockPath) : undefined
   const components = [...new Set([...(old?.components ?? []), ...names])].sort() as string[]
@@ -56,6 +70,7 @@ export async function generate(
     path.resolve(root, process.env.ZAG_SOURCE ?? '../zag'),
     options.zag ?? old?.upstream.zag.commit ?? 'HEAD',
   )
+  options.onUpstream?.({ ark: { commit: ark.commit }, zag: { commit: zag.commit } })
   if (
     old &&
     !options.baseline &&
@@ -80,7 +95,9 @@ export async function generate(
         `${frameworkRoot(framework)}/providers/${component}/index.ts`,
       ].find((file) => ark.files.has(file))
       if (!file) {
-        console.error(`No ${framework} implementation for ${component} at ${ark.commit}`)
+        const message = `No ${framework} implementation for ${component} at ${ark.commit}`
+        console.warn(message)
+        options.onDiagnostic?.('warning', message)
         continue
       }
       const id = graph.visit({ repo: 'ark', file })
@@ -170,7 +187,17 @@ export async function generate(
       fs.readFileSync(path.join(root, file), 'utf8') !== content
     )
       throw new Error(`Refusing to replace existing file ${file}`)
-  const changed = [...output]
+  const configs = new Map<string, string>()
+  for (const file of [...output.keys(), ...Object.keys(starters)]) {
+    const name = /^packages\/([^/]+)\/src\//.exec(file)?.[1]
+    const config = `packages/${name}/tsconfig.json`
+    if (name && !configs.has(config) && !fs.existsSync(path.join(root, config)))
+      configs.set(
+        config,
+        await formatConfig(config, stringify({ extends: '../../tsconfig.json', include: ['src'] })),
+      )
+  }
+  const changed = [...output, ...configs]
     .filter(
       ([file, content]) =>
         !fs.existsSync(path.join(root, file)) ||
@@ -189,12 +216,18 @@ export async function generate(
     ),
   }
   console.log(stringify(report))
+  options.onReport?.(report)
   if (!options.apply) return manifest
   for (const [file, content] of output) write(file, content)
   for (const file of removed) fs.rmSync(path.join(root, file), { force: true })
   for (const [file, content] of Object.entries(starters))
     if (!fs.existsSync(path.join(root, file))) write(file, content)
+  for (const [file, content] of configs) write(file, content)
   syncAliases(root)
+  write(
+    'tsconfig.json',
+    await formatConfig('tsconfig.json', fs.readFileSync(path.join(root, 'tsconfig.json'), 'utf8')),
+  )
   write(lockPath, stringify(manifest))
   return manifest
 }
@@ -364,14 +397,25 @@ export function verify() {
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   try {
     const [command, ...args] = process.argv.slice(2)
-    if (command === 'import')
-      await generate(
-        args.filter((a) => !a.startsWith('--')),
-        { apply: args.includes('--apply') },
-      )
-    else if (command === 'registry') buildRegistry()
+    if (command === 'import') {
+      const names = args.filter((a) => !a.startsWith('--'))
+      const apply = args.includes('--apply')
+      const operation = apply ? startOperation('import', names) : undefined
+      try {
+        if (operation) operation.phase = 'generation'
+        await generate(names, { apply, ...(operation ? generationOptions(operation) : {}) })
+        if (operation) {
+          operation.status = 'imported'
+          operation.phase = 'done'
+          saveOperation(operation)
+        }
+      } catch (error) {
+        if (operation) failOperation(operation, error)
+        throw error
+      }
+    } else if (command === 'registry') buildRegistry()
     else if (command === 'verify') verify()
-    else throw new Error('Usage: import.ts import <component> [--apply] | registry | verify')
+    else throw new Error('Usage: import.ts import <component...> [--apply] | registry | verify')
   } catch (error) {
     console.error(error instanceof Error ? error.message : error)
     process.exitCode = 1

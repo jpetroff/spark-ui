@@ -13,6 +13,8 @@
     "scripts/vendor/graph.ts",
     "scripts/vendor/import.ts",
     "scripts/vendor/update.ts",
-    "scripts/vendor/command.ts"
+    "scripts/vendor/command.ts",
+    "scripts/vendor/ledger.ts",
+    "scripts/vendor/merge.ts"
   ]
 }

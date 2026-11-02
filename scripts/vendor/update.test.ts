@@ -79,7 +79,7 @@ for (const { mode, scenario } of ['local', 'refs'].flatMap((mode) =>
       put(
         'spark',
         '.gitignore',
-        'node_modules\npublic/\nregistry.react.json\nregistry.svelte.json\n',
+        'node_modules\npublic/\nregistry.react.json\nregistry.svelte.json\n.import.lock.json\n.import.lock.json.*.tmp\n',
       )
       put('spark', 'registry.json', '{"name":"fixture","items":[]}\n')
       put('spark', 'tsconfig.json', '{"compilerOptions":{"paths":{"@/*":["./src/*"]}}}\n')
