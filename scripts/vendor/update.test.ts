@@ -73,6 +73,9 @@ for (const { mode, scenario } of ['local', 'refs'].flatMap((mode) =>
       fs.cpSync(path.join(root, 'scripts/vendor'), path.join(dirs.spark!, 'scripts/vendor'), {
         recursive: true,
       })
+      fs.cpSync(path.join(root, 'scripts/template'), path.join(dirs.spark!, 'scripts/template'), {
+        recursive: true,
+      })
       fs.copyFileSync(path.join(root, 'Makefile'), path.join(dirs.spark!, 'Makefile'))
       fs.symlinkSync(path.join(root, 'node_modules'), path.join(dirs.spark!, 'node_modules'), 'dir')
       put('spark', 'package.json', '{"type":"module"}\n')

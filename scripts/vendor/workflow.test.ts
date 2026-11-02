@@ -62,6 +62,7 @@ function fixture(bootstrap = true) {
           name: `@ark-ui/${framework}`,
           version: '1.0.0',
           exports: { '.': './src/index.ts' },
+          peerDependencies: { [framework]: framework === 'react' ? '^19.0.0' : '^5.0.0' },
         }),
       )
       const src = `packages/${framework}/src${framework === 'svelte' ? '/lib' : ''}`
@@ -82,6 +83,24 @@ function fixture(bootstrap = true) {
       put('ark', `${src}/utils/shared.ts`, 'export const common = 1\n')
     }
     put('ark', 'packages/react/src/components/only-react/index.ts', 'export const value = 1\n')
+    for (const framework of ['react', 'svelte']) {
+      const base = `packages/${framework}/src${framework === 'svelte' ? '/lib' : ''}/components/toggle-group`
+      put('ark', `${base}/index.ts`, "export * as ToggleGroup from './toggle-group.ts'\n")
+      put(
+        'ark',
+        `${base}/toggle-group.ts`,
+        framework === 'react'
+          ? "export { Root, Root as Label } from './root.tsx'\n"
+          : "export { default as Root, default as Label } from './root.svelte'\n",
+      )
+      put(
+        'ark',
+        `${base}/${framework === 'react' ? 'root.tsx' : 'root.svelte'}`,
+        framework === 'react'
+          ? "import type { ComponentProps } from 'react'; export function Root(props: ComponentProps<'div'>) { return <div {...props} /> }\n"
+          : `<script lang="ts">import type { HTMLAttributes } from 'svelte/elements'; let { children, ...props }: HTMLAttributes<HTMLDivElement> = $props()</script><div {...props}>{@render children?.()}</div>\n`,
+      )
+    }
     put('ark', 'LICENSE', 'Ark fixture license\n')
     put('zag', 'LICENSE', 'Zag fixture license\n')
     put(
@@ -92,6 +111,9 @@ function fixture(bootstrap = true) {
     commit('ark')
     commit('zag')
     fs.cpSync(path.join(root, 'scripts/vendor'), path.join(spark, 'scripts/vendor'), {
+      recursive: true,
+    })
+    fs.cpSync(path.join(root, 'scripts/template'), path.join(spark, 'scripts/template'), {
       recursive: true,
     })
     fs.copyFileSync(path.join(root, 'Makefile'), path.join(spark, 'Makefile'))
@@ -237,6 +259,139 @@ test('direct imports generate and repair configs without replacing custom config
     assert.ok(!f.exists('packages/third'))
     assert.throws(() => f.run('command', 'third', 'missing'), /No upstream implementation/)
     assert.ok(!f.exists('packages/third'))
+  } finally {
+    f.dispose()
+  }
+})
+
+test('new imports render editable templates, register assemblies, and preserve existing files', () => {
+  const f = fixture(false)
+  try {
+    const sample = f.read('packages/sample/src/svelte.ts')
+    const config = f.read('packages/sample/tsconfig.json')
+    f.put('spark', 'packages/sample/src/styles.css', '/* application styles */\n')
+    f.put(
+      'spark',
+      'scripts/template/react.tsx.template',
+      '// template edit\n' + f.read('scripts/template/react.tsx.template'),
+    )
+    f.put(
+      'spark',
+      'scripts/template/svelte-composition.svelte.template',
+      '<!-- template edit -->\n' + f.read('scripts/template/svelte-composition.svelte.template'),
+    )
+    f.put(
+      'spark',
+      'scripts/template/tsconfig.json',
+      JSON.stringify({
+        extends: '../../tsconfig.json',
+        include: ['src'],
+        exclude: ['src/excluded.ts'],
+      }),
+    )
+    f.make('import', 'toggle-group', 'DRY_RUN=1')
+    assert.ok(!f.exists('packages/toggle-group'))
+    f.make('import', 'toggle-group')
+    const react = f.read('packages/toggle-group/src/react.tsx')
+    const svelte = f.read('packages/toggle-group/src/svelte.ts')
+    const composition = 'packages/toggle-group/src/svelte/toggle-group-composition.svelte'
+    assert.match(react, /template edit/)
+    assert.match(react, /export type ToggleGroupProps/)
+    assert.match(
+      react,
+      /export const ToggleGroup = Object.assign\(AssembledComponent, ComponentParts\)/,
+    )
+    assert.match(
+      svelte,
+      /export const ToggleGroup = Object.assign\(AssembledComponent, ComponentParts\)/,
+    )
+    assert.match(f.read(composition), /template edit/)
+    assert.match(f.read(composition), /import type \{ ToggleGroupProps \} from '\.\.\/svelte.ts'/)
+    assert.deepEqual(JSON.parse(f.read('packages/toggle-group/tsconfig.json')).exclude, [
+      'src/excluded.ts',
+    ])
+    assert.equal(f.read('packages/sample/src/svelte.ts'), sample)
+    assert.equal(f.read('packages/sample/tsconfig.json'), config)
+    assert.equal(f.read('packages/sample/src/styles.css'), '/* application styles */\n')
+    assert.ok(!f.exists('packages/sample/src/svelte/sample-composition.svelte'))
+    assert.ok(JSON.parse(f.read('vendor.lock.json')).starters.includes(composition))
+    const original = f.read(composition)
+    f.put(
+      'spark',
+      'scripts/template/svelte-composition.svelte.template',
+      '<!-- future template -->\n' + f.read('scripts/template/svelte-composition.svelte.template'),
+    )
+    f.run('command', 'toggle-group')
+    assert.equal(f.read(composition), original)
+    f.run('import', 'registry')
+    f.run('import', 'verify')
+    const item = JSON.parse(f.read('public/r/svelte/toggle-group-svelte.json'))
+    assert.ok(item.files.some((file: { path: string }) => file.path === composition))
+    f.put(
+      'spark',
+      'Consumer.tsx',
+      "import { ToggleGroup } from './packages/toggle-group/src/react.tsx'; export const view = <ToggleGroup><ToggleGroup.Label>React</ToggleGroup.Label></ToggleGroup>\n",
+    )
+    f.put(
+      'spark',
+      'Consumer.svelte',
+      `<script lang="ts">import { ToggleGroup } from './packages/toggle-group/src/svelte.ts'</script><ToggleGroup><ToggleGroup.Label>Svelte</ToggleGroup.Label></ToggleGroup>\n`,
+    )
+    f.put(
+      'spark',
+      'tsconfig.generated.json',
+      JSON.stringify({
+        extends: './tsconfig.json',
+        compilerOptions: {
+          target: 'ES2022',
+          module: 'ESNext',
+          moduleResolution: 'Bundler',
+          jsx: 'react-jsx',
+          allowImportingTsExtensions: true,
+          noEmit: true,
+          strict: true,
+          skipLibCheck: true,
+          types: ['vite/client', 'svelte', 'node'],
+        },
+        include: ['Consumer.tsx', 'Consumer.svelte', 'packages/toggle-group/src'],
+      }),
+    )
+    execFileSync(
+      process.execPath,
+      [path.join(root, 'node_modules/typescript-parser/bin/tsc'), '-p', 'tsconfig.generated.json'],
+      { cwd: f.spark, stdio: 'pipe', encoding: 'utf8' },
+    )
+    execFileSync(
+      process.execPath,
+      [
+        path.join(root, 'packages/vendor-tools/node_modules/svelte-check/bin/svelte-check'),
+        '--tsconfig',
+        './tsconfig.generated.json',
+      ],
+      { cwd: f.spark, stdio: 'pipe', encoding: 'utf8' },
+    )
+  } finally {
+    f.dispose()
+  }
+})
+
+test('branch imports use the invoking branch templates before switching to the older baseline', () => {
+  const f = fixture()
+  try {
+    f.put(
+      'spark',
+      'scripts/template/react.tsx.template',
+      '// invoking branch template\n' + f.read('scripts/template/react.tsx.template'),
+    )
+    f.commit()
+    f.importBranch('toggle-group')
+    assert.match(f.read('packages/toggle-group/src/react.tsx'), /invoking branch template/)
+    assert.equal(f.latest().status, 'ready')
+    assert.ok(
+      JSON.parse(f.read('public/r/svelte/toggle-group-svelte.json')).files.some(
+        (file: { path: string }) => file.path.endsWith('toggle-group-composition.svelte'),
+      ),
+    )
   } finally {
     f.dispose()
   }

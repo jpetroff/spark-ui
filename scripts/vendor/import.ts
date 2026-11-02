@@ -5,6 +5,7 @@ import { execFileSync } from 'node:child_process'
 import semver from 'semver'
 import { format, resolveConfig } from 'prettier'
 import { resolveSourceImport, syncAliases } from './aliases.ts'
+import { componentStarters, renderTemplate } from './templates.ts'
 import { startOperation, saveOperation, failOperation, generationOptions } from './ledger.ts'
 import {
   Graph,
@@ -143,10 +144,22 @@ export async function generate(
   const starters: Record<string, string> = {}
   for (const { component, framework, root: entryRoot } of Object.values(entries)) {
     const file = `packages/${component}/src/${framework === 'react' ? 'react.tsx' : 'svelte.ts'}`
-    starters[file] =
-      `${framework === 'react' ? "'use client'\n\n" : ''}// Customize this public API and compose wrappers here. Implementation sources are editable.\nimport './styles.css'\n${fs.existsSync(path.join(root, `packages/${component}/src/recipe.css`)) ? "\n// Optional sample design system; uncomment and edit recipe.css to adopt it.\n// import './recipe.css'\n\n" : ''}export * from '${relative(file, graph.nodes.get(entryRoot)!.destination)}'\n`
-    starters[`packages/${component}/src/styles.css`] =
-      `/* ${component}: add styles using Ark's data-scope and data-part attributes. */\n`
+    const composition = `packages/${component}/src/svelte/${component}-composition.svelte`
+    Object.assign(
+      starters,
+      componentStarters({
+        component,
+        framework,
+        entry: graph.nodes.get(entryRoot)!.destination,
+        content: graph.nodes.get(entryRoot)!.content,
+        hasRecipe: fs.existsSync(path.join(root, `packages/${component}/src/recipe.css`)),
+        // Existing Svelte barrels stay barrels; only new assemblies need a helper file.
+        assemble:
+          framework === 'react' ||
+          old?.starters.includes(composition) ||
+          (!old?.starters.includes(file) && !fs.existsSync(path.join(root, file))),
+      }),
+    )
   }
   const manifest = {
     version: 1,
@@ -192,10 +205,7 @@ export async function generate(
     const name = /^packages\/([^/]+)\/src\//.exec(file)?.[1]
     const config = `packages/${name}/tsconfig.json`
     if (name && !configs.has(config) && !fs.existsSync(path.join(root, config)))
-      configs.set(
-        config,
-        await formatConfig(config, stringify({ extends: '../../tsconfig.json', include: ['src'] })),
-      )
+      configs.set(config, await formatConfig(config, renderTemplate('tsconfig.json')))
   }
   const changed = [...output, ...configs]
     .filter(
@@ -265,10 +275,11 @@ export function buildRegistry() {
         .readdirSync(path.join(root, 'packages/styles/src'))
         .map((file) => `packages/styles/src/${file}`)
     : []
-  const recipeFiles = [...visualComponents].flatMap((name) =>
-    ['functional.css', 'recipe.css', `svelte/${name}-composition.svelte`]
-      .map((file) => `packages/${name}/src/${file}`)
-      .filter((file) => fs.existsSync(path.join(root, file))),
+  const recipeFiles = [...new Set([...visualComponents, ...(lock.components ?? [])])].flatMap(
+    (name) =>
+      ['functional.css', 'recipe.css', `svelte/${name}-composition.svelte`]
+        .map((file) => `packages/${name}/src/${file}`)
+        .filter((file) => fs.existsSync(path.join(root, file))),
   )
   const all = [
     ...new Set([

@@ -1,0 +1,9 @@
+<!-- Editable assembly. Add subcomponents and their props here as needed. -->
+<script lang="ts">
+  import type { {{componentName}}Props } from '{{propsImport}}'
+  import { {{componentName}} as ComponentParts } from '{{partsImport}}'
+
+  let props: {{componentName}}Props = $props()
+</script>
+
+<ComponentParts.Root {...props} />

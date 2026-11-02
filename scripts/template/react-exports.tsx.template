@@ -1,0 +1,6 @@
+'use client'
+
+// Customize this public API. Implementation sources are editable.
+import './styles.css'
+{{recipeImport}}
+export * from '{{entryImport}}'

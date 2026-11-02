@@ -1,0 +1,11 @@
+import './styles.css'
+{{recipeImport}}
+import type { ComponentProps } from 'svelte'
+import { {{componentName}} as ComponentParts } from '{{entryImport}}'
+import AssembledComponent from '{{compositionImport}}'
+export * from '{{entryImport}}'
+
+export type {{componentName}}Props = ComponentProps<typeof ComponentParts.Root>
+
+/** Editable assembly; customize its markup in {{compositionImport}}. */
+export const {{componentName}} = Object.assign(AssembledComponent, ComponentParts)

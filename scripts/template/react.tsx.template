@@ -1,0 +1,16 @@
+'use client'
+
+import './styles.css'
+{{recipeImport}}
+import type { ComponentProps } from 'react'
+import { {{componentName}} as ComponentParts } from '{{entryImport}}'
+export * from '{{entryImport}}'
+
+export type {{componentName}}Props = ComponentProps<typeof ComponentParts.Root>
+
+/** Editable assembly. Add subcomponents and their props here as needed. */
+function AssembledComponent(props: {{componentName}}Props) {
+  return <ComponentParts.Root {...props} />
+}
+
+export const {{componentName}} = Object.assign(AssembledComponent, ComponentParts)

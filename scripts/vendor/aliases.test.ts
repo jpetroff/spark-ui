@@ -120,6 +120,9 @@ test('registry output resolves aliases to canonical installed files and verifier
     fs.cpSync(path.join(root, 'scripts/vendor'), path.join(dir, 'scripts/vendor'), {
       recursive: true,
     })
+    fs.cpSync(path.join(root, 'scripts/template'), path.join(dir, 'scripts/template'), {
+      recursive: true,
+    })
     fs.symlinkSync(path.join(root, 'node_modules'), path.join(dir, 'node_modules'), 'dir')
     const files = {
       'packages/sample/src/react/ark/index.ts': `export { value } from '@spark/shared/react/zag/index.ts'; export type T = import('@spark/shared/react/zag/index.ts').T; const text = '@spark/shared/react/zag/index.ts'`,

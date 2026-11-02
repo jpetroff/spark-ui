@@ -11,16 +11,18 @@ For command-by-command checks, exact error messages, ledger interpretation, and 
 
 ## Implementation map
 
-| File                        | Responsibility                                                                                          |
-| --------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `scripts/vendor/graph.ts`   | Git snapshots, source resolution, dependency traversal, parser-based rewriting, canonical destinations. |
-| `scripts/vendor/import.ts`  | Generation, lock manifest, npm range intersection, registry catalogs/artifacts, import verification.    |
-| `scripts/vendor/command.ts` | Route imports to direct generation before bootstrap or branch updates afterward.                        |
-| `scripts/vendor/update.ts`  | Clean-checkout enforcement, baseline regeneration, integration branches, ordinary Git merges.           |
-| `scripts/vendor/ledger.ts`  | Local operation schema, atomic persistence, generation diagnostics, captured command output.            |
-| `scripts/vendor/merge.ts`   | Review selection, merging into the checked-out target, ancestry checks, resumable branch cleanup.       |
-| `scripts/vendor/aliases.ts` | Canonical cross-component aliases, root TypeScript path synchronization, Vite aliases.                  |
-| `Makefile`                  | Positional/named batch imports, dry runs, bootstrap, updates, merge cleanup, verification.              |
+| File                          | Responsibility                                                                                          |
+| ----------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `scripts/vendor/graph.ts`     | Git snapshots, source resolution, dependency traversal, parser-based rewriting, canonical destinations. |
+| `scripts/vendor/templates.ts` | Starter template loading, namespace detection, placeholder expansion, and output paths.                 |
+| `scripts/template/`           | Editable first-import templates for public APIs, Svelte compositions, styles, and package configs.      |
+| `scripts/vendor/import.ts`    | Generation, lock manifest, npm range intersection, registry catalogs/artifacts, import verification.    |
+| `scripts/vendor/command.ts`   | Route imports to direct generation before bootstrap or branch updates afterward.                        |
+| `scripts/vendor/update.ts`    | Clean-checkout enforcement, baseline regeneration, integration branches, ordinary Git merges.           |
+| `scripts/vendor/ledger.ts`    | Local operation schema, atomic persistence, generation diagnostics, captured command output.            |
+| `scripts/vendor/merge.ts`     | Review selection, merging into the checked-out target, ancestry checks, resumable branch cleanup.       |
+| `scripts/vendor/aliases.ts`   | Canonical cross-component aliases, root TypeScript path synchronization, Vite aliases.                  |
+| `Makefile`                    | Positional/named batch imports, dry runs, bootstrap, updates, merge cleanup, verification.              |
 
 ## Source graph
 
@@ -58,6 +60,7 @@ packages/shared/src/
 - `vendor.lock.json` records importer version, upstream commits/versions, public entry closures, source mappings, source/generated hashes, external requirements, and starter paths.
 - Direct regeneration refuses modified/deleted implementation files and collisions with unowned files. Baseline updates replace generated files and remove obsolete sources.
 - Generate missing package-root `tsconfig.json` files for participating public components, internal dependencies, and shared source roots. Each extends `../../tsconfig.json` and includes `src`. Preserve existing configs, format newly generated configs and the root config, and commit them with the baseline. Package configs are editor boundaries and are excluded from registry source/starter lists. The root includes `ES2023.Array` for Date Picker's `findLastIndex` usage.
+- New compound components are seeded from [`scripts/template/`](../scripts/template/README.md): React and Svelte indexes export `Object.assign(AssembledComponent, ComponentParts)`, with typed Root forwarding and an editable Svelte composition helper. Provider/utility entries without a matching compound namespace keep public export barrels. Starter contents and package configs live in separate template files; the invoking branch's templates are loaded before switching to `vendor/upstream`. Existing entries, compositions, styles, and configs are preserved; template edits do not migrate created components. Composition helpers are registered as starters and included in their framework registry items.
 - Registry sources must be registered in the locked graph/starter list. New local helper files require importer registration before publication; consumer-owned installed copies have no generation restriction.
 
 ## Registry generation
