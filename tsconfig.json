@@ -31,6 +31,7 @@
       "@spark/popover/*": ["./packages/popover/src/*"],
       "@spark/presence/*": ["./packages/presence/src/*"],
       "@spark/shared/*": ["./packages/shared/src/*"],
+      "@spark/styles/*": ["./packages/styles/src/*"],
       "@spark/utils/*": ["./packages/utils/src/*"]
     }
   },

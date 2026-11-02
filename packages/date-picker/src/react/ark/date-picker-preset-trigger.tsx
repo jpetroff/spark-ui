@@ -18,7 +18,7 @@ const splitPresetTriggerProps = createSplitProps<PresetTriggerProps>()
 export const DatePickerPresetTrigger = forwardRef<HTMLButtonElement, DatePickerPresetTriggerProps>((props, ref) => {
   const [presetTriggerProps, localProps] = splitPresetTriggerProps(props, ['value'])
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getPresetTriggerProps(presetTriggerProps), localProps)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-preset-trigger' }, datePicker.getPresetTriggerProps(presetTriggerProps), localProps)
 
   return <ark.button {...mergedProps} ref={ref} />
 })

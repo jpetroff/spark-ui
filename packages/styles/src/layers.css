@@ -1,0 +1,2 @@
+/* Native CSS cascade layers; no Tailwind compiler is involved. */
+@layer spark.tokens, spark.theme, spark.base, spark.components;

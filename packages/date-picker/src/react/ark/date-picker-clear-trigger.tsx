@@ -12,7 +12,7 @@ export interface DatePickerClearTriggerProps extends HTMLProps<'button'>, DatePi
 
 export const DatePickerClearTrigger = forwardRef<HTMLButtonElement, DatePickerClearTriggerProps>((props, ref) => {
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getClearTriggerProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-clear-trigger' }, datePicker.getClearTriggerProps(), props)
 
   return <ark.button {...mergedProps} ref={ref} />
 })

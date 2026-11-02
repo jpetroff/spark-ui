@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const popover = usePopoverContext()
   const presence = usePresenceContext()
-  const mergedProps = $derived(mergeProps(popover().getPositionerProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-popover-positioner' }, popover().getPositionerProps(), props))
 </script>
 
 {#if !presence().unmounted}

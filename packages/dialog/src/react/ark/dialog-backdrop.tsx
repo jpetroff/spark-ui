@@ -18,7 +18,7 @@ export const DialogBackdrop = forwardRef<HTMLDivElement, DialogBackdropProps>((p
   const dialog = useDialogContext()
   const renderStrategyProps = useRenderStrategyPropsContext()
   const presence = usePresence({ ...renderStrategyProps, present: dialog.open })
-  const mergedProps = mergeProps(dialog.getBackdropProps(), presence.getPresenceProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-dialog-backdrop' }, dialog.getBackdropProps(), presence.getPresenceProps(), props)
   const composedRefs = useComposedRefs(presence.ref, ref)
 
   return (

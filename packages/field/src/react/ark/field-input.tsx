@@ -12,7 +12,7 @@ export interface FieldInputProps extends HTMLProps<'input'>, FieldInputBaseProps
 
 export const FieldInput = forwardRef<HTMLInputElement, FieldInputProps>((props, ref) => {
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'input'>>(field?.getInputProps(), props)
+  const mergedProps = mergeProps<HTMLProps<'input'>>({ className: 'spark-field-input' }, field?.getInputProps(), props)
 
   return <ark.input {...mergedProps} ref={ref} />
 })

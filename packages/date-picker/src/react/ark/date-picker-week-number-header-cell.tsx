@@ -15,7 +15,7 @@ export const DatePickerWeekNumberHeaderCell = forwardRef<HTMLTableCellElement, D
   (props, ref) => {
     const datePicker = useDatePickerContext()
     const tableProps = useDatePickerTablePropsContext()
-    const mergedProps = mergeProps(datePicker.getWeekNumberHeaderCellProps(tableProps), props)
+    const mergedProps = mergeProps({ className: 'spark-date-picker-week-number-header-cell' }, datePicker.getWeekNumberHeaderCellProps(tableProps), props)
 
     return <ark.th {...mergedProps} ref={ref} />
   },

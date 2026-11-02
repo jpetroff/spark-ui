@@ -16,7 +16,7 @@ export interface DatePickerContentProps extends HTMLProps<'div'>, DatePickerCont
 export const DatePickerContent = forwardRef<HTMLDivElement, DatePickerContentProps>((props, ref) => {
   const datePicker = useDatePickerContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(datePicker.getContentProps(), presence.getPresenceProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-content' }, datePicker.getContentProps(), presence.getPresenceProps(), props)
   const composedRefs = useComposedRefs(presence.ref, ref)
 
   return (

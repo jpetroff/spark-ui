@@ -24,7 +24,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
     },
   })
 
-  const mergedProps = $derived(mergeProps(field?.()?.getInputProps() ?? {}, nativeInputProps, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-input' }, field?.()?.getInputProps() ?? {}, nativeInputProps, props))
 </script>
 
 <Ark as="input" bind:ref {...mergedProps} />

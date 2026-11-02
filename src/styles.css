@@ -1,57 +1,60 @@
-@import 'tailwindcss';
-@source '../packages';
+/* Workshop presentation only. Distributed components enable none of these recipes by default. */
+@import '../packages/styles/src/index.css';
+@import '../packages/button/src/recipe.css';
+@import '../packages/checkbox/src/recipe.css';
+@import '../packages/field/src/recipe.css';
+@import '../packages/dialog/src/recipe.css';
+@import '../packages/popover/src/recipe.css';
+@import '../packages/date-picker/src/recipe.css';
 
-@custom-variant dark (&:is(.dark *));
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+body {
+  margin: 0;
+  font-family: var(--spark-font-family);
+  background: var(--spark-surface);
+  color: var(--spark-text);
 }
-
-:root {
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-  --background: oklch(0.985 0 0);
-  --foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.95 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted-foreground: oklch(0.44 0 0);
-  --accent: oklch(0.93 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --border: oklch(0.9 0 0);
-  --input: oklch(0.85 0 0);
-  --ring: oklch(0.556 0 0);
+.workshop {
+  box-sizing: border-box;
+  margin-inline: auto;
+  display: flex;
+  min-height: 100vh;
+  max-width: 48rem;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 2rem;
 }
-
-.dark {
-  color-scheme: dark;
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.985 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --border: oklch(0.35 0 0);
-  --input: oklch(0.4 0 0);
-  --ring: oklch(0.708 0 0);
+.workshop header,
+.workshop-install {
+  display: grid;
+  gap: 0.75rem;
 }
-
-@layer base {
-  body {
-    @apply m-0 bg-background text-foreground antialiased;
-  }
+.workshop h1,
+.workshop h2,
+.workshop p {
+  margin: 0;
+}
+.workshop h1 {
+  font-size: 2.5rem;
+  letter-spacing: -0.025em;
+}
+.workshop h2 {
+  font-size: 1.125rem;
+}
+.workshop-muted {
+  color: var(--spark-text-muted);
+}
+.workshop-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+.workshop pre {
+  overflow-x: auto;
+  border: 1px solid var(--spark-border);
+  border-radius: var(--spark-radius-control);
+  background: var(--spark-secondary);
+  padding: 1rem;
+  font-size: 0.875rem;
 }

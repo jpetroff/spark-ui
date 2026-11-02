@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), indeterminate, ...rest }: CheckboxIndicatorProps = $props()
 
   const checkbox = useCheckboxContext()
-  const mergedProps = $derived(mergeProps(checkbox().getIndicatorProps(), rest))
+  const mergedProps = $derived(mergeProps({ class: 'spark-checkbox-indicator' }, checkbox().getIndicatorProps(), rest))
   const isVisible = $derived(indeterminate ? checkbox().indeterminate : checkbox().checked)
 </script>
 

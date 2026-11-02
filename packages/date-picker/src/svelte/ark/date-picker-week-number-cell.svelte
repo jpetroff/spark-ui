@@ -25,7 +25,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const datePicker = useDatePickerContext()
 
-  const mergedProps = $derived(mergeProps(datePicker().getWeekNumberCellProps(cellProps), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-week-number-cell' }, datePicker().getWeekNumberCellProps(cellProps), localProps))
 </script>
 
 <Ark as="td" bind:ref {...mergedProps} />

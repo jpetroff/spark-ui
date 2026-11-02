@@ -14,7 +14,7 @@ export interface DatePickerTableHeadProps extends HTMLProps<'thead'>, DatePicker
 export const DatePickerTableHead = forwardRef<HTMLTableSectionElement, DatePickerTableHeadProps>((props, ref) => {
   const datePicker = useDatePickerContext()
   const tableProps = useDatePickerTablePropsContext()
-  const mergedProps = mergeProps(datePicker.getTableHeadProps(tableProps), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-table-head' }, datePicker.getTableHeadProps(tableProps), props)
 
   return <ark.thead {...mergedProps} ref={ref} />
 })

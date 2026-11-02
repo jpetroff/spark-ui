@@ -23,7 +23,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   const renderStrategyProps = useRenderStrategyPropsContext()
 
   const presence = usePresence(() => ({ ...renderStrategyProps(), present: dialog().open }))
-  const mergedProps = $derived(mergeProps(dialog().getBackdropProps(), presence().getPresenceProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-dialog-backdrop' }, dialog().getBackdropProps(), presence().getPresenceProps(), props))
 
   function setNode(node: Element | null) {
     presence().setNode(node)

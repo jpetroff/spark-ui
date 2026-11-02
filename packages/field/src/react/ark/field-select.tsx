@@ -12,7 +12,7 @@ export interface FieldSelectProps extends HTMLProps<'select'>, FieldSelectBasePr
 
 export const FieldSelect = forwardRef<HTMLSelectElement, FieldSelectProps>((props, ref) => {
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'select'>>(field?.getSelectProps(), props)
+  const mergedProps = mergeProps<HTMLProps<'select'>>({ className: 'spark-field-select' }, field?.getSelectProps(), props)
 
   return <ark.select {...mergedProps} ref={ref} />
 })

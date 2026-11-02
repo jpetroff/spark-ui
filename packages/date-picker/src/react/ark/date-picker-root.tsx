@@ -69,7 +69,7 @@ export const DatePickerRoot = forwardRef<HTMLDivElement, DatePickerRootProps>((p
   ])
   const datePicker = useDatePicker(useDatePickerProps)
   const presence = usePresence(mergeProps({ present: datePicker.open }, presenceProps))
-  const mergedProps = mergeProps(datePicker.getRootProps(), localProps)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-root' }, datePicker.getRootProps(), localProps)
 
   return (
     <DatePickerProvider value={datePicker}>

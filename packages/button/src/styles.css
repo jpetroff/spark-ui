@@ -1,1 +1,3 @@
-/* button: add styles using the data-slot="button" attribute. */
+/* Keep these functional rules enabled when replacing the sample design system. */
+@import '../../styles/src/index.css';
+@import './functional.css';

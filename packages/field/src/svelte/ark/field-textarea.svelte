@@ -38,7 +38,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
     style: autoresize ? 'resize: none' : undefined,
   })
 
-  const mergedProps = $derived(mergeProps(field?.()?.getTextareaProps() ?? {}, nativeTextareaProps, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-textarea' }, field?.()?.getTextareaProps() ?? {}, nativeTextareaProps, props))
 
   function setNode(node: HTMLTextAreaElement | null) {
     textareaRef = node

@@ -22,7 +22,7 @@ packages/
     src/
       react.tsx              Public React entry point
       svelte.ts              Public Svelte entry point
-      styles.css             Component stylesheet
+      styles.css             Functional component stylesheet; optional recipe.css is shipped inactive
       react/button.tsx       Native React implementation
       svelte/button.svelte   Native Svelte implementation
       common/variants.ts     Shared classes, variants, and sizes
@@ -34,7 +34,7 @@ registry.json                Installable items and their source files
 public/r/                    Generated registry JSON (gitignored)
 ```
 
-Component directories do not need package manifests: local imports use TypeScript source aliases, and registry consumers copy the source. `utils` retains a private workspace manifest for `clsx` and `tailwind-merge`; `vendor-tools` isolates the Svelte tooling dependencies. Shared development and framework dependencies belong in the root `package.json`.
+Component directories do not need package manifests: local imports use TypeScript source aliases, and registry consumers copy the source. `utils` retains a private workspace manifest for `clsx`; `vendor-tools` isolates the Svelte tooling dependencies. Shared development and framework dependencies belong in the root `package.json`.
 
 TypeScript `paths` provide `@/*` for playground source, `@/components/ui/<name>` for component package entry points, and `@/lib/spark-utils` for the shared utility. Vite's `resolve.tsconfigPaths` reads those same mappings, including in Storybook; keep mappings in `tsconfig.json` rather than duplicating them in Vite.
 
@@ -49,13 +49,13 @@ Keep relative imports within the same component's `src` tree, including `../`. T
 
 ## Registry installation
 
-Start `pnpm dev`, then run this from a consumer project already initialized with shadcn and Tailwind CSS v4:
+Start `pnpm dev`, then run this from a consumer project already initialized with shadcn (Tailwind CSS is optional):
 
 ```sh
 pnpm dlx shadcn@latest add http://localhost:5173/r/button.json
 ```
 
-Button uses the same framework layout as the other components: `button/index.tsx` for React or `button/index.ts` for Svelte, plus its framework implementation, shared variants, and stylesheet. The registry also includes `utils/spark-utils.ts` and installs `clsx` and `tailwind-merge`. Imports are rewritten to relative paths; consumers need no Spark aliases. The existing `button.json` URL remains a React alias for `button-react.json`. The component uses the consumer's standard shadcn theme tokens; playground styles are not shipped with it.
+Button uses the same framework layout as the other components: `button/index.tsx` for React or `button/index.ts` for Svelte, plus its framework implementation, shared variants, and stylesheet. The registry also includes `utils/spark-utils.ts`, installs `clsx`, and resolves the shared `spark-styles` dependency. Imports are rewritten to relative paths; consumers need no Spark aliases. The existing `button.json` URL remains a React alias for `button-react.json`. Components load only functional CSS by default. Each public index documents editable wrapper props and contains a commented recipe import for the sample design system; Tailwind is optional. See [styling and customization](packages/styles/README.md) for sample opt-in, native CSS cascade layers, wrapper customization, CSS Modules, and optional Tailwind integration.
 
 Registry JSON is also served by Storybook at `http://localhost:6006/r/button.json`. To publish, set `homepage` in `registry.json` to your production URL, run a build, and host either `dist/` or `storybook-static/` as static files. Consumers can then use the deployed item URL or configure their own namespace:
 
@@ -118,7 +118,7 @@ pnpm registry:build
 
 Node 22.18+ with built-in TypeScript stripping is required for importer commands (the development environment uses Node 26). `package.json` pins pnpm. The private `vendor-tools` workspace supplies TypeScript 6 for Svelte's language tools; the app remains on TypeScript 7.
 
-Each component has editable `react.tsx`, `svelte.ts`, and `styles.css` entry files under `packages/<name>/src`. Ark implementation lives in the framework folders; Zag machines live in `common/zag`. Framework adapters, providers, and shared utilities live in `packages/shared/src`. Provider entrypoints reference those same shared context modules. Internal cross-component sources, such as Presence, are included automatically without forcing a public styled component installation.
+Each component has editable `react.tsx`, `svelte.ts`, and `styles.css` entry files under `packages/<name>/src`. Visual entries export assembled components and their props under their actual names (for example, `DatePicker` and `DatePickerProps`), with nested `parts` props for customization. Subcomponents remain available on the same export, such as `DatePicker.Root` and `DatePicker.Input`; the native Button primitive is `Button.Root`. React compositions are editable in `react.tsx`; Svelte compositions are attached in `svelte.ts`, with editable markup in `svelte/<component>-composition.svelte`. Functional styles are automatic; uncomment the local `recipe.css` import to enable its design-system sample. Ark implementation lives in the framework folders; Zag machines live in `common/zag`. Framework adapters, providers, and shared utilities live in `packages/shared/src`. Provider entrypoints reference those same shared context modules. Internal cross-component sources, such as Presence, are included automatically without forcing a public styled component installation.
 
 Public entry files and CSS are seeded once. Add wrappers and exports there, or edit implementation files directly. The importer rejects direct regeneration over locally modified/deleted implementation files; use the merge workflow below. Keep registered source paths stable. The registry verifier rejects unregistered file imports: register additional source files in the import tooling before publishing new local modules. Installed consumer copies are entirely owned by the consumer and have no such generation constraint.
 

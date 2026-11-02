@@ -14,7 +14,7 @@ export interface DatePickerPrevTriggerProps extends HTMLProps<'button'>, DatePic
 export const DatePickerPrevTrigger = forwardRef<HTMLButtonElement, DatePickerPrevTriggerProps>((props, ref) => {
   const datePicker = useDatePickerContext()
   const viewProps = useDatePickerViewPropsContext()
-  const mergedProps = mergeProps(datePicker.getPrevTriggerProps(viewProps), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-prev-trigger' }, datePicker.getPrevTriggerProps(viewProps), props)
 
   return <ark.button {...mergedProps} ref={ref} />
 })

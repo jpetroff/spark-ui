@@ -14,7 +14,7 @@ export interface PopoverPositionerProps extends HTMLProps<'div'>, PopoverPositio
 export const PopoverPositioner = forwardRef<HTMLDivElement, PopoverPositionerProps>((props, ref) => {
   const popover = usePopoverContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(popover.getPositionerProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-popover-positioner' }, popover.getPositionerProps(), props)
 
   if (presence.unmounted) {
     return null

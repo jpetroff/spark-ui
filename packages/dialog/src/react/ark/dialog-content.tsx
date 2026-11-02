@@ -16,7 +16,7 @@ export interface DialogContentProps extends HTMLProps<'div'>, DialogContentBaseP
 export const DialogContent = forwardRef<HTMLDivElement, DialogContentProps>((props, ref) => {
   const dialog = useDialogContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(dialog.getContentProps(), presence.getPresenceProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-dialog-content' }, dialog.getContentProps(), presence.getPresenceProps(), props)
   const composedRefs = useComposedRefs(presence.ref, ref)
 
   return (

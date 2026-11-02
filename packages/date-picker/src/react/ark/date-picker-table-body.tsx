@@ -14,7 +14,7 @@ export interface DatePickerTableBodyProps extends HTMLProps<'tbody'>, DatePicker
 export const DatePickerTableBody = forwardRef<HTMLTableSectionElement, DatePickerTableBodyProps>((props, ref) => {
   const datePicker = useDatePickerContext()
   const tableProps = useDatePickerTablePropsContext()
-  const mergedProps = mergeProps(datePicker.getTableBodyProps(tableProps), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-table-body' }, datePicker.getTableBodyProps(tableProps), props)
 
   return <ark.tbody {...mergedProps} ref={ref} />
 })

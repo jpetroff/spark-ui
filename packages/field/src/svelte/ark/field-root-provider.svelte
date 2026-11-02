@@ -17,7 +17,7 @@ import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
 
   const { value, ...props }: FieldRootProviderProps = $props()
 
-  const mergedProps = $derived(mergeProps(value().getRootProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-root' }, value().getRootProps(), props))
 
   FieldProvider(() => value())
 </script>

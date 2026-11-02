@@ -1,0 +1,47 @@
+@layer spark.components {
+  :where([class*='spark-fieldset-']) {
+    box-sizing: border-box;
+    font-family: var(--spark-font-family);
+    font-size: var(--spark-font-size);
+    line-height: var(--spark-line-height);
+  }
+  :where([class*='spark-fieldset-']):focus-visible {
+    outline: var(--spark-focus-width) solid var(--spark-focus);
+    outline-offset: var(--spark-focus-offset);
+  }
+}
+
+@layer spark.components {
+  :where(.spark-fieldset-root) {
+    display: grid;
+    gap: var(--spark-space-md);
+    padding: var(--spark-space-md);
+    border: var(--spark-border-width) solid var(--spark-border);
+    border-radius: var(--spark-radius-control);
+    color: var(--spark-text);
+  }
+  :where(.spark-fieldset-legend) {
+    font-weight: var(--spark-font-weight-title);
+  }
+  :where(.spark-fieldset-helper-text) {
+    color: var(--spark-text-muted);
+  }
+  :where(.spark-fieldset-error-text) {
+    color: var(--spark-error-text);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  @layer spark.components {
+    :where([class*='spark-']) {
+      transition: none;
+      animation: none;
+    }
+  }
+}
+@media (forced-colors: active) {
+  @layer spark.components {
+    :where([class*='spark-']):focus-visible {
+      outline-color: Highlight;
+    }
+  }
+}

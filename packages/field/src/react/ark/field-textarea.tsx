@@ -22,7 +22,7 @@ export const FieldTextarea = forwardRef<HTMLTextAreaElement, FieldTextareaProps>
   const { autoresize, ...textareaProps } = props
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'textarea'>>(
+  const mergedProps = mergeProps<HTMLProps<'textarea'>>({ className: 'spark-field-textarea' },
     field?.getTextareaProps(),
     { style: { resize: autoresize ? 'none' : undefined } },
     textareaProps,

@@ -12,7 +12,7 @@ export interface FieldHelperTextProps extends HTMLProps<'span'>, FieldHelperText
 
 export const FieldHelperText = forwardRef<HTMLSpanElement, FieldHelperTextProps>((props, ref) => {
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'span'>>(field?.getHelperTextProps(), props)
+  const mergedProps = mergeProps<HTMLProps<'span'>>({ className: 'spark-field-helper-text' }, field?.getHelperTextProps(), props)
 
   return <ark.span {...mergedProps} ref={ref} />
 })

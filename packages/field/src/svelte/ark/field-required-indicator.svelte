@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   let { ref = $bindable(null), ...props }: FieldRequiredIndicatorProps = $props()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(field?.()?.getRequiredIndicatorProps() ?? {}, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-required-indicator' }, field?.()?.getRequiredIndicatorProps() ?? {}, props))
 </script>
 
 {#if field?.()?.required}

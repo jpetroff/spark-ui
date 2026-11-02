@@ -17,7 +17,7 @@ const splitInputProps = createSplitProps<InputProps>()
 export const DatePickerInput = forwardRef<HTMLInputElement, DatePickerInputProps>((props, ref) => {
   const [inputProps, localProps] = splitInputProps(props, ['index', 'fixOnBlur'])
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getInputProps(inputProps), localProps)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-input' }, datePicker.getInputProps(inputProps), localProps)
 
   return <ark.input {...mergedProps} ref={ref} />
 })

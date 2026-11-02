@@ -16,7 +16,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), ...props }: CheckboxControlProps = $props()
 
   const checkbox = useCheckboxContext()
-  const mergedProps = $derived(mergeProps(checkbox().getControlProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-checkbox-control' }, checkbox().getControlProps(), props))
 </script>
 
 <Ark as="div" bind:ref {...mergedProps} />

@@ -27,7 +27,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
     },
   })
 
-  const mergedProps = $derived(mergeProps(field?.()?.getSelectProps() ?? {}, nativeSelectProps, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-select' }, field?.()?.getSelectProps() ?? {}, nativeSelectProps, props))
 </script>
 
 <Ark as="select" bind:ref {...mergedProps} />

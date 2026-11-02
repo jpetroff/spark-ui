@@ -15,7 +15,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   let { ref = $bindable(null), ...props }: FieldHelperTextProps = $props()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(field?.()?.getHelperTextProps() ?? {}, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-helper-text' }, field?.()?.getHelperTextProps() ?? {}, props))
 </script>
 
 <Ark as="span" bind:ref {...mergedProps} />

@@ -6,19 +6,13 @@ const meta = {
   component: Field.Root,
   args: { disabled: false, invalid: false, readOnly: false, required: false },
   render: (args) => (
-    <Field.Root {...args} className="grid w-72 gap-2">
+    <Field.Root {...args}>
       <Field.Label>
         Email <Field.RequiredIndicator />
       </Field.Label>
-      <Field.Input
-        type="email"
-        placeholder="you@example.com"
-        className="rounded-md border border-input px-3 py-2 disabled:opacity-50"
-      />
-      <Field.HelperText className="text-sm text-muted-foreground">
-        Enter your email address.
-      </Field.HelperText>
-      <Field.ErrorText className="text-sm">Enter a valid email address.</Field.ErrorText>
+      <Field.Input type="email" placeholder="you@example.com" />
+      <Field.HelperText>Enter your email address.</Field.HelperText>
+      <Field.ErrorText>Enter a valid email address.</Field.ErrorText>
     </Field.Root>
   ),
 } satisfies Meta<typeof Field.Root>
@@ -33,23 +27,18 @@ export const Disabled: Story = { args: { disabled: true } }
 export const ReadOnly: Story = { args: { readOnly: true } }
 export const Textarea: Story = {
   render: (args) => (
-    <Field.Root {...args} className="grid w-72 gap-2">
+    <Field.Root {...args}>
       <Field.Label>Message</Field.Label>
-      <Field.Textarea
-        placeholder="Write a message…"
-        className="rounded-md border border-input px-3 py-2"
-      />
-      <Field.HelperText className="text-sm text-muted-foreground">
-        Tell us how we can help.
-      </Field.HelperText>
+      <Field.Textarea placeholder="Write a message…" />
+      <Field.HelperText>Tell us how we can help.</Field.HelperText>
     </Field.Root>
   ),
 }
 export const Select: Story = {
   render: (args) => (
-    <Field.Root {...args} className="grid w-72 gap-2">
+    <Field.Root {...args}>
       <Field.Label>Country</Field.Label>
-      <Field.Select defaultValue="" className="rounded-md border border-input px-3 py-2">
+      <Field.Select defaultValue="">
         <option value="" disabled>
           Select a country
         </option>
@@ -58,5 +47,24 @@ export const Select: Story = {
         <option value="us">United States</option>
       </Field.Select>
     </Field.Root>
+  ),
+}
+
+export const CustomizedWrapper: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Editable assembled component from the public component index. The parts prop forwards typed props to each nested primitive; change the source to add or remove parts.',
+      },
+    },
+  },
+  render: (args) => (
+    <Field
+      label="Email"
+      helperText="Enter your email address."
+      errorText="Enter a valid email address."
+      parts={{ root: args, input: { type: 'email', placeholder: 'you@example.com' } }}
+    />
   ),
 }

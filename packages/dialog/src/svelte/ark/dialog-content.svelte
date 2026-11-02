@@ -20,7 +20,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const dialog = useDialogContext()
   const presence = usePresenceContext()
-  const mergedProps = $derived(mergeProps(dialog().getContentProps(), presence().getPresenceProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-dialog-content' }, dialog().getContentProps(), presence().getPresenceProps(), props))
 
   function setNode(node: Element | null) {
     presence().setNode(node)

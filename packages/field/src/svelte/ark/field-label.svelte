@@ -15,7 +15,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   let { ref = $bindable(null), ...props }: FieldLabelProps = $props()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(field?.()?.getLabelProps() ?? {}, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-label' }, field?.()?.getLabelProps() ?? {}, props))
 </script>
 
 <Ark as="label" bind:ref {...mergedProps} />

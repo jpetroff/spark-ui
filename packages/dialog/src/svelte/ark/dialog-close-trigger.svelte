@@ -16,7 +16,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), ...props }: DialogCloseTriggerProps = $props()
 
   const dialog = useDialogContext()
-  const mergedProps = $derived(mergeProps(dialog().getCloseTriggerProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-dialog-close-trigger' }, dialog().getCloseTriggerProps(), props))
 </script>
 
 <Ark as="button" bind:ref {...mergedProps} />

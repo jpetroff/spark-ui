@@ -10,6 +10,8 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 </script>
 
 <script lang="ts">
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+
   import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
   import { checkboxAnatomy } from "./checkbox.anatomy.ts";
   import { CheckboxGroupContextProvider } from "./use-checkbox-group-context.ts";
@@ -34,4 +36,4 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   CheckboxGroupContextProvider(checkboxGroup)
 </script>
 
-<Ark as="div" bind:ref role="group" {...checkboxAnatomy.build().group.attrs} {...localProps} />
+<Ark as="div" bind:ref role="group" {...checkboxAnatomy.build().group.attrs} {...mergeProps({ class: 'spark-checkbox-group' }, localProps)} />

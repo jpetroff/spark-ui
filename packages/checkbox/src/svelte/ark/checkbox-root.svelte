@@ -32,7 +32,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   })
 
   const checkbox = useCheckbox(() => resolvedProps)
-  const mergedProps = $derived(mergeProps(checkbox().getRootProps(), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-checkbox-root' }, checkbox().getRootProps(), localProps))
 
   CheckboxProvider(checkbox)
 </script>

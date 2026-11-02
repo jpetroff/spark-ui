@@ -32,7 +32,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   })
 
   const field = useField(() => machineProps)
-  const mergedProps = $derived(mergeProps(field().getRootProps(), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-root' }, field().getRootProps(), localProps))
 
   FieldProvider(field)
 

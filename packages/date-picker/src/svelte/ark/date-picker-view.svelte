@@ -20,7 +20,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const [viewProps, localProps] = $derived(createSplitProps<ViewProps>()(props, ['view']))
   const datePicker = useDatePickerContext()
-  const mergedProps = $derived(mergeProps(datePicker().getViewProps(viewProps), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-view' }, datePicker().getViewProps(viewProps), localProps))
 
   DatePickerViewPropsProvider(() => viewProps)
 </script>

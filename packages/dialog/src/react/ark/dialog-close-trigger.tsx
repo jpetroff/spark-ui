@@ -12,7 +12,7 @@ export interface DialogCloseTriggerProps extends HTMLProps<'button'>, DialogClos
 
 export const DialogCloseTrigger = forwardRef<HTMLButtonElement, DialogCloseTriggerProps>((props, ref) => {
   const dialog = useDialogContext()
-  const mergedProps = mergeProps(dialog.getCloseTriggerProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-dialog-close-trigger' }, dialog.getCloseTriggerProps(), props)
 
   return <ark.button {...mergedProps} ref={ref} />
 })

@@ -15,7 +15,7 @@ export interface CheckboxIndicatorProps extends HTMLProps<'div'>, CheckboxIndica
 export const CheckboxIndicator = forwardRef<HTMLDivElement, CheckboxIndicatorProps>((props, ref) => {
   const { indeterminate, ...rest } = props
   const checkbox = useCheckboxContext()
-  const mergedProps = mergeProps(checkbox.getIndicatorProps(), rest)
+  const mergedProps = mergeProps({ className: 'spark-checkbox-indicator' }, checkbox.getIndicatorProps(), rest)
   const isVisible = indeterminate ? checkbox.indeterminate : checkbox.checked
 
   return <ark.div {...mergedProps} hidden={!isVisible} ref={ref} />

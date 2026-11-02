@@ -107,7 +107,7 @@ import { usePresence } from "@spark/presence/svelte/ark/use-presence.svelte.ts";
 
   const datePicker = useDatePicker(() => resolvedProps)
   const presence = usePresence(() => ({ present: datePicker().open, ...presenceProps }))
-  const mergedProps = $derived(mergeProps(datePicker().getRootProps(), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-root' }, datePicker().getRootProps(), localProps))
 
   DatePickerProvider(datePicker)
   PresenceProvider(presence)

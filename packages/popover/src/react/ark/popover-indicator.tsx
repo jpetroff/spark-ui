@@ -12,7 +12,7 @@ export interface PopoverIndicatorProps extends HTMLProps<'div'>, PopoverIndicato
 
 export const PopoverIndicator = forwardRef<HTMLDivElement, PopoverIndicatorProps>((props, ref) => {
   const popover = usePopoverContext()
-  const mergedProps = mergeProps(popover.getIndicatorProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-popover-indicator' }, popover.getIndicatorProps(), props)
 
   return <ark.div {...mergedProps} ref={ref} />
 })

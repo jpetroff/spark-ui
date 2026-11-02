@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const dialog = useDialogContext()
   const presence = usePresenceContext()
-  const mergedProps = $derived(mergeProps(dialog().getPositionerProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-dialog-positioner' }, dialog().getPositionerProps(), props))
 </script>
 
 {#if !presence().unmounted}

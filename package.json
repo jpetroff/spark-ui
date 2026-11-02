@@ -28,7 +28,8 @@
     "typecheck:vendor": "tsc -p tsconfig.vendor-react.json && node packages/vendor-tools/node_modules/svelte-check/bin/svelte-check --tsconfig ./tsconfig.vendor-svelte.json",
     "test:registry": "node scripts/vendor/smoke.ts",
     "test:browser": "node scripts/vendor/browser.ts",
-    "typecheck:importer": "node node_modules/typescript-parser/bin/tsc -p tsconfig.importer.json"
+    "typecheck:importer": "node node_modules/typescript-parser/bin/tsc -p tsconfig.importer.json",
+    "test:styling": "node scripts/vendor/styling.ts"
   },
   "devDependencies": {
     "@floating-ui/dom": "1.7.6",

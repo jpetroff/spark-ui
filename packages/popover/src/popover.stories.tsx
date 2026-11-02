@@ -9,16 +9,16 @@ const meta = {
   render: (args) => (
     <Popover.Root {...args}>
       <Popover.Trigger asChild>
-        <Button variant="outline">Open popover</Button>
+        <Button.Root variant="outline">Open popover</Button.Root>
       </Popover.Trigger>
       <Popover.Positioner>
-        <Popover.Content className="grid w-72 gap-3 rounded-lg border border-border bg-background p-4 shadow-lg">
-          <Popover.Title className="font-semibold">Notifications</Popover.Title>
-          <Popover.Description className="text-sm text-muted-foreground">
+        <Popover.Content>
+          <Popover.Title>Notifications</Popover.Title>
+          <Popover.Description>
             You are all caught up. New notifications will appear here.
           </Popover.Description>
           <Popover.CloseTrigger asChild>
-            <Button size="sm">Close</Button>
+            <Button.Root size="sm">Close</Button.Root>
           </Popover.CloseTrigger>
         </Popover.Content>
       </Popover.Positioner>
@@ -33,3 +33,23 @@ export const Default: Story = {}
 export const InitiallyOpen: Story = { args: { defaultOpen: true } }
 export const Modal: Story = { args: { modal: true } }
 export const Top: Story = { args: { positioning: { placement: 'top' } } }
+
+export const CustomizedWrapper: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Editable assembled component from the public component index. The parts prop forwards typed props to each nested primitive; change the source to add or remove parts.',
+      },
+    },
+  },
+  render: (args) => (
+    <Popover
+      title="Notifications"
+      description="You are all caught up. New notifications will appear here."
+      trigger={<Button.Root variant="outline">Open popover</Button.Root>}
+      closeLabel={<Button.Root size="sm">Close</Button.Root>}
+      parts={{ root: args, trigger: { asChild: true }, closeTrigger: { asChild: true } }}
+    />
+  ),
+}

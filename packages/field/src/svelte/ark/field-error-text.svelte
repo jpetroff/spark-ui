@@ -15,7 +15,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   let { ref = $bindable(null), ...props }: FieldErrorTextProps = $props()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(field?.()?.getErrorTextProps() ?? {}, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-field-error-text' }, field?.()?.getErrorTextProps() ?? {}, props))
 </script>
 
 {#if field?.()?.invalid}

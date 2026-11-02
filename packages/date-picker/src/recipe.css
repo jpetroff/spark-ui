@@ -1,0 +1,97 @@
+/* Optional, editable sample. Enable it from this component's public index. */
+@import '../../styles/src/sample.css';
+
+@layer spark.components {
+  :where([class*='spark-date-picker-']) {
+    box-sizing: border-box;
+    font-family: var(--spark-font-family);
+    font-size: var(--spark-font-size);
+    line-height: var(--spark-line-height);
+  }
+  :where([class*='spark-date-picker-']):focus-visible {
+    outline: var(--spark-focus-width) solid var(--spark-focus);
+    outline-offset: var(--spark-focus-offset);
+  }
+}
+
+@layer spark.components {
+  :where(.spark-date-picker-content) {
+    display: grid;
+    gap: var(--spark-overlay-gap);
+    padding: var(--spark-space-lg);
+    border: var(--spark-border-width) solid var(--spark-border);
+    border-radius: var(--spark-radius-overlay);
+    background: var(--spark-surface-overlay);
+    color: var(--spark-text);
+    box-shadow: var(--spark-shadow-overlay);
+  }
+  :where(.spark-date-picker-title) {
+    margin: 0;
+    font-size: var(--spark-font-size-title);
+    font-weight: var(--spark-font-weight-title);
+  }
+  :where(.spark-date-picker-description) {
+    margin: 0;
+    color: var(--spark-text-muted);
+  }
+  :where(.spark-date-picker-control, .spark-date-picker-view-control) {
+    display: flex;
+    align-items: center;
+    gap: var(--spark-control-gap);
+  }
+  :where(
+    .spark-date-picker-input,
+    .spark-date-picker-trigger,
+    .spark-date-picker-view-trigger,
+    .spark-date-picker-prev-trigger,
+    .spark-date-picker-next-trigger
+  ) {
+    min-block-size: var(--spark-control-height);
+    padding-inline: var(--spark-space-sm);
+    border: var(--spark-border-width) solid var(--spark-border);
+    border-radius: var(--spark-radius-control);
+    background: var(--spark-surface);
+    color: var(--spark-text);
+  }
+  :where(.spark-date-picker-table) {
+    border-collapse: collapse;
+  }
+  :where(.spark-date-picker-table-cell-trigger) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-inline-size: var(--spark-control-height);
+    min-block-size: var(--spark-control-height);
+    border-radius: var(--spark-radius-control);
+    cursor: pointer;
+  }
+  :where(.spark-date-picker-table-cell-trigger:hover) {
+    background: var(--spark-secondary-hover);
+  }
+  :where(.spark-date-picker-table-cell-trigger[data-selected]) {
+    background: var(--spark-action);
+    color: var(--spark-on-action);
+  }
+  :where(.spark-date-picker-table-cell-trigger[data-disabled]) {
+    color: var(--spark-disabled-text);
+    cursor: not-allowed;
+  }
+  :where(.spark-date-picker-table-cell-trigger[data-today]) {
+    outline: var(--spark-border-width) solid var(--spark-border);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  @layer spark.components {
+    :where([class*='spark-']) {
+      transition: none;
+      animation: none;
+    }
+  }
+}
+@media (forced-colors: active) {
+  @layer spark.components {
+    :where([class*='spark-']):focus-visible {
+      outline-color: Highlight;
+    }
+  }
+}

@@ -13,7 +13,7 @@ export interface DatePickerRangeTextProps extends HTMLProps<'div'>, DatePickerRa
 
 export const DatePickerRangeText = forwardRef<HTMLDivElement, DatePickerRangeTextProps>((props, ref) => {
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getRangeTextProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-range-text' }, datePicker.getRangeTextProps(), props)
   const visibleRangeText = useMemo(() => {
     const { start, end } = datePicker.visibleRangeText
     return uniq([start, end]).filter(Boolean).join(' - ')

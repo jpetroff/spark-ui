@@ -13,7 +13,7 @@ export interface CheckboxHiddenInputProps extends HTMLProps<'input'>, CheckboxHi
 
 export const CheckboxHiddenInput = forwardRef<HTMLInputElement, CheckboxHiddenInputProps>((props, ref) => {
   const checkbox = useCheckboxContext()
-  const mergedProps = mergeProps(checkbox.getHiddenInputProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-checkbox-hidden-input' }, checkbox.getHiddenInputProps(), props)
   const field = useFieldContext()
 
   return <ark.input aria-describedby={field?.ariaDescribedby} {...mergedProps} ref={ref} />

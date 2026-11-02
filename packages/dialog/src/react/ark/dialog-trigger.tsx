@@ -22,7 +22,7 @@ export const DialogTrigger = forwardRef<HTMLButtonElement, DialogTriggerProps>((
   const presence = usePresenceContext()
 
   const triggerPropsRaw = dialog.getTriggerProps(triggerProps)
-  const mergedProps = mergeProps(
+  const mergedProps = mergeProps({ className: 'spark-dialog-trigger' },
     {
       ...triggerPropsRaw,
       'aria-controls': presence.unmounted ? undefined : triggerPropsRaw['aria-controls'],

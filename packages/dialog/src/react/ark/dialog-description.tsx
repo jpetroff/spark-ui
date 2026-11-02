@@ -12,7 +12,7 @@ export interface DialogDescriptionProps extends HTMLProps<'div'>, DialogDescript
 
 export const DialogDescription = forwardRef<HTMLDivElement, DialogDescriptionProps>((props, ref) => {
   const dialog = useDialogContext()
-  const mergedProps = mergeProps(dialog.getDescriptionProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-dialog-description' }, dialog.getDescriptionProps(), props)
 
   return <ark.div {...mergedProps} ref={ref} />
 })

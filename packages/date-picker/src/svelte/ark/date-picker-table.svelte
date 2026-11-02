@@ -23,7 +23,7 @@ import type { PolymorphicProps } from "@spark/shared/svelte/ark/types.ts";
   const viewProps = useDatePickerViewPropsContext()
 
   const tableProps = $derived({ id: providedId, columns, ...viewProps() })
-  const mergedProps = $derived(mergeProps(datePicker().getTableProps(tableProps), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-table' }, datePicker().getTableProps(tableProps), localProps))
 
   DatePickerTablePropsProvider(() => tableProps)
 </script>

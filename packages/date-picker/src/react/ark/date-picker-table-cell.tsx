@@ -28,7 +28,7 @@ export const DatePickerTableCell = forwardRef<HTMLTableCellElement, DatePickerTa
     // @ts-expect-error value is number filter
   }[viewProps.view](cellProps)
 
-  const mergedProps = mergeProps(tableCellProps, localProps)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-table-cell' }, tableCellProps, localProps)
 
   return (
     <DatePickerTableCellPropsProvider value={cellProps}>

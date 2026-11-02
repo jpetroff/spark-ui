@@ -19,7 +19,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   let { ref = $bindable(null), value, ...props }: CheckboxGroupProviderProps = $props()
 
-  const mergedProps = $derived(mergeProps({ role: 'group', ...checkboxAnatomy.build().group.attrs }, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-checkbox-group' }, { role: 'group', ...checkboxAnatomy.build().group.attrs }, props))
 
   CheckboxGroupContextProvider(() => value())
 </script>

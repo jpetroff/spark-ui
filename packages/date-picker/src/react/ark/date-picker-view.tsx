@@ -1,5 +1,7 @@
 'use client'
 
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
+
 import type { ViewProps } from '../../common/zag/date-picker/index.ts'
 import { forwardRef } from 'react'
 import { createSplitProps } from "@spark/shared/react/ark/utils/create-split-props.ts";
@@ -24,7 +26,7 @@ export const DatePickerView = forwardRef<HTMLDivElement, DatePickerViewProps>((p
       <ark.div
         hidden={datePicker.view !== viewProps.view}
         {...datePickerAnatomy.build().view.attrs}
-        {...localProps}
+        {...mergeProps({ className: 'spark-date-picker-view' }, localProps)}
         ref={ref}
       />
     </DatePickerViewPropsProvider>

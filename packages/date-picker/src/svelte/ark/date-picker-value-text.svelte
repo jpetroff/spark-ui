@@ -28,6 +28,8 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 </script>
 
 <script lang="ts">
+  import { mergeProps } from '@spark/shared/svelte/zag/index.ts'
+
   import type { Snippet } from 'svelte'
   import { default as Ark } from "@spark/shared/svelte/ark/components/factory/factory.svelte";
   import { datePickerAnatomy } from "./date-picker.anatomy.ts";
@@ -66,7 +68,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
     {placeholder}
   {/if}
 {:else}
-  <Ark as="span" bind:ref {...datePickerAnatomy.build().valueText.attrs} {...props}>
+  <Ark as="span" bind:ref {...datePickerAnatomy.build().valueText.attrs} {...mergeProps({ class: 'spark-date-picker-value-text' }, props)}>
     {displayValue}
   </Ark>
 {/if}

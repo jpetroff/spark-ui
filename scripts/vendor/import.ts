@@ -144,7 +144,7 @@ export async function generate(
   for (const { component, framework, root: entryRoot } of Object.values(entries)) {
     const file = `packages/${component}/src/${framework === 'react' ? 'react.tsx' : 'svelte.ts'}`
     starters[file] =
-      `${framework === 'react' ? "'use client'\n\n" : ''}// Customize this public API and compose wrappers here. Implementation sources are editable.\nimport './styles.css'\nexport * from '${relative(file, graph.nodes.get(entryRoot)!.destination)}'\n`
+      `${framework === 'react' ? "'use client'\n\n" : ''}// Customize this public API and compose wrappers here. Implementation sources are editable.\nimport './styles.css'\n${fs.existsSync(path.join(root, `packages/${component}/src/recipe.css`)) ? "\n// Optional sample design system; uncomment and edit recipe.css to adopt it.\n// import './recipe.css'\n\n" : ''}export * from '${relative(file, graph.nodes.get(entryRoot)!.destination)}'\n`
     starters[`packages/${component}/src/styles.css`] =
       `/* ${component}: add styles using Ark's data-scope and data-part attributes. */\n`
   }
@@ -251,9 +251,30 @@ export function buildRegistry() {
   const native = json('registry.json').items.filter(
     (item: any) => item.meta?.framework === 'react' || item.meta?.framework === 'svelte',
   ) as any[]
+  const visualComponents = new Set([
+    'button',
+    'checkbox',
+    'field',
+    'fieldset',
+    'dialog',
+    'popover',
+    'date-picker',
+  ])
+  const stylingFiles = fs.existsSync(path.join(root, 'packages/styles/src'))
+    ? fs
+        .readdirSync(path.join(root, 'packages/styles/src'))
+        .map((file) => `packages/styles/src/${file}`)
+    : []
+  const recipeFiles = [...visualComponents].flatMap((name) =>
+    ['functional.css', 'recipe.css', `svelte/${name}-composition.svelte`]
+      .map((file) => `packages/${name}/src/${file}`)
+      .filter((file) => fs.existsSync(path.join(root, file))),
+  )
   const all = [
     ...new Set([
       ...sourceFiles,
+      ...stylingFiles,
+      ...recipeFiles,
       ...lock.starters,
       ...licenses,
       ...native.flatMap((item) => item.files.map((file: any) => file.path)),
@@ -298,6 +319,12 @@ export function buildRegistry() {
         type: 'registry:lib',
         files: [fileEntry(lock.files[id].destination, framework)],
       })
+    if (stylingFiles.length)
+      items.push({
+        name: 'spark-styles',
+        type: 'registry:lib',
+        files: stylingFiles.map((file) => fileEntry(file, framework)),
+      })
     items.push({
       name: 'upstream-licenses',
       type: 'registry:lib',
@@ -318,10 +345,18 @@ export function buildRegistry() {
         registryDependencies: [
           ...entry.files.map((id: string) => sourceName(id)),
           'upstream-licenses',
+          ...(visualComponents.has(entry.component) ? ['spark-styles'] : []),
         ].map((item) => `${base}/${release}/${framework}/${item}.json`),
         files: [
           fileEntry(starter, framework),
           fileEntry(`packages/${entry.component}/src/styles.css`, framework),
+          ...recipeFiles
+            .filter(
+              (file) =>
+                file.startsWith(`packages/${entry.component}/`) &&
+                (!file.includes('/svelte/') || framework === 'svelte'),
+            )
+            .map((file) => fileEntry(file, framework)),
         ],
       })
     }
@@ -330,6 +365,9 @@ export function buildRegistry() {
         .filter((item) => item.meta.framework === framework)
         .map(({ files, ...item }) => ({
           ...item,
+          ...(visualComponents.has(item.name.replace(/-(react|svelte)$/, ''))
+            ? { registryDependencies: [`${base}/${release}/${framework}/spark-styles.json`] }
+            : {}),
           files: files.map((file: any) => fileEntry(file.path, framework)),
         })),
     )
@@ -337,13 +375,15 @@ export function buildRegistry() {
       const catalog = json('registry.json')
       const generatedNames = new Set(Object.keys(lock.entries))
       const generated = items
-        .filter((item) => generatedNames.has(item.name))
+        .filter((item) => generatedNames.has(item.name) || item.name === 'spark-styles')
         .map(({ files, ...item }) => ({
           ...item,
           files: files.map(({ content, ...file }: any) => file),
         }))
       catalog.items = [
-        ...catalog.items.filter((item: any) => !generatedNames.has(item.name)),
+        ...catalog.items.filter(
+          (item: any) => !generatedNames.has(item.name) && item.name !== 'spark-styles',
+        ),
         ...generated,
       ]
       write('registry.json', stringify(catalog))
@@ -363,7 +403,11 @@ export function buildRegistry() {
       write(`public/r/${release}/${framework}/${item.name}.json`, content)
       if (!item.name.startsWith('source-')) {
         write(`public/r/${framework}/${item.name}.json`, content)
-        if (item.name !== 'upstream-licenses') write(`public/r/${item.name}.json`, content)
+        if (
+          item.name !== 'upstream-licenses' &&
+          (item.name !== 'spark-styles' || framework === 'react')
+        )
+          write(`public/r/${item.name}.json`, content)
       }
     }
   }
@@ -375,6 +419,24 @@ export function verify() {
   const files = new Set<string>([
     ...Object.values(lock.files).map((f: any) => f.destination),
     ...lock.starters,
+    ...json('registry.json').items.flatMap((item: any) => item.files.map((file: any) => file.path)),
+    ...fs.readdirSync(path.join(root, 'packages')).flatMap((name) => {
+      const dir = `packages/${name}/src`
+      if (!fs.existsSync(path.join(root, dir))) return []
+      const svelteDir = `${dir}/svelte`
+      return [
+        ...fs
+          .readdirSync(path.join(root, dir))
+          .filter((file) => file.endsWith('.css'))
+          .map((file) => `${dir}/${file}`),
+        ...(fs.existsSync(path.join(root, svelteDir))
+          ? fs
+              .readdirSync(path.join(root, svelteDir))
+              .filter((file) => file.endsWith('-composition.svelte'))
+              .map((file) => `${svelteDir}/${file}`)
+          : []),
+      ]
+    }),
   ])
   for (const file of files) {
     const content = fs.readFileSync(path.join(root, file), 'utf8')

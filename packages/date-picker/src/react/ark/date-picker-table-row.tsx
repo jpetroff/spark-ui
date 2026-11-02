@@ -14,7 +14,7 @@ export interface DatePickerTableRowProps extends HTMLProps<'tr'>, DatePickerTabl
 export const DatePickerTableRow = forwardRef<HTMLTableRowElement, DatePickerTableRowProps>((props, ref) => {
   const datePicker = useDatePickerContext()
   const tableProps = useDatePickerTablePropsContext()
-  const mergedProps = mergeProps(datePicker.getTableRowProps(tableProps), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-table-row' }, datePicker.getTableRowProps(tableProps), props)
 
   return <ark.tr {...mergedProps} ref={ref} />
 })

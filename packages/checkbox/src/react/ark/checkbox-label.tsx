@@ -12,7 +12,7 @@ export interface CheckboxLabelProps extends HTMLProps<'span'>, CheckboxLabelBase
 
 export const CheckboxLabel = forwardRef<HTMLSpanElement, CheckboxLabelProps>((props, ref) => {
   const checkbox = useCheckboxContext()
-  const mergedProps = mergeProps(checkbox.getLabelProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-checkbox-label' }, checkbox.getLabelProps(), props)
 
   return <ark.span {...mergedProps} ref={ref} />
 })

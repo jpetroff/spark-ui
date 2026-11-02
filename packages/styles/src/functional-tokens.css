@@ -1,0 +1,7 @@
+/* Required behavior variables. Visual design tokens live in the optional sample. */
+@layer spark.tokens {
+  :root {
+    --spark-overlay-base: 1000;
+    --spark-visually-hidden-size: 1px;
+  }
+}

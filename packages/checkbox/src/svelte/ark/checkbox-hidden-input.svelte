@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const checkbox = useCheckboxContext()
   const field = useFieldContext()
-  const mergedProps = $derived(mergeProps(checkbox().getHiddenInputProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-checkbox-hidden-input' }, checkbox().getHiddenInputProps(), props))
 </script>
 
 <Ark as="input" bind:ref aria-describedby={field?.()?.ariaDescribedby} {...mergedProps} />

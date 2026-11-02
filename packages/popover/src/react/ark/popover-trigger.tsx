@@ -21,7 +21,7 @@ export const PopoverTrigger = forwardRef<HTMLButtonElement, PopoverTriggerProps>
   const popover = usePopoverContext()
   const presence = usePresenceContext()
   const triggerPropsRaw = popover.getTriggerProps(triggerProps)
-  const mergedProps = mergeProps(
+  const mergedProps = mergeProps({ className: 'spark-popover-trigger' },
     {
       ...triggerPropsRaw,
       'aria-controls': presence.unmounted ? undefined : triggerPropsRaw['aria-controls'],

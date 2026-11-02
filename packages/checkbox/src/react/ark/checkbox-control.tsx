@@ -12,7 +12,7 @@ export interface CheckboxControlProps extends HTMLProps<'div'>, CheckboxControlB
 
 export const CheckboxControl = forwardRef<HTMLDivElement, CheckboxControlProps>((props, ref) => {
   const checkbox = useCheckboxContext()
-  const mergedProps = mergeProps(checkbox.getControlProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-checkbox-control' }, checkbox.getControlProps(), props)
 
   return <ark.div {...mergedProps} ref={ref} />
 })

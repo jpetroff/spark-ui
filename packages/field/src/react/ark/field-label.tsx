@@ -12,7 +12,7 @@ export interface FieldLabelProps extends HTMLProps<'label'>, FieldLabelBaseProps
 
 export const FieldLabel = forwardRef<HTMLLabelElement, FieldLabelProps>((props, ref) => {
   const field = useFieldContext()
-  const mergedProps = mergeProps<HTMLProps<'label'>>(field?.getLabelProps(), props)
+  const mergedProps = mergeProps<HTMLProps<'label'>>({ className: 'spark-field-label' }, field?.getLabelProps(), props)
 
   return <ark.label {...mergedProps} ref={ref} />
 })

@@ -16,7 +16,7 @@ export interface PopoverContentProps extends HTMLProps<'div'>, PopoverContentBas
 export const PopoverContent = forwardRef<HTMLDivElement, PopoverContentProps>((props, ref) => {
   const popover = usePopoverContext()
   const presence = usePresenceContext()
-  const mergedProps = mergeProps(popover.getContentProps(), presence.getPresenceProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-popover-content' }, popover.getContentProps(), presence.getPresenceProps(), props)
   const composedRefs = useComposedRefs(presence.ref, ref)
 
   return (

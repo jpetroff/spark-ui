@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const datePicker = useDatePickerContext()
   const presence = usePresenceContext()
-  const mergedProps = $derived(mergeProps(datePicker().getContentProps(), presence().getPresenceProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-content' }, datePicker().getContentProps(), presence().getPresenceProps(), props))
 
   function setNode(node: HTMLElement) {
     presence().setNode(node)

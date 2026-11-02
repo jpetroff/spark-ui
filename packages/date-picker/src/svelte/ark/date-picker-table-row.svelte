@@ -19,7 +19,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   const datePicker = useDatePickerContext()
   const tableProps = useDatePickerTablePropsContext()
 
-  const mergedProps = $derived(mergeProps(datePicker().getTableRowProps(tableProps()), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-table-row' }, datePicker().getTableRowProps(tableProps()), props))
 </script>
 
 <Ark as="tr" bind:ref {...mergedProps} />

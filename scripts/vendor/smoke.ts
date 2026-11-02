@@ -17,9 +17,11 @@ export const run = (command: string, args: string[], cwd = root) =>
   new Promise<void>((resolve, reject) => {
     const child = spawn(command, args, {
       cwd,
-      stdio: 'inherit',
+      stdio: ['pipe', 'inherit', 'inherit'],
       env: { ...process.env, CI: 'true', npm_config_ignore_workspace: 'true' },
     })
+    child.stdin?.on('error', () => {})
+    child.stdin?.end('n\n')
     child.on('error', reject)
     child.on('exit', (code) =>
       code === 0 ? resolve() : reject(new Error(`${command} exited ${code}`)),
@@ -49,7 +51,6 @@ try {
       framework === 'react' ? { react: '19.3.1', 'react-dom': '19.3.1' } : { svelte: '5.57.2' }
     const devDependencies = {
       vite: '8.3.5',
-      tailwindcss: '4.3.3',
       typescript: '6.0.3',
       '@types/node': '26.6.6',
       ...(framework === 'react'
@@ -78,6 +79,7 @@ try {
       stringify({
         compilerOptions: {
           target: 'ES2022',
+          lib: ['ES2023', 'DOM', 'DOM.Iterable'],
           module: 'ESNext',
           moduleResolution: 'Bundler',
           jsx: 'react-jsx',
@@ -126,7 +128,12 @@ try {
             },
       ),
     )
-    write(dir, 'src/app.css', '@import "tailwindcss";\n')
+    write(dir, 'src/app.css', ':root { --spark-control-height-lg: 3rem; }\n')
+    write(
+      dir,
+      'src/custom.module.css',
+      '.custom { padding-inline: var(--spark-space-lg, 1.5rem); }',
+    )
     write(
       dir,
       'vite.config.ts',
@@ -140,10 +147,34 @@ try {
       'node_modules',
       framework === 'react' ? 'shadcn/dist/index.js' : 'shadcn-svelte/dist/index.mjs',
     )
-    const names = ['button', 'checkbox', 'field', 'dialog', 'popover', 'locale', 'environment']
+    const names = [
+      'button',
+      'checkbox',
+      'field',
+      'dialog',
+      'popover',
+      'locale',
+      'environment',
+      'date-picker',
+    ]
     const urls = names.map(
       (name) => `${process.env.REGISTRY_BASE_URL}/${framework}/${name}-${framework}.json`,
     )
+    await run(process.execPath, [
+      cli,
+      'add',
+      urls[0]!,
+      '--cwd',
+      dir,
+      '--yes',
+      ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
+    ])
+    assert.ok(
+      fs.existsSync(path.join(dir, 'src/components/ui/styles/theme.css')),
+      'First component installs shared styles',
+    )
+    const override = ':root { --spark-focus: rebeccapurple; }\n'
+    write(dir, 'src/project-theme.css', override)
     await run(process.execPath, [
       cli,
       'add',
@@ -163,6 +194,15 @@ try {
           e.isDirectory() ? walk(path.join(folder, e.name)) : [path.join(folder, e.name)],
         )
     const files = walk(path.join(dir, 'src/components/ui'))
+    assert.ok(!files.some((file) => /functional-(react|svelte)\./.test(file)))
+    for (const name of ['button', 'checkbox', 'field', 'dialog', 'popover', 'date-picker']) {
+      const index = path.join(
+        dir,
+        `src/components/ui/${name}/index.${framework === 'react' ? 'tsx' : 'ts'}`,
+      )
+      assert.match(fs.readFileSync(index, 'utf8'), /\/\/ import '\.\/recipe\.css'/)
+      assert.ok(fs.existsSync(path.join(dir, `src/components/ui/${name}/recipe.css`)))
+    }
     const before = new Map(files.map((file) => [file, hash(fs.readFileSync(file, 'utf8'))]))
     await run(process.execPath, [
       cli,
@@ -186,6 +226,26 @@ try {
         /from\s+['"](?:@ark-ui\/|@zag-js\/|\$lib\/|@spark-ui\/|@spark\/)/,
       )
     }
+    const themeFile = path.join(dir, 'src/components/ui/styles/theme.css')
+    const originalTheme = fs.readFileSync(themeFile, 'utf8')
+    const customizedTheme = originalTheme + '\n/* project customization */\n'
+    fs.writeFileSync(themeFile, customizedTheme)
+    await run(process.execPath, [
+      cli,
+      'add',
+      urls[0]!,
+      '--cwd',
+      dir,
+      '--yes',
+      ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
+    ])
+    assert.equal(
+      fs.readFileSync(themeFile, 'utf8'),
+      customizedTheme,
+      'Normal installs preserve customized shared files',
+    )
+    fs.writeFileSync(themeFile, originalTheme)
+    assert.equal(fs.readFileSync(path.join(dir, 'src/project-theme.css'), 'utf8'), override)
     const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))
     assert.ok(
       !Object.keys(manifest.dependencies).some(
@@ -196,8 +256,8 @@ try {
       write(
         dir,
         'src/App.tsx',
-        `import { useState } from 'react'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';
-export default function App(){const [count,setCount]=useState(0);return <EnvironmentProvider><Button variant="secondary" size="lg" className="px-8" ref={(node)=>{if(node) node.dataset.refReady="true"}} onClick={()=>setCount(count+1)}>Native clicks {count}</Button><Button disabled>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox.Root><Checkbox.HiddenInput/><Checkbox.Control/><Checkbox.Label>Accept terms</Checkbox.Label></Checkbox.Root><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Dialog.Root><Dialog.Trigger>Open dialog</Dialog.Trigger><Dialog.Backdrop/><Dialog.Positioner><Dialog.Content><Dialog.Title>Settings</Dialog.Title><Dialog.Description>Settings dialog</Dialog.Description><Popover.Root><Popover.Trigger>Open popover</Popover.Trigger><Popover.Positioner><Popover.Content><Popover.Title>Details</Popover.Title><Popover.Description>Details popup</Popover.Description><button>Inner action</button></Popover.Content></Popover.Positioner></Popover.Root><Dialog.CloseTrigger>Close dialog</Dialog.CloseTrigger></Dialog.Content></Dialog.Positioner></Dialog.Root><button>Outside action</button></LocaleProvider></EnvironmentProvider>}`,
+        `import './app.css'; import custom from './custom.module.css'; import { useState } from 'react'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { DatePicker } from './components/ui/date-picker/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';
+export default function App(){const [count,setCount]=useState(0);return <EnvironmentProvider><Button parts={{button:{variant:"secondary",size:"lg",className:custom.custom,ref:(node)=>{if(node) node.dataset.refReady="true"},onClick:()=>setCount(count+1)}}}>Native clicks {count}</Button><Button parts={{button:{disabled:true}}}>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox label="Accept terms" parts={{root:{name:"terms"}}}/><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Field label="Email" helperText="Use your work email." errorText="Enter a valid email." parts={{root:{invalid:true},input:{type:"email",name:"email"}}}/><Dialog title="Settings" description="Settings dialog"><Popover title="Details" description="Details popup" parts={{content:{className:"custom-popover"}}}><button>Inner action</button></Popover></Dialog><DatePicker label="Appointment"/><button>Outside action</button></LocaleProvider></EnvironmentProvider>}`,
       )
       write(
         dir,
@@ -213,8 +273,8 @@ export default function App(){const [count,setCount]=useState(0);return <Environ
       write(
         dir,
         'src/App.svelte',
-        `<script lang="ts">import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';let count=$state(0);let buttonRef=$state<HTMLButtonElement|null>(null);$effect(()=>{if(buttonRef) buttonRef.dataset.refReady='true'});</script>
-<EnvironmentProvider><Button variant="secondary" size="lg" class="px-8" bind:ref={buttonRef} onclick={()=>count++}>Native clicks {count}</Button><Button disabled>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox.Root><Checkbox.HiddenInput/><Checkbox.Control/><Checkbox.Label>Accept terms</Checkbox.Label></Checkbox.Root><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Dialog.Root><Dialog.Trigger>Open dialog</Dialog.Trigger><Dialog.Backdrop/><Dialog.Positioner><Dialog.Content><Dialog.Title>Settings</Dialog.Title><Dialog.Description>Settings dialog</Dialog.Description><Popover.Root><Popover.Trigger>Open popover</Popover.Trigger><Popover.Positioner><Popover.Content><Popover.Title>Details</Popover.Title><Popover.Description>Details popup</Popover.Description><button>Inner action</button></Popover.Content></Popover.Positioner></Popover.Root><Dialog.CloseTrigger>Close dialog</Dialog.CloseTrigger></Dialog.Content></Dialog.Positioner></Dialog.Root><button>Outside action</button></LocaleProvider></EnvironmentProvider>`,
+        `<script lang="ts">import './app.css'; import custom from './custom.module.css'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { DatePicker } from './components/ui/date-picker/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';let count=$state(0);let buttonRef=$state<HTMLButtonElement|null>(null);$effect(()=>{if(buttonRef) buttonRef.dataset.refReady='true'});</script>
+<EnvironmentProvider><Button.Root variant="secondary" size="lg" class={custom.custom} bind:ref={buttonRef} onclick={()=>count++}>Native clicks {count}</Button.Root><Button parts={{button:{disabled:true}}}>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox parts={{root:{name:'terms'}}}>{#snippet label()}Accept terms{/snippet}</Checkbox><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Field parts={{root:{invalid:true},input:{type:'email',name:'email'}}}>{#snippet label()}Email{/snippet}{#snippet helperText()}Use your work email.{/snippet}{#snippet errorText()}Enter a valid email.{/snippet}</Field><Dialog>{#snippet title()}Settings{/snippet}{#snippet description()}Settings dialog{/snippet}<Popover parts={{content:{class:'custom-popover'}}}>{#snippet title()}Details{/snippet}{#snippet description()}Details popup{/snippet}<button>Inner action</button></Popover></Dialog><DatePicker>{#snippet label()}Appointment{/snippet}</DatePicker><button>Outside action</button></LocaleProvider></EnvironmentProvider>`,
       )
       write(
         dir,
@@ -227,6 +287,7 @@ export default function App(){const [count,setCount]=useState(0);return <Environ
         `import {render} from 'svelte/server';import App from './App.svelte';export const html=render(App).body;`,
       )
     }
+    assert.ok(!manifest.dependencies.tailwindcss && !manifest.dependencies['tailwind-merge'])
     if (framework === 'react')
       await run(
         process.execPath,
@@ -243,6 +304,22 @@ export default function App(){const [count,setCount]=useState(0);return <Environ
         ],
         dir,
       )
+    write(
+      dir,
+      'index.html',
+      `<html><body><div id="app"></div><script type="module" src="/src/client.${framework === 'react' ? 'tsx' : 'ts'}"></script></body></html>`,
+    )
+    await run(process.execPath, [path.join(dir, 'node_modules/vite/bin/vite.js'), 'build'], dir)
+    const assets = path.join(dir, 'dist/assets')
+    const css = fs
+      .readdirSync(assets)
+      .filter((file) => file.endsWith('.css'))
+      .map((file) => fs.readFileSync(path.join(assets, file), 'utf8'))
+      .join('')
+    assert.match(css, /spark-dialog-positioner/)
+    assert.doesNotMatch(css, /spark-button-secondary|--spark-action:|spark-fieldset-root/)
+    assert.match(css, /--spark-control-height-lg:3rem/)
+    assert.doesNotMatch(css, /@theme|@apply/)
     console.log(`Registry installation, import isolation, and type checks passed: ${framework}`)
   }
 } finally {

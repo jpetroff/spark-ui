@@ -20,7 +20,7 @@ export const FieldRequiredIndicator = forwardRef<HTMLSpanElement, FieldRequiredI
       return fallback
     }
 
-    const mergedProps = mergeProps(field.getRequiredIndicatorProps(), props)
+    const mergedProps = mergeProps({ className: 'spark-field-required-indicator' }, field.getRequiredIndicatorProps(), props)
     return (
       <ark.span {...mergedProps} ref={ref}>
         {props.children ?? '*'}

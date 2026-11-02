@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const datePicker = useDatePickerContext()
   const viewProps = useDatePickerViewPropsContext()
-  const mergedProps = $derived(mergeProps(datePicker().getNextTriggerProps(viewProps()), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-next-trigger' }, datePicker().getNextTriggerProps(viewProps()), props))
 </script>
 
 <Ark as="button" bind:ref {...mergedProps} />

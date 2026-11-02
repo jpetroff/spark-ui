@@ -12,7 +12,7 @@ export interface DatePickerLabelProps extends HTMLProps<'label'>, DatePickerLabe
 
 export const DatePickerLabel = forwardRef<HTMLLabelElement, DatePickerLabelProps>((props, ref) => {
   const datePicker = useDatePickerContext()
-  const mergedProps = mergeProps(datePicker.getLabelProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-label' }, datePicker.getLabelProps(), props)
 
   return <ark.label {...mergedProps} ref={ref} />
 })

@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const datePicker = useDatePickerContext()
   const presence = usePresenceContext()
-  const mergedProps = $derived(mergeProps(datePicker().getPositionerProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-positioner' }, datePicker().getPositionerProps(), props))
 </script>
 
 {#if !presence().unmounted}

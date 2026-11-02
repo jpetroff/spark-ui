@@ -20,7 +20,7 @@ const splitRootProviderProps = createSplitProps<RootProviderProps>()
 
 export const CheckboxRootProvider = forwardRef<HTMLLabelElement, CheckboxRootProviderProps>((props, ref) => {
   const [{ value: checkbox }, localProps] = splitRootProviderProps(props, ['value'])
-  const mergedProps = mergeProps(checkbox.getRootProps(), localProps)
+  const mergedProps = mergeProps({ className: 'spark-checkbox-root' }, checkbox.getRootProps(), localProps)
 
   return (
     <CheckboxProvider value={checkbox}>

@@ -16,7 +16,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), ...props }: DialogTitleProps = $props()
 
   const dialog = useDialogContext()
-  const mergedProps = $derived(mergeProps(dialog().getTitleProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-dialog-title' }, dialog().getTitleProps(), props))
 </script>
 
 <Ark as="h2" bind:ref {...mergedProps} />

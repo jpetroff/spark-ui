@@ -23,7 +23,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   const presence = usePresenceContext()
   const mergedProps = $derived.by(() => {
     const triggerPropsRaw = popover().getTriggerProps(triggerProps)
-    return mergeProps(
+    return mergeProps({ class: 'spark-popover-trigger' },
       {
         ...triggerPropsRaw,
         'aria-controls': presence().unmounted ? undefined : triggerPropsRaw['aria-controls'],

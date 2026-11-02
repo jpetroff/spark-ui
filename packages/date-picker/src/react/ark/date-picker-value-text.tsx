@@ -1,5 +1,7 @@
 'use client'
 
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
+
 import type { DateValue } from '../../common/zag/date-picker/index.ts'
 import { Fragment, forwardRef } from 'react'
 import type { Assign } from "@spark/shared/react/ark/types.ts";
@@ -63,7 +65,7 @@ export const DatePickerValueText = forwardRef<HTMLSpanElement, DatePickerValueTe
   }
 
   return (
-    <ark.span {...datePickerAnatomy.build().valueText.attrs} {...localProps} ref={ref}>
+    <ark.span {...datePickerAnatomy.build().valueText.attrs} {...mergeProps({ className: 'spark-date-picker-value-text' }, localProps)} ref={ref}>
       {hasValue ? datePicker.valueAsString.join(separator) : placeholder}
     </ark.span>
   )

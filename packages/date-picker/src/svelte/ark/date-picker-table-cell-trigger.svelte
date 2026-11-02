@@ -37,7 +37,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
     return viewFn(cellProps())
   })
 
-  const mergedProps = $derived(mergeProps(triggerProps, props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-table-cell-trigger' }, triggerProps, props))
 </script>
 
 <Ark as="div" bind:ref {...mergedProps} />

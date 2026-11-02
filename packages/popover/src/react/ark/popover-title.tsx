@@ -12,7 +12,7 @@ export interface PopoverTitleProps extends HTMLProps<'h2'>, PopoverTitleBaseProp
 
 export const PopoverTitle = forwardRef<HTMLHeadingElement, PopoverTitleProps>((props, ref) => {
   const popover = usePopoverContext()
-  const mergedProps = mergeProps(popover.getTitleProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-popover-title' }, popover.getTitleProps(), props)
 
   return <ark.h2 {...mergedProps} ref={ref} />
 })

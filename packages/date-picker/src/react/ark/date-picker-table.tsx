@@ -21,7 +21,7 @@ export const DatePickerTable = forwardRef<HTMLTableElement, DatePickerTableProps
   const datePicker = useDatePickerContext()
   const viewProps = useDatePickerViewPropsContext()
   const tableProps = { columns, id: useId(), ...viewProps }
-  const mergedProps = mergeProps(datePicker.getTableProps(tableProps), localProps)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-table' }, datePicker.getTableProps(tableProps), localProps)
 
   return (
     <DatePickerTablePropsProvider value={tableProps}>

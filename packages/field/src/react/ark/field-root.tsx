@@ -28,7 +28,7 @@ export const FieldRoot = forwardRef<HTMLDivElement, FieldRootProps>((props, ref)
   ])
 
   const field = useField(useFieldProps)
-  const mergedProps = mergeProps<HTMLProps<'div'>>(field.getRootProps(), localProps)
+  const mergedProps = mergeProps<HTMLProps<'div'>>({ className: 'spark-field-root' }, field.getRootProps(), localProps)
   const composedRefs = useComposedRefs(ref, field.refs.rootRef)
 
   return (

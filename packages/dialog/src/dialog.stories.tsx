@@ -9,17 +9,17 @@ const meta = {
   render: (args) => (
     <Dialog.Root {...args}>
       <Dialog.Trigger asChild>
-        <Button>Open dialog</Button>
+        <Button.Root>Open dialog</Button.Root>
       </Dialog.Trigger>
-      <Dialog.Backdrop className="fixed inset-0 bg-black/40" />
-      <Dialog.Positioner className="fixed inset-0 flex items-center justify-center p-4">
-        <Dialog.Content className="grid w-full max-w-sm gap-4 rounded-lg border border-border bg-background p-6 shadow-lg">
-          <Dialog.Title className="text-lg font-semibold">Edit profile</Dialog.Title>
-          <Dialog.Description className="text-sm text-muted-foreground">
+      <Dialog.Backdrop />
+      <Dialog.Positioner>
+        <Dialog.Content>
+          <Dialog.Title>Edit profile</Dialog.Title>
+          <Dialog.Description>
             Update your profile details, then close this dialog to return to the page.
           </Dialog.Description>
           <Dialog.CloseTrigger asChild>
-            <Button>Close</Button>
+            <Button.Root>Close</Button.Root>
           </Dialog.CloseTrigger>
         </Dialog.Content>
       </Dialog.Positioner>
@@ -33,3 +33,22 @@ type Story = StoryObj<typeof meta>
 export const Default: Story = {}
 export const InitiallyOpen: Story = { args: { defaultOpen: true } }
 export const NonModal: Story = { args: { modal: false } }
+
+export const CustomizedWrapper: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Editable assembled component from the public component index. The parts prop forwards typed props to each nested primitive; change the source to add or remove parts.',
+      },
+    },
+  },
+  render: (args) => (
+    <Dialog
+      title="Edit profile"
+      description="Update your profile details."
+      trigger={<Button.Root>Open dialog</Button.Root>}
+      parts={{ root: args, trigger: { asChild: true } }}
+    />
+  ),
+}

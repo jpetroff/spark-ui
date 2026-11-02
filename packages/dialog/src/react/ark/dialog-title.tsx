@@ -12,7 +12,7 @@ export interface DialogTitleProps extends HTMLProps<'h2'>, DialogTitleBaseProps 
 
 export const DialogTitle = forwardRef<HTMLHeadingElement, DialogTitleProps>((props, ref) => {
   const dialog = useDialogContext()
-  const mergedProps = mergeProps(dialog.getTitleProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-dialog-title' }, dialog.getTitleProps(), props)
 
   return <ark.h2 {...mergedProps} ref={ref} />
 })

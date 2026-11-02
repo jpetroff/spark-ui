@@ -12,7 +12,7 @@ export interface PopoverDescriptionProps extends HTMLProps<'div'>, PopoverDescri
 
 export const PopoverDescription = forwardRef<HTMLDivElement, PopoverDescriptionProps>((props, ref) => {
   const popover = usePopoverContext()
-  const mergedProps = mergeProps(popover.getDescriptionProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-popover-description' }, popover.getDescriptionProps(), props)
 
   return <ark.div {...mergedProps} ref={ref} />
 })

@@ -1,0 +1,8 @@
+@layer spark.base {
+  .spark-date-picker-content {
+    z-index: calc(var(--spark-overlay-base) + var(--layer-index, 0));
+  }
+  .spark-date-picker-positioner {
+    z-index: var(--z-index, var(--spark-overlay-base));
+  }
+}

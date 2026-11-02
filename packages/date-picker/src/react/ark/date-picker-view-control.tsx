@@ -14,7 +14,7 @@ export interface DatePickerViewControlProps extends HTMLProps<'div'>, DatePicker
 export const DatePickerViewControl = forwardRef<HTMLDivElement, DatePickerViewControlProps>((props, ref) => {
   const datePicker = useDatePickerContext()
   const viewProps = useDatePickerViewPropsContext()
-  const mergedProps = mergeProps(datePicker.getViewControlProps(viewProps), props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-view-control' }, datePicker.getViewControlProps(viewProps), props)
 
   return <ark.div {...mergedProps} ref={ref} />
 })

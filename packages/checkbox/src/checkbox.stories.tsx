@@ -6,8 +6,8 @@ const meta = {
   component: Checkbox.Root,
   args: { defaultChecked: false, disabled: false, readOnly: false, invalid: false },
   render: (args) => (
-    <Checkbox.Root {...args} className="flex items-center gap-2 data-disabled:opacity-50">
-      <Checkbox.Control className="flex size-5 items-center justify-center rounded border border-input data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground">
+    <Checkbox.Root {...args}>
+      <Checkbox.Control>
         <Checkbox.Indicator aria-hidden="true">✓</Checkbox.Indicator>
         <Checkbox.Indicator indeterminate aria-hidden="true">
           −
@@ -28,3 +28,20 @@ export const Indeterminate: Story = { args: { defaultChecked: 'indeterminate' } 
 export const Disabled: Story = { args: { disabled: true } }
 export const ReadOnly: Story = { args: { defaultChecked: true, readOnly: true } }
 export const Invalid: Story = { args: { invalid: true } }
+
+export const CustomizedWrapper: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story:
+          'Editable assembled component from the public component index. The parts prop forwards typed props to each nested primitive; change the source to add or remove parts.',
+      },
+    },
+  },
+  render: (args) => (
+    <Checkbox
+      label="Accept terms and conditions"
+      parts={{ root: args, control: { title: 'Customizable control' } }}
+    />
+  ),
+}

@@ -28,7 +28,7 @@ export const DatePickerTableCellTrigger = forwardRef<HTMLDivElement, DatePickerT
   // @ts-expect-error fix later
   const triggerProps = viewFn(tableCellProps)
 
-  const mergedProps = mergeProps(triggerProps, props)
+  const mergedProps = mergeProps({ className: 'spark-date-picker-table-cell-trigger' }, triggerProps, props)
 
   return <ark.div ref={ref} {...mergedProps} />
 })

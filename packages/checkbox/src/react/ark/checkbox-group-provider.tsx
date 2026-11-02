@@ -1,5 +1,7 @@
 'use client'
 
+import { mergeProps } from '@spark/shared/react/zag/index.ts'
+
 import { forwardRef } from 'react'
 import type { Assign } from "@spark/shared/react/ark/types.ts";
 import { createSplitProps } from "@spark/shared/react/ark/utils/create-split-props.ts";
@@ -24,7 +26,7 @@ export const CheckboxGroupProvider = forwardRef<HTMLDivElement, CheckboxGroupPro
 
   return (
     <CheckboxGroupContextProvider value={localProps.value}>
-      <ark.div ref={ref} role="group" {...restProps} {...checkboxAnatomy.build().group.attrs} />
+      <ark.div ref={ref} role="group" {...mergeProps({ className: 'spark-checkbox-group' }, restProps)} {...checkboxAnatomy.build().group.attrs} />
     </CheckboxGroupContextProvider>
   )
 })

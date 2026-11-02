@@ -18,7 +18,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const popover = usePopoverContext()
   const presence = usePresenceContext()
-  const mergedProps = $derived(mergeProps(popover().getContentProps(), presence().getPresenceProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-popover-content' }, popover().getContentProps(), presence().getPresenceProps(), props))
 
   function setNode(node: Element | null) {
     presence().setNode(node)

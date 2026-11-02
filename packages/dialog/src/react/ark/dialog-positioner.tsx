@@ -13,7 +13,7 @@ export interface DialogPositionerProps extends HTMLProps<'div'>, DialogPositione
 
 export const DialogPositioner = forwardRef<HTMLDivElement, DialogPositionerProps>((props, ref) => {
   const dialog = useDialogContext()
-  const mergedProps = mergeProps(dialog.getPositionerProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-dialog-positioner' }, dialog.getPositionerProps(), props)
   const presence = usePresenceContext()
 
   if (presence.unmounted) {

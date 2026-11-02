@@ -20,7 +20,7 @@ const splitRootProviderProps = createSplitProps<RootProviderProps>()
 
 export const FieldRootProvider = forwardRef<HTMLDivElement, FieldRootProviderProps>((props, ref) => {
   const [{ value: field }, localProps] = splitRootProviderProps(props, ['value'])
-  const mergedProps = mergeProps<HTMLProps<'div'>>(field.getRootProps(), localProps)
+  const mergedProps = mergeProps<HTMLProps<'div'>>({ className: 'spark-field-root' }, field.getRootProps(), localProps)
 
   return (
     <FieldProvider value={field}>

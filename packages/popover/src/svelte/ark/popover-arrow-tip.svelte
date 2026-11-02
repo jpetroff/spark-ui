@@ -16,7 +16,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), ...props }: PopoverArrowTipProps = $props()
 
   const popover = usePopoverContext()
-  const mergedProps = $derived(mergeProps(popover().getArrowTipProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-popover-arrow-tip' }, popover().getArrowTipProps(), props))
 </script>
 
 <Ark as="div" bind:ref {...mergedProps} />

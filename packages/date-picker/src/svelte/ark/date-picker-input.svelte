@@ -19,7 +19,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
 
   const [inputProps, localProps] = $derived(createSplitProps<InputProps>()(props, ['index', 'fixOnBlur']))
   const datePicker = useDatePickerContext()
-  const mergedProps = $derived(mergeProps(datePicker().getInputProps(inputProps), localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-input' }, datePicker().getInputProps(inputProps), localProps))
 </script>
 
 <Ark as="input" bind:ref {...mergedProps} />

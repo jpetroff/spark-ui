@@ -43,7 +43,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
     return viewMap[viewProps().view](cellProps)
   })
 
-  const mergedProps = $derived(mergeProps(tableCellProps, localProps))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-table-cell' }, tableCellProps, localProps))
 
   DatePickerTableCellPropsProvider(() => cellProps)
 </script>

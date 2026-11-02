@@ -32,7 +32,7 @@ export const CheckboxRoot = forwardRef<HTMLLabelElement, CheckboxRootProps>((pro
     'value',
   ])
   const checkbox = useCheckbox(useCheckboxProps)
-  const mergedProps = mergeProps(checkbox.getRootProps(), localProps)
+  const mergedProps = mergeProps({ className: 'spark-checkbox-root' }, checkbox.getRootProps(), localProps)
 
   return (
     <CheckboxProvider value={checkbox}>

@@ -12,7 +12,7 @@ export interface PopoverCloseTriggerProps extends HTMLProps<'button'>, PopoverCl
 
 export const PopoverCloseTrigger = forwardRef<HTMLButtonElement, PopoverCloseTriggerProps>((props, ref) => {
   const popover = usePopoverContext()
-  const mergedProps = mergeProps(popover.getCloseTriggerProps(), props)
+  const mergedProps = mergeProps({ className: 'spark-popover-close-trigger' }, popover.getCloseTriggerProps(), props)
 
   return <ark.button {...mergedProps} ref={ref} />
 })

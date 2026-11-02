@@ -1,0 +1,8 @@
+@layer spark.base {
+  .spark-popover-content {
+    z-index: calc(var(--spark-overlay-base) + var(--layer-index, 0));
+  }
+  .spark-popover-positioner {
+    z-index: var(--z-index, var(--spark-overlay-base));
+  }
+}

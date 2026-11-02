@@ -17,7 +17,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), ...props }: DatePickerRangeTextProps = $props()
 
   const datePicker = useDatePickerContext()
-  const mergedProps = $derived(mergeProps(datePicker().getRangeTextProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-date-picker-range-text' }, datePicker().getRangeTextProps(), props))
 
   const visibleRangeText = $derived.by(() => {
     const { start, end } = datePicker().visibleRangeText

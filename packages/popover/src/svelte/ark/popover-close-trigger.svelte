@@ -16,7 +16,7 @@ import type { RefAttribute } from "@spark/shared/svelte/ark/types.ts";
   let { ref = $bindable(null), ...props }: PopoverCloseTriggerProps = $props()
 
   const popover = usePopoverContext()
-  const mergedProps = $derived(mergeProps(popover().getCloseTriggerProps(), props))
+  const mergedProps = $derived(mergeProps({ class: 'spark-popover-close-trigger' }, popover().getCloseTriggerProps(), props))
 </script>
 
 <Ark as="button" bind:ref {...mergedProps} />
