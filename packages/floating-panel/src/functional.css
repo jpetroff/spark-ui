@@ -1,0 +1,11 @@
+@layer spark.base {
+  :where([data-scope='floating-panel'][hidden]:not([hidden='until-found'])) {
+    display: none !important;
+  }
+  [data-scope='floating-panel'][data-part='positioner'] {
+    z-index: calc(var(--spark-overlay-base) + var(--z-index, 0));
+  }
+  [data-scope='floating-panel'][data-part='content'] {
+    box-sizing: border-box;
+  }
+}

@@ -1,0 +1,53 @@
+/* Optional, editable sample. Enable it from this component's public index. */
+@import '../../styles/src/sample.css';
+
+@layer spark.components {
+  :where([data-scope='radio-group']) {
+    box-sizing: border-box;
+    font-family: var(--spark-font-family);
+    font-size: var(--spark-font-size);
+    line-height: var(--spark-line-height);
+    color: inherit;
+  }
+  :where([data-scope='radio-group']):focus-visible {
+    outline: var(--spark-focus-width) solid var(--spark-focus);
+    outline-offset: var(--spark-focus-offset);
+  }
+  :where([data-scope='radio-group'][data-disabled]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  :where([data-scope='radio-group'][data-part='root']) {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spark-space-sm);
+  }
+  :where([data-scope='radio-group'][data-part='root'][data-orientation='horizontal']) {
+    flex-direction: row;
+    align-items: center;
+  }
+  :where([data-scope='radio-group'][data-part='item']) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spark-space-sm);
+  }
+  :where([data-scope='radio-group'][data-part='item-control']) {
+    display: grid;
+    place-items: center;
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border: 1px solid var(--spark-border);
+    border-radius: 50%;
+  }
+  :where([data-scope='radio-group'][data-part='item-control'][data-state='checked']::after) {
+    content: '';
+    inline-size: 0.65rem;
+    block-size: 0.65rem;
+    border-radius: 50%;
+    background: var(--spark-action);
+  }
+  :where([data-scope='radio-group'][data-part='item-control'][data-focus-visible]) {
+    outline: 2px solid var(--spark-focus);
+    outline-offset: 2px;
+  }
+}

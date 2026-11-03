@@ -1,0 +1,34 @@
+@layer spark.base {
+  :where([data-scope='scroll-area'][hidden]:not([hidden='until-found'])) {
+    display: none !important;
+  }
+  [data-scope='scroll-area'][data-part='viewport'] {
+    inline-size: 100%;
+    block-size: 100%;
+    scrollbar-width: none;
+  }
+  [data-scope='scroll-area'][data-part='viewport']::-webkit-scrollbar {
+    display: none;
+  }
+  [data-scope='scroll-area'][data-part='scrollbar'][data-orientation='vertical'] {
+    inline-size: 10px;
+  }
+  [data-scope='scroll-area'][data-part='scrollbar'][data-orientation='horizontal'] {
+    block-size: 10px;
+  }
+  [data-scope='scroll-area'][data-part='thumb'] {
+    inline-size: 100%;
+    block-size: 100%;
+  }
+  [data-scope='scroll-area'][data-part='corner'][data-state='hidden'] {
+    display: none;
+  }
+  [data-scope='scroll-area'][data-part='scrollbar'][data-orientation='vertical']:not(
+      [data-overflow-y]
+    ),
+  [data-scope='scroll-area'][data-part='scrollbar'][data-orientation='horizontal']:not(
+      [data-overflow-x]
+    ) {
+    display: none;
+  }
+}

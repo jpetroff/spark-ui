@@ -2,15 +2,30 @@
 
 import './styles.css'
 
-import type { ComponentProps } from 'react'
+// Optional sample design system; uncomment and edit recipe.css to adopt it.
+// import './recipe.css'
+
+import type { ComponentProps, ReactNode } from 'react'
 import { Toggle as ComponentParts } from './react/ark/index.ts'
 export * from './react/ark/index.ts'
 
-export type ToggleProps = ComponentProps<typeof ComponentParts.Root>
-
-/** Editable assembly. Add subcomponents and their props here as needed. */
-function AssembledComponent(props: ToggleProps) {
-  return <ComponentParts.Root {...props} />
+/** Editable assembled Toggle. Subcomponents remain available as Toggle.Root, etc. */
+export interface ToggleProps {
+  /** Button content must give the toggle an accessible name. */
+  children: ReactNode
+  /** Typed primitive props. Customize markup here; use className (React) or class (Svelte). */
+  parts?: {
+    /** Pressed/defaultPressed, onPressedChange, disabled, label and button events. */
+    root?: Omit<ComponentProps<typeof ComponentParts.Root>, 'children'>
+  }
 }
 
-export const Toggle = Object.assign(AssembledComponent, ComponentParts)
+/**
+ * Customize this assembly and its documented parts for your application.
+ * Ark anatomy and behavior: https://ark-ui.com/docs/components/toggle
+ * @example
+ * <Toggle parts={{ root: { defaultPressed: true } }}>Bold</Toggle>
+ */
+export const Toggle = Object.assign(function Toggle({ children, parts = {} }: ToggleProps) {
+  return <ComponentParts.Root {...parts.root}>{children}</ComponentParts.Root>
+}, ComponentParts)

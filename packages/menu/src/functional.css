@@ -1,0 +1,11 @@
+@layer spark.base {
+  :where([data-scope='menu'][hidden]:not([hidden='until-found'])) {
+    display: none !important;
+  }
+  [data-scope='menu'][data-part='positioner'] {
+    z-index: var(--z-index, var(--spark-overlay-base));
+  }
+  [data-scope='menu'][data-part='content'] {
+    z-index: calc(var(--spark-overlay-base) + var(--layer-index, 0));
+  }
+}

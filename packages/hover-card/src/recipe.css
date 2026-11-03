@@ -1,0 +1,36 @@
+/* Optional, editable sample. Enable it from this component's public index. */
+@import '../../styles/src/sample.css';
+
+@layer spark.components {
+  :where([data-scope='hover-card']) {
+    box-sizing: border-box;
+    font-family: var(--spark-font-family);
+    font-size: var(--spark-font-size);
+    line-height: var(--spark-line-height);
+    color: inherit;
+  }
+  :where([data-scope='hover-card']):focus-visible {
+    outline: var(--spark-focus-width) solid var(--spark-focus);
+    outline-offset: var(--spark-focus-offset);
+  }
+  :where([data-scope='hover-card'][data-disabled]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  :where([data-scope='hover-card'][data-part='trigger']) {
+    color: var(--spark-info-text);
+    border: 0;
+    padding: 0;
+    background: transparent;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  :where([data-scope='hover-card'][data-part='content']) {
+    max-inline-size: 20rem;
+    padding: var(--spark-space-md);
+    border: 1px solid var(--spark-border);
+    border-radius: var(--spark-radius-overlay);
+    background: var(--spark-surface-overlay);
+    box-shadow: var(--spark-shadow-overlay);
+  }
+}

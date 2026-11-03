@@ -1,1 +1,2 @@
-/* floating-panel: add styles using Ark's data-scope and data-part attributes. */
+@import '../../styles/src/index.css';
+@import './functional.css';

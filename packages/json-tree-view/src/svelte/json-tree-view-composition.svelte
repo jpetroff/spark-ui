@@ -1,9 +1,12 @@
-<!-- Editable assembly. Add subcomponents and their props here as needed. -->
+<!-- Editable composition; the public index documents every prop and part. -->
 <script lang="ts">
   import type { JsonTreeViewProps } from '../svelte.ts'
   import { JsonTreeView as ComponentParts } from './ark/index.ts'
 
-  let props: JsonTreeViewProps = $props()
+  let { data, label, parts = {} }: JsonTreeViewProps = $props()
+
 </script>
 
-<ComponentParts.Root {...props} />
+<ComponentParts.Root {...parts.root} {data}>
+  <ComponentParts.Tree {...parts.tree} aria-label={label} />
+</ComponentParts.Root>

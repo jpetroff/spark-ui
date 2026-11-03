@@ -1,12 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "lib": [
-      "ES2022",
-      "ES2023.Array",
-      "DOM",
-      "DOM.Iterable"
-    ],
+    "lib": ["ES2022", "ES2023.Array", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowImportingTsExtensions": true,
@@ -20,10 +15,7 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": [
-      "vite/client",
-      "node"
-    ],
+    "types": ["vite/client", "node"],
     "paths": {
       "@/*": ["./src/*"],
       "@/components/ui/*": ["./packages/*/src/react.tsx"],
@@ -54,6 +46,7 @@
       "@spark/segment-group/*": ["./packages/segment-group/src/*"],
       "@spark/select/*": ["./packages/select/src/*"],
       "@spark/shared/*": ["./packages/shared/src/*"],
+      "@spark/styles/*": ["./packages/styles/src/*"],
       "@spark/swap/*": ["./packages/swap/src/*"],
       "@spark/switch/*": ["./packages/switch/src/*"],
       "@spark/tabs/*": ["./packages/tabs/src/*"],

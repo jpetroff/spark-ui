@@ -17,7 +17,7 @@ import './styles.css'
 
 `styles.css` loads the shared functional foundation and the component's `functional.css`. Keep these enabled when writing a design system. Components automatically import the foundation; importing another component never enables its recipe.
 
-To try the sample, uncomment `import './recipe.css'` in that component's index. The recipe imports shared `styles/sample.css`, which supplies the visual tokens, light/dark palette, and Fieldset sample. It then styles the component's stable `.spark-*` classes. The sample is ordinary CSS, not a CSS Module. Edit, replace, or delete its appearance rules freely. Toggle the document's `.dark` class to use its dark palette.
+To try the sample, uncomment `import './recipe.css'` in that component's index. The recipe imports shared `styles/sample.css`, which supplies the visual tokens, light/dark palette, and Fieldset sample. It then styles the component's stable `.spark-*` classes or Ark's `data-scope`/`data-part` attributes for the newly imported components. The sample is ordinary CSS, not a CSS Module. Edit, replace, or delete its appearance rules freely. Toggle the document's `.dark` class to use its dark palette.
 
 A project can also opt in centrally by importing selected component recipes from application CSS. The workshop and Storybook do this explicitly; that choice is not distributed in component indexes.
 
@@ -44,6 +44,27 @@ Each visual index exports an assembled component under its actual name, with mat
 | `Dialog`     | Trigger, backdrop, positioner, titled/described content, body, and close button                                        |
 | `Popover`    | Trigger, positioner, titled/described content, body, and close button                                                  |
 | `DatePicker` | Single-date day calendar with navigation, weekdays, and selectable cells; use primitives for range or month/year views |
+
+The additional imported samples cover:
+
+| Component                    | Editable composition                                                                      |
+| ---------------------------- | ----------------------------------------------------------------------------------------- |
+| `NumberInput`                | Label, input, and increment/decrement controls                                            |
+| `Switch`                     | Track, thumb, label, and hidden input                                                     |
+| `RadioGroup`, `SegmentGroup` | Labeled choices with native hidden inputs                                                 |
+| `Select`                     | Labeled list collection, trigger, options, and hidden select; supports multiple selection |
+| `Menu`                       | Trigger and action items; use primitives for submenus and checkbox/radio actions          |
+| `Tabs`                       | Named tab list and matching panels from item data                                         |
+| `HoverCard`                  | Trigger and supplementary hover content                                                   |
+| `FloatingPanel`              | Trigger, draggable titled header, body, close button, and resize handle                   |
+| `ScrollArea`                 | Dimensioned viewport with both scrollbars; supply dimensions through part props           |
+| `TreeView`                   | Recursive `id`/`name` nodes; use primitives for custom collections and async loading      |
+| `JsonTreeView`               | Accessible JSON tree with expansion and display options                                   |
+| `Toggle`, `Swap`             | Toggle button content, or two controlled display states                                   |
+| `Toast`                      | Notification region backed by a stable `createToaster()` store                            |
+| `Format`                     | Callable number formatter with attached byte, time, and relative-time formatters          |
+
+Each sample has Storybook stories using its public index. Visual recipes remain opt-in; Format, Highlight, and Portal use their existing primitive presentation. Highlight and Portal indexes include usage examples without an extra assembly. Toast stores should be created once per region; React content uses nodes and Svelte content uses snippets.
 
 Locale and Environment indexes document their provider APIs; they have no visual recipe. Locale supplies language/direction, and Environment supplies the document or root node.
 

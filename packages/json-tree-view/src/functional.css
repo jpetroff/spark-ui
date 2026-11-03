@@ -1,0 +1,5 @@
+@layer spark.base {
+  :where([data-scope='json-tree-view'][hidden]:not([hidden='until-found'])) {
+    display: none !important;
+  }
+}

@@ -1,0 +1,48 @@
+/* Optional, editable sample. Enable it from this component's public index. */
+@import '../../styles/src/sample.css';
+
+@layer spark.components {
+  :where([data-scope='segment-group']) {
+    box-sizing: border-box;
+    font-family: var(--spark-font-family);
+    font-size: var(--spark-font-size);
+    line-height: var(--spark-line-height);
+    color: inherit;
+  }
+  :where([data-scope='segment-group']):focus-visible {
+    outline: var(--spark-focus-width) solid var(--spark-focus);
+    outline-offset: var(--spark-focus-offset);
+  }
+  :where([data-scope='segment-group'][data-disabled]) {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  :where([data-scope='segment-group'][data-part='root']) {
+    display: flex;
+    align-items: center;
+    gap: var(--spark-space-xs);
+  }
+  :where([data-scope='segment-group'][data-part='root'][data-orientation='vertical']) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  :where([data-scope='segment-group'][data-part='label']) {
+    margin-inline-end: var(--spark-space-sm);
+  }
+  :where([data-scope='segment-group'][data-part='item']) {
+    display: inline-flex;
+    padding: var(--spark-space-sm) var(--spark-space-md);
+    border: 1px solid var(--spark-border);
+    border-radius: var(--spark-radius-control);
+    background: var(--spark-secondary);
+    cursor: pointer;
+  }
+  :where([data-scope='segment-group'][data-part='item'][data-state='checked']) {
+    background: var(--spark-action);
+    color: var(--spark-on-action);
+  }
+  :where([data-scope='segment-group'][data-part='item'][data-focus-visible]) {
+    outline: 2px solid var(--spark-focus);
+    outline-offset: 2px;
+  }
+}

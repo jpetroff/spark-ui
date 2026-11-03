@@ -6,6 +6,21 @@
 @import '../packages/dialog/src/recipe.css';
 @import '../packages/popover/src/recipe.css';
 @import '../packages/date-picker/src/recipe.css';
+@import '../packages/number-input/src/recipe.css';
+@import '../packages/switch/src/recipe.css';
+@import '../packages/radio-group/src/recipe.css';
+@import '../packages/segment-group/src/recipe.css';
+@import '../packages/menu/src/recipe.css';
+@import '../packages/select/src/recipe.css';
+@import '../packages/hover-card/src/recipe.css';
+@import '../packages/floating-panel/src/recipe.css';
+@import '../packages/scroll-area/src/recipe.css';
+@import '../packages/swap/src/recipe.css';
+@import '../packages/toggle/src/recipe.css';
+@import '../packages/tabs/src/recipe.css';
+@import '../packages/tree-view/src/recipe.css';
+@import '../packages/json-tree-view/src/recipe.css';
+@import '../packages/toast/src/recipe.css';
 
 body {
   margin: 0;
