@@ -15,23 +15,30 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "types": ["vite/client", "node"],
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "paths": {
       "@/*": ["./src/*"],
       "@/components/ui/*": ["./packages/*/src/react.tsx"],
       "@/lib/spark-utils": ["./packages/utils/src/spark-utils.ts"],
+      "@spark/async-list/*": ["./packages/async-list/src/*"],
       "@spark/button/*": ["./packages/button/src/*"],
       "@spark/checkbox/*": ["./packages/checkbox/src/*"],
+      "@spark/collapsible/*": ["./packages/collapsible/src/*"],
+      "@spark/collection/*": ["./packages/collection/src/*"],
       "@spark/date-picker/*": ["./packages/date-picker/src/*"],
       "@spark/dialog/*": ["./packages/dialog/src/*"],
       "@spark/environment/*": ["./packages/environment/src/*"],
       "@spark/field/*": ["./packages/field/src/*"],
       "@spark/fieldset/*": ["./packages/fieldset/src/*"],
+      "@spark/json-tree-view/*": ["./packages/json-tree-view/src/*"],
       "@spark/locale/*": ["./packages/locale/src/*"],
       "@spark/popover/*": ["./packages/popover/src/*"],
       "@spark/presence/*": ["./packages/presence/src/*"],
       "@spark/shared/*": ["./packages/shared/src/*"],
-      "@spark/styles/*": ["./packages/styles/src/*"],
+      "@spark/tree-view/*": ["./packages/tree-view/src/*"],
       "@spark/utils/*": ["./packages/utils/src/*"]
     }
   },

@@ -17,6 +17,7 @@
     "dialog",
     "environment",
     "field",
+    "json-tree-view",
     "locale",
     "popover"
   ],
@@ -1599,6 +1600,440 @@
         "svelte@>=5.29.0"
       ]
     },
+    "json-tree-view-react": {
+      "component": "json-tree-view",
+      "framework": "react",
+      "root": "ark:packages/react/src/components/json-tree-view/index.ts",
+      "files": [
+        "ark:packages/react/src/components/collapsible/collapsible-content.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-context.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-gate.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-indicator.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-root-provider.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-root.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-trigger.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible.anatomy.ts",
+        "ark:packages/react/src/components/collapsible/collapsible.ts",
+        "ark:packages/react/src/components/collapsible/index.ts",
+        "ark:packages/react/src/components/collapsible/split-collapsible-props.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "ark:packages/react/src/components/collection/grid-collection.ts",
+        "ark:packages/react/src/components/collection/index.ts",
+        "ark:packages/react/src/components/collection/list-collection.ts",
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/collection/use-async-list.ts",
+        "ark:packages/react/src/components/collection/use-list-collection.ts",
+        "ark:packages/react/src/components/collection/use-list-selection.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/json-tree-view/get-branch-value.ts",
+        "ark:packages/react/src/components/json-tree-view/index.ts",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-key-node.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-node.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-root-provider.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-root.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-tree.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-value-node.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view.tsx",
+        "ark:packages/react/src/components/json-tree-view/use-json-tree-view.ts",
+        "ark:packages/react/src/components/tree-view/index.ts",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-content.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-control.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-indent-guide.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-text.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-trigger.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-context.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item-text.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-label.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-checkbox-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-checkbox.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-context.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-provider.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-rename-input.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-root-provider.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-root.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-tree.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view.anatomy.ts",
+        "ark:packages/react/src/components/tree-view/tree-view.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view.ts",
+        "ark:packages/react/src/providers/environment/environment-provider.tsx",
+        "ark:packages/react/src/providers/environment/index.ts",
+        "ark:packages/react/src/providers/environment/use-environment-context.ts",
+        "ark:packages/react/src/providers/hotkeys/index.ts",
+        "ark:packages/react/src/providers/hotkeys/use-format-hotkey.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey-recorder.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey-registrations.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey-store.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkey.ts",
+        "ark:packages/react/src/providers/hotkeys/use-hotkeys.ts",
+        "ark:packages/react/src/providers/hotkeys/use-is-key-pressed.ts",
+        "ark:packages/react/src/providers/hotkeys/use-platform.ts",
+        "ark:packages/react/src/providers/hotkeys/use-pressed-keys.ts",
+        "ark:packages/react/src/providers/hotkeys/use-store-snapshot.ts",
+        "ark:packages/react/src/providers/index.ts",
+        "ark:packages/react/src/providers/interaction/index.ts",
+        "ark:packages/react/src/providers/interaction/use-focus-visible.ts",
+        "ark:packages/react/src/providers/interaction/use-interaction-modality.ts",
+        "ark:packages/react/src/providers/locale/index.ts",
+        "ark:packages/react/src/providers/locale/locale-provider.tsx",
+        "ark:packages/react/src/providers/locale/use-collator.ts",
+        "ark:packages/react/src/providers/locale/use-date-formatter.ts",
+        "ark:packages/react/src/providers/locale/use-filter.ts",
+        "ark:packages/react/src/providers/locale/use-locale-context.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/compose-refs.ts",
+        "ark:packages/react/src/utils/create-context.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "ark:packages/react/src/utils/react-activity.ts",
+        "ark:packages/react/src/utils/render-strategy.ts",
+        "ark:packages/react/src/utils/run-if-fn.ts",
+        "ark:packages/react/src/utils/use-event.ts",
+        "ark:packages/react/src/utils/use-safe-layout-effect.ts",
+        "zag:packages/anatomy/src/create-anatomy.ts",
+        "zag:packages/core/src/create-machine.ts",
+        "zag:packages/core/src/index.ts",
+        "zag:packages/core/src/memo.ts",
+        "zag:packages/core/src/merge-props.ts",
+        "zag:packages/core/src/replace-tracker.ts",
+        "zag:packages/core/src/scope.ts",
+        "zag:packages/core/src/state.ts",
+        "zag:packages/core/src/types.ts",
+        "zag:packages/frameworks/react/src/bindable.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/frameworks/react/src/machine.ts",
+        "zag:packages/frameworks/react/src/normalize-props.ts",
+        "zag:packages/frameworks/react/src/portal.tsx",
+        "zag:packages/frameworks/react/src/refs.ts",
+        "zag:packages/frameworks/react/src/stable.ts",
+        "zag:packages/frameworks/react/src/track.ts",
+        "zag:packages/frameworks/react/src/use-layout-effect.ts",
+        "zag:packages/machines/async-list/src/async-list.connect.ts",
+        "zag:packages/machines/async-list/src/async-list.machine.ts",
+        "zag:packages/machines/async-list/src/async-list.types.ts",
+        "zag:packages/machines/async-list/src/index.ts",
+        "zag:packages/machines/collapsible/src/collapsible.anatomy.ts",
+        "zag:packages/machines/collapsible/src/collapsible.connect.ts",
+        "zag:packages/machines/collapsible/src/collapsible.dom.ts",
+        "zag:packages/machines/collapsible/src/collapsible.machine.ts",
+        "zag:packages/machines/collapsible/src/collapsible.props.ts",
+        "zag:packages/machines/collapsible/src/collapsible.types.ts",
+        "zag:packages/machines/collapsible/src/index.ts",
+        "zag:packages/machines/tree-view/src/index.ts",
+        "zag:packages/machines/tree-view/src/tree-view.anatomy.ts",
+        "zag:packages/machines/tree-view/src/tree-view.collection.ts",
+        "zag:packages/machines/tree-view/src/tree-view.connect.ts",
+        "zag:packages/machines/tree-view/src/tree-view.dom.ts",
+        "zag:packages/machines/tree-view/src/tree-view.machine.ts",
+        "zag:packages/machines/tree-view/src/tree-view.props.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/machines/tree-view/src/utils/checked-state.ts",
+        "zag:packages/machines/tree-view/src/utils/expand-branch.ts",
+        "zag:packages/machines/tree-view/src/utils/visit-skip.ts",
+        "zag:packages/types/src/create-props.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/types/src/jsx.ts",
+        "zag:packages/types/src/prop-types.ts",
+        "zag:packages/utilities/collection/src/grid-collection.ts",
+        "zag:packages/utilities/collection/src/index.ts",
+        "zag:packages/utilities/collection/src/list-collection.ts",
+        "zag:packages/utilities/collection/src/selection-map.ts",
+        "zag:packages/utilities/collection/src/selection.ts",
+        "zag:packages/utilities/collection/src/tree-collection.ts",
+        "zag:packages/utilities/collection/src/tree-visit.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/array.ts",
+        "zag:packages/utilities/core/src/equal.ts",
+        "zag:packages/utilities/core/src/functions.ts",
+        "zag:packages/utilities/core/src/guard.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/core/src/number.ts",
+        "zag:packages/utilities/core/src/object.ts",
+        "zag:packages/utilities/core/src/store.ts",
+        "zag:packages/utilities/core/src/timers.ts",
+        "zag:packages/utilities/core/src/warning.ts",
+        "zag:packages/utilities/dom-query/src/caret.ts",
+        "zag:packages/utilities/dom-query/src/computed-style.ts",
+        "zag:packages/utilities/dom-query/src/controller.ts",
+        "zag:packages/utilities/dom-query/src/data-url.ts",
+        "zag:packages/utilities/dom-query/src/event.ts",
+        "zag:packages/utilities/dom-query/src/form.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/dom-query/src/initial-focus.ts",
+        "zag:packages/utilities/dom-query/src/mutation-observer.ts",
+        "zag:packages/utilities/dom-query/src/navigate.ts",
+        "zag:packages/utilities/dom-query/src/node.ts",
+        "zag:packages/utilities/dom-query/src/overflow.ts",
+        "zag:packages/utilities/dom-query/src/platform.ts",
+        "zag:packages/utilities/dom-query/src/point.ts",
+        "zag:packages/utilities/dom-query/src/pointer-lock.ts",
+        "zag:packages/utilities/dom-query/src/pointer-move.ts",
+        "zag:packages/utilities/dom-query/src/press.ts",
+        "zag:packages/utilities/dom-query/src/proxy-tab-focus.ts",
+        "zag:packages/utilities/dom-query/src/query.ts",
+        "zag:packages/utilities/dom-query/src/raf.ts",
+        "zag:packages/utilities/dom-query/src/resize-observer.ts",
+        "zag:packages/utilities/dom-query/src/scale.ts",
+        "zag:packages/utilities/dom-query/src/scope.ts",
+        "zag:packages/utilities/dom-query/src/scroll.ts",
+        "zag:packages/utilities/dom-query/src/searchable.ts",
+        "zag:packages/utilities/dom-query/src/set.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts",
+        "zag:packages/utilities/dom-query/src/tabbable.ts",
+        "zag:packages/utilities/dom-query/src/text-selection.ts",
+        "zag:packages/utilities/dom-query/src/timeout.ts",
+        "zag:packages/utilities/dom-query/src/typeahead.ts",
+        "zag:packages/utilities/dom-query/src/types.ts",
+        "zag:packages/utilities/dom-query/src/visual-viewport.ts",
+        "zag:packages/utilities/dom-query/src/visually-hidden.ts",
+        "zag:packages/utilities/dom-query/src/wait-for.ts",
+        "zag:packages/utilities/dom-query/src/when-node.ts",
+        "zag:packages/utilities/focus-visible/src/index.ts",
+        "zag:packages/utilities/hotkeys/src/format.ts",
+        "zag:packages/utilities/hotkeys/src/index.ts",
+        "zag:packages/utilities/hotkeys/src/key-to-code.ts",
+        "zag:packages/utilities/hotkeys/src/modifier.ts",
+        "zag:packages/utilities/hotkeys/src/normalize.ts",
+        "zag:packages/utilities/hotkeys/src/parser.ts",
+        "zag:packages/utilities/hotkeys/src/recorder.ts",
+        "zag:packages/utilities/hotkeys/src/store.ts",
+        "zag:packages/utilities/hotkeys/src/types.ts",
+        "zag:packages/utilities/hotkeys/src/utils.ts",
+        "zag:packages/utilities/hotkeys/src/validate.ts",
+        "zag:packages/utilities/i18n-utils/src/cache.ts",
+        "zag:packages/utilities/i18n-utils/src/collator.ts",
+        "zag:packages/utilities/i18n-utils/src/filter.ts",
+        "zag:packages/utilities/i18n-utils/src/format-bytes.ts",
+        "zag:packages/utilities/i18n-utils/src/format-date.ts",
+        "zag:packages/utilities/i18n-utils/src/format-list.ts",
+        "zag:packages/utilities/i18n-utils/src/format-number.ts",
+        "zag:packages/utilities/i18n-utils/src/format-relative-time.ts",
+        "zag:packages/utilities/i18n-utils/src/format-time.ts",
+        "zag:packages/utilities/i18n-utils/src/index.ts",
+        "zag:packages/utilities/i18n-utils/src/is-rtl.ts",
+        "zag:packages/utilities/i18n-utils/src/locale.ts",
+        "zag:packages/utilities/i18n-utils/src/track-locale.ts",
+        "zag:packages/utilities/json-tree-utils/src/accessibility.ts",
+        "zag:packages/utilities/json-tree-utils/src/data-type.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts",
+        "zag:packages/utilities/json-tree-utils/src/json-to-tree.ts",
+        "zag:packages/utilities/json-tree-utils/src/node-conversion.ts",
+        "zag:packages/utilities/json-tree-utils/src/shared.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "dependencies": [
+        "@internationalized/date@3.12.4",
+        "csstype@3.2.3",
+        "react@>=18.0.0",
+        "react-dom@>=18.0.0"
+      ]
+    },
+    "json-tree-view-svelte": {
+      "component": "json-tree-view",
+      "framework": "svelte",
+      "root": "ark:packages/svelte/src/lib/components/json-tree-view/index.ts",
+      "files": [
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-content.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-context.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-root.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/index.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/split-collapsible-props.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collection/grid-collection.ts",
+        "ark:packages/svelte/src/lib/components/collection/index.ts",
+        "ark:packages/svelte/src/lib/components/collection/list-collection.ts",
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/collection/use-async-list.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collection/use-list-collection.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collection/use-list-selection.svelte.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/factory/svg-factory.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/get-branch-value.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/index.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-key-node.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-node.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-tree.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-value-node.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/use-json-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-content.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-control.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indent-guide.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-text.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-context.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-text.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-label.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-context.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-provider.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-rename-input.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-split-props.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-tree.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/providers/environment/use-environment-context.ts",
+        "ark:packages/svelte/src/lib/providers/locale/use-locale-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "ark:packages/svelte/src/lib/utils/render-strategy.ts",
+        "ark:packages/svelte/src/lib/utils/run-if-fn.ts",
+        "ark:packages/svelte/src/lib/utils/tags.ts",
+        "zag:packages/anatomy/src/create-anatomy.ts",
+        "zag:packages/core/src/create-machine.ts",
+        "zag:packages/core/src/index.ts",
+        "zag:packages/core/src/memo.ts",
+        "zag:packages/core/src/merge-props.ts",
+        "zag:packages/core/src/replace-tracker.ts",
+        "zag:packages/core/src/scope.ts",
+        "zag:packages/core/src/state.ts",
+        "zag:packages/core/src/types.ts",
+        "zag:packages/frameworks/svelte/src/bindable.svelte.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/frameworks/svelte/src/machine.svelte.ts",
+        "zag:packages/frameworks/svelte/src/merge-props.ts",
+        "zag:packages/frameworks/svelte/src/normalize-props.ts",
+        "zag:packages/frameworks/svelte/src/portal.ts",
+        "zag:packages/frameworks/svelte/src/reflect.ts",
+        "zag:packages/frameworks/svelte/src/refs.svelte.ts",
+        "zag:packages/frameworks/svelte/src/style.ts",
+        "zag:packages/frameworks/svelte/src/track.svelte.ts",
+        "zag:packages/frameworks/svelte/src/use-sync-external-store.svelte.ts",
+        "zag:packages/machines/async-list/src/async-list.connect.ts",
+        "zag:packages/machines/async-list/src/async-list.machine.ts",
+        "zag:packages/machines/async-list/src/async-list.types.ts",
+        "zag:packages/machines/async-list/src/index.ts",
+        "zag:packages/machines/collapsible/src/collapsible.anatomy.ts",
+        "zag:packages/machines/collapsible/src/collapsible.connect.ts",
+        "zag:packages/machines/collapsible/src/collapsible.dom.ts",
+        "zag:packages/machines/collapsible/src/collapsible.machine.ts",
+        "zag:packages/machines/collapsible/src/collapsible.props.ts",
+        "zag:packages/machines/collapsible/src/collapsible.types.ts",
+        "zag:packages/machines/collapsible/src/index.ts",
+        "zag:packages/machines/tree-view/src/index.ts",
+        "zag:packages/machines/tree-view/src/tree-view.anatomy.ts",
+        "zag:packages/machines/tree-view/src/tree-view.collection.ts",
+        "zag:packages/machines/tree-view/src/tree-view.connect.ts",
+        "zag:packages/machines/tree-view/src/tree-view.dom.ts",
+        "zag:packages/machines/tree-view/src/tree-view.machine.ts",
+        "zag:packages/machines/tree-view/src/tree-view.props.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/machines/tree-view/src/utils/checked-state.ts",
+        "zag:packages/machines/tree-view/src/utils/expand-branch.ts",
+        "zag:packages/machines/tree-view/src/utils/visit-skip.ts",
+        "zag:packages/types/src/create-props.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/types/src/jsx.ts",
+        "zag:packages/types/src/prop-types.ts",
+        "zag:packages/utilities/collection/src/grid-collection.ts",
+        "zag:packages/utilities/collection/src/index.ts",
+        "zag:packages/utilities/collection/src/list-collection.ts",
+        "zag:packages/utilities/collection/src/selection-map.ts",
+        "zag:packages/utilities/collection/src/selection.ts",
+        "zag:packages/utilities/collection/src/tree-collection.ts",
+        "zag:packages/utilities/collection/src/tree-visit.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/array.ts",
+        "zag:packages/utilities/core/src/equal.ts",
+        "zag:packages/utilities/core/src/functions.ts",
+        "zag:packages/utilities/core/src/guard.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/core/src/number.ts",
+        "zag:packages/utilities/core/src/object.ts",
+        "zag:packages/utilities/core/src/store.ts",
+        "zag:packages/utilities/core/src/timers.ts",
+        "zag:packages/utilities/core/src/warning.ts",
+        "zag:packages/utilities/dom-query/src/caret.ts",
+        "zag:packages/utilities/dom-query/src/computed-style.ts",
+        "zag:packages/utilities/dom-query/src/controller.ts",
+        "zag:packages/utilities/dom-query/src/data-url.ts",
+        "zag:packages/utilities/dom-query/src/event.ts",
+        "zag:packages/utilities/dom-query/src/form.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/dom-query/src/initial-focus.ts",
+        "zag:packages/utilities/dom-query/src/mutation-observer.ts",
+        "zag:packages/utilities/dom-query/src/navigate.ts",
+        "zag:packages/utilities/dom-query/src/node.ts",
+        "zag:packages/utilities/dom-query/src/overflow.ts",
+        "zag:packages/utilities/dom-query/src/platform.ts",
+        "zag:packages/utilities/dom-query/src/point.ts",
+        "zag:packages/utilities/dom-query/src/pointer-lock.ts",
+        "zag:packages/utilities/dom-query/src/pointer-move.ts",
+        "zag:packages/utilities/dom-query/src/press.ts",
+        "zag:packages/utilities/dom-query/src/proxy-tab-focus.ts",
+        "zag:packages/utilities/dom-query/src/query.ts",
+        "zag:packages/utilities/dom-query/src/raf.ts",
+        "zag:packages/utilities/dom-query/src/resize-observer.ts",
+        "zag:packages/utilities/dom-query/src/scale.ts",
+        "zag:packages/utilities/dom-query/src/scope.ts",
+        "zag:packages/utilities/dom-query/src/scroll.ts",
+        "zag:packages/utilities/dom-query/src/searchable.ts",
+        "zag:packages/utilities/dom-query/src/set.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts",
+        "zag:packages/utilities/dom-query/src/tabbable.ts",
+        "zag:packages/utilities/dom-query/src/text-selection.ts",
+        "zag:packages/utilities/dom-query/src/timeout.ts",
+        "zag:packages/utilities/dom-query/src/typeahead.ts",
+        "zag:packages/utilities/dom-query/src/types.ts",
+        "zag:packages/utilities/dom-query/src/visual-viewport.ts",
+        "zag:packages/utilities/dom-query/src/visually-hidden.ts",
+        "zag:packages/utilities/dom-query/src/wait-for.ts",
+        "zag:packages/utilities/dom-query/src/when-node.ts",
+        "zag:packages/utilities/i18n-utils/src/cache.ts",
+        "zag:packages/utilities/i18n-utils/src/collator.ts",
+        "zag:packages/utilities/i18n-utils/src/filter.ts",
+        "zag:packages/utilities/i18n-utils/src/format-bytes.ts",
+        "zag:packages/utilities/i18n-utils/src/format-date.ts",
+        "zag:packages/utilities/i18n-utils/src/format-list.ts",
+        "zag:packages/utilities/i18n-utils/src/format-number.ts",
+        "zag:packages/utilities/i18n-utils/src/format-relative-time.ts",
+        "zag:packages/utilities/i18n-utils/src/format-time.ts",
+        "zag:packages/utilities/i18n-utils/src/index.ts",
+        "zag:packages/utilities/i18n-utils/src/is-rtl.ts",
+        "zag:packages/utilities/i18n-utils/src/locale.ts",
+        "zag:packages/utilities/i18n-utils/src/track-locale.ts",
+        "zag:packages/utilities/json-tree-utils/src/accessibility.ts",
+        "zag:packages/utilities/json-tree-utils/src/data-type.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts",
+        "zag:packages/utilities/json-tree-utils/src/json-to-tree.ts",
+        "zag:packages/utilities/json-tree-utils/src/node-conversion.ts",
+        "zag:packages/utilities/json-tree-utils/src/shared.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "dependencies": [
+        "csstype@3.2.3",
+        "svelte@>=5.29.0"
+      ]
+    },
     "locale-react": {
       "component": "locale",
       "framework": "react",
@@ -2337,6 +2772,254 @@
         "ark:packages/react/src/types.ts",
         "zag:packages/frameworks/react/src/index.ts",
         "zag:packages/machines/checkbox/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-content.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-content.tsx",
+      "upstreamHash": "3718f14639fd4b12a45b91683c85da334f4cacde6b580b8f78936e8dbc86d769",
+      "generatedHash": "220e48e975f799d3aed26722ae60646d98572a06e7af989fac8d9743f6fa151a",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/collapsible-gate.tsx",
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-context.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-context.tsx",
+      "upstreamHash": "323cfa3cef0b0fbaebc05a11d8b88cd183b6abce3675f8807579a8f80189c9fa",
+      "generatedHash": "4a6fa1fc6e768431315f76c333cb8d6267faed652b1f173aa68ff931515225a3",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-gate.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-gate.tsx",
+      "upstreamHash": "9a3652cf8353e9df90960e086d7dff489a153c52b4e389d4d4c4a736a397a13e",
+      "generatedHash": "cf850064fb900ad069b0b1906f16c934c5731df8c76101ad09ff2375e3e0f439",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "ark:packages/react/src/utils/react-activity.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-indicator.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-indicator.tsx",
+      "upstreamHash": "37c7c212f35293be19acd75348598fa65fcf24a39808d0284c8db51350567318",
+      "generatedHash": "c981a78b4d60b9ccfa4726f0cfb391e4acd4ad42862fd71c2c4f9c1740868981",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-root-provider.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-root-provider.tsx",
+      "upstreamHash": "df63568ac0fe1a2b674495832f01b6fefdf37c716d51e2c1adcecf938808f211",
+      "generatedHash": "ce81a7b781381bc0257fb7fb246d3bccf1b0e4f0d836be5405ac227c79be71d7",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-root.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-root.tsx",
+      "upstreamHash": "e7ef3eeb89affa19ba79e09973c66cf88543cd3767d6feb3a4579c36b0bf1638",
+      "generatedHash": "82837bd24d47e699fe2fe99a6f92817282dfbd8f2f17dbce9a155270a185fb04",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/split-collapsible-props.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible-trigger.tsx": {
+      "destination": "packages/collapsible/src/react/ark/collapsible-trigger.tsx",
+      "upstreamHash": "5a14406235ef3b78bda1196e7e1bdc394a0d64a4e15d1a168ee79a0316c48a8f",
+      "generatedHash": "a8cc289fcc6137e48b5843da8ca8f16398396efdeb1c0aa16efb714bfedeea99",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collapsible/collapsible.anatomy.ts": {
+      "destination": "packages/collapsible/src/react/ark/collapsible.anatomy.ts",
+      "upstreamHash": "98a3e22d78d2fa87553192b2b3e7b065b0702b4e1dac63cef2cee02ec547355c",
+      "generatedHash": "9ca8a0dbd242c0473c84916ac85bb42d1c1231099b455198e3db19f70c046c1b",
+      "dependencies": [
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collapsible/collapsible.ts": {
+      "destination": "packages/collapsible/src/react/ark/collapsible.ts",
+      "upstreamHash": "a4a280807ae12ea5406e5debe203d00f2dc9d897ff81966924442a2ce9d7e9be",
+      "generatedHash": "4082d6176bcba85e4efb80f5117268c294f2f284eebdccbb200478b4fe065838",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/collapsible-content.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-context.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-indicator.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-root-provider.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-root.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-trigger.tsx",
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collapsible/index.ts": {
+      "destination": "packages/collapsible/src/react/ark/index.ts",
+      "upstreamHash": "cb0fb53122eefea4f406ebc458d35e1e3932d4684d048a3947505bae5171982d",
+      "generatedHash": "e1d9e56c2890a0a7bf23d64896c1f73fdc4a74f612e43e3d890e57e3d5b12b5b",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/collapsible-content.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-context.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-indicator.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-root-provider.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-root.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible-trigger.tsx",
+        "ark:packages/react/src/components/collapsible/collapsible.anatomy.ts",
+        "ark:packages/react/src/components/collapsible/collapsible.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collapsible/split-collapsible-props.ts": {
+      "destination": "packages/collapsible/src/react/ark/split-collapsible-props.ts",
+      "upstreamHash": "b272444f2c8d3a37f65216d515f63b3b8f71f7f5f279847f2592fd843a98472c",
+      "generatedHash": "8e610c31ae1ad696241fff9d8475ff2facfca18fb08f9c3e1ab692eff0bdcffd",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "ark:packages/react/src/utils/create-split-props.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collapsible/use-collapsible-context.ts": {
+      "destination": "packages/collapsible/src/react/ark/use-collapsible-context.ts",
+      "upstreamHash": "2a4c18f1949cda20888a35f4a5eb7a8c0436fa839db04aaf07dcea3ea1a63ca7",
+      "generatedHash": "519969c1313bca90b9dedc1d05f6f8a3b829a154a9d7dfb5da4bf37b63682c08",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/use-collapsible.ts",
+        "ark:packages/react/src/utils/create-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collapsible/use-collapsible.ts": {
+      "destination": "packages/collapsible/src/react/ark/use-collapsible.ts",
+      "upstreamHash": "f5257b4429d35f91cb967b1fa0fb094acba45ad8fb2aa58aec543c9980751914",
+      "generatedHash": "a1a525f8fdf50d5b8a50517c805f2f59c93548fc69ec9c344f4b6430f851ea2a",
+      "dependencies": [
+        "ark:packages/react/src/providers/index.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/react-activity.ts",
+        "ark:packages/react/src/utils/render-strategy.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collection/grid-collection.ts": {
+      "destination": "packages/collection/src/react/ark/grid-collection.ts",
+      "upstreamHash": "b1021be6854fda48ff5bc27efc5a142c55448e9f7ea19934e13fe237faf66420",
+      "generatedHash": "673b3a44a4910e6bfdded48eeec2fb65c9c2d16e750498a4ba2bd67ca221a031",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collection/index.ts": {
+      "destination": "packages/collection/src/react/ark/index.ts",
+      "upstreamHash": "9aaa063bf55d49677f688f858c7a78d3f2b5995eea5aeb905ae035d6dba4d866",
+      "generatedHash": "9aaa063bf55d49677f688f858c7a78d3f2b5995eea5aeb905ae035d6dba4d866",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/grid-collection.ts",
+        "ark:packages/react/src/components/collection/list-collection.ts",
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/collection/use-async-list.ts",
+        "ark:packages/react/src/components/collection/use-list-collection.ts",
+        "ark:packages/react/src/components/collection/use-list-selection.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collection/list-collection.ts": {
+      "destination": "packages/collection/src/react/ark/list-collection.ts",
+      "upstreamHash": "3d6f877eea424a5d6f3052d76d79ab062004b0a8848e8a5454d62d7587311f79",
+      "generatedHash": "d7aad71915cb0d385d43e8ba1641ef23b7c3eac32097b7759a9e27418f0f26e2",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collection/tree-collection.ts": {
+      "destination": "packages/collection/src/react/ark/tree-collection.ts",
+      "upstreamHash": "4980b4ebed6998c0088ec17136a6001168152a71e394a5110bde61b11604bdf9",
+      "generatedHash": "7bba9f587c215563ede0a90f08654f4410af3aaa8f5b633d300508478307262a",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collection/use-async-list.ts": {
+      "destination": "packages/collection/src/react/ark/use-async-list.ts",
+      "upstreamHash": "405c5d0934dc60b713f582841357aa59d2ba707b763b16f8b8ddb48640cb5bbf",
+      "generatedHash": "5b547e58b68b54c7d5273fa7a6316578a0a7e189cb53f1cf2b2789ef21688f65",
+      "dependencies": [
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/async-list/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/collection/use-list-collection.ts": {
+      "destination": "packages/collection/src/react/ark/use-list-collection.ts",
+      "upstreamHash": "65b992fc7bcbcdfbe93424f011c415570913088e8e79c33739bd7cb8562a4f69",
+      "generatedHash": "7fea35e195099d6b88932b936d10d693d5692ad2a2e3723e1c25c6f4c0bb0f95",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/list-collection.ts",
+        "ark:packages/react/src/utils/use-event.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/collection/use-list-selection.ts": {
+      "destination": "packages/collection/src/react/ark/use-list-selection.ts",
+      "upstreamHash": "970b1b2f80ddd8893dc3600e50c27aad6e58bacfe8a6d377e5b4c55fc06f482e",
+      "generatedHash": "1e889c65bd003a92452f00a46b2a9515cc30fc2ef110c0d30cb1409be6add383",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/list-collection.ts",
+        "ark:packages/react/src/utils/use-event.ts",
+        "zag:packages/utilities/collection/src/index.ts"
       ],
       "external": {
         "react": ">=18.0.0"
@@ -3401,6 +4084,144 @@
         "react": ">=18.0.0"
       }
     },
+    "ark:packages/react/src/components/json-tree-view/get-branch-value.ts": {
+      "destination": "packages/json-tree-view/src/react/ark/get-branch-value.ts",
+      "upstreamHash": "8606e3b26270a2bc1dc79806ff8f73e022629dfa23787b0450102958f68e2058",
+      "generatedHash": "3e07965c40fdf5a19b32dbe52919934355d2a2699a711fadf1a30c8f543fdbae",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/json-tree-view/index.ts": {
+      "destination": "packages/json-tree-view/src/react/ark/index.ts",
+      "upstreamHash": "fcfd4f4daf5d4aad5d8159ba7a71a8b1345c3927ca570cd6faf982579637129d",
+      "generatedHash": "fcfd4f4daf5d4aad5d8159ba7a71a8b1345c3927ca570cd6faf982579637129d",
+      "dependencies": [
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-root-provider.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-root.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-tree.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view.tsx",
+        "ark:packages/react/src/components/json-tree-view/use-json-tree-view.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-key-node.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-key-node.tsx",
+      "upstreamHash": "f2cf7d7211b9550f8fea680988beaa92f3d235be6ebd2fa3b5959f57bca8a423",
+      "generatedHash": "8b1cd55c8cbfbc57940de9b6f1a11f140197089c324e65deeeba46e9fab19d34",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-node.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-node.tsx",
+      "upstreamHash": "80e95487ac8ec9313e385cb6f64e9c851f00fe5bf616754e5d80fa2aeb89c862",
+      "generatedHash": "fa2872b0bb5eae2a838deb777370de8062b125f7434244733015bd5846424516",
+      "dependencies": [
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-key-node.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-value-node.tsx",
+        "ark:packages/react/src/components/tree-view/index.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-props-context.ts": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-props-context.ts",
+      "upstreamHash": "e405a5ca814128e83148bce980801f81b8714d4633071143e28312f0f1883698",
+      "generatedHash": "e94a759b826f2e263760b23e094174ece92f38df392d6555fc0fd8895cbb734f",
+      "dependencies": [
+        "ark:packages/react/src/utils/create-context.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-root-provider.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-root-provider.tsx",
+      "upstreamHash": "8f87ebd65b342cb2a65b66b77c313d29dc29700a35c7186f73fd97f37d3ca9d3",
+      "generatedHash": "7d35d2473d651761664020402eed36f5e3339e3d22b45dc6dd22510fa4d82ab7",
+      "dependencies": [
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/react/src/components/json-tree-view/use-json-tree-view.ts",
+        "ark:packages/react/src/components/tree-view/index.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-root.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-root.tsx",
+      "upstreamHash": "ae19873342fdfbcc67a49322989b1bdf4733c7bb6851f1e0470dbdda0fee86e7",
+      "generatedHash": "1cea7c6de8d81c6390d637189afe077111d87018ff9425b7b36c91c5ba25a905",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/json-tree-view/get-branch-value.ts",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/react/src/components/tree-view/index.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-tree.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-tree.tsx",
+      "upstreamHash": "82b56d29ea6eaf2f639481d88a1bfbfc37c61dc67e120550c056553ebac5ae13",
+      "generatedHash": "52738242fdff31b2454c047755084ac93334764711456670791c8b1747367240",
+      "dependencies": [
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-node.tsx",
+        "ark:packages/react/src/components/tree-view/index.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/utils/create-split-props.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view-value-node.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view-value-node.tsx",
+      "upstreamHash": "ca7a16161dacb97e4761e1d9e7a1446608c4f9df3bda76eb06546b628bd80a08",
+      "generatedHash": "46c19ed53f141ec055a91eba0307dcf890852200018b21392effd524597acb24",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/json-tree-view/json-tree-view.tsx": {
+      "destination": "packages/json-tree-view/src/react/ark/json-tree-view.tsx",
+      "upstreamHash": "c7384a46bf7d87025c2eb130d52e6d5d8b27c5e5c92cda3393f15c4fc287562f",
+      "generatedHash": "c7384a46bf7d87025c2eb130d52e6d5d8b27c5e5c92cda3393f15c4fc287562f",
+      "dependencies": [
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-root-provider.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-root.tsx",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-tree.tsx"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/json-tree-view/use-json-tree-view.ts": {
+      "destination": "packages/json-tree-view/src/react/ark/use-json-tree-view.ts",
+      "upstreamHash": "8ac0f920ae0866ea199ccc499f397510ec37085e1f0f7c42786963b4d90a4374",
+      "generatedHash": "f0788f5ad573f1426ed41e1bcd8efa7053e1da24685ab14e3e0ebdc7502d7c8b",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/json-tree-view/get-branch-value.ts",
+        "ark:packages/react/src/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
     "ark:packages/react/src/components/popover/index.ts": {
       "destination": "packages/popover/src/react/ark/index.ts",
       "upstreamHash": "e73aa8bcd9860bc910cdaefbbea5fa2b1ec00523fd06f0a824f5d0d389869da1",
@@ -3706,6 +4527,405 @@
         "ark:packages/react/src/utils/use-event.ts",
         "zag:packages/frameworks/react/src/index.ts",
         "zag:packages/machines/presence/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/index.ts": {
+      "destination": "packages/tree-view/src/react/ark/index.ts",
+      "upstreamHash": "fddca4c260f3469e293994c210535b5a4e72cfc92285136d37cef5657ff04fbc",
+      "generatedHash": "9adae23778a1f4deacdd9279e0181f2357441a90d3c000e33bf0d48d1fae7354",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/index.ts",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-content.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-control.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-indent-guide.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-text.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-trigger.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-context.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item-text.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-label.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-checkbox-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-checkbox.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-context.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-provider.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-rename-input.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-root-provider.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-root.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-tree.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view.anatomy.ts",
+        "ark:packages/react/src/components/tree-view/tree-view.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch-content.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch-content.tsx",
+      "upstreamHash": "7c990795fd21d081df54f0fe8ea52ab3bd012166d183f800a5bc6f20fd07b258",
+      "generatedHash": "846615a83979af64ee086ec1c188c9d201b090198c140e9788242781e52ea213",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/index.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch-control.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch-control.tsx",
+      "upstreamHash": "eea88b0aa31ca2b5f40472ff04d3631160dee019e8827412fe74fea55f15a64d",
+      "generatedHash": "415621d9fb2b5b7d87376085b83e888478dac9eac8c8cceeec20ad53e95c43ad",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch-indent-guide.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch-indent-guide.tsx",
+      "upstreamHash": "3a48c1c44e82584f56e89b15f0732c2c51bc1b908a491cfe778d9484ad65cde6",
+      "generatedHash": "1bbb83cd1cef11722c3452f89fc8d05fa84fdc6a44b1c76e8fa6efb4241e9ccf",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch-indicator.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch-indicator.tsx",
+      "upstreamHash": "633e1666a82b43ef5597923a7cf5d1b90abde61055ddc17dad82d72dfcadae4b",
+      "generatedHash": "dd17eedb689c6d55ed8294b5a6163370b73b0af2ac1bcfe3776fce797cf90d80",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch-text.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch-text.tsx",
+      "upstreamHash": "98db4e1b29f9b3978313911a78925b53563cc350924a267ee6efa51dd7510d07",
+      "generatedHash": "dbfe4c17c47371c410f3e09050593759415c46b37206e65dc257d4dddaf21a55",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch-trigger.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch-trigger.tsx",
+      "upstreamHash": "c77eb4751216855e416a6bfd0f4d6590cd4e29fcfef497cd8825d11c655d4065",
+      "generatedHash": "69376ccc8d971bb45e24d7d4ea07291ff6e9246ef8cefdf763174ff3d9450f27",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-branch.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-branch.tsx",
+      "upstreamHash": "de2181ac1aa021ac3d4d903af2305fe48a7810bdf9caf52e6211650c7e87855a",
+      "generatedHash": "0282915ef5c3752cb49e7547215fe0ba504642707f408c4a7a8bb42ade54ea3a",
+      "dependencies": [
+        "ark:packages/react/src/components/collapsible/index.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/render-strategy.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-context.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-context.tsx",
+      "upstreamHash": "fda2331c5cfa69d6e7ab6e10d42f60af1cf008dfb1daa4f2e9da749ceed8af76",
+      "generatedHash": "2efce21b50863604eff2e140d3212dacd7def2dd395bfa7940d9bbfba615e14c",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-item-indicator.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-item-indicator.tsx",
+      "upstreamHash": "a7165bae3b3042a954b47250622722048d7f362d4d916330921190d591d37356",
+      "generatedHash": "354d4f999cc46ff7efb6ca427fb2ccc9a74bbdf050fbb6724e58bfe756774e1e",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-item-text.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-item-text.tsx",
+      "upstreamHash": "1e2f9fa93ba1b1a08282d97a8ad5f4065c35b9c71a63a9ac2446b11bb64a2a50",
+      "generatedHash": "ba24ddf5327b5600c3fb26761f135eecf08b506c03b4b67b93e3ca43b745b22a",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-item.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-item.tsx",
+      "upstreamHash": "fb7586541b5a62e40792f492ab9bbafd90213d3a7ec6704eaa988fe5dbb00fae",
+      "generatedHash": "81add8f32134c0df0849ce1c73acd29417fecc1be1c1694222ada27c20290ad0",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/react/src/types.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-label.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-label.tsx",
+      "upstreamHash": "b65367f545f6e1f59105ad49ac95232ccd5c9cf6d20c7c0796caa3fa697e8aa2",
+      "generatedHash": "f57805cf447ab46a3845271c951ae8a9d5efb22b3d41d1a7a2f3263bc4682d13",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-node-checkbox-indicator.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-node-checkbox-indicator.tsx",
+      "upstreamHash": "931ea438f4bb4f0b62f4fe0d8aa0accd780beb529f43d284773493f804592e61",
+      "generatedHash": "12456378593bd6851875049220224788102152f5286c273f23e80be8bdc9f9c6",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-node-checkbox.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-node-checkbox.tsx",
+      "upstreamHash": "8f5e7b1b66b45a265366179597206a44f4c70af983f3f5e074f1d49223fb163d",
+      "generatedHash": "8884ace851210e212b51b7562feeab4e9ada67e934858ec1438efd360a06ccea",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-node-context.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-node-context.tsx",
+      "upstreamHash": "71d15552ebb045a1292929bd5e064019e1d5bdbeeb5261725b739c44bf381b92",
+      "generatedHash": "c25c93b0f0eb7e39090c6140f1212fd8c74c9a10a0fb0e8a4bbbb521156921a2",
+      "dependencies": [
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-node-provider.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-node-provider.tsx",
+      "upstreamHash": "bdad66f55af71bbee56d5b7be7fc5aea990c88373537be868bc5212faa2c114b",
+      "generatedHash": "afb11f1dd17d1941b7ede1dd4d6ade3732af1762272f401fb864f1b27c4bdcd7",
+      "dependencies": [
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-node-rename-input.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-node-rename-input.tsx",
+      "upstreamHash": "b0296c5f7087cb88814f78eb453d481f8a517c7a3ecf7fa5d80909ea444fd748",
+      "generatedHash": "f07353f0ff3229f73014daa5dec2c5043b002accc0c0548cc2d05d50f1080e2c",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/react/src/types.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-root-provider.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-root-provider.tsx",
+      "upstreamHash": "a3c2c2d974bbc2dbb674e7a463a45ec02a632a685fc3ea2a688d94b500e2e3f9",
+      "generatedHash": "6e7b90677a0f701df079d81bbe7b6c0584ceb507bb50b72ef3ccc6563cc08bfe",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "ark:packages/react/src/utils/render-strategy.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-root.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-root.tsx",
+      "upstreamHash": "25cc65651fb7a98e40ab3db652b888200f50f133258390e78379dc9f5dd44c73",
+      "generatedHash": "8308bc002aab282f2a5f61889ab926b7b42c59c9a3258ddff62e836f0513030f",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view.ts",
+        "ark:packages/react/src/types.ts",
+        "ark:packages/react/src/utils/create-split-props.ts",
+        "ark:packages/react/src/utils/render-strategy.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view-tree.tsx": {
+      "destination": "packages/tree-view/src/react/ark/tree-view-tree.tsx",
+      "upstreamHash": "5af286334bf695b417893a8e3c87ee9f94491bb0caaf60f58b41d07f98d025fa",
+      "generatedHash": "03d9617788af2e6b4dfb9a9ba16f586219fb53c3e0c832f58fcc1bc4a3418a5b",
+      "dependencies": [
+        "ark:packages/react/src/components/factory.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view-context.ts",
+        "zag:packages/frameworks/react/src/index.ts"
+      ],
+      "external": {
+        "react": ">=18.0.0"
+      }
+    },
+    "ark:packages/react/src/components/tree-view/tree-view.anatomy.ts": {
+      "destination": "packages/tree-view/src/react/ark/tree-view.anatomy.ts",
+      "upstreamHash": "49c9b2e999bb3e05ace7c4b17b845a3abfe364233523d34b2051a8e504d007b4",
+      "generatedHash": "3f089706545d0dd3470d98ee4b9a2a71ba7fef2242bcb63e44be8f3e66a90c46",
+      "dependencies": [
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/tree-view.ts": {
+      "destination": "packages/tree-view/src/react/ark/tree-view.ts",
+      "upstreamHash": "5f4e7411e6ba716503869ae5fb2e9f2eef74540841d03fd3049dce418ab4f5e5",
+      "generatedHash": "b6b7eb9d143d947638375d1db64d6618aeafc58c93a1942138e0938d36e84629",
+      "dependencies": [
+        "ark:packages/react/src/components/tree-view/tree-view-branch-content.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-control.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-indent-guide.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-text.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch-trigger.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-branch.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-context.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item-text.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-item.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-label.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-checkbox-indicator.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-checkbox.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-context.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-provider.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-node-rename-input.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-root-provider.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-root.tsx",
+        "ark:packages/react/src/components/tree-view/tree-view-tree.tsx",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/use-tree-view-context.ts": {
+      "destination": "packages/tree-view/src/react/ark/use-tree-view-context.ts",
+      "upstreamHash": "12d41ef36f6c7b973c5f12da9a2b9ee352897e5044cea9fd059fc193b07aca40",
+      "generatedHash": "806efb3747251d6140cb06712d53138fae5f3575df1e7633a13447f1ce215873",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/components/tree-view/use-tree-view.ts",
+        "ark:packages/react/src/utils/create-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/use-tree-view-node-context.ts": {
+      "destination": "packages/tree-view/src/react/ark/use-tree-view-node-context.ts",
+      "upstreamHash": "5a6744d6966664139af71c22d0945b3b6b9c3285b1999a4e86255fd2033e7bec",
+      "generatedHash": "c75e9da63da3a9ad1da5a5b52d5c15669b1fb403da1a7a0e6a36a7837c56c60c",
+      "dependencies": [
+        "ark:packages/react/src/utils/create-context.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/use-tree-view-node-props-context.ts": {
+      "destination": "packages/tree-view/src/react/ark/use-tree-view-node-props-context.ts",
+      "upstreamHash": "b302737bd2d34fe1169358dc03db22707bd24f474c646b97d866c10666f83ef9",
+      "generatedHash": "bec495c33b20300752603bc01993c7e5f175d2add71afb069272868e1ec1c6ba",
+      "dependencies": [
+        "ark:packages/react/src/utils/create-context.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/react/src/components/tree-view/use-tree-view.ts": {
+      "destination": "packages/tree-view/src/react/ark/use-tree-view.ts",
+      "upstreamHash": "5c66258fe313615a48d1728a9dca894e23ec5fa611255ff50215c961b279420e",
+      "generatedHash": "5420cd040a77178e446526b32ce1f356b2f0c05b747fe4332c96b00c59532af6",
+      "dependencies": [
+        "ark:packages/react/src/components/collection/tree-collection.ts",
+        "ark:packages/react/src/providers/index.ts",
+        "ark:packages/react/src/types.ts",
+        "zag:packages/frameworks/react/src/index.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
       ],
       "external": {
         "react": ">=18.0.0"
@@ -4325,6 +5545,236 @@
         "zag:packages/utilities/core/src/index.ts"
       ],
       "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible-content.svelte": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible-content.svelte",
+      "upstreamHash": "cef87bd3e4743b354d0504457492995bd63afa1680e216a16ea179b1aa4da88d",
+      "generatedHash": "0c309d8a3e97b4c02e406ed092724f003def21486f0b10a911eee353d5881e6b",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible-context.svelte": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible-context.svelte",
+      "upstreamHash": "c42302e9a19e044fb35960acc0fad8bcfe71ac99d55700ab566e7ed9e6bc74d4",
+      "generatedHash": "b5b550f615119a654cd9cc2c12bad04b5fb847e9ff2af74dcc061c9f93056333",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible-indicator.svelte": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible-indicator.svelte",
+      "upstreamHash": "682c3de090669fb1cc095e3366f7fabb7d7a59d526d5299228f6cc7cdcbe0627",
+      "generatedHash": "7485f2df2011d36fef3ead10305573e33a85e66882d1159d3893b77cb727d29f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible-root-provider.svelte": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible-root-provider.svelte",
+      "upstreamHash": "4afef8e48b8fd442b8a7093d84e865e4c278797a4102d2743d6cb56908676a8a",
+      "generatedHash": "651b466c0432c03055d743308de7a3415c6d632c3a035cfac20d0a7363529761",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible-root.svelte": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible-root.svelte",
+      "upstreamHash": "3eeacc6a6b0527feabf4fc0b9cc9eafd2e592ef2c106dc9f40ba1ec9589d208b",
+      "generatedHash": "660d8d586ab34a247e01cedff1aa3438e7a2afc960182133d3be7d87c1d6be98",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/split-collapsible-props.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible-trigger.svelte": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible-trigger.svelte",
+      "upstreamHash": "89b8f0b4094b0385ca84a7f5e8d3d767bddb72467ec882e7de9dcd21933e399f",
+      "generatedHash": "236e80882d43237beaad9ec9ac6aa26deffb742cd7dac87c37ef141e3776848c",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible.anatomy.ts": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible.anatomy.ts",
+      "upstreamHash": "b3d5c2303087696a9629441b52e1c153267d992c4d44f5a9e7b563cc1703843d",
+      "generatedHash": "261c89a1c1aa3bf7a8e78f6689c23284c3f589ae2e6a379abe6facd900d097f7",
+      "dependencies": [
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/collapsible.ts": {
+      "destination": "packages/collapsible/src/svelte/ark/collapsible.ts",
+      "upstreamHash": "7069a4502b1abd65043906d044be2fbdb686af09af12bc28f741ebc17ab03e8e",
+      "generatedHash": "d7ded5046772419a58db883f7a28d9cc01f27f71b68a6660e027853c5faec22f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-content.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-context.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-root.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-trigger.svelte",
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/index.ts": {
+      "destination": "packages/collapsible/src/svelte/ark/index.ts",
+      "upstreamHash": "be99236a43d30324dccf94c8c54137ca2dd7a8ec369c54b2a2efff61e356ada0",
+      "generatedHash": "980e75d0d594e0becf43196cf8830eaab751bba4c42dcc56b5455632e4e6e538",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-content.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-context.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-root.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/collapsible.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/split-collapsible-props.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts",
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts",
+        "zag:packages/machines/collapsible/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/split-collapsible-props.svelte.ts": {
+      "destination": "packages/collapsible/src/svelte/ark/split-collapsible-props.svelte.ts",
+      "upstreamHash": "69d0d825c907419b176726de5ccd8b42bb35a5d9708e08002084f79a2cacb213",
+      "generatedHash": "b1fe7e68cb67ba29a52477ffc9f47a0046a05838e0946c03c3064fcf83635a26",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/use-collapsible-context.ts": {
+      "destination": "packages/collapsible/src/svelte/ark/use-collapsible-context.ts",
+      "upstreamHash": "0a2b37d4aa0814bc124d866d6c45439888dc2010868417ab8125178d9f01c2f3",
+      "generatedHash": "7c711be36574d6ace379620bfd69cbb0687dd6c79b9fa98cea805b6be243c335",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collapsible/use-collapsible.svelte.ts": {
+      "destination": "packages/collapsible/src/svelte/ark/use-collapsible.svelte.ts",
+      "upstreamHash": "e8bb3ad03e337614aaf4b7e4c396e217869fa734b9f7311de63ed34ef9d2be92",
+      "generatedHash": "baf9ae2264f9fb15d7d22ba98549b7ca837893e5bb9f50776694316efb1a463d",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/providers/environment/use-environment-context.ts",
+        "ark:packages/svelte/src/lib/providers/locale/use-locale-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/collapsible/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collection/grid-collection.ts": {
+      "destination": "packages/collection/src/svelte/ark/grid-collection.ts",
+      "upstreamHash": "7643621f2afb60a45e0714f79cad43c044dcee83945ee99254503bd57966f2ec",
+      "generatedHash": "36e22974567d050df9453a7b8922ace451aaf5aecd0b81dcc9c4cc0227d4df24",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collection/index.ts": {
+      "destination": "packages/collection/src/svelte/ark/index.ts",
+      "upstreamHash": "e1ee4deab3221ca5ecaf4fdf001914245099379b542073220ac8c128b4a226fd",
+      "generatedHash": "e1ee4deab3221ca5ecaf4fdf001914245099379b542073220ac8c128b4a226fd",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/grid-collection.ts",
+        "ark:packages/svelte/src/lib/components/collection/list-collection.ts",
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/collection/use-async-list.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collection/use-list-collection.svelte.ts",
+        "ark:packages/svelte/src/lib/components/collection/use-list-selection.svelte.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collection/list-collection.ts": {
+      "destination": "packages/collection/src/svelte/ark/list-collection.ts",
+      "upstreamHash": "4cdd4d6ef8d4b0980be9803dd73709f83c84cf01b205bacad2ce172fcfb55e87",
+      "generatedHash": "f9393eb90cd7c48eea1578701d2bb45ea1c85bce5e93854a9990e2b0cfc3ca5f",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collection/tree-collection.ts": {
+      "destination": "packages/collection/src/svelte/ark/tree-collection.ts",
+      "upstreamHash": "ae071be55d4ec402996c3be77873d3241329fd98546c756f7a7b36e85b4ee9f4",
+      "generatedHash": "840949e14ac4fc958306341c2bb35a26c6b838b0ffbecce52016d7d6fcf75f62",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collection/use-async-list.svelte.ts": {
+      "destination": "packages/collection/src/svelte/ark/use-async-list.svelte.ts",
+      "upstreamHash": "512995e73fae77518f02b13c75eaaa3d61009f92e5fb30b044837a5832872307",
+      "generatedHash": "42c6ac30f6dc1bde35eb671a5d32509f4ffbf5bdf0e7b19531be39872b52c9cb",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/async-list/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/collection/use-list-collection.svelte.ts": {
+      "destination": "packages/collection/src/svelte/ark/use-list-collection.svelte.ts",
+      "upstreamHash": "f10f64bf21def3e8151039d3dc661e58b19da9d6b8011f486bac2beabc4fdeaa",
+      "generatedHash": "7eece3b9ba55648321510a5f2b45ee67b2ed7ddcee214d51fa3475e04c6529da",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/list-collection.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/collection/use-list-selection.svelte.ts": {
+      "destination": "packages/collection/src/svelte/ark/use-list-selection.svelte.ts",
+      "upstreamHash": "efa9b7aff9cd26be9b9f9d37263437c5e60832bb189215c260a05db4e615ede6",
+      "generatedHash": "06c761bffd19c651faaf6f1c4577773661f234272d6b3645121ed060035b8198",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/list-collection.ts",
+        "zag:packages/utilities/collection/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
     },
     "ark:packages/svelte/src/lib/components/date-picker/date-picker-clear-trigger.svelte": {
       "destination": "packages/date-picker/src/svelte/ark/date-picker-clear-trigger.svelte",
@@ -5346,6 +6796,149 @@
         "svelte": ">=5.29.0"
       }
     },
+    "ark:packages/svelte/src/lib/components/json-tree-view/get-branch-value.ts": {
+      "destination": "packages/json-tree-view/src/svelte/ark/get-branch-value.ts",
+      "upstreamHash": "9500b1e7436f07eeb7a596152f238d20c78559ace40100c2f114278fcff764c2",
+      "generatedHash": "3ab5ef6b0a782f9a44a872e2b02c1931256b2117fa5f205a5ba715b3a41f6c27",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/index.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/index.ts": {
+      "destination": "packages/json-tree-view/src/svelte/ark/index.ts",
+      "upstreamHash": "34187a3cfb68f34825ffe4c322ca508a328fd74cff46f2c7cbaba1e368568215",
+      "generatedHash": "34187a3cfb68f34825ffe4c322ca508a328fd74cff46f2c7cbaba1e368568215",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-tree.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/use-json-tree-view.svelte.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-key-node.svelte": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-key-node.svelte",
+      "upstreamHash": "0384717fd528c5b647b88482857bf4f388c10ea7d3d1cedfe27d28d063805aec",
+      "generatedHash": "9470347b9be3dc02767b500236caa40f4f95e4eb366a034058770aefb1fc69ed",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-node.svelte": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-node.svelte",
+      "upstreamHash": "a0040ee36fcb9d421e4b933d409eea1fb349ec5940d52f59c36e193191ad4ee6",
+      "generatedHash": "685241922b256848e076dd89f3cd176cf256693e554f9d2a4f91bb054a66673f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-key-node.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-node.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-value-node.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-props-context.ts": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-props-context.ts",
+      "upstreamHash": "4107634a295975996a951913e6977fd76a2e35d9d4ceb057a032a3b98ac22e6c",
+      "generatedHash": "6d05ac5c4767ae8942cb76ca8334ced3651d71606f3c8cfd4e4965c783bd8dc3",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root-provider.svelte": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-root-provider.svelte",
+      "upstreamHash": "c5043dedc2da964d70602b87bbcd086a1234cdba25636ab4ffe999f6bfc952ea",
+      "generatedHash": "1628b0df9465ca93a057073f4da4a7a073b2b684566821861d12d5e3823c5328",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/use-json-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root-provider.svelte",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root.svelte": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-root.svelte",
+      "upstreamHash": "b8aff5f7b1e30fdf90cc90f7dd115a732ce1941e59e61238c589af4027812762",
+      "generatedHash": "02fb4b20c631565385ae2b3a28323c6db841d9fb525473fca98cdd23712afa24",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/get-branch-value.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-tree.svelte": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-tree.svelte",
+      "upstreamHash": "a3753679e26bdaca85cae12b91dce6603a1181d31659ef9be4b1d4fd919528c6",
+      "generatedHash": "88e2394a9247be79c108b18ba7ca59da3e1c129d4706707fb2fc9b0fb98e7fc3",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-node.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-tree.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-value-node.svelte": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view-value-node.svelte",
+      "upstreamHash": "6fb63acbe7a96155491187a988524368b2b339c576fedca1ccb08b9c3ef9bcf3",
+      "generatedHash": "ab79f24991d5155d7d085e24023be6e6d40e44c335c4cb093a104b63a335657e",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-value-node.svelte",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view.ts": {
+      "destination": "packages/json-tree-view/src/svelte/ark/json-tree-view.ts",
+      "upstreamHash": "53ef2aef46a02a490f58f0e0c78a6187b8a19a14d3c12d5c2965516811c06df9",
+      "generatedHash": "53ef2aef46a02a490f58f0e0c78a6187b8a19a14d3c12d5c2965516811c06df9",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-tree.svelte"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/json-tree-view/use-json-tree-view.svelte.ts": {
+      "destination": "packages/json-tree-view/src/svelte/ark/use-json-tree-view.svelte.ts",
+      "upstreamHash": "0e79c29dc0a4e694318b79491932df638ddeeec531bb827592c25967bd745b57",
+      "generatedHash": "c1acec71bdefadcba00067895298fc890a25fe4d617c3bd503638664bbaea9e0",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/get-branch-value.ts",
+        "ark:packages/svelte/src/lib/components/json-tree-view/json-tree-view-props-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "ark:packages/svelte/src/lib/utils/run-if-fn.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/tree-view/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/json-tree-utils/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
     "ark:packages/svelte/src/lib/components/popover/index.ts": {
       "destination": "packages/popover/src/svelte/ark/index.ts",
       "upstreamHash": "10e1738a22112916d9af1d2f1b7040f48cc98fd6dc6cca5d86b16204949e4d37",
@@ -5622,6 +7215,406 @@
         "ark:packages/svelte/src/lib/utils/render-strategy.ts",
         "zag:packages/frameworks/svelte/src/index.ts",
         "zag:packages/machines/presence/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/index.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/index.ts",
+      "upstreamHash": "7ff342a85d63be4db988233225354a6dd435661bd89cf892b23bf8d6aaf1182c",
+      "generatedHash": "b975a6de84a08e222e94e85f65790451e190d1830674ba7cc22af3ae0ff0b637",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-content.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-control.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indent-guide.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-text.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-context.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-text.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-label.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-context.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-provider.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-rename-input.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-tree.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view.anatomy.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-content.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch-content.svelte",
+      "upstreamHash": "fca01cd8ca0a5bac7227a84f7fc6b97949e85c45b95841698b1f64eb7b5f934a",
+      "generatedHash": "374975323a9d6c38ceecc03fe450b05d6e292481214ddbad1bfb537af75f1865",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-control.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch-control.svelte",
+      "upstreamHash": "6d43b739f81e7647c85bb26547fb911fa7b14c3ebe7cc635b7927219746e3ca2",
+      "generatedHash": "49a9931bb910feef784e3fa0621acf9e64b886d4afd7529c83b36b747eda2243",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indent-guide.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch-indent-guide.svelte",
+      "upstreamHash": "365157ea9ae936f4f2e8211606cf3b17a2063c1ae967268e6f94171978ad783e",
+      "generatedHash": "7862a46e5a3913ef953927b45dac079416e17f9cf12457743981d594e98c2aad",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indicator.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch-indicator.svelte",
+      "upstreamHash": "543438f32eebab2c3565723eb5e12c93776948bd9fc6de1c07f9f9bb5c1471c9",
+      "generatedHash": "e43107039c43b4d1573b2459d5928fc7393f2688c6bee349810f835e6f049362",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-text.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch-text.svelte",
+      "upstreamHash": "30fe2820a1777e323fdf6afad40cbbb5308ef3a8b52724dad9b66a4af4deb790",
+      "generatedHash": "f3badc50c5e30da6231e7e13972389250f13aa0536e21269913d4c8674906fdf",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-trigger.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch-trigger.svelte",
+      "upstreamHash": "94d8bbfc06fa5943d03639b3df94dc6b2df9d308b1941d0ad117dd462ea53017",
+      "generatedHash": "91c2083c567954c233f2edd91474eacf051fb94645d24b12ce857fe3f46099a2",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-branch.svelte",
+      "upstreamHash": "c8762e4f404700ca6cf007724b5121b8df0468d51800c1dae142529eb0204b80",
+      "generatedHash": "0e8a2ab89e0e83529d437481c36b4a88d4371f8c700550109c7a14acacfe5379",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collapsible/index.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/render-strategy.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-context.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-context.svelte",
+      "upstreamHash": "4d6000dea3efcf95640a2f1b61c6207a1bb96f4c972b456e78c50db7d027c6d5",
+      "generatedHash": "75e267c6ec4facffdef181ce0eabe573463e75a32fafced2b9592159ccc52d92",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-indicator.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-item-indicator.svelte",
+      "upstreamHash": "31c2a56ee0a5afaeaf60c0c02802978fd1c68348cb6981fd71ccfbf47ec6cf46",
+      "generatedHash": "0792998f508198c72f792a6f98cca355d2b631e4ca4f96f1ba3ab60178cf5383",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-text.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-item-text.svelte",
+      "upstreamHash": "321e41e5442586b3a3695374500b497f06840b430d57f8ff2f371865d3d12c82",
+      "generatedHash": "cbadede37b41198966d58b776647d1ac8c2a435f67ade1c89143b75fdffad8f4",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-item.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-item.svelte",
+      "upstreamHash": "c6c134ca6f7f35fcb65c3483f83b857d32f73253f83f89f30fb7f081e279d9ff",
+      "generatedHash": "9509fa302db59d5c165fc2ea7113f4d88e1dbbe136b8e252462e389058d54c77",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-label.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-label.svelte",
+      "upstreamHash": "9ad91dc367cd07132daf29059e201b2fcc5be06d7766d2d176b76516c5cfc9aa",
+      "generatedHash": "efce28ae592ccaf5d34e1f6e6ad4aa18f3460d82753910dc112015d7f9196bb2",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox-indicator.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-node-checkbox-indicator.svelte",
+      "upstreamHash": "317c80fa7a251f04b50eed223e3dc4711867dfb584c992a02d961c89d1b21af7",
+      "generatedHash": "4830c3d1fb751135233155a9132380f700dd374fed17138014a0e24c390905a3",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-node-checkbox.svelte",
+      "upstreamHash": "bdd045c49b07ef9f72df69a4785bd96a13294583beffd2e5f04f7eb121d699b9",
+      "generatedHash": "92e1cf242733e6490ffe9e1d359cd91709587a3fa8e767829b03e03e0e91101c",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-context.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-node-context.svelte",
+      "upstreamHash": "1b031aa3d5d76c16dbd9be8654a8aed920055c279330d54a3c33152bcca2f67c",
+      "generatedHash": "381b398affc020a774bb4018c953197fd9ef33f65714882d584ee6318596a239",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts",
+        "zag:packages/utilities/collection/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-provider.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-node-provider.svelte",
+      "upstreamHash": "212e63dddd947cda491160125b9e50220d4c520cc9bdb8e8fdeedb4c4d1c4d40",
+      "generatedHash": "e6949428c5132b1828e5cfd87dddf4bc3fb9a8ebdceb8c2f196d18f2700fe51f",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-rename-input.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-node-rename-input.svelte",
+      "upstreamHash": "0806916a2bb391bf8833f598336b3e8802de054db3c0c5640c05a66b6cb73edc",
+      "generatedHash": "c16cbc5bca0ca1461efd56fc7e5e2c0053a02ffdb9b632ca6a114fc021bb7802",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-root-provider.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-root-provider.svelte",
+      "upstreamHash": "6f6baf895dba275a463168500d028c6ce60ebaa9981779fbc3b11124ceebee48",
+      "generatedHash": "26bd45812622f70f3ed592e191423037ea970cd4a0a54562e0e11f495bb0e2fb",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/render-strategy.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-root.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-root.svelte",
+      "upstreamHash": "27168bbd9f8b054ec69344894f08e32b70a2201a4638a4d28f693d412cc72394",
+      "generatedHash": "3abf5792f792240df78ae15da581561f7f52b98f96e9c34133e2931abf7677c5",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-split-props.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/render-strategy.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {
+        "svelte": ">=5.29.0"
+      }
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-split-props.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-split-props.ts",
+      "upstreamHash": "d935487df40a6debd2e037ad429d56abadda31d75c0ce8010cde6aa946ecfe30",
+      "generatedHash": "a16c7945a8a7fed8df469f55b6eb7a1e7a558703ac997f2f5727be862ddb9ca9",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/utils/create-split-props.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view-tree.svelte": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view-tree.svelte",
+      "upstreamHash": "b1579b081bfb670d95d1e264e0cb525f11885ed5ef420ab36f17fd9776f63962",
+      "generatedHash": "f781e84f4a09f82c21be5d8fc646d3cd8d857fd5d301ea90cc53389db58a00fd",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/factory/factory.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view.anatomy.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view.anatomy.ts",
+      "upstreamHash": "c577a35befbb6a4a1b50a13ce522529057be72bb8b1533883e51a92496e3f66e",
+      "generatedHash": "fdc476a93bb0947314d3b16cbb8814b6c90384c3f85f3c4ca479ac01aaac2d29",
+      "dependencies": [
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/tree-view.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/tree-view.ts",
+      "upstreamHash": "85916755d4cb5214bbef1ed5feb03c4a6776bec5db9553b51c70c5e42a20cde9",
+      "generatedHash": "c94f66f4f69bfe8bf1636de9d7e8dcb605b08085b8b4498bf65877be061a740d",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-content.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-control.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indent-guide.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-text.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch-trigger.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-branch.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-context.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item-text.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-item.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-label.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox-indicator.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-checkbox.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-context.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-provider.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-node-rename-input.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root-provider.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-root.svelte",
+        "ark:packages/svelte/src/lib/components/tree-view/tree-view-tree.svelte",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-context.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/use-tree-view-context.ts",
+      "upstreamHash": "c2b2d5cf8f4ff634687c981c7976397a52278f23fea27a192d61d2b1cf3504db",
+      "generatedHash": "330ea5bb687c4b8a9689b0860680febf9436152aed2deeab48341468ae28bcd2",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-context.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/use-tree-view-node-context.ts",
+      "upstreamHash": "91d0a6229a8ed188f796a23ff5d616b76c88600fefa8cd18234d9f29edd28585",
+      "generatedHash": "1d0d7dbdc0db15c60e27428d47a0722e7ad8a08e45ed6a241e3e67548e3d10d7",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/use-tree-view-node-props-context.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/use-tree-view-node-props-context.ts",
+      "upstreamHash": "6f62dd9122950acf358ca07fa1628713ac470d550d3bad5c7b80f9ad3f9bd416",
+      "generatedHash": "4f8495aa154a8b6f66d6ff62d6b1a38e282bf158a7c11c14f942114f4ed34452",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/types.ts",
+        "ark:packages/svelte/src/lib/utils/create-context.ts",
+        "zag:packages/machines/tree-view/src/index.ts"
+      ],
+      "external": {}
+    },
+    "ark:packages/svelte/src/lib/components/tree-view/use-tree-view.svelte.ts": {
+      "destination": "packages/tree-view/src/svelte/ark/use-tree-view.svelte.ts",
+      "upstreamHash": "80e52137a6048f7c22c231b285c7689f7f0cff3313a309577a5bcf8ddf778bfc",
+      "generatedHash": "f06b41e069ed5473525e144a77d65dd7d51d17695407784bce296bf5ae530e81",
+      "dependencies": [
+        "ark:packages/svelte/src/lib/components/collection/tree-collection.ts",
+        "ark:packages/svelte/src/lib/providers/environment/use-environment-context.ts",
+        "ark:packages/svelte/src/lib/providers/locale/use-locale-context.ts",
+        "ark:packages/svelte/src/lib/types.ts",
+        "zag:packages/frameworks/svelte/src/index.ts",
+        "zag:packages/machines/tree-view/src/index.ts",
         "zag:packages/utilities/core/src/index.ts"
       ],
       "external": {}
@@ -6262,6 +8255,46 @@
       "dependencies": [],
       "external": {}
     },
+    "zag:packages/machines/async-list/src/async-list.connect.ts": {
+      "destination": "packages/async-list/src/common/zag/async-list/async-list.connect.ts",
+      "upstreamHash": "5337ff44196272cf227d7288e538af8be1456df192487f353b1513d864dabf5d",
+      "generatedHash": "e4145b7611dfea0cdb5da7ea3d52d55b6938c40c45a5a1fa13f173d6d6db25b0",
+      "dependencies": [
+        "zag:packages/machines/async-list/src/async-list.types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/async-list/src/async-list.machine.ts": {
+      "destination": "packages/async-list/src/common/zag/async-list/async-list.machine.ts",
+      "upstreamHash": "e81b7aa98466ec238e4b268870eb75db015fdc1506ac49ecd08dbe924c41d9c1",
+      "generatedHash": "9964fa111b82cdf121e92da47d8682f5089d43fbcf7bf1e1c5d9c16a50145553",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/async-list/src/async-list.types.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/async-list/src/async-list.types.ts": {
+      "destination": "packages/async-list/src/common/zag/async-list/async-list.types.ts",
+      "upstreamHash": "a67551dbccab63d87aec19c1882660c49cce466c996cc6cdb50edc76fbb66843",
+      "generatedHash": "fbdcee903d77ee7427cb21fed66dc46540c4b899b3c7470eaeab14567c1a9fc1",
+      "dependencies": [
+        "zag:packages/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/async-list/src/index.ts": {
+      "destination": "packages/async-list/src/common/zag/async-list/index.ts",
+      "upstreamHash": "1808fbd41fc21a53b43a069480e8eb4ce4e0aabcd18ac61a16238d41736ef604",
+      "generatedHash": "53a7eb3ed30ff14b55351c42add71baa02d859bd7daab8133d697512f8b971e9",
+      "dependencies": [
+        "zag:packages/machines/async-list/src/async-list.connect.ts",
+        "zag:packages/machines/async-list/src/async-list.machine.ts",
+        "zag:packages/machines/async-list/src/async-list.types.ts"
+      ],
+      "external": {}
+    },
     "zag:packages/machines/checkbox/src/checkbox.anatomy.ts": {
       "destination": "packages/checkbox/src/common/zag/checkbox/checkbox.anatomy.ts",
       "upstreamHash": "c6dbc17d40e13ce27652d5bc4cad6eb760c043535d4e88d58794ad17ae67e817",
@@ -6340,6 +8373,85 @@
         "zag:packages/machines/checkbox/src/checkbox.machine.ts",
         "zag:packages/machines/checkbox/src/checkbox.props.ts",
         "zag:packages/machines/checkbox/src/checkbox.types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/collapsible.anatomy.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/collapsible.anatomy.ts",
+      "upstreamHash": "88bdb229ac186ee4b95c6a61e41305ac2689561a7fcb723e47efde0092439acb",
+      "generatedHash": "34172af74576cf9e962449b6aae32640da207e9c46f7f5ee3fcfde55ca1d141d",
+      "dependencies": [
+        "zag:packages/anatomy/src/create-anatomy.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/collapsible.connect.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/collapsible.connect.ts",
+      "upstreamHash": "04501f9fe052f2e4cc51334a81ec3633d8119a10232c25451cf5d8d819972f47",
+      "generatedHash": "ebfc6be5a197d0465b9be796bc2cc1d7aa9f6b1ffe92c4d411065acd6f61e613",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/collapsible/src/collapsible.anatomy.ts",
+        "zag:packages/machines/collapsible/src/collapsible.dom.ts",
+        "zag:packages/machines/collapsible/src/collapsible.types.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/collapsible.dom.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/collapsible.dom.ts",
+      "upstreamHash": "aba9b8f866dbedd7612e1608cc13985205c83762249549e955ef6529cf369f06",
+      "generatedHash": "e1699f9e3b4daa412258c144d91c8e793c26903f7eff3d76f44dff85e29cd159",
+      "dependencies": [
+        "zag:packages/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/collapsible.machine.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/collapsible.machine.ts",
+      "upstreamHash": "ae6f72e7e69d91725285f05c4b7f75307ebbb852c1bffd372161afcae2a08565",
+      "generatedHash": "cd707c3d565db95e57357a354f89daea02c934db8569f3d073fe33389924d2b4",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/collapsible/src/collapsible.dom.ts",
+        "zag:packages/machines/collapsible/src/collapsible.types.ts",
+        "zag:packages/utilities/dom-query/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/collapsible.props.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/collapsible.props.ts",
+      "upstreamHash": "3df412bef790849ce9e59c87e720462b795b08755a24f5284fb4825b4c6a70e5",
+      "generatedHash": "07db1e15e9356fa9eac04216a1cb0ba1f74a48e955c383cc9c32d1ba61f50c37",
+      "dependencies": [
+        "zag:packages/machines/collapsible/src/collapsible.types.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/collapsible.types.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/collapsible.types.ts",
+      "upstreamHash": "add2fde8806eb8cdf7640717edf733ea3b9c64044e4b6404a86dc98696b1de39",
+      "generatedHash": "98e9a31a9db119ecac02218310837d24bac86473cc91ac0489aeba7a0b6a711a",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/types/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/collapsible/src/index.ts": {
+      "destination": "packages/collapsible/src/common/zag/collapsible/index.ts",
+      "upstreamHash": "ad026d898040166fbcdae34909c970fab487d9ead34b143cbfd1bfc345b03abc",
+      "generatedHash": "c2fed030fe7de97a335cf10a12683301690e286d251d61097922573dbc51e553",
+      "dependencies": [
+        "zag:packages/machines/collapsible/src/collapsible.anatomy.ts",
+        "zag:packages/machines/collapsible/src/collapsible.connect.ts",
+        "zag:packages/machines/collapsible/src/collapsible.machine.ts",
+        "zag:packages/machines/collapsible/src/collapsible.props.ts",
+        "zag:packages/machines/collapsible/src/collapsible.types.ts"
       ],
       "external": {}
     },
@@ -6705,6 +8817,141 @@
       ],
       "external": {}
     },
+    "zag:packages/machines/tree-view/src/index.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/index.ts",
+      "upstreamHash": "19bebbeb70452febd8c1aec703e99cbecfa2761090b7807c9c9e0c95c743eb97",
+      "generatedHash": "2544616e864aa3ca65b78c341b71f6d2388eb9affa224f7cc34afb82b911235b",
+      "dependencies": [
+        "zag:packages/machines/tree-view/src/tree-view.anatomy.ts",
+        "zag:packages/machines/tree-view/src/tree-view.collection.ts",
+        "zag:packages/machines/tree-view/src/tree-view.connect.ts",
+        "zag:packages/machines/tree-view/src/tree-view.machine.ts",
+        "zag:packages/machines/tree-view/src/tree-view.props.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.anatomy.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.anatomy.ts",
+      "upstreamHash": "f5065a53044e96d186fb2822e6e79641d2bfb7bedb855d8d0d6619aaa8843d47",
+      "generatedHash": "49cb38003bc3e11b00f6c435f2077c1bfedda3b395b2da8050e2a4dca0b97dcd",
+      "dependencies": [
+        "zag:packages/anatomy/src/create-anatomy.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.collection.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.collection.ts",
+      "upstreamHash": "b3c84f9481009b03afb50c2f4405f841b99c3a605a6b958132de51b5b08506b5",
+      "generatedHash": "ad3018286d97d26caca3f42d31cc2c8b8f692ddbbbe7a17fd2657bc4b7b67f64",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/tree-collection.ts",
+        "zag:packages/utilities/collection/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.connect.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.connect.ts",
+      "upstreamHash": "13f7e1acab4c09c2143944573381ac583d39d51b6da7a19f1951db3d0f71b70b",
+      "generatedHash": "fd069eda41f007f3a8a68e1e0a8731cc3005ceb824e71be8b7c503dd18715bac",
+      "dependencies": [
+        "zag:packages/machines/tree-view/src/tree-view.anatomy.ts",
+        "zag:packages/machines/tree-view/src/tree-view.dom.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/machines/tree-view/src/utils/checked-state.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/dom-query/src/index.ts",
+        "zag:packages/utilities/dom-query/src/shared.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.dom.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.dom.ts",
+      "upstreamHash": "6c000d9f35844c14e3fb9ec951ade9ca023d94dcdf3bfc1cc46cd5cdf63c1f3e",
+      "generatedHash": "a3644028aa2e0620eadc3c0a83bd36df0b6b526685f91a3122a5d7a4f48fe0f7",
+      "dependencies": [
+        "zag:packages/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.machine.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.machine.ts",
+      "upstreamHash": "bd380d343feb9ca5cf602cf8b07a73a692abff03c76cd69c1bf77d2e8636b0ed",
+      "generatedHash": "d45bac5d3a1c0cb1d50b181ea2b940926e667707fd5d241af144d6240649f578",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/tree-view/src/tree-view.collection.ts",
+        "zag:packages/machines/tree-view/src/tree-view.dom.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/machines/tree-view/src/utils/checked-state.ts",
+        "zag:packages/machines/tree-view/src/utils/expand-branch.ts",
+        "zag:packages/machines/tree-view/src/utils/visit-skip.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/index.ts",
+        "zag:packages/utilities/dom-query/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.props.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.props.ts",
+      "upstreamHash": "fb4a53bf10517ed1a73ee19b331acd1359a3841eef88e9bedb270c401bc41779",
+      "generatedHash": "741af8622e221565d483cf55bb3af55c5d977491b6e4bac1ff3b0e7294d2d07c",
+      "dependencies": [
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/tree-view.types.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/tree-view.types.ts",
+      "upstreamHash": "6e5698569c6f34b1d82a239e7c1333a2cc7dacbb0e2705f0b92c6fb593302d5d",
+      "generatedHash": "a6d36f23e6c909cc47c7a6416799a27acd9857b8130c4b457a811e73e007a3f6",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/types/src/index.ts",
+        "zag:packages/utilities/collection/src/index.ts",
+        "zag:packages/utilities/collection/src/tree-collection.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/dom-query/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/utils/checked-state.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/utils/checked-state.ts",
+      "upstreamHash": "edec25a5c135ed7efc936935c74977b7b4a907070dd676bf299c4d67a50d35ab",
+      "generatedHash": "c9f54ec81ba0fd531c3afa58d5a5b24a12cc79aa671a4a18e6926ca2119d069c",
+      "dependencies": [
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/utilities/collection/src/tree-collection.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/utils/expand-branch.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/utils/expand-branch.ts",
+      "upstreamHash": "b65e1e2f5547938e4a0181bee133dbf9e5f0c6261ef40467cb3d4341b72c6aea",
+      "generatedHash": "46a25c7141332de9e9dfef52b0b933a240f9d1536745c277d86514cc1b2d1913",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/machines/tree-view/src/utils/visit-skip.ts": {
+      "destination": "packages/tree-view/src/common/zag/tree-view/utils/visit-skip.ts",
+      "upstreamHash": "4ac2aa7381b241493cc5c8b4962903ed790ffc784f32a4625dc6fa083d4e3307",
+      "generatedHash": "88a99a9a03f783262396b48814f08d346ff6d6f0c2251b0bd51f015f10073d6c",
+      "dependencies": [
+        "zag:packages/core/src/index.ts",
+        "zag:packages/machines/tree-view/src/tree-view.types.ts",
+        "zag:packages/utilities/collection/src/types.ts"
+      ],
+      "external": {}
+    },
     "zag:packages/types/src/create-props.ts": {
       "destination": "packages/shared/src/common/zag/types/create-props.ts",
       "upstreamHash": "349890ae74d09081caa8951c22bb2a24c69d8b77208bfea7ce84eb440cfe5198",
@@ -6804,6 +9051,87 @@
       "dependencies": [
         "zag:packages/utilities/dom-query/src/index.ts"
       ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/grid-collection.ts": {
+      "destination": "packages/shared/src/common/zag/collection/grid-collection.ts",
+      "upstreamHash": "fdb1d23a80a679ca7bfbfb295eaf33cdf40cfe19cbd01c8cd9aa604c04907cd3",
+      "generatedHash": "0c6d8128e44301916a49a74e13e92f779e0c6f5cea78cfb7c74ad0f202b3a0de",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/list-collection.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/index.ts": {
+      "destination": "packages/shared/src/common/zag/collection/index.ts",
+      "upstreamHash": "9f1c5878b7e3a2c32d0fc5d6886c42050ee5be79c830d9e09610ca1ddabe79f7",
+      "generatedHash": "615cddb0b12727194dc70cc1244b3d14908b451ad7c236ef738f6cfa89312d19",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/grid-collection.ts",
+        "zag:packages/utilities/collection/src/list-collection.ts",
+        "zag:packages/utilities/collection/src/selection-map.ts",
+        "zag:packages/utilities/collection/src/selection.ts",
+        "zag:packages/utilities/collection/src/tree-collection.ts",
+        "zag:packages/utilities/collection/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/list-collection.ts": {
+      "destination": "packages/shared/src/common/zag/collection/list-collection.ts",
+      "upstreamHash": "4a611dd47bea8904a34ec4e97d99f7181f22b57654c3c848155f7aa1016108f0",
+      "generatedHash": "8b4acbe4bdba3041c85575f75d6d3709561b52677a0d1323b3c7b322a4ec46be",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/selection-map.ts": {
+      "destination": "packages/shared/src/common/zag/collection/selection-map.ts",
+      "upstreamHash": "616080d9d92a57ff84f91694d7b8efaa22db64224054b8e92761f0e53cb4cdd7",
+      "generatedHash": "5901d95367b4acf977ee308a2ee0c3e2ded75401ecfe7de12de02f1dc5dc1824",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/selection.ts": {
+      "destination": "packages/shared/src/common/zag/collection/selection.ts",
+      "upstreamHash": "8dbd0c1b7f6e8b151de808d9054285192b261b5721eba4254177affa7127d1dd",
+      "generatedHash": "11a17763c2aaec4a28649b963c96eeb75ae88a3134c148fb3d77310dfac33c4a",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/list-collection.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/tree-collection.ts": {
+      "destination": "packages/shared/src/common/zag/collection/tree-collection.ts",
+      "upstreamHash": "b432d275e124de24113a2fe5cd47335b0e433f9c7c250337d11b9ead2ecc0f32",
+      "generatedHash": "b27bfc5b3f9f5542ef2543dfbfcb12cf9427924200f944bde2cae6de6be3ea92",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/tree-visit.ts",
+        "zag:packages/utilities/collection/src/types.ts",
+        "zag:packages/utilities/core/src/index.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/tree-visit.ts": {
+      "destination": "packages/shared/src/common/zag/collection/tree-visit.ts",
+      "upstreamHash": "7c588033c3be5d86565ecddd21c37fa3868ba49febd35cd652a3ac6fd3851adf",
+      "generatedHash": "d8960367ba5eca7416cf71be15f79815899450831773a1253edd0884c90a6987",
+      "dependencies": [
+        "zag:packages/utilities/collection/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/collection/src/types.ts": {
+      "destination": "packages/shared/src/common/zag/collection/types.ts",
+      "upstreamHash": "d1674946964dcd25c7655e2628e5ba03b4c43a52d87e3ec9f40ba2cb96aaae7f",
+      "generatedHash": "d1674946964dcd25c7655e2628e5ba03b4c43a52d87e3ec9f40ba2cb96aaae7f",
+      "dependencies": [],
       "external": {}
     },
     "zag:packages/utilities/core/src/array.ts": {
@@ -7794,6 +10122,77 @@
       ],
       "external": {}
     },
+    "zag:packages/utilities/json-tree-utils/src/accessibility.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/accessibility.ts",
+      "upstreamHash": "ec8efb5b7fde42fc65555c2bbb22ebd753f402da7ebe171797bc159bbe5d0b99",
+      "generatedHash": "92ffbcff6af7d9701f659e79609a867660bc0a596c4ff2e3526270b07d221ff7",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/data-type.ts",
+        "zag:packages/utilities/json-tree-utils/src/node-conversion.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/json-tree-utils/src/data-type.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/data-type.ts",
+      "upstreamHash": "ecb1dd0acd187a29ad020e0df3f7d17faa6db3535fe3cd3073bbdf1f7358de43",
+      "generatedHash": "1af446b679c1a445e453da79ccbb74093a39d6750f85ba14d4c5c74ad7d585af",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/node-conversion.ts",
+        "zag:packages/utilities/json-tree-utils/src/shared.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/json-tree-utils/src/index.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/index.ts",
+      "upstreamHash": "a6cd83d748802e7a45793e39d0a82cddf727d6c06de7edc819374604c0fc7346",
+      "generatedHash": "e235219d78901aa3127124328b492c41667c3739aee9a91cf5366d3eeeb9786c",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/accessibility.ts",
+        "zag:packages/utilities/json-tree-utils/src/data-type.ts",
+        "zag:packages/utilities/json-tree-utils/src/json-to-tree.ts",
+        "zag:packages/utilities/json-tree-utils/src/node-conversion.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/json-tree-utils/src/json-to-tree.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/json-to-tree.ts",
+      "upstreamHash": "a18d6ef679a3a92efccc237b63e90de58d5e9d6a37165c8749b3fa4551482db0",
+      "generatedHash": "59e5c3c6b9dda4e387a9cb012acab106226814515b1c37dc8ff7a9b3313b786d",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/data-type.ts",
+        "zag:packages/utilities/json-tree-utils/src/node-conversion.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/json-tree-utils/src/node-conversion.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/node-conversion.ts",
+      "upstreamHash": "50a642cfdd28e83ab5d9469a64348a7e728e6c43b8a4ce3c041a81e5baa0106c",
+      "generatedHash": "1bb630ec10946aaca010ecbabfed00abd334fe5d848e4bf50dac9bc43bfdaa00",
+      "dependencies": [
+        "zag:packages/utilities/json-tree-utils/src/json-to-tree.ts",
+        "zag:packages/utilities/json-tree-utils/src/shared.ts",
+        "zag:packages/utilities/json-tree-utils/src/types.ts"
+      ],
+      "external": {}
+    },
+    "zag:packages/utilities/json-tree-utils/src/shared.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/shared.ts",
+      "upstreamHash": "a05384fc0fa342f0d1fedefd668d0099dbd6ec76fdc2e742564c76fa43243669",
+      "generatedHash": "a05384fc0fa342f0d1fedefd668d0099dbd6ec76fdc2e742564c76fa43243669",
+      "dependencies": [],
+      "external": {}
+    },
+    "zag:packages/utilities/json-tree-utils/src/types.ts": {
+      "destination": "packages/shared/src/common/zag/json-tree-utils/types.ts",
+      "upstreamHash": "32a35348bfd3f68bc786d6ca1f1940cbc6c83972415b84457c4c5c6909bbb3b9",
+      "generatedHash": "32a35348bfd3f68bc786d6ca1f1940cbc6c83972415b84457c4c5c6909bbb3b9",
+      "dependencies": [],
+      "external": {}
+    },
     "zag:packages/utilities/live-region/src/index.ts": {
       "destination": "packages/shared/src/common/zag/live-region/index.ts",
       "upstreamHash": "49e4c10cd992ddd97183f82798d9c02480f8f62e1d81f7d97e0912c26fe4d901",
@@ -7898,6 +10297,10 @@
     "packages/field/src/react.tsx",
     "packages/field/src/styles.css",
     "packages/field/src/svelte.ts",
+    "packages/json-tree-view/src/react.tsx",
+    "packages/json-tree-view/src/styles.css",
+    "packages/json-tree-view/src/svelte.ts",
+    "packages/json-tree-view/src/svelte/json-tree-view-composition.svelte",
     "packages/locale/src/react.tsx",
     "packages/locale/src/styles.css",
     "packages/locale/src/svelte.ts",
