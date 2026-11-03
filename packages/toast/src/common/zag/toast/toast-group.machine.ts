@@ -1,0 +1,344 @@
+import { setup } from "@spark/shared/common/zag/core/index.ts";
+import { trackDismissableBranch } from "@spark/shared/common/zag/dismissable/index.ts";
+import { addDomEvent } from "@spark/shared/common/zag/dom-query/index.ts";
+import { AnimationFrame } from "@spark/shared/common/zag/dom-query/index.ts";
+import { contains } from "@spark/shared/common/zag/dom-query/index.ts";
+import { getEventTarget } from "@spark/shared/common/zag/dom-query/index.ts";
+import { uuid } from "@spark/shared/common/zag/utils/index.ts";
+import * as dom from "./toast.dom.ts"
+import type { ToastGroupSchema } from "./toast.types.ts";
+
+const { guards, createMachine } = setup<ToastGroupSchema>()
+const { and } = guards
+
+export const groupMachine = createMachine({
+  props({ props }) {
+    return {
+      dir: "ltr",
+      id: uuid(),
+      ...props,
+      store: props.store!,
+    }
+  },
+
+  initialState({ prop }) {
+    return prop("store").attrs.overlap ? "overlap" : "stack"
+  },
+
+  refs() {
+    return {
+      lastFocusedEl: null,
+      isFocusWithin: false,
+      isPointerWithin: false,
+      ignoreMouseTimer: AnimationFrame.create(),
+      dismissableCleanup: undefined,
+    }
+  },
+
+  context({ bindable }) {
+    return {
+      toasts: bindable<any[]>(() => ({
+        defaultValue: [],
+        sync: true,
+        hash: (toasts) => toasts.map((t) => t.id).join(","),
+      })),
+      heights: bindable<any[]>(() => ({
+        defaultValue: [],
+        sync: true,
+      })),
+    }
+  },
+
+  computed: {
+    count: ({ context }) => context.get("toasts").length,
+    overlap: ({ prop }) => prop("store").attrs.overlap,
+    placement: ({ prop }) => prop("store").attrs.placement,
+  },
+
+  effects: ["subscribeToStore", "subscribeToLayout", "trackDocumentVisibility", "trackHotKeyPress"],
+
+  watch({ track, context, action }) {
+    track([() => context.hash("toasts")], () => {
+      queueMicrotask(() => {
+        action(["collapsedIfEmpty", "setDismissableBranch", "resetInteractionIfEmpty"])
+      })
+    })
+  },
+
+  exit: ["clearDismissableBranch", "clearLastFocusedEl", "clearMouseEventTimer"],
+
+  on: {
+    PAUSE_ALL: {
+      actions: ["pauseToasts"],
+    },
+    RESUME_ALL: {
+      actions: ["resumeToasts"],
+    },
+    "DOC.HOTKEY": {
+      actions: ["focusRegionEl"],
+    },
+    "REGION.BLUR": [
+      {
+        guard: and("isOverlapping", "isPointerOut"),
+        target: "overlap",
+        actions: ["resumeToasts", "restoreFocusIfPointerOut"],
+      },
+      {
+        guard: "isPointerOut",
+        target: "stack",
+        actions: ["resumeToasts", "restoreFocusIfPointerOut"],
+      },
+      {
+        actions: ["clearFocusWithin"],
+      },
+    ],
+    "TOAST.DISMISS": {
+      actions: ["moveFocusOnDismiss"],
+    },
+    "TOAST.REMOVE": {
+      actions: ["removeToast", "removeHeight", "ignoreMouseEventsTemporarily"],
+    },
+    "TOAST.PAUSE": {
+      actions: ["pauseToasts"],
+    },
+  },
+
+  states: {
+    stack: {
+      on: {
+        "REGION.POINTER_LEAVE": [
+          {
+            guard: "isOverlapping",
+            target: "overlap",
+            actions: ["clearPointerWithin", "resumeToasts"],
+          },
+          {
+            actions: ["clearPointerWithin", "resumeToasts"],
+          },
+        ],
+        "REGION.OVERLAP": {
+          target: "overlap",
+        },
+        "REGION.FOCUS": {
+          actions: ["setLastFocusedEl", "pauseToasts"],
+        },
+        "REGION.POINTER_ENTER": {
+          actions: ["setPointerWithin", "pauseToasts"],
+        },
+      },
+    },
+
+    overlap: {
+      on: {
+        "REGION.STACK": {
+          target: "stack",
+        },
+        "REGION.POINTER_ENTER": {
+          target: "stack",
+          actions: ["setPointerWithin", "pauseToasts"],
+        },
+        "REGION.POINTER_LEAVE": {
+          actions: ["clearPointerWithin", "resumeToasts"],
+        },
+        "REGION.FOCUS": {
+          target: "stack",
+          actions: ["setLastFocusedEl", "pauseToasts"],
+        },
+      },
+    },
+  },
+
+  implementations: {
+    guards: {
+      isOverlapping: ({ computed }) => computed("overlap"),
+      isPointerOut: ({ refs }) => !refs.get("isPointerWithin"),
+    },
+
+    effects: {
+      subscribeToStore({ context, prop }) {
+        const store = prop("store")
+        context.set("toasts", store.getVisibleToasts() as any)
+        return store.subscribe((toast) => {
+          if (toast.dismiss) {
+            context.set("toasts", (prev) => prev.filter((t) => t.id !== toast.id))
+            return
+          }
+
+          context.set("toasts", (prev) => {
+            const index = prev.findIndex((t) => t.id === toast.id)
+            if (index !== -1) {
+              return [...prev.slice(0, index), { ...prev[index], ...toast }, ...prev.slice(index + 1)]
+            }
+            return [toast as any, ...prev]
+          })
+        })
+      },
+      subscribeToLayout({ prop, send }) {
+        return prop("store").subscribeLayout((stacked) => {
+          send({ type: stacked ? "REGION.STACK" : "REGION.OVERLAP" })
+        })
+      },
+      trackHotKeyPress({ prop, send }) {
+        const handleKeyDown = (event: KeyboardEvent) => {
+          const { hotkey } = prop("store").attrs
+          const isHotkeyPressed = hotkey.every((key) => (event as any)[key] || event.code === key)
+          if (!isHotkeyPressed) return
+          send({ type: "DOC.HOTKEY" })
+        }
+        return addDomEvent(document, "keydown", handleKeyDown, { capture: true })
+      },
+      trackDocumentVisibility({ prop, send, scope }) {
+        const { pauseOnPageIdle } = prop("store").attrs
+        if (!pauseOnPageIdle) return
+
+        const doc = scope.getDoc()
+        if (doc.visibilityState === "hidden") send({ type: "PAUSE_ALL" })
+
+        return addDomEvent(doc, "visibilitychange", () => {
+          const isHidden = doc.visibilityState === "hidden"
+          send({ type: isHidden ? "PAUSE_ALL" : "RESUME_ALL" })
+        })
+      },
+    },
+
+    actions: {
+      setDismissableBranch({ refs, context, computed, scope }) {
+        const toasts = context.get("toasts")
+        const placement = computed("placement")
+        const hasToasts = toasts.length > 0
+
+        if (!hasToasts) {
+          refs.get("dismissableCleanup")?.()
+          refs.set("dismissableCleanup", undefined)
+          return
+        }
+
+        if (hasToasts && refs.get("dismissableCleanup")) {
+          return
+        }
+
+        //  mark toast as a dismissable branch
+        //  so that interacting with them will not close dismissable layers
+        const groupEl = () => dom.getRegionEl(scope, placement)
+        const cleanup = trackDismissableBranch(groupEl, { defer: true, getRootNode: scope.getRootNode })
+        refs.set("dismissableCleanup", cleanup)
+      },
+      clearDismissableBranch({ refs }) {
+        refs.get("dismissableCleanup")?.()
+        refs.set("dismissableCleanup", undefined)
+      },
+      focusRegionEl({ scope, computed }) {
+        queueMicrotask(() => {
+          dom.getRegionEl(scope, computed("placement"))?.focus()
+        })
+      },
+      pauseToasts({ prop }) {
+        prop("store").pause()
+      },
+      resumeToasts({ prop, refs, scope, event }) {
+        if (event.type === "REGION.BLUR") refs.set("isFocusWithin", false)
+
+        const idle = prop("store").attrs.pauseOnPageIdle && scope.getDoc().visibilityState === "hidden"
+        if (idle || refs.get("isPointerWithin") || refs.get("isFocusWithin")) return
+
+        prop("store").resume()
+      },
+      removeToast({ prop, event }) {
+        prop("store").remove(event.id)
+      },
+      removeHeight({ event, context }) {
+        if (event?.id == null) return
+        queueMicrotask(() => {
+          context.set("heights", (heights) => heights.filter((height) => height.id !== event.id))
+        })
+      },
+      collapsedIfEmpty({ send, computed }) {
+        if (!computed("overlap") || computed("count") > 1) return
+        send({ type: "REGION.OVERLAP" })
+      },
+      setLastFocusedEl({ refs, event }) {
+        if (refs.get("isFocusWithin")) return
+
+        refs.set("isFocusWithin", true)
+        refs.set("lastFocusedEl", event.target ?? null)
+      },
+      moveFocusOnDismiss({ refs, scope, computed, event }) {
+        if (event.focusVisible) {
+          const toastEls = dom.getToastEls(scope, computed("placement"))
+          const index = toastEls.findIndex((el) => contains(el, scope.getActiveElement()))
+          const nextEl = findOpenToast(toastEls, index + 1, 1) ?? findOpenToast(toastEls, index - 1, -1)
+          if (nextEl) {
+            nextEl.focus({ preventScroll: true })
+            return
+          }
+        }
+
+        const lastFocusedEl = refs.get("lastFocusedEl")
+        if (event.focusVisible && lastFocusedEl) {
+          lastFocusedEl.focus({ preventScroll: true })
+        } else {
+          scope.getActiveElement()?.blur()
+        }
+      },
+      resetInteractionIfEmpty({ refs, prop, scope, computed }) {
+        if (computed("count") > 0) return
+        refs.set("isFocusWithin", false)
+        refs.set("isPointerWithin", false)
+        refs.set("lastFocusedEl", null)
+        const idle = prop("store").attrs.pauseOnPageIdle && scope.getDoc().visibilityState === "hidden"
+        if (!idle) prop("store").resume()
+      },
+      restoreFocusIfPointerOut({ refs }) {
+        if (!refs.get("lastFocusedEl") || refs.get("isPointerWithin")) return
+        refs.get("lastFocusedEl")?.focus({ preventScroll: true })
+        refs.set("lastFocusedEl", null)
+        refs.set("isFocusWithin", false)
+      },
+      setPointerWithin({ refs }) {
+        refs.set("isPointerWithin", true)
+      },
+      clearPointerWithin({ refs }) {
+        refs.set("isPointerWithin", false)
+        if (refs.get("lastFocusedEl") && !refs.get("isFocusWithin")) {
+          refs.get("lastFocusedEl")?.focus({ preventScroll: true })
+          refs.set("lastFocusedEl", null)
+        }
+      },
+      clearFocusWithin({ refs }) {
+        refs.set("isFocusWithin", false)
+      },
+      clearLastFocusedEl({ refs }) {
+        if (!refs.get("lastFocusedEl")) return
+        refs.get("lastFocusedEl")?.focus({ preventScroll: true })
+        refs.set("lastFocusedEl", null)
+        refs.set("isFocusWithin", false)
+      },
+      ignoreMouseEventsTemporarily({ refs, scope, computed, send }) {
+        // Removing the hovered toast fires no leave, so check on the next pointer move
+        refs.get("ignoreMouseTimer").request(() => {
+          return addDomEvent(
+            scope.getDoc(),
+            "pointermove",
+            (event) => {
+              if (!refs.get("isPointerWithin")) return
+              const regionEl = dom.getRegionEl(scope, computed("placement"))
+              if (contains(regionEl, getEventTarget(event))) return
+              send({ type: "REGION.POINTER_LEAVE", placement: computed("placement") })
+            },
+            { once: true },
+          )
+        })
+      },
+      clearMouseEventTimer({ refs }) {
+        refs.get("ignoreMouseTimer").cancel()
+      },
+    },
+  },
+})
+
+function findOpenToast(toastEls: HTMLElement[], from: number, step: number) {
+  for (let i = from; i >= 0 && i < toastEls.length; i += step) {
+    if (toastEls[i].dataset.state === "open") return toastEls[i]
+  }
+  return null
+}

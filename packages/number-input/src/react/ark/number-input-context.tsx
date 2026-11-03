@@ -1,0 +1,11 @@
+'use client'
+
+import type { ReactNode } from 'react'
+import { type UseNumberInputContext } from "./use-number-input-context.ts";
+import { useNumberInputContext } from "./use-number-input-context.ts";
+
+export interface NumberInputContextProps {
+  children: (context: UseNumberInputContext) => ReactNode
+}
+
+export const NumberInputContext = (props: NumberInputContextProps) => props.children(useNumberInputContext())

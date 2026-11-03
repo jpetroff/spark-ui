@@ -1,0 +1,252 @@
+import { dataAttr } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { getEventTarget } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isLeftClick } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isSafari } from "@spark/shared/common/zag/dom-query/index.ts";
+import { visuallyHiddenStyle } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isFocusVisible } from "@spark/shared/common/zag/focus-visible/index.ts";
+import type { NormalizeProps } from "@spark/shared/common/zag/types/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+import type { Rect } from "@spark/shared/common/zag/types/index.ts";
+import { toPx } from "@spark/shared/common/zag/utils/index.ts";
+import { parts } from "./radio-group.anatomy.ts";
+import * as dom from "./radio-group.dom.ts"
+import type { ItemProps } from "./radio-group.types.ts";
+import type { ItemState } from "./radio-group.types.ts";
+import type { RadioGroupApi } from "./radio-group.types.ts";
+import type { RadioGroupService } from "./radio-group.types.ts";
+
+export function connect<T extends PropTypes>(
+  service: RadioGroupService,
+  normalize: NormalizeProps<T>,
+): RadioGroupApi<T> {
+  const { context, send, computed, prop, scope } = service
+
+  const groupDisabled = computed("isDisabled")
+  const groupInvalid = prop("invalid")
+  const readOnly = prop("readOnly")
+
+  function getItemState(props: ItemProps): ItemState {
+    return {
+      value: props.value,
+      invalid: !!props.invalid || !!groupInvalid,
+      disabled: !!props.disabled || groupDisabled,
+      checked: context.get("value") === props.value,
+      focused: context.get("focusedValue") === props.value,
+      focusVisible: context.get("focusVisibleValue") === props.value,
+      hovered: context.get("hoveredValue") === props.value,
+      active: context.get("activeValue") === props.value,
+    }
+  }
+
+  function getItemDataAttrs<T extends ItemProps>(props: T) {
+    const itemState = getItemState(props)
+    return {
+      "data-focus": dataAttr(itemState.focused),
+      "data-focus-visible": dataAttr(itemState.focusVisible),
+      "data-disabled": dataAttr(itemState.disabled),
+      "data-readonly": dataAttr(readOnly),
+      "data-state": itemState.checked ? "checked" : "unchecked",
+      "data-hover": dataAttr(itemState.hovered),
+      "data-invalid": dataAttr(itemState.invalid),
+      "data-orientation": prop("orientation"),
+      "data-ssr": dataAttr(context.get("ssr")),
+    }
+  }
+
+  const focus = () => {
+    const nodeToFocus = dom.getFirstEnabledAndCheckedInputEl(scope) ?? dom.getFirstEnabledInputEl(scope)
+    nodeToFocus?.focus()
+  }
+
+  return {
+    focus,
+    value: context.get("value"),
+    setValue(value) {
+      send({ type: "SET_VALUE", value, isTrusted: false })
+    },
+    clearValue() {
+      send({ type: "SET_VALUE", value: null, isTrusted: false })
+    },
+
+    getRootProps() {
+      return normalize.element({
+        ...parts.root.attrs,
+        role: "radiogroup",
+        id: dom.getRootId(scope),
+        "aria-labelledby": dom.getLabelId(scope),
+        "aria-required": prop("required") || undefined,
+        "aria-disabled": groupDisabled || undefined,
+        "aria-readonly": readOnly || undefined,
+        "data-orientation": prop("orientation"),
+        "data-disabled": dataAttr(groupDisabled),
+        "data-invalid": dataAttr(groupInvalid),
+        "data-required": dataAttr(prop("required")),
+        "aria-orientation": prop("orientation"),
+        dir: prop("dir"),
+        style: {
+          position: "relative",
+        },
+      })
+    },
+
+    getLabelProps() {
+      return normalize.element({
+        ...parts.label.attrs,
+        dir: prop("dir"),
+        "data-orientation": prop("orientation"),
+        "data-disabled": dataAttr(groupDisabled),
+        "data-invalid": dataAttr(groupInvalid),
+        "data-required": dataAttr(prop("required")),
+        id: dom.getLabelId(scope),
+        onClick: focus,
+      })
+    },
+
+    getItemState,
+
+    getItemProps(props) {
+      const itemState = getItemState(props)
+
+      return normalize.label({
+        ...parts.item.attrs,
+        dir: prop("dir"),
+        id: dom.getItemId(scope, props.value),
+        htmlFor: dom.getItemHiddenInputId(scope, props.value),
+        ...getItemDataAttrs(props),
+        onPointerMove() {
+          if (itemState.disabled) return
+          if (itemState.hovered) return
+          send({ type: "SET_HOVERED", value: props.value, hovered: true })
+        },
+        onPointerLeave() {
+          if (itemState.disabled) return
+          send({ type: "SET_HOVERED", value: null })
+        },
+        onPointerDown(event) {
+          if (itemState.disabled) return
+          if (!isLeftClick(event)) return
+          // On pointerdown, the input blurs and returns focus to the `body`,
+          // we need to prevent this.
+          if (itemState.focused && event.pointerType === "mouse") {
+            event.preventDefault()
+          }
+          send({ type: "SET_ACTIVE", value: props.value, active: true })
+        },
+        onPointerUp() {
+          if (itemState.disabled) return
+          send({ type: "SET_ACTIVE", value: null })
+        },
+        onClick() {
+          if (!itemState.disabled && isSafari()) {
+            dom.getItemHiddenInputEl(scope, props.value)?.focus()
+          }
+        },
+      })
+    },
+
+    getItemTextProps(props) {
+      return normalize.element({
+        ...parts.itemText.attrs,
+        dir: prop("dir"),
+        id: dom.getItemLabelId(scope, props.value),
+        ...getItemDataAttrs(props),
+      })
+    },
+
+    getItemControlProps(props) {
+      const itemState = getItemState(props)
+
+      return normalize.element({
+        ...parts.itemControl.attrs,
+        dir: prop("dir"),
+        id: dom.getItemControlId(scope, props.value),
+        "data-active": dataAttr(itemState.active),
+        "aria-hidden": true,
+        ...getItemDataAttrs(props),
+      })
+    },
+
+    getItemHiddenInputProps(props) {
+      const itemState = getItemState(props)
+
+      return normalize.input({
+        "data-ownedby": dom.getRootId(scope),
+        id: dom.getItemHiddenInputId(scope, props.value),
+        type: "radio",
+        name: prop("name") || prop("id"),
+        form: prop("form"),
+        value: props.value,
+        required: prop("required"),
+        "aria-labelledby": dom.getItemLabelId(scope, props.value),
+        "aria-invalid": itemState.invalid || undefined,
+        onClick(event) {
+          if (readOnly) {
+            event.preventDefault()
+            return
+          }
+
+          if (event.currentTarget.checked) {
+            send({ type: "SET_VALUE", value: props.value, isTrusted: true })
+          }
+        },
+        onBlur() {
+          send({ type: "SET_FOCUSED", value: null, focused: false, focusVisible: false })
+        },
+        onFocus() {
+          const focusVisible = isFocusVisible()
+          send({ type: "SET_FOCUSED", value: props.value, focused: true, focusVisible })
+        },
+        onKeyDown(event) {
+          if (event.defaultPrevented) return
+          if (event.key === " ") {
+            send({ type: "SET_ACTIVE", value: props.value, active: true })
+          }
+        },
+        onKeyUp(event) {
+          if (event.defaultPrevented) return
+          if (event.key === " ") {
+            send({ type: "SET_ACTIVE", value: null })
+          }
+        },
+        disabled: itemState.disabled || readOnly,
+        defaultChecked: itemState.checked,
+        style: visuallyHiddenStyle,
+      })
+    },
+
+    getIndicatorProps() {
+      const rect = context.get("indicatorRect")
+      const animateIndicator = context.get("animateIndicator")
+
+      return normalize.element({
+        id: dom.getIndicatorId(scope),
+        ...parts.indicator.attrs,
+        dir: prop("dir"),
+        hidden: context.get("value") == null || isRectEmpty(rect),
+        "data-disabled": dataAttr(groupDisabled),
+        "data-orientation": prop("orientation"),
+        onTransitionEnd(event) {
+          if (getEventTarget(event) !== event.currentTarget) return
+          send({ type: "INDICATOR_TRANSITION_END" })
+        },
+        style: {
+          "--transition-property": "left, top, width, height",
+          "--left": toPx(rect?.x),
+          "--top": toPx(rect?.y),
+          "--width": toPx(rect?.width),
+          "--height": toPx(rect?.height),
+          position: "absolute",
+          willChange: animateIndicator ? "var(--transition-property)" : "auto",
+          transitionProperty: animateIndicator ? "var(--transition-property)" : "none",
+          transitionDuration: animateIndicator ? "var(--transition-duration, 150ms)" : "0ms",
+          transitionTimingFunction: "var(--transition-timing-function)",
+          [prop("orientation") === "horizontal" ? "left" : "top"]:
+            prop("orientation") === "horizontal" ? "var(--left)" : "var(--top)",
+        },
+      })
+    },
+  }
+}
+
+const isRectEmpty = (rect: Rect | null) =>
+  rect == null || (rect.width === 0 && rect.height === 0 && rect.x === 0 && rect.y === 0)

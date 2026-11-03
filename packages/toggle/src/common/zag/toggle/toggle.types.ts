@@ -1,0 +1,63 @@
+import type { EventObject } from "@spark/shared/common/zag/core/index.ts";
+import type { Machine } from "@spark/shared/common/zag/core/index.ts";
+import type { Service } from "@spark/shared/common/zag/core/index.ts";
+import type { PropTypes } from "@spark/shared/common/zag/types/index.ts";
+
+export interface ToggleProps {
+  /**
+   * Whether the toggle is disabled.
+   */
+  disabled?: boolean | undefined
+  /**
+   * The default pressed state of the toggle.
+   */
+  defaultPressed?: boolean | undefined
+  /**
+   * The pressed state of the toggle.
+   */
+  pressed?: boolean | undefined
+  /**
+   * Event handler called when the pressed state of the toggle changes.
+   */
+  onPressedChange?: ((pressed: boolean) => void) | undefined
+}
+
+export interface ToggleSchema {
+  state: "idle"
+  props: ToggleProps
+  context: {
+    pressed: boolean
+  }
+  event: EventObject
+  action: string
+  guard: string
+  effect: string
+}
+
+export type ToggleService = Service<ToggleSchema>
+
+export type ToggleMachine = Machine<ToggleSchema>
+
+export interface ToggleApi<T extends PropTypes = PropTypes> {
+  /**
+   * Whether the toggle is pressed.
+   */
+  pressed: boolean
+  /**
+   * Whether the toggle is disabled.
+   */
+  disabled: boolean
+  /**
+   * Sets the pressed state of the toggle.
+   */
+  setPressed: (pressed: boolean) => void
+
+  /**
+   * Props for the root `button` element.
+   */
+  getRootProps: () => T["element"]
+  /**
+   * Props for the optional visual indicator (e.g. icon) element.
+   */
+  getIndicatorProps: () => T["element"]
+}
