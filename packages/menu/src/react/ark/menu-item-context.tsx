@@ -1,0 +1,11 @@
+'use client'
+
+import type { ReactNode } from 'react'
+import { type UseMenuItemContext } from "./use-menu-item-context.ts";
+import { useMenuItemContext } from "./use-menu-item-context.ts";
+
+export interface MenuItemContextProps {
+  children: (context: UseMenuItemContext) => ReactNode
+}
+
+export const MenuItemContext = (props: MenuItemContextProps) => props.children(useMenuItemContext())

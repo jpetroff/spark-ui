@@ -1,0 +1,27 @@
+import type { Scope } from "@spark/shared/common/zag/core/index.ts";
+import { getByOwnerId } from "@spark/shared/common/zag/dom-query/shared.ts";
+import { queryAll } from "@spark/shared/common/zag/dom-query/index.ts";
+import { isFunction } from "@spark/shared/common/zag/utils/index.ts";
+
+export const getTriggerId = (scope: Scope, value?: string) => {
+  const customId = scope.ids?.trigger
+  if (customId != null) return isFunction(customId) ? customId(value) : customId
+  return value ? `hover-card:${scope.id}:trigger:${value}` : `hover-card:${scope.id}:trigger`
+}
+export const getContentId = (scope: Scope) => scope.ids?.content ?? `hover-card:${scope.id}:content`
+export const getPositionerId = (scope: Scope) => scope.ids?.positioner ?? `hover-card:${scope.id}:popper`
+export const getArrowId = (scope: Scope) => scope.ids?.arrow ?? `hover-card:${scope.id}:arrow`
+
+export const getTriggerEl = (scope: Scope) => scope.getById(getTriggerId(scope))
+export const getContentEl = (scope: Scope) => scope.getById(getContentId(scope))
+export const getPositionerEl = (scope: Scope) => scope.getById(getPositionerId(scope))
+
+export const getTriggerEls = (scope: Scope): HTMLElement[] =>
+  queryAll<HTMLElement>(scope.getRootNode(), `[data-scope="hover-card"][data-part="trigger"]${getByOwnerId(scope.id)}`)
+
+export const getActiveTriggerEl = (scope: Scope, value: string | null): HTMLElement | null => {
+  if (value == null) {
+    return getTriggerEl(scope) ?? getTriggerEls(scope)[0]
+  }
+  return scope.getById(getTriggerId(scope, value))
+}
