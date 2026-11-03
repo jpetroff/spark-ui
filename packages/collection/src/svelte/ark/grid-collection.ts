@@ -1,0 +1,11 @@
+import {
+  type CollectionItem,
+  type CollectionOptions,
+  GridCollection,
+  type GridCollectionOptions,
+} from '@spark/shared/common/zag/collection/index.ts'
+
+export const createGridCollection = <T extends CollectionItem>(options: GridCollectionOptions<T>): GridCollection<T> =>
+  new GridCollection(options)
+
+export type { GridCollection, CollectionOptions, CollectionItem, GridCollectionOptions }
