@@ -85,22 +85,16 @@ try {
           if (mode === 'tailwind') {
             await nativeButton.evaluate((node) => {
               node.classList.add('bg-spark-info-surface')
-              node.style.setProperty('--spark-info-surface', '#123456')
+              node.style.setProperty('--color-background-info', '#123456')
             })
             await expect(nativeButton).toHaveCSS('background-color', 'rgb(18, 52, 86)')
             await nativeButton.evaluate((node) => {
               node.classList.remove('bg-spark-info-surface')
-              node.style.removeProperty('--spark-info-surface')
+              node.style.removeProperty('--color-background-info')
             })
           }
-          const light = await nativeButton.evaluate(
-            (node) => getComputedStyle(node).backgroundColor,
-          )
-          await page.locator('html').evaluate((node) => node.classList.add('dark'))
-          await expect
-            .poll(() => nativeButton.evaluate((node) => getComputedStyle(node).backgroundColor))
-            .not.toBe(light)
-          await page.locator('html').evaluate((node) => node.classList.remove('dark'))
+          await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark')
+          await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(17, 16, 15)')
           await page.keyboard.press('Tab')
           await nativeButton.focus()
           await expect(nativeButton).toHaveCSS('outline-style', 'solid')

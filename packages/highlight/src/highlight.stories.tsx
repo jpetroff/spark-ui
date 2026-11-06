@@ -19,10 +19,10 @@ export const CaseSensitive: Story = {
 export const CustomizedWrapper: Story = {
   args: {
     style: {
-      background: 'var(--spark-warning-surface)',
-      color: 'var(--spark-warning-text)',
-      paddingInline: 2,
-      borderRadius: 3,
+      background: 'var(--color-background-warning)',
+      color: 'var(--color-text-warning)',
+      paddingInline: 'var(--space-list-inset)',
+      borderRadius: 'var(--radius-control)',
     },
   },
 }

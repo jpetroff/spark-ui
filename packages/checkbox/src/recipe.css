@@ -4,65 +4,94 @@
 @layer spark.components {
   :where([class*='spark-checkbox-']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([class*='spark-checkbox-']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-}
 
-@layer spark.components {
   :where(.spark-checkbox-root) {
     display: inline-flex;
     align-items: center;
-    gap: var(--spark-control-gap);
-    color: var(--spark-text);
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    color: var(--color-text-primary);
+    cursor: pointer;
   }
+
   :where(.spark-checkbox-control) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    inline-size: var(--spark-checkbox-size);
-    block-size: var(--spark-checkbox-size);
-    border: var(--spark-border-width) solid var(--spark-border);
-    border-radius: var(--spark-radius-control);
-    background: var(--spark-surface);
+    display: inline-grid;
+    place-items: center;
+    flex: none;
+    inline-size: var(--size-indicator);
+    block-size: var(--size-indicator);
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-field);
+    color: var(--color-text-primary);
   }
-  :where(.spark-checkbox-control:is([data-state='checked'], [data-state='indeterminate'])) {
-    background: var(--spark-action);
-    color: var(--spark-on-action);
+
+  :where(.spark-checkbox-root):where(:hover):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where(.spark-checkbox-control) {
+    background-color: var(--color-background-neutral-hover);
   }
-  :where(.spark-checkbox-control[data-focus-visible]) {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
+
+  :where(.spark-checkbox-root):where(:active):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where(.spark-checkbox-control) {
+    background-color: var(--color-background-neutral-pressed);
   }
-  :where(.spark-checkbox-control[data-invalid]) {
-    border-color: var(--spark-error-border);
+
+  :where(.spark-checkbox-control):where([data-state='checked'], [data-state='indeterminate']) {
+    background-color: var(--color-background-selected);
+    border-color: var(--color-border-selected);
   }
-  :where(.spark-checkbox-root[data-disabled]) {
-    color: var(--spark-disabled-text);
+
+  :where(.spark-checkbox-root):where(:hover):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where(.spark-checkbox-control):where([data-state='checked'], [data-state='indeterminate']) {
+    background-color: var(--color-background-selected-hover);
+  }
+
+  :where(.spark-checkbox-root):where(:active):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where(.spark-checkbox-control):where([data-state='checked'], [data-state='indeterminate']) {
+    background-color: var(--color-background-selected-pressed);
+  }
+
+  :where(.spark-checkbox-indicator) > :where(svg) {
+    display: block;
+    inline-size: calc(var(--size-indicator) - 2 * var(--size-border));
+    block-size: calc(var(--size-indicator) - 2 * var(--size-border));
+  }
+
+  :where(.spark-checkbox-control):where([data-invalid]) {
+    border-color: var(--color-border-danger);
+  }
+
+  :where(.spark-checkbox-control):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where(.spark-checkbox-root):where(:disabled, [data-disabled], [aria-disabled='true']) {
+    color: var(--color-text-disabled);
     cursor: not-allowed;
   }
-  :where(.spark-checkbox-control[data-disabled]) {
-    background: var(--spark-disabled-surface);
-    color: var(--spark-disabled-text);
+
+  :where(.spark-checkbox-control):where(:disabled, [data-disabled], [aria-disabled='true']) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  @layer spark.components {
-    :where([class*='spark-']) {
-      transition: none;
-      animation: none;
-    }
-  }
-}
-@media (forced-colors: active) {
-  @layer spark.components {
-    :where([class*='spark-']):focus-visible {
-      outline-color: Highlight;
-    }
+
+  :where(.spark-checkbox-root):where(:disabled, [data-disabled], [aria-disabled='true'])
+    :where(.spark-checkbox-control) {
+    background-color: var(--color-background-disabled);
+    color: var(--color-text-disabled);
+    border-color: var(--color-border-disabled);
   }
 }

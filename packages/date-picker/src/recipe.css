@@ -4,94 +4,215 @@
 @layer spark.components {
   :where([class*='spark-date-picker-']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([class*='spark-date-picker-']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-}
 
-@layer spark.components {
-  :where(.spark-date-picker-content) {
-    display: grid;
-    gap: var(--spark-overlay-gap);
-    padding: var(--spark-space-lg);
-    border: var(--spark-border-width) solid var(--spark-border);
-    border-radius: var(--spark-radius-overlay);
-    background: var(--spark-surface-overlay);
-    color: var(--spark-text);
-    box-shadow: var(--spark-shadow-overlay);
+  :where(.spark-date-picker-content):not(:where([data-spark-layer])) {
+    --color-background-surface: var(--color-background-layer-3);
   }
+
+  :where(.spark-date-picker-content) {
+    border: var(--size-border) solid var(--color-border-divider);
+    border-radius: var(--radius-overlay);
+    background-color: var(--color-background-surface);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-overlay);
+    display: grid;
+    gap: var(--space-stack-gap);
+    padding: var(--space-panel-inset);
+    max-inline-size: var(--available-width, calc(100vw - 2 * var(--space-list-inset)));
+    overflow: auto;
+  }
+
   :where(.spark-date-picker-title) {
     margin: 0;
-    font-size: var(--spark-font-size-title);
-    font-weight: var(--spark-font-weight-title);
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
   }
+
   :where(.spark-date-picker-description) {
     margin: 0;
-    color: var(--spark-text-muted);
+    color: var(--color-text-secondary);
   }
+
   :where(.spark-date-picker-control, .spark-date-picker-view-control) {
     display: flex;
     align-items: center;
-    gap: var(--spark-control-gap);
+    gap: var(--space-content-gap);
   }
+
+  :where(.spark-date-picker-control) {
+    flex-wrap: wrap;
+  }
+
+  :where(.spark-date-picker-input) {
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-field);
+    color: var(--color-text-primary);
+    min-inline-size: 0;
+  }
+
+  :where(.spark-date-picker-input):where(:hover):not(
+      :where(:disabled, [data-disabled], [aria-disabled='true']),
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    ) {
+    background-color: var(--color-background-field-hover);
+  }
+
+  :where(.spark-date-picker-input):where([data-invalid], [aria-invalid='true']) {
+    border-color: var(--color-border-danger);
+  }
+
+  :where(.spark-date-picker-input)::placeholder {
+    color: var(--color-text-placeholder);
+    opacity: 1;
+  }
+
   :where(
-    .spark-date-picker-input,
     .spark-date-picker-trigger,
     .spark-date-picker-view-trigger,
     .spark-date-picker-prev-trigger,
     .spark-date-picker-next-trigger
   ) {
-    min-block-size: var(--spark-control-height);
-    padding-inline: var(--spark-space-sm);
-    border: var(--spark-border-width) solid var(--spark-border);
-    border-radius: var(--spark-radius-control);
-    background: var(--spark-surface);
-    color: var(--spark-text);
-  }
-  :where(.spark-date-picker-table) {
-    border-collapse: collapse;
-  }
-  :where(.spark-date-picker-table-cell-trigger) {
-    display: flex;
+    display: inline-flex;
     align-items: center;
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
     justify-content: center;
-    min-inline-size: var(--spark-control-height);
-    min-block-size: var(--spark-control-height);
-    border-radius: var(--spark-radius-control);
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-neutral);
+    color: var(--color-text-primary);
     cursor: pointer;
   }
-  :where(.spark-date-picker-table-cell-trigger:hover) {
-    background: var(--spark-secondary-hover);
+
+  :where(
+    .spark-date-picker-trigger,
+    .spark-date-picker-view-trigger,
+    .spark-date-picker-prev-trigger,
+    .spark-date-picker-next-trigger
+  ):where(:hover) {
+    background-color: var(--color-background-neutral-hover);
   }
-  :where(.spark-date-picker-table-cell-trigger[data-selected]) {
-    background: var(--spark-action);
-    color: var(--spark-on-action);
+
+  :where(
+    .spark-date-picker-trigger,
+    .spark-date-picker-view-trigger,
+    .spark-date-picker-prev-trigger,
+    .spark-date-picker-next-trigger
+  ):where(:active) {
+    background-color: var(--color-background-neutral-pressed);
   }
-  :where(.spark-date-picker-table-cell-trigger[data-disabled]) {
-    color: var(--spark-disabled-text);
+
+  :where(.spark-date-picker-prev-trigger, .spark-date-picker-next-trigger) {
+    min-inline-size: var(--size-row-min);
+    padding-inline: 0;
+  }
+
+  :where(.spark-date-picker-table) {
+    border-collapse: collapse;
+    inline-size: 100%;
+  }
+
+  :where(.spark-date-picker-table-cell-trigger) {
+    display: grid;
+    place-items: center;
+    min-inline-size: min(
+      var(--size-row-min),
+      max(1.5rem, calc((100vw - 2 * var(--space-panel-inset)) / 7))
+    );
+    min-block-size: var(--size-row-min);
+    border: var(--size-border) solid transparent;
+    border-radius: var(--radius-control);
+    cursor: pointer;
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where(:hover) {
+    background-color: var(--color-background-neutral-hover);
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where(:active) {
+    background-color: var(--color-background-neutral-pressed);
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where([data-outside-range]) {
+    color: var(--color-text-secondary);
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where([data-today]) {
+    border-color: var(--color-border-control);
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where([data-selected]) {
+    background-color: var(--color-background-selected);
+    border-color: var(--color-border-selected);
+    text-decoration: underline;
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where([data-selected]):where(:hover) {
+    background-color: var(--color-background-selected-hover);
+  }
+
+  :where(.spark-date-picker-table-cell-trigger):where([data-selected]):where(:active) {
+    background-color: var(--color-background-selected-pressed);
+  }
+
+  :where(.spark-date-picker-table-cell-trigger) {
+    --_focus-offset: calc(-1 * var(--size-focus-ring));
+  }
+
+  :where(
+    .spark-date-picker-input,
+    .spark-date-picker-trigger,
+    .spark-date-picker-view-trigger,
+    .spark-date-picker-prev-trigger,
+    .spark-date-picker-next-trigger,
+    .spark-date-picker-table-cell-trigger,
+    .spark-date-picker-content
+  ):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--_focus-offset, var(--space-focus-offset));
+  }
+
+  :where(.spark-date-picker-input):where(:disabled, [data-disabled], [aria-disabled='true']) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
     cursor: not-allowed;
   }
-  :where(.spark-date-picker-table-cell-trigger[data-today]) {
-    outline: var(--spark-border-width) solid var(--spark-border);
+
+  :where(.spark-date-picker-input):where(
+      :disabled,
+      [data-disabled],
+      [aria-disabled='true']
+    )::placeholder {
+    color: var(--color-text-disabled);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  @layer spark.components {
-    :where([class*='spark-']) {
-      transition: none;
-      animation: none;
-    }
+
+  :where(
+    .spark-date-picker-trigger,
+    .spark-date-picker-view-trigger,
+    .spark-date-picker-prev-trigger,
+    .spark-date-picker-next-trigger
+  ):where(:disabled, [data-disabled], [aria-disabled='true']) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
   }
-}
-@media (forced-colors: active) {
-  @layer spark.components {
-    :where([class*='spark-']):focus-visible {
-      outline-color: Highlight;
-    }
+
+  :where(.spark-date-picker-table-cell-trigger):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
   }
 }

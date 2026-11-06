@@ -4,59 +4,85 @@
 @layer spark.components {
   :where([class*='spark-field-']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([class*='spark-field-']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-}
 
-@layer spark.components {
   :where(.spark-field-root) {
     display: grid;
-    gap: var(--spark-space-sm);
-    color: var(--spark-text);
+    gap: var(--space-field-gap);
+    color: var(--color-text-primary);
   }
+
   :where(.spark-field-label) {
-    font-weight: var(--spark-font-weight);
+    font-weight: var(--font-weight-label);
   }
-  :where(:is(.spark-field-input, .spark-field-textarea, .spark-field-select)) {
-    min-block-size: var(--spark-control-height);
-    padding: var(--spark-space-sm) var(--spark-control-padding-inline);
-    border: var(--spark-border-width) solid var(--spark-border);
-    border-radius: var(--spark-radius-control);
-    background: var(--spark-surface);
-    color: var(--spark-text);
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select) {
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-field);
+    color: var(--color-text-primary);
+    min-inline-size: 0;
   }
-  :where(:is(.spark-field-input, .spark-field-textarea, .spark-field-select)[data-invalid]) {
-    border-color: var(--spark-error-border);
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select):where(:hover):not(
+      :where(:disabled, [data-disabled], [aria-disabled='true']),
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    ) {
+    background-color: var(--color-background-field-hover);
   }
-  :where(:is(.spark-field-input, .spark-field-textarea, .spark-field-select):disabled) {
-    background: var(--spark-disabled-surface);
-    color: var(--spark-disabled-text);
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select):where(
+    [data-invalid],
+    [aria-invalid='true']
+  ) {
+    border-color: var(--color-border-danger);
   }
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select)::placeholder {
+    color: var(--color-text-placeholder);
+    opacity: 1;
+  }
+
+  :where(.spark-field-textarea) {
+    padding-block: var(--space-content-gap);
+    resize: vertical;
+  }
+
   :where(.spark-field-helper-text) {
-    color: var(--spark-text-muted);
+    color: var(--color-text-secondary);
   }
+
   :where(.spark-field-error-text, .spark-field-required-indicator) {
-    color: var(--spark-error-text);
+    color: var(--color-text-danger);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  @layer spark.components {
-    :where([class*='spark-']) {
-      transition: none;
-      animation: none;
-    }
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select):is(
+    :focus-visible,
+    [data-focus-visible]
+  ) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
   }
-}
-@media (forced-colors: active) {
-  @layer spark.components {
-    :where([class*='spark-']):focus-visible {
-      outline-color: Highlight;
-    }
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
+  }
+
+  :where(.spark-field-input, .spark-field-textarea, .spark-field-select):where(
+      :disabled,
+      [data-disabled],
+      [aria-disabled='true']
+    )::placeholder {
+    color: var(--color-text-disabled);
   }
 }

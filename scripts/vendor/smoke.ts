@@ -128,11 +128,11 @@ try {
             },
       ),
     )
-    write(dir, 'src/app.css', ':root { --spark-control-height-lg: 3rem; }\n')
+    write(dir, 'src/app.css', ':root { --fixture-large-row: 3rem; }\n')
     write(
       dir,
       'src/custom.module.css',
-      '.custom { padding-inline: var(--spark-space-lg, 1.5rem); }',
+      '.custom { --size-row-min: var(--fixture-large-row); padding-inline: 1.5rem; }',
     )
     write(
       dir,
@@ -170,10 +170,15 @@ try {
       ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
     ])
     assert.ok(
-      fs.existsSync(path.join(dir, 'src/components/ui/styles/theme.css')),
-      'First component installs shared styles',
+      fs.existsSync(path.join(dir, 'src/components/ui/styles/tokens.css')),
+      'First component installs shared visual tokens',
     )
-    const override = ':root { --spark-focus: rebeccapurple; }\n'
+    assert.ok(
+      fs.existsSync(path.join(dir, 'src/components/ui/styles/colors.css')),
+      'First component installs the palette',
+    )
+    assert.ok(!fs.existsSync(path.join(dir, 'src/components/ui/styles/theme.css')))
+    const override = ':root { --color-outline-focus: rebeccapurple; }\n'
     write(dir, 'src/project-theme.css', override)
     await run(process.execPath, [
       cli,
@@ -226,10 +231,10 @@ try {
         /from\s+['"](?:@ark-ui\/|@zag-js\/|\$lib\/|@spark-ui\/|@spark\/)/,
       )
     }
-    const themeFile = path.join(dir, 'src/components/ui/styles/theme.css')
-    const originalTheme = fs.readFileSync(themeFile, 'utf8')
-    const customizedTheme = originalTheme + '\n/* project customization */\n'
-    fs.writeFileSync(themeFile, customizedTheme)
+    const tokensFile = path.join(dir, 'src/components/ui/styles/tokens.css')
+    const originalTokens = fs.readFileSync(tokensFile, 'utf8')
+    const customizedTokens = originalTokens + '\n/* project customization */\n'
+    fs.writeFileSync(tokensFile, customizedTokens)
     await run(process.execPath, [
       cli,
       'add',
@@ -240,11 +245,11 @@ try {
       ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
     ])
     assert.equal(
-      fs.readFileSync(themeFile, 'utf8'),
-      customizedTheme,
+      fs.readFileSync(tokensFile, 'utf8'),
+      customizedTokens,
       'Normal installs preserve customized shared files',
     )
-    fs.writeFileSync(themeFile, originalTheme)
+    fs.writeFileSync(tokensFile, originalTokens)
     assert.equal(fs.readFileSync(path.join(dir, 'src/project-theme.css'), 'utf8'), override)
     const manifest = JSON.parse(fs.readFileSync(path.join(dir, 'package.json'), 'utf8'))
     assert.ok(
@@ -317,8 +322,11 @@ export default function App(){const [count,setCount]=useState(0);return <Environ
       .map((file) => fs.readFileSync(path.join(assets, file), 'utf8'))
       .join('')
     assert.match(css, /spark-dialog-positioner/)
-    assert.doesNotMatch(css, /spark-button-secondary|--spark-action:|spark-fieldset-root/)
-    assert.match(css, /--spark-control-height-lg:3rem/)
+    assert.doesNotMatch(
+      css,
+      /spark-button-secondary|--color-background-action:|spark-fieldset-root/,
+    )
+    assert.match(css, /--fixture-large-row:3rem/)
     assert.doesNotMatch(css, /@theme|@apply/)
     console.log(`Registry installation, import isolation, and type checks passed: ${framework}`)
   }

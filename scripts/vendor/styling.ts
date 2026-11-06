@@ -29,15 +29,17 @@ for (const framework of ['react', 'svelte']) {
       if (mode === 'functional') {
         assert.doesNotMatch(
           css,
-          /spark-button-secondary|--spark-action:|--spark-font-family:|spark-fieldset-root/,
+          /spark-button-secondary|--color-background-action:|--font-family-ui:|spark-fieldset-root/,
         )
       } else {
         assert.match(css, /spark-button-secondary/)
-        assert.match(css, /--spark-action:/)
+        assert.match(css, /--color-background-action:/)
+        assert.match(css, /--color-stone-neutral-900:/)
+        assert.match(css, /color-scheme:dark/)
       }
       if (mode === 'tailwind') {
         assert.match(css, /\.bg-spark-info-surface/)
-        assert.match(css, /var\(--spark-info-surface\)/)
+        assert.match(css, /var\(--color-background-info\)/)
       }
       console.log(`${framework} (${mode}): installed production CSS passed`)
     } finally {

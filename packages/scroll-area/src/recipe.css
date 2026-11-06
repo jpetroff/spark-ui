@@ -4,39 +4,50 @@
 @layer spark.components {
   :where([data-scope='scroll-area']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
-    color: inherit;
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([data-scope='scroll-area']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-  :where([data-scope='scroll-area'][data-disabled]) {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+
   :where([data-scope='scroll-area'][data-part='root']) {
-    border: 1px solid var(--spark-border);
-    border-radius: var(--spark-radius-control);
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
   }
+
   :where([data-scope='scroll-area'][data-part='content']) {
-    padding: var(--spark-space-md);
+    padding: var(--space-stack-gap);
   }
+
   :where([data-scope='scroll-area'][data-part='scrollbar']) {
-    padding: 2px;
-    border-radius: 999px;
-    background: var(--spark-secondary);
+    --_scrollbar-size: calc(2 * var(--space-unit));
+    padding: calc(var(--space-unit) / 2);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-background-neutral);
   }
-  :where([data-scope='scroll-area'][data-part='scrollbar'][data-orientation='vertical']) {
-    inline-size: 10px;
+
+  :where([data-scope='scroll-area'][data-part='scrollbar']):where([data-orientation='vertical']) {
+    inline-size: var(--_scrollbar-size);
   }
-  :where([data-scope='scroll-area'][data-part='scrollbar'][data-orientation='horizontal']) {
-    block-size: 10px;
+
+  :where([data-scope='scroll-area'][data-part='scrollbar']):where([data-orientation='horizontal']) {
+    block-size: var(--_scrollbar-size);
   }
+
   :where([data-scope='scroll-area'][data-part='thumb']) {
-    border-radius: 999px;
-    background: var(--spark-border);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-icon-muted);
+  }
+
+  :where([data-scope='scroll-area'][data-part='scrollbar']):where(:hover)
+    :where([data-scope='scroll-area'][data-part='thumb']) {
+    background-color: var(--color-icon-default);
+  }
+
+  :where(
+    [data-scope='scroll-area'][data-part='root'],
+    [data-scope='scroll-area'][data-part='viewport'],
+    [data-scope='scroll-area'][data-part='scrollbar'],
+    [data-scope='scroll-area'][data-part='thumb']
+  ):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
   }
 }

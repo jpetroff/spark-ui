@@ -4,59 +4,91 @@
 @layer spark.components {
   :where([class*='spark-dialog-']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([class*='spark-dialog-']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-}
 
-@layer spark.components {
-  :where(.spark-dialog-content) {
-    display: grid;
-    gap: var(--spark-overlay-gap);
-    padding: var(--spark-space-lg);
-    border: var(--spark-border-width) solid var(--spark-border);
-    border-radius: var(--spark-radius-overlay);
-    background: var(--spark-surface-overlay);
-    color: var(--spark-text);
-    box-shadow: var(--spark-shadow-overlay);
+  :where(.spark-dialog-content):not(:where([data-spark-layer])) {
+    --color-background-surface: var(--color-background-layer-3);
   }
+
+  :where(.spark-dialog-content) {
+    border: var(--size-border) solid var(--color-border-divider);
+    border-radius: var(--radius-overlay);
+    background-color: var(--color-background-surface);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-overlay);
+    display: grid;
+    gap: var(--space-stack-gap);
+    padding: var(--space-panel-inset);
+    inline-size: 100%;
+    max-inline-size: 28rem;
+  }
+
   :where(.spark-dialog-title) {
     margin: 0;
-    font-size: var(--spark-font-size-title);
-    font-weight: var(--spark-font-weight-title);
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
   }
+
   :where(.spark-dialog-description) {
     margin: 0;
-    color: var(--spark-text-muted);
+    color: var(--color-text-secondary);
   }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):not(:where(.spark-button)) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
+    justify-content: center;
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-neutral);
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):not(:where(.spark-button)):where(
+      :hover
+    ) {
+    background-color: var(--color-background-neutral-hover);
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):not(:where(.spark-button)):where(
+      :active
+    ) {
+    background-color: var(--color-background-neutral-pressed);
+  }
+
+  :where(.spark-dialog-close-trigger) {
+    justify-self: start;
+  }
+
   :where(.spark-dialog-positioner) {
-    padding: var(--spark-overlay-padding);
+    padding: var(--space-panel-inset);
   }
-  :where(.spark-dialog-content) {
-    inline-size: 100%;
-    max-inline-size: var(--spark-dialog-width);
-  }
+
   :where(.spark-dialog-backdrop) {
-    background: var(--spark-backdrop);
+    background-color: var(--color-background-scrim);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  @layer spark.components {
-    :where([class*='spark-']) {
-      transition: none;
-      animation: none;
-    }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger, .spark-dialog-content):is(
+    :focus-visible,
+    [data-focus-visible]
+  ) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
   }
-}
-@media (forced-colors: active) {
-  @layer spark.components {
-    :where([class*='spark-']):focus-visible {
-      outline-color: Highlight;
-    }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
   }
 }

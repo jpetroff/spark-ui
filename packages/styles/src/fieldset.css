@@ -1,47 +1,35 @@
 @layer spark.components {
   :where([class*='spark-fieldset-']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([class*='spark-fieldset-']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-}
 
-@layer spark.components {
   :where(.spark-fieldset-root) {
     display: grid;
-    gap: var(--spark-space-md);
-    padding: var(--spark-space-md);
-    border: var(--spark-border-width) solid var(--spark-border);
-    border-radius: var(--spark-radius-control);
-    color: var(--spark-text);
+    min-inline-size: 0;
+    margin: 0;
+    gap: var(--space-stack-gap);
+    padding: var(--space-panel-inset);
+    border: var(--size-border) solid var(--color-border-divider);
+    border-radius: var(--radius-control);
+    color: var(--color-text-primary);
   }
+
   :where(.spark-fieldset-legend) {
-    font-weight: var(--spark-font-weight-title);
+    font-weight: var(--font-weight-title);
+    padding-inline: var(--space-list-inset);
   }
+
   :where(.spark-fieldset-helper-text) {
-    color: var(--spark-text-muted);
+    color: var(--color-text-secondary);
   }
+
   :where(.spark-fieldset-error-text) {
-    color: var(--spark-error-text);
+    color: var(--color-text-danger);
   }
-}
-@media (prefers-reduced-motion: reduce) {
-  @layer spark.components {
-    :where([class*='spark-']) {
-      transition: none;
-      animation: none;
-    }
-  }
-}
-@media (forced-colors: active) {
-  @layer spark.components {
-    :where([class*='spark-']):focus-visible {
-      outline-color: Highlight;
-    }
+
+  :where([class*='spark-fieldset-']):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
   }
 }

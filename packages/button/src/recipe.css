@@ -4,90 +4,108 @@
 @layer spark.components {
   :where(.spark-button) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where(.spark-button):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-}
 
-@layer spark.components {
   :where(.spark-button) {
     display: inline-flex;
-    flex-shrink: 0;
     align-items: center;
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
     justify-content: center;
-    gap: var(--spark-control-gap);
-    block-size: var(--spark-control-height);
-    padding-inline: var(--spark-control-padding-inline);
-    border: var(--spark-border-width) solid transparent;
-    border-radius: var(--spark-radius-control);
-    background: var(--spark-action);
-    color: var(--spark-on-action);
-    font-weight: var(--spark-font-weight);
-    white-space: nowrap;
+    flex-shrink: 0;
+    border: var(--size-border) solid transparent;
+    border-radius: var(--radius-control);
+    color: var(--color-text-primary);
+    font-weight: var(--font-weight-label);
     cursor: pointer;
-    transition: background-color var(--spark-motion-duration) var(--spark-motion-easing);
+    transition: background-color var(--duration-interaction) var(--ease-interaction);
   }
-  :where(.spark-button:hover) {
-    background: var(--spark-action-hover);
+
+  :where(.spark-button) > :where(svg) {
+    color: var(--color-icon-default);
+    inline-size: var(--size-icon);
+    block-size: var(--size-icon);
+    flex: none;
   }
-  :where(.spark-button:active) {
-    background: var(--spark-action-active);
+
+  :where(.spark-button):not(
+    :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost)
+  ) {
+    background-color: var(--color-background-action);
+    color: var(--color-text-on-strong);
   }
-  :where(.spark-button-secondary) {
-    background: var(--spark-secondary);
-    color: var(--spark-on-secondary);
+
+  :where(.spark-button):not(
+      :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost)
+    )
+    > :where(svg) {
+    color: var(--color-icon-on-strong);
   }
-  :where(.spark-button-secondary:hover, .spark-button-outline:hover, .spark-button-ghost:hover) {
-    background: var(--spark-secondary-hover);
+
+  /* A scroll viewport can clip the outer ring at its edges. */
+  :where(.spark-button):where([data-scope='scroll-area'][data-part='viewport'] *) {
+    --_focus-offset: calc(-1 * var(--size-focus-ring));
   }
-  :where(.spark-button-secondary:active, .spark-button-outline:active, .spark-button-ghost:active) {
-    background: var(--spark-secondary-active);
+
+  :where(.spark-button):not(
+      :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost)
+    ):where([data-scope='scroll-area'][data-part='viewport'] *) {
+    --_focus-color: var(--color-outline-focus-on-strong);
   }
+
+  :where(.spark-button):not(
+      :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost)
+    ):where(:hover) {
+    background-color: var(--color-background-action-hover);
+  }
+
+  :where(.spark-button):not(
+      :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost)
+    ):where(:active) {
+    background-color: var(--color-background-action-pressed);
+  }
+
+  :where(.spark-button-secondary, .spark-button-outline) {
+    background-color: var(--color-background-neutral);
+  }
+
   :where(.spark-button-outline) {
-    border-color: var(--spark-border);
-    background: var(--spark-surface);
-    color: var(--spark-text);
+    border-color: var(--color-border-control);
   }
+
   :where(.spark-button-ghost) {
-    background: transparent;
-    color: var(--spark-text);
+    background-color: transparent;
   }
-  :where(.spark-button-sm) {
-    block-size: var(--spark-control-height-sm);
-    padding-inline: var(--spark-control-padding-inline-sm);
-    font-size: var(--spark-font-size-sm);
+
+  :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost):where(:hover) {
+    background-color: var(--color-background-neutral-hover);
   }
-  :where(.spark-button-lg) {
-    block-size: var(--spark-control-height-lg);
-    padding-inline: var(--spark-control-padding-inline-lg);
+
+  :where(.spark-button-secondary, .spark-button-outline, .spark-button-ghost):where(:active) {
+    background-color: var(--color-background-neutral-pressed);
   }
+
   :where(.spark-button-icon) {
-    inline-size: var(--spark-control-height);
-    padding: 0;
+    min-inline-size: var(--size-row-min);
+    padding-inline: 0;
+    inline-size: var(--size-row-min);
   }
-  :where(.spark-button:disabled) {
-    background: var(--spark-disabled-surface);
-    color: var(--spark-disabled-text);
+
+  :where(.spark-button):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--_focus-color, var(--color-outline-focus));
+    outline-offset: var(--_focus-offset, var(--space-focus-offset));
+  }
+
+  :where(.spark-button):where(:disabled, [data-disabled], [aria-disabled='true']) > :where(svg) {
+    color: var(--color-icon-disabled);
+  }
+
+  :where(.spark-button):where(:disabled, [data-disabled], [aria-disabled='true']) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
     cursor: not-allowed;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  @layer spark.components {
-    :where([class*='spark-']) {
-      transition: none;
-      animation: none;
-    }
-  }
-}
-@media (forced-colors: active) {
-  @layer spark.components {
-    :where([class*='spark-']):focus-visible {
-      outline-color: Highlight;
-    }
   }
 }

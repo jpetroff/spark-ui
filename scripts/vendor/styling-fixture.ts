@@ -27,7 +27,7 @@ export function configureStyling(dir: string, framework: string, mode: StylingMo
     const file = path.join(dir, 'src/app.css')
     replace(
       file,
-      `@layer theme, base, spark.tokens, spark.theme, spark.base, spark.components, components, utilities;\n@import '${path.join(root, 'node_modules/tailwindcss/index.css')}';\n@import './components/ui/styles/tailwind.css';\n@source inline('bg-spark-info-surface');\n${fs.readFileSync(file, 'utf8')}`,
+      `@layer theme, base, spark.tokens, spark.base, spark.components, components, utilities;\n@import '${path.join(root, 'node_modules/tailwindcss/index.css')}';\n@import './components/ui/styles/tailwind.css';\n@source inline('bg-spark-info-surface');\n${fs.readFileSync(file, 'utf8')}`,
     )
   }
   return () => {

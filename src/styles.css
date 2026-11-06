@@ -1,5 +1,5 @@
 /* Workshop presentation only. Distributed components enable none of these recipes by default. */
-@import '../packages/styles/src/index.css';
+@import '../packages/styles/src/sample.css';
 @import '../packages/button/src/recipe.css';
 @import '../packages/checkbox/src/recipe.css';
 @import '../packages/field/src/recipe.css';
@@ -24,9 +24,9 @@
 
 body {
   margin: 0;
-  font-family: var(--spark-font-family);
-  background: var(--spark-surface);
-  color: var(--spark-text);
+  font-family: var(--font-family-ui);
+  background: var(--color-background-surface);
+  color: var(--color-text-primary);
 }
 .workshop {
   box-sizing: border-box;
@@ -36,13 +36,13 @@ body {
   max-width: 48rem;
   flex-direction: column;
   justify-content: center;
-  gap: 2rem;
-  padding: 2rem;
+  gap: var(--space-section-gap);
+  padding: var(--space-section-gap);
 }
 .workshop header,
 .workshop-install {
   display: grid;
-  gap: 0.75rem;
+  gap: var(--space-stack-gap);
 }
 .workshop h1,
 .workshop h2,
@@ -54,22 +54,22 @@ body {
   letter-spacing: -0.025em;
 }
 .workshop h2 {
-  font-size: 1.125rem;
+  font-size: var(--font-size-title);
 }
 .workshop-muted {
-  color: var(--spark-text-muted);
+  color: var(--color-text-secondary);
 }
 .workshop-buttons {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.75rem;
+  gap: var(--space-stack-gap);
 }
 .workshop pre {
   overflow-x: auto;
-  border: 1px solid var(--spark-border);
-  border-radius: var(--spark-radius-control);
-  background: var(--spark-secondary);
-  padding: 1rem;
-  font-size: 0.875rem;
+  border: var(--size-border) solid var(--color-border-divider);
+  border-radius: var(--radius-control);
+  background: var(--color-background-neutral);
+  padding: var(--space-panel-inset);
+  font-size: var(--font-size-control);
 }

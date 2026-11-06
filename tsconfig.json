@@ -61,6 +61,7 @@
     "src/**/*.css",
     "packages/button/src/react.tsx",
     "packages/*/src/*.stories.tsx",
+    "packages/styles/*.stories.tsx",
     "packages/utils",
     ".storybook",
     "vite.config.ts"

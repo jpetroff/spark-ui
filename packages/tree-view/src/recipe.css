@@ -4,48 +4,107 @@
 @layer spark.components {
   :where([data-scope='tree-view']) {
     box-sizing: border-box;
-    font-family: var(--spark-font-family);
-    font-size: var(--spark-font-size);
-    line-height: var(--spark-line-height);
-    color: inherit;
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
   }
-  :where([data-scope='tree-view']):focus-visible {
-    outline: var(--spark-focus-width) solid var(--spark-focus);
-    outline-offset: var(--spark-focus-offset);
-  }
-  :where([data-scope='tree-view'][data-disabled]) {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
+
   :where([data-scope='tree-view'][data-part='root']) {
-    min-inline-size: 16rem;
+    min-inline-size: 0;
   }
+
   :where([data-scope='tree-view'][data-part='label']) {
     display: block;
-    font-weight: var(--spark-font-weight-title);
-    margin-block-end: var(--spark-space-sm);
+    font-weight: var(--font-weight-title);
+    margin-block-end: var(--space-list-inset);
   }
+
   :where(
     [data-scope='tree-view'][data-part='branch-control'],
     [data-scope='tree-view'][data-part='item']
   ) {
     display: flex;
     align-items: center;
-    gap: var(--spark-space-xs);
-    padding: var(--spark-space-xs) var(--spark-space-sm);
-    border-radius: var(--spark-radius-control);
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
+    border: var(--size-border) solid transparent;
+    border-radius: var(--radius-control);
     cursor: pointer;
   }
-  :where([data-scope='tree-view'][data-part='branch-content']) {
-    padding-inline-start: var(--spark-space-md);
+
+  :where([data-scope='tree-view'][data-part='item']) {
+    padding-inline-start: calc(
+      var(--space-row-inline) + var(--size-icon) + var(--space-content-gap)
+    );
   }
+
   :where(
-    [data-scope='tree-view'][data-part='branch-control'][data-selected],
-    [data-scope='tree-view'][data-part='item'][data-selected]
-  ) {
-    background: var(--spark-secondary);
+    [data-scope='tree-view'][data-part='branch-control'],
+    [data-scope='tree-view'][data-part='item']
+  ):where(:hover) {
+    background-color: var(--color-background-neutral-hover);
   }
-  :where([data-scope='tree-view'][data-part='branch-indicator'][data-state='open']) {
+
+  :where(
+    [data-scope='tree-view'][data-part='branch-control'],
+    [data-scope='tree-view'][data-part='item']
+  ):where(:active) {
+    background-color: var(--color-background-neutral-pressed);
+  }
+
+  :where(
+    [data-scope='tree-view'][data-part='branch-control'],
+    [data-scope='tree-view'][data-part='item']
+  ):where([data-selected]) {
+    background-color: var(--color-background-selected);
+    border-color: var(--color-border-selected);
+    font-weight: var(--font-weight-title);
+  }
+
+  :where(
+      [data-scope='tree-view'][data-part='branch-control'],
+      [data-scope='tree-view'][data-part='item']
+    ):where([data-selected]):where(:hover) {
+    background-color: var(--color-background-selected-hover);
+  }
+
+  :where(
+      [data-scope='tree-view'][data-part='branch-control'],
+      [data-scope='tree-view'][data-part='item']
+    ):where([data-selected]):where(:active) {
+    background-color: var(--color-background-selected-pressed);
+  }
+
+  :where([data-scope='tree-view'][data-part='branch-content']) {
+    padding-inline-start: var(--space-tree-indent);
+  }
+
+  :where([data-scope='tree-view'][data-part='branch-indicator']) {
+    inline-size: var(--size-icon);
+    block-size: var(--size-icon);
+    flex: none;
+    text-align: center;
+    color: var(--color-icon-muted);
+  }
+
+  :where([data-scope='tree-view'][data-part='branch-indicator']):where([data-state='open']) {
     transform: rotate(90deg);
+  }
+
+  :where(
+    [data-scope='tree-view'][data-part='branch-control'],
+    [data-scope='tree-view'][data-part='item']
+  ):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where(
+    [data-scope='tree-view'][data-part='branch-control'],
+    [data-scope='tree-view'][data-part='item']
+  ):where(:disabled, [data-disabled], [aria-disabled='true']) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
   }
 }

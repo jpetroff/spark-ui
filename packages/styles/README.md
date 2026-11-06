@@ -17,20 +17,21 @@ import './styles.css'
 
 `styles.css` loads the shared functional foundation and the component's `functional.css`. Keep these enabled when writing a design system. Components automatically import the foundation; importing another component never enables its recipe.
 
-To try the sample, uncomment `import './recipe.css'` in that component's index. The recipe imports shared `styles/sample.css`, which supplies the visual tokens, light/dark palette, and Fieldset sample. It then styles the component's stable `.spark-*` classes or Ark's `data-scope`/`data-part` attributes for the newly imported components. The sample is ordinary CSS, not a CSS Module. Edit, replace, or delete its appearance rules freely. Toggle the document's `.dark` class to use its dark palette.
+To try the sample, uncomment `import './recipe.css'` in that component's index. The recipe imports shared `styles/sample.css`, which supplies the dark palette, visual tokens, and Fieldset sample. It then styles the component's stable `.spark-*` classes or Ark's `data-scope`/`data-part` attributes for the newly imported components. The sample is ordinary CSS, not a CSS Module. Edit, replace, or delete its appearance rules freely.
 
 A project can also opt in centrally by importing selected component recipes from application CSS. The workshop and Storybook do this explicitly; that choice is not distributed in component indexes.
 
-| File                                      | Purpose                                                                   |
-| ----------------------------------------- | ------------------------------------------------------------------------- |
-| Shared `styles/index.css`                 | Functional entry: layers, functional variables, visibility helpers        |
-| Shared `styles/functional-tokens.css`     | `--spark-overlay-base` and `--spark-visually-hidden-size`                 |
-| Component `styles.css` / `functional.css` | Required component behavior                                               |
-| Component `recipe.css`                    | Optional editable appearance, including its shared sample dependency      |
-| Shared `styles/sample.css`                | Optional sample entry                                                     |
-| Shared `styles/tokens.css` / `theme.css`  | Sample dimensions, typography, effects, semantic colors, and dark palette |
-| Shared `styles/fieldset.css`              | Sample styles for composed Fieldset markup; no public Fieldset API        |
-| Shared `styles/tailwind.css`              | Optional adapter for applications that already use Tailwind v4            |
+| File                                      | Purpose                                                              |
+| ----------------------------------------- | -------------------------------------------------------------------- |
+| Shared `styles/index.css`                 | Functional entry: layers, functional variables, visibility helpers   |
+| Shared `styles/functional-tokens.css`     | `--spark-overlay-base` and `--spark-visually-hidden-size`            |
+| Component `styles.css` / `functional.css` | Required component behavior                                          |
+| Component `recipe.css`                    | Optional editable appearance, including its shared sample dependency |
+| Shared `styles/sample.css`                | Optional sample entry                                                |
+| Shared `styles/tokens.css`                | Semantic colors, density, typography, and effects                    |
+| Shared `styles/colors.css`                | Raw palette used by the dark sample                                  |
+| Shared `styles/fieldset.css`              | Sample styles for composed Fieldset markup; no public Fieldset API   |
+| Shared `styles/tailwind.css`              | Optional adapter for applications that already use Tailwind v4       |
 
 ## Customize the API in the index
 
@@ -139,27 +140,30 @@ You can style the stable `spark-<component>-<part>` classes and Ark state attrib
 <Popover title="Notifications" parts={{ content: { className: styles.panel } }} />
 ```
 
-To customize the sample instead, keep project token overrides in an application-owned file imported after your sample recipes. Public variables use `--spark-*`; `tokens.css` and `theme.css` are the authoritative sample inventory. For example:
+## Dark tokens, surfaces, and density
+
+Override semantic variables in application-owned CSS loaded after the sample. Use `tokens.css` to find the role for each override.
 
 ```css
 :root {
-  --spark-action: var(--project-primary);
-  --spark-on-action: var(--project-on-primary);
-  --spark-radius-control: 0.5rem;
-}
-:root.dark {
-  --spark-action: var(--project-primary-dark);
+  --color-background-action: var(--project-primary);
+  --color-text-on-strong: var(--project-on-primary);
+  --radius-control: 0.5rem;
 }
 ```
 
-Shared sample variables apply across the document, including portals. Nested independent themes and portal theme propagation are not implemented. Button always supplies variant/size class hooks, but their appearance depends on the chosen CSS. Class merging uses `clsx`, without Tailwind-specific conflict resolution.
+When upgrading, remove imports of `theme.css` and any code that toggles `.dark` on the document. Rename visual overrides by role. For example, `--spark-action` becomes `--color-background-action`, `--spark-focus` becomes `--color-outline-focus`, and `--spark-control-height` becomes `--size-row-min`. Existing Tailwind utilities such as `bg-spark-action` use the new variables through the adapter.
+
+Use `data-spark-layer="0"` for a canvas, `"1"` for a panel, and `"2"` for a nested panel. Floating recipes default to layer `3`. Each layer paints a distinct surface, and translucent state fills respond to the surface behind them.
+
+Set `data-spark-density="sm|md|lg"` on a document or subtree. Default density is `md`. Buttons with explicit `sm` and `lg` sizes use those profiles. Apply the subtree density to a portal mount outside that subtree so its controls match. For an interactive comparison, open **Design System / Token Workbench** in Storybook.
 
 ## Why `@layer` is plain CSS
 
 `@layer` is a native CSS cascade feature, standardized in [CSS Cascading and Inheritance Level 5](https://www.w3.org/TR/css-cascade-5/#layering) and described by [MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer). Browsers interpret it directly; it does not require Tailwind or a plugin. The default declaration names only Spark's own layers:
 
 ```css
-@layer spark.tokens, spark.theme, spark.base, spark.components;
+@layer spark.tokens, spark.base, spark.components;
 ```
 
 For normal declarations, later layers take priority over earlier ones. Normal unlayered application CSS takes priority over layered library styles. Sample selectors also use low specificity, making application overrides straightforward. The native `hidden` attribute and `.spark-hidden` use `display: none !important` deliberately: a recipe's grid/flex display must never reveal a closed overlay. Important declarations have different cascade precedence; treat these visibility rules as behavior invariants.
@@ -172,7 +176,7 @@ Nothing in the default component setup imports Tailwind, uses utility classes, o
 
 ```css
 /* Your application's CSS entry. Configure Tailwind in your application build. */
-@layer theme, base, spark.tokens, spark.theme, spark.base, spark.components, components, utilities;
+@layer theme, base, spark.tokens, spark.base, spark.components, components, utilities;
 @import 'tailwindcss';
 /* Optional mapping from Spark sample variables to Tailwind utilities: */
 @import './components/ui/styles/tailwind.css';

@@ -24,7 +24,11 @@ export const CustomContainer: Story = {
         <p>The portal mounts its content in the outlined target below.</p>
         <div
           ref={container}
-          style={{ minHeight: 80, padding: 16, border: '1px dashed var(--spark-border)' }}
+          style={{
+            minHeight: 80,
+            padding: 'var(--space-panel-inset)',
+            border: 'var(--size-border) dashed var(--color-border-control)',
+          }}
         />
         <Portal {...args} container={container}>
           <p>Inside the custom container.</p>

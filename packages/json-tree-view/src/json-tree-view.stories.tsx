@@ -11,7 +11,7 @@ const meta = {
       version: 1,
       enabled: true,
       frameworks: ['React', 'Svelte'],
-      theme: { mode: 'light', accent: null },
+      theme: { mode: 'dark', accent: null },
     },
   },
 } satisfies Meta<typeof JsonTreeView>
