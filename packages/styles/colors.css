@@ -1,0 +1,358 @@
+.color-reference {
+  box-sizing: border-box;
+  max-inline-size: 96rem;
+  min-block-size: 100vh;
+  margin-inline: auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  font: var(--font-size-control)/1.5 var(--font-family-ui);
+}
+
+.color-reference :where(h1, h2, p, ul) {
+  margin: 0;
+}
+
+.color-reference-header {
+  margin-block-end: 2rem;
+}
+
+.color-reference-eyebrow,
+.color-reference-hint,
+.color-reference-legend,
+.color-reference-section-heading > p {
+  font-size: var(--font-size-caption);
+}
+
+.color-reference h1 {
+  margin-block: 0.5rem;
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.color-reference h2 {
+  font-size: var(--font-size-title);
+}
+
+.color-reference :where(p, footer) {
+  color: var(--color-text-secondary);
+}
+
+.color-reference-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-block-end: 0.5rem;
+}
+
+.color-reference-legend {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.color-reference-legend span {
+  inline-size: 0.75rem;
+  block-size: 0.75rem;
+  border: 1px solid var(--color-text-primary);
+  outline: 1px solid var(--color-background-layer-0);
+}
+
+.color-reference-hint {
+  margin-block-end: 1rem;
+}
+
+.color-reference-table-scroll {
+  overflow-x: auto;
+}
+
+.color-reference-palette {
+  inline-size: 100%;
+  min-inline-size: 69rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.color-reference-palette th {
+  color: var(--color-text-secondary);
+  font-size: 0.625rem;
+  font-weight: var(--font-weight-label);
+}
+
+.color-reference-palette th:first-child {
+  inline-size: 6.5rem;
+  padding-inline-end: 0.75rem;
+  text-align: start;
+  text-transform: capitalize;
+}
+
+.color-reference-palette thead th {
+  padding-block-end: 0.5rem;
+}
+
+.color-reference-palette td {
+  padding: 0;
+}
+
+.color-reference-swatch {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 0;
+  block-size: 2rem;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.color-reference-swatch[data-used]::after {
+  position: absolute;
+  inset: 4px;
+  border: 1px solid #fff;
+  outline: 1px solid #000;
+  content: '';
+}
+
+.color-reference-swatch:is(:hover, :focus-visible) {
+  z-index: 1;
+  outline: 2px solid var(--color-outline-focus);
+  outline-offset: 2px;
+}
+
+.color-reference-hover-positioner {
+  z-index: 10;
+}
+
+.color-reference-hover {
+  box-sizing: border-box;
+  inline-size: max-content;
+  max-inline-size: min(30rem, calc(100vw - 2rem));
+  max-block-size: min(32rem, var(--available-height, 70vh));
+  overflow: auto;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-overlay);
+  background: var(--color-background-layer-3);
+  color: var(--color-text-primary);
+  box-shadow: var(--shadow-overlay);
+  font: var(--font-size-caption)/1.6 var(--font-family-ui);
+  overflow-wrap: anywhere;
+}
+
+.color-reference-swatch-details {
+  padding: 0.75rem;
+  user-select: text;
+}
+
+.color-reference-popover-title {
+  margin: 0;
+  font: inherit;
+  font-weight: var(--font-weight-title);
+}
+
+.color-reference-swatch-details > code {
+  display: block;
+  color: var(--color-text-secondary);
+}
+
+.color-reference-swatch-details > ul {
+  margin-block-start: 0.5rem;
+}
+
+.color-reference-hover ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.color-reference-semantics {
+  margin-block: 3rem 2rem;
+}
+
+.color-reference-toolbar {
+  margin-block: 1.5rem 0;
+}
+
+.color-reference-toolbar > label {
+  display: block;
+  margin-block-end: 0.5rem;
+  font-weight: var(--font-weight-label);
+}
+
+.color-reference-toolbar input {
+  box-sizing: border-box;
+  inline-size: 100%;
+  min-block-size: 2.5rem;
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-control);
+  padding: 0.5rem 0.75rem;
+  background: var(--color-background-layer-1);
+  color: var(--color-text-primary);
+  font: inherit;
+}
+
+.color-reference-toolbar input::placeholder {
+  color: var(--color-text-placeholder);
+}
+
+.color-reference-filters {
+  display: grid;
+  gap: 0.625rem;
+  margin-block-start: 1rem;
+}
+
+.color-reference-filters fieldset {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.color-reference-filters legend {
+  float: inline-start;
+  inline-size: 4rem;
+  padding: 0.3rem 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+}
+
+.color-reference-filters fieldset > div {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.color-reference-filters button {
+  border: 1px solid var(--color-border-divider);
+  border-radius: var(--radius-control);
+  padding: 0.25rem 0.625rem;
+  background: transparent;
+  color: var(--color-text-secondary);
+  font: inherit;
+  font-size: var(--font-size-caption);
+  text-transform: capitalize;
+  cursor: pointer;
+}
+
+.color-reference-filters button:hover {
+  background: var(--color-background-neutral-hover);
+  color: var(--color-text-primary);
+}
+
+.color-reference-filters button[aria-pressed='true'] {
+  border-color: var(--color-border-selected);
+  background: var(--color-background-action);
+  color: var(--color-text-on-strong);
+}
+
+.color-reference-filter-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-block-size: 3.25rem;
+  font-size: var(--font-size-caption);
+}
+
+.color-reference-clear {
+  border: 0;
+  padding: 0.25rem;
+  background: transparent;
+  color: var(--color-text-link);
+  font: inherit;
+  cursor: pointer;
+}
+
+.color-reference :where(input, button, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-outline-focus);
+  outline-offset: 2px;
+}
+
+.color-reference-semantic-table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  text-align: start;
+}
+
+.color-reference-semantic-table :where(th, td) {
+  inline-size: 50%;
+  border-block-end: 1px solid var(--color-border-divider);
+  padding: 0.75rem;
+  vertical-align: top;
+  text-align: start;
+}
+
+.color-reference-semantic-table th {
+  background: var(--color-background-layer-1);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+  font-weight: var(--font-weight-label);
+}
+
+.color-reference-semantic-table code {
+  overflow-wrap: anywhere;
+}
+
+.color-reference-token,
+.color-reference-sources li {
+  display: flex;
+  align-items: start;
+  gap: 0.75rem;
+}
+
+.color-reference-token-paint {
+  box-sizing: border-box;
+  flex: 0 0 1.5rem;
+  block-size: 1.5rem;
+  border: 1px solid var(--color-border-divider);
+  border-radius: 0.2rem;
+}
+
+.color-reference-sources {
+  display: grid;
+  gap: 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.color-reference-expression {
+  display: block;
+  margin-block-start: 0.25rem;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+}
+
+.color-reference-empty {
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+.color-reference footer {
+  border-block-start: 1px solid var(--color-border-divider);
+  padding-block-start: 1.5rem;
+  overflow-wrap: anywhere;
+  font-size: var(--font-size-caption);
+}
+
+@media (max-width: 40rem) {
+  .color-reference-semantic-table :where(th, td) {
+    padding: 0.5rem;
+  }
+
+  .color-reference-token,
+  .color-reference-sources li {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .color-reference-token-paint {
+    inline-size: 1.5rem;
+  }
+}

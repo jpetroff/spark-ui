@@ -156,7 +156,7 @@ When upgrading, remove imports of `theme.css` and any code that toggles `.dark` 
 
 Use `data-spark-layer="0"` for a canvas, `"1"` for a panel, and `"2"` for a nested panel. Floating recipes default to layer `3`. Each layer paints a distinct surface, and translucent state fills respond to the surface behind them.
 
-Set `data-spark-density="sm|md|lg"` on a document or subtree. Default density is `md`. Buttons with explicit `sm` and `lg` sizes use those profiles. Apply the subtree density to a portal mount outside that subtree so its controls match. For an interactive comparison, open **Design System / Token Workbench** in Storybook.
+Set `data-spark-density="sm|md|lg"` on a document or subtree. Default density is `md`. Buttons with explicit `sm` and `lg` sizes use those profiles. Apply the subtree density to a portal mount outside that subtree so its controls match.
 
 ## Why `@layer` is plain CSS
 
