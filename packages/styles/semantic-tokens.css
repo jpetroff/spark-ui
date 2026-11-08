@@ -1,0 +1,279 @@
+.semantic-tokens {
+  box-sizing: border-box;
+  max-inline-size: 90rem;
+  margin-inline: auto;
+  padding: clamp(1rem, 4vw, 3rem);
+  font: var(--font-size-control)/1.5 var(--font-family-ui);
+}
+
+.semantic-tokens :where(h1, h2, h3, p) {
+  margin: 0;
+}
+
+.semantic-tokens h1 {
+  margin-block-end: 0.75rem;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.semantic-tokens h2 {
+  font-size: var(--font-size-title);
+}
+
+.semantic-tokens h3 {
+  margin-block-end: 0.5rem;
+  font-size: var(--font-size-control);
+}
+
+.semantic-tokens :where(header, footer),
+.semantic-tokens .semantic-tokens-secondary,
+.semantic-tokens .semantic-tokens-caption {
+  color: var(--color-text-secondary);
+}
+
+.semantic-tokens header p + p {
+  margin-block-start: 0.5rem;
+}
+
+.semantic-tokens-group {
+  margin-block: 2.5rem;
+}
+
+.semantic-tokens-group-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-block-end: 1rem;
+}
+
+.semantic-tokens-demo {
+  display: grid;
+  gap: 1.5rem;
+  padding-block: 0.5rem 1.5rem;
+}
+
+/* Include component internals and icons; preserve keyboard focus rings and hidden elements. */
+.semantic-tokens-demo[data-show-structure]
+  :where(*):not(:focus-visible, [data-focus-visible], [hidden], [type='hidden']) {
+  outline: 1px dotted var(--color-text-secondary);
+  outline-offset: 2px;
+}
+
+.semantic-tokens-densities {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: start;
+  gap: 1.5rem;
+}
+
+.semantic-tokens-densities > div {
+  display: grid;
+  min-inline-size: 0;
+  gap: 0.75rem;
+}
+
+.semantic-tokens-caption {
+  font-size: var(--font-size-caption);
+}
+
+.semantic-tokens-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: var(--space-stack-gap);
+}
+
+.semantic-tokens-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-stack-gap);
+}
+
+.semantic-tokens-border-example,
+.semantic-tokens-focus-example {
+  display: inline-block;
+  padding: var(--space-content-gap) var(--space-row-inline);
+  border: var(--size-border) solid var(--color-border-control);
+  border-radius: var(--radius-control);
+}
+
+.semantic-tokens-focus-example {
+  outline: var(--size-focus-ring) solid var(--color-outline-focus);
+  outline-offset: var(--space-focus-offset);
+}
+
+.semantic-tokens-spacing-panel {
+  display: grid;
+  min-inline-size: 0;
+  gap: var(--space-section-gap);
+  padding: var(--space-panel-inset);
+}
+
+.semantic-tokens-spacing-panel .spark-field-root {
+  inline-size: 100%;
+}
+
+.semantic-tokens-list {
+  padding: var(--space-list-inset);
+}
+
+.semantic-tokens-list-row {
+  display: flex;
+  align-items: center;
+  min-block-size: var(--size-row-min);
+  padding-inline: var(--space-row-inline);
+}
+
+.semantic-tokens-tree {
+  margin-inline-start: var(--space-tree-indent);
+}
+
+.semantic-tokens-surface,
+.semantic-tokens-radius {
+  padding: var(--space-panel-inset);
+}
+
+.semantic-tokens-surface {
+  min-inline-size: 5rem;
+}
+
+.semantic-tokens a {
+  color: var(--color-text-link);
+}
+
+.semantic-tokens a:hover {
+  color: var(--color-text-link-hover);
+}
+
+.semantic-tokens-feedback {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-content-gap);
+  padding: var(--space-content-gap) var(--space-row-inline);
+  border: var(--size-border) solid;
+  border-radius: var(--radius-control);
+}
+
+.semantic-tokens-type-sample {
+  display: grid;
+  gap: var(--space-stack-gap);
+  font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
+}
+
+.semantic-tokens .semantic-tokens-type-title {
+  font-size: var(--font-size-title);
+  font-weight: var(--font-weight-title);
+}
+
+.semantic-tokens-type-label {
+  font-weight: var(--font-weight-label);
+}
+
+.semantic-tokens-radius {
+  border: var(--size-border) solid var(--color-border-control);
+  background-color: var(--color-background-neutral);
+}
+
+.semantic-tokens-elevation {
+  display: grid;
+  place-items: center;
+  padding: 2rem;
+  background-color: var(--color-background-scrim);
+}
+
+.semantic-tokens-elevation-panel {
+  padding: var(--space-panel-inset);
+  border-radius: var(--radius-overlay);
+  box-shadow: var(--shadow-overlay);
+}
+
+.semantic-tokens .semantic-tokens-motion {
+  transition: background-color var(--duration-interaction) var(--ease-interaction);
+}
+
+.semantic-tokens .semantic-tokens-motion:where(:hover, :focus-visible) {
+  background-color: var(--color-background-neutral-hover);
+}
+
+.semantic-tokens-table-group + .semantic-tokens-table-group {
+  margin-block-start: 1.5rem;
+}
+
+.semantic-tokens-table-scroll {
+  overflow-x: auto;
+}
+
+.semantic-tokens-table-scroll + .semantic-tokens-table-scroll {
+  margin-block-start: 1rem;
+}
+
+.semantic-tokens table {
+  inline-size: 100%;
+  border-collapse: collapse;
+  text-align: start;
+}
+
+.semantic-tokens :where(th, td) {
+  padding: 0.625rem 0.75rem;
+  border-block-end: var(--size-border) solid var(--color-border-divider);
+  text-align: start;
+  vertical-align: top;
+}
+
+.semantic-tokens th {
+  font-weight: var(--font-weight-label);
+}
+
+.semantic-tokens thead th {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-caption);
+}
+
+.semantic-tokens code {
+  font-size: 0.75rem;
+  overflow-wrap: anywhere;
+}
+
+.semantic-tokens tbody th code {
+  white-space: nowrap;
+}
+
+.semantic-tokens td:last-child {
+  min-inline-size: 12rem;
+  color: var(--color-text-secondary);
+}
+
+.semantic-tokens-token-name {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.semantic-tokens-swatch {
+  flex: none;
+  inline-size: 0.875rem;
+  block-size: 0.875rem;
+  border: var(--size-border) solid var(--color-border-divider);
+}
+
+.semantic-tokens :where(a, [tabindex='0']):focus-visible {
+  outline: var(--size-focus-ring) solid var(--color-outline-focus);
+  outline-offset: var(--space-focus-offset);
+}
+
+.semantic-tokens footer {
+  font-size: var(--font-size-caption);
+}
+
+@media (max-width: 48rem) {
+  .semantic-tokens-densities {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .semantic-tokens table {
+    min-inline-size: 42rem;
+  }
+}
