@@ -46,10 +46,9 @@ export function componentStarters(options: {
   framework: Framework
   entry: string
   content: string
-  hasRecipe: boolean
   assemble: boolean
 }) {
-  const { component, framework, entry, content, hasRecipe, assemble } = options
+  const { component, framework, entry, content, assemble } = options
   const base = `packages/${component}/src`
   const file = `${base}/${framework === 'react' ? 'react.tsx' : 'svelte.ts'}`
   const composition = `${base}/svelte/${component}-composition.svelte`
@@ -61,7 +60,6 @@ export function componentStarters(options: {
     compositionImport: relative(file, composition),
     partsImport: relative(composition, entry),
     propsImport: relative(composition, file),
-    recipeImport: hasRecipe ? renderTemplate('recipe-import.ts.template') : '',
   }
   const template = name
     ? `${framework === 'react' ? 'react.tsx' : 'svelte.ts'}.template`

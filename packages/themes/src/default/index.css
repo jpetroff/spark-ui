@@ -1,0 +1,27 @@
+/* Match the order declared by the functional foundation in either import order. */
+@layer spark.tokens, spark.base, spark.components;
+@import './colors.css' layer(spark.tokens);
+@import './tokens.css';
+@import './base.css';
+@import './components/fieldset.css';
+@import './components/button.css';
+@import './components/checkbox.css';
+@import './components/field.css';
+@import './components/dialog.css';
+@import './components/popover.css';
+@import './components/date-picker.css';
+@import './components/number-input.css';
+@import './components/switch.css';
+@import './components/radio-group.css';
+@import './components/segment-group.css';
+@import './components/menu.css';
+@import './components/select.css';
+@import './components/hover-card.css';
+@import './components/floating-panel.css';
+@import './components/scroll-area.css';
+@import './components/swap.css';
+@import './components/toggle.css';
+@import './components/tabs.css';
+@import './components/tree-view.css';
+@import './components/json-tree-view.css';
+@import './components/toast.css';

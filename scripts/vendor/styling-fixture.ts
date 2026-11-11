@@ -1,36 +1,55 @@
 import fs from 'node:fs'
 import path from 'node:path'
-import assert from 'node:assert/strict'
 import { root } from './import.ts'
 
-export const visualComponents = ['button', 'checkbox', 'field', 'dialog', 'popover', 'date-picker']
-export type StylingMode = 'functional' | 'sample' | 'tailwind'
+export const stylingModes = ['functional', 'default', 'alternate', 'tailwind'] as const
+type StylingMode = (typeof stylingModes)[number]
 
-// Toggle the exact opt-in users edit in their installed public index. Component imports stay fixed.
-export function configureStyling(dir: string, framework: string, mode: StylingMode) {
-  const originals = new Map<string, string>()
-  const replace = (file: string, content: string) => {
-    originals.set(file, fs.readFileSync(file, 'utf8'))
-    fs.writeFileSync(file, content)
-  }
-  for (const name of visualComponents) {
-    const file = path.join(
-      dir,
-      `src/components/ui/${name}/index.${framework === 'react' ? 'tsx' : 'ts'}`,
+export function configureStyling(dir: string, mode: StylingMode) {
+  const file = path.join(dir, 'src/app.css')
+  const original = fs.readFileSync(file, 'utf8')
+  const themes = path.join(dir, 'src/components/ui/themes')
+  const alternate = path.join(themes, 'alternate')
+  const createAlternate = mode === 'alternate'
+
+  // Exercise a full theme folder with different tokens and component rules.
+  if (createAlternate) {
+    fs.cpSync(path.join(themes, 'default'), alternate, { recursive: true })
+    const tokens = path.join(alternate, 'tokens.css')
+    fs.writeFileSync(
+      tokens,
+      fs
+        .readFileSync(tokens, 'utf8')
+        .replace(
+          '--color-background-layer-0: var(--color-stone-neutral-900);',
+          '--color-background-layer-0: #212e40;',
+        ),
     )
-    const original = fs.readFileSync(file, 'utf8')
-    assert.match(original, /\/\/ import '\.\/recipe\.css'/)
-    if (mode !== 'functional')
-      replace(file, original.replace("// import './recipe.css'", "import './recipe.css'"))
+    const popover = path.join(alternate, 'components/popover.css')
+    fs.writeFileSync(
+      popover,
+      fs
+        .readFileSync(popover, 'utf8')
+        .replace('border-radius: var(--radius-overlay);', 'border-radius: 2px;'),
+    )
   }
+
+  const theme = createAlternate ? 'alternate' : 'default'
+  const imports =
+    mode === 'functional' ? [] : [`@import './components/ui/themes/${theme}/index.css';`]
   if (mode === 'tailwind') {
-    const file = path.join(dir, 'src/app.css')
-    replace(
-      file,
-      `@layer theme, base, spark.tokens, spark.base, spark.components, components, utilities;\n@import '${path.join(root, 'node_modules/tailwindcss/index.css')}';\n@import './components/ui/styles/tailwind.css';\n@source inline('bg-spark-info-surface');\n${fs.readFileSync(file, 'utf8')}`,
+    imports.unshift(
+      '@layer theme, base, spark.tokens, spark.base, spark.components, components, utilities;',
+      `@import '${path.join(root, 'node_modules/tailwindcss/index.css')}';`,
+    )
+    imports.push(
+      "@import './components/ui/themes/default/tailwind.css';",
+      "@source inline('bg-spark-info-surface');",
     )
   }
+  fs.writeFileSync(file, [...imports, original].join('\n'))
   return () => {
-    for (const [file, original] of originals) fs.writeFileSync(file, original)
+    fs.writeFileSync(file, original)
+    if (createAlternate) fs.rmSync(alternate, { recursive: true, force: true })
   }
 }

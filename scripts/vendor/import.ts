@@ -152,7 +152,6 @@ export async function generate(
         framework,
         entry: graph.nodes.get(entryRoot)!.destination,
         content: graph.nodes.get(entryRoot)!.content,
-        hasRecipe: fs.existsSync(path.join(root, `packages/${component}/src/recipe.css`)),
         // Existing Svelte barrels stay barrels; only new assemblies need a helper file.
         assemble:
           framework === 'react' ||
@@ -249,6 +248,40 @@ export function installed(file: string) {
   )
   return result.replace(/\/react\.tsx$/, '/index.tsx').replace(/\/svelte\.ts$/, '/index.ts')
 }
+type RegistryTheme = {
+  name: string
+  type: string
+  title?: string
+  description?: string
+  files: { path: string }[]
+}
+
+function registryThemes(items: RegistryTheme[]) {
+  const themes = items.filter((item) => item.name.startsWith('spark-theme-'))
+  for (const theme of themes) {
+    const directory = `packages/themes/src/${theme.name.slice('spark-theme-'.length)}/`
+    const files = new Set(theme.files.map((file) => file.path))
+    if (!files.has(directory + 'index.css')) throw new Error(`Missing theme entry: ${theme.name}`)
+    for (const file of files) {
+      if (
+        !file.startsWith(directory) ||
+        path.posix.normalize(file) !== file ||
+        !file.endsWith('.css')
+      )
+        throw new Error(`Invalid theme file: ${file}`)
+      const css = fs.readFileSync(path.join(root, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
+      for (const [rule] of css.matchAll(/@import\b[^;]*;/gi)) {
+        const specifier = /^@import\s+(?:url\(\s*)?(['"])(.*?)\1/i.exec(rule)?.[2]
+        const target =
+          specifier && path.posix.normalize(path.posix.join(path.posix.dirname(file), specifier))
+        if (!specifier?.startsWith('.') || !target || !files.has(target))
+          throw new Error(`Unresolved theme import in ${file}: ${rule}`)
+      }
+    }
+  }
+  return themes
+}
+
 export function buildRegistry() {
   if (!fs.existsSync(path.join(root, lockPath))) return
   const lock = json(lockPath)
@@ -258,34 +291,32 @@ export function buildRegistry() {
     'packages/shared/src/licenses/ark-LICENSE',
     'packages/shared/src/licenses/zag-LICENSE',
   ]
-  const native = json('registry.json').items.filter(
+  const catalog = json('registry.json')
+  const native = catalog.items.filter(
     (item: any) => item.meta?.framework === 'react' || item.meta?.framework === 'svelte',
   ) as any[]
-  const visualComponents = new Set([
-    'button',
-    'checkbox',
-    'field',
-    'fieldset',
-    'dialog',
-    'popover',
-    'date-picker',
-  ])
-  const stylingFiles = fs.existsSync(path.join(root, 'packages/styles/src'))
-    ? fs
-        .readdirSync(path.join(root, 'packages/styles/src'))
-        .map((file) => `packages/styles/src/${file}`)
-    : []
-  const recipeFiles = [...new Set([...visualComponents, ...(lock.components ?? [])])].flatMap(
-    (name) =>
-      ['functional.css', 'recipe.css', `svelte/${name}-composition.svelte`]
-        .map((file) => `packages/${name}/src/${file}`)
-        .filter((file) => fs.existsSync(path.join(root, file))),
+  const themes = registryThemes(catalog.items)
+  const stylingFiles = ['functional-tokens.css', 'helpers.css', 'index.css', 'layers.css']
+    .map((file) => `packages/styles/src/${file}`)
+    .filter((file) => fs.existsSync(path.join(root, file)))
+  const componentFiles = new Map(
+    [...new Set(Object.values(lock.entries).map((entry: any) => entry.component as string))].map(
+      (name) => [
+        name,
+        ['functional.css', `svelte/${name}-composition.svelte`]
+          .map((file) => `packages/${name}/src/${file}`)
+          .filter((file) => fs.existsSync(path.join(root, file))),
+      ],
+    ),
   )
+  const loadsFoundation = (file: string) =>
+    fs.readFileSync(path.join(root, file), 'utf8').includes('../../styles/src/index.css')
   const all = [
     ...new Set([
       ...sourceFiles,
       ...stylingFiles,
-      ...recipeFiles,
+      ...[...componentFiles.values()].flat(),
+      ...themes.flatMap((theme) => theme.files.map((file) => file.path)),
       ...lock.starters,
       ...licenses,
       ...native.flatMap((item) => item.files.map((file: any) => file.path)),
@@ -293,8 +324,8 @@ export function buildRegistry() {
   ].sort()
   const release = hash(
     JSON.stringify(lock) +
-      '\0registry-v4\0' +
-      JSON.stringify(native) +
+      '\0registry-v5\0' +
+      JSON.stringify([native, themes]) +
       (process.env.REGISTRY_BASE_URL ?? 'http://localhost:5173/r') +
       '\0' +
       all.map((file) => `${file}\0${fs.readFileSync(path.join(root, file), 'utf8')}`).join('\0'),
@@ -336,6 +367,12 @@ export function buildRegistry() {
         type: 'registry:lib',
         files: stylingFiles.map((file) => fileEntry(file, framework)),
       })
+    items.push(
+      ...themes.map(({ files, ...theme }) => ({
+        ...theme,
+        files: files.map((file) => fileEntry(file.path, framework)),
+      })),
+    )
     items.push({
       name: 'upstream-licenses',
       type: 'registry:lib',
@@ -344,6 +381,7 @@ export function buildRegistry() {
     for (const [name, entry] of Object.entries(lock.entries) as [string, any][]) {
       if (entry.framework !== framework) continue
       const starter = `packages/${entry.component}/src/${framework === 'react' ? 'react.tsx' : 'svelte.ts'}`
+      const stylesheet = `packages/${entry.component}/src/styles.css`
       items.push({
         name,
         type: 'registry:ui',
@@ -356,17 +394,13 @@ export function buildRegistry() {
         registryDependencies: [
           ...entry.files.map((id: string) => sourceName(id)),
           'upstream-licenses',
-          ...(visualComponents.has(entry.component) ? ['spark-styles'] : []),
+          ...(loadsFoundation(stylesheet) ? ['spark-styles'] : []),
         ].map((item) => `${base}/${release}/${framework}/${item}.json`),
         files: [
           fileEntry(starter, framework),
-          fileEntry(`packages/${entry.component}/src/styles.css`, framework),
-          ...recipeFiles
-            .filter(
-              (file) =>
-                file.startsWith(`packages/${entry.component}/`) &&
-                (!file.includes('/svelte/') || framework === 'svelte'),
-            )
+          fileEntry(stylesheet, framework),
+          ...(componentFiles.get(entry.component) ?? [])
+            .filter((file) => !file.includes('/svelte/') || framework === 'svelte')
             .map((file) => fileEntry(file, framework)),
         ],
       })
@@ -376,14 +410,20 @@ export function buildRegistry() {
         .filter((item) => item.meta.framework === framework)
         .map(({ files, ...item }) => ({
           ...item,
-          ...(visualComponents.has(item.name.replace(/-(react|svelte)$/, ''))
-            ? { registryDependencies: [`${base}/${release}/${framework}/spark-styles.json`] }
+          ...(files.some(
+            ({ path }: { path: string }) => path.endsWith('/styles.css') && loadsFoundation(path),
+          )
+            ? {
+                registryDependencies: [
+                  ...(item.registryDependencies ?? []),
+                  `${base}/${release}/${framework}/spark-styles.json`,
+                ],
+              }
             : {}),
           files: files.map((file: any) => fileEntry(file.path, framework)),
         })),
     )
     if (framework === 'react') {
-      const catalog = json('registry.json')
       const generatedNames = new Set(Object.keys(lock.entries))
       const generated = items
         .filter((item) => generatedNames.has(item.name) || item.name === 'spark-styles')
@@ -416,7 +456,8 @@ export function buildRegistry() {
         write(`public/r/${framework}/${item.name}.json`, content)
         if (
           item.name !== 'upstream-licenses' &&
-          (item.name !== 'spark-styles' || framework === 'react')
+          (framework === 'react' ||
+            (item.name !== 'spark-styles' && !item.name.startsWith('spark-theme-')))
         )
           write(`public/r/${item.name}.json`, content)
       }
@@ -426,11 +467,13 @@ export function buildRegistry() {
 }
 export function verify() {
   const lock = json(lockPath)
+  const catalog = json('registry.json')
+  registryThemes(catalog.items)
   const paths = syncAliases(root, true)
   const files = new Set<string>([
     ...Object.values(lock.files).map((f: any) => f.destination),
     ...lock.starters,
-    ...json('registry.json').items.flatMap((item: any) => item.files.map((file: any) => file.path)),
+    ...catalog.items.flatMap((item: any) => item.files.map((file: any) => file.path)),
     ...fs.readdirSync(path.join(root, 'packages')).flatMap((name) => {
       const dir = `packages/${name}/src`
       if (!fs.existsSync(path.join(root, dir))) return []

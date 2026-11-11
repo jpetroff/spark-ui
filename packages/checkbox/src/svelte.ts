@@ -1,8 +1,5 @@
 import './styles.css'
 
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
-
 import type { ComponentProps, Snippet } from 'svelte'
 import { Checkbox as CheckboxParts } from './svelte/ark/index.ts'
 import CheckboxComponent from './svelte/checkbox-composition.svelte'
@@ -21,7 +18,7 @@ export * from './svelte/ark/index.ts'
  * Add application classes through `parts` (className in React, class in Svelte).
  * Tailwind users can put utility strings in those same class props after configuring
  * Tailwind in their application; this component does not require it.
- * For ordinary CSS, uncomment recipe.css and edit its stable .spark-* selectors.
+ * For ordinary CSS, target the stable .spark-* selectors or install the Spark theme.
  */
 export interface CheckboxProps {
   /** Accessible label shown next to the control. */

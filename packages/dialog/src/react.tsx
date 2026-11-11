@@ -2,9 +2,6 @@
 
 import './styles.css'
 
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
-
 import type { ComponentProps, ReactNode } from 'react'
 import { Dialog as DialogParts } from './react/ark/index.ts'
 export * from './react/ark/index.ts'
@@ -15,7 +12,7 @@ export * from './react/ark/index.ts'
  * Add application classes through `parts` (className in React, class in Svelte).
  * Tailwind users can put utility strings in those same class props after configuring
  * Tailwind in their application; this component does not require it.
- * For ordinary CSS, uncomment recipe.css and edit its stable .spark-* selectors.
+ * For ordinary CSS, target the stable .spark-* selectors or install the Spark theme.
  */
 export interface DialogProps {
   /** Required accessible title. */

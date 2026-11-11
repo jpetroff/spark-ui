@@ -159,7 +159,22 @@ test('registry output resolves aliases to canonical installed files and verifier
       lock.starters.push(file)
     }
     put('vendor.lock.json', JSON.stringify(lock))
-    put('registry.json', '{"items":[]}')
+    const themeEntry = 'packages/themes/src/probe/index.css'
+    const themeTokens = 'packages/themes/src/probe/tokens.css'
+    put(themeEntry, "@import './tokens.css';")
+    put(themeTokens, ':root { --probe: red; }')
+    put(
+      'registry.json',
+      JSON.stringify({
+        items: [
+          {
+            name: 'spark-theme-probe',
+            type: 'registry:lib',
+            files: [{ path: themeEntry }, { path: themeTokens }],
+          },
+        ],
+      }),
+    )
     const paths = syncAliases(dir)
     const run = (command: string) =>
       execFileSync(process.execPath, ['scripts/vendor/import.ts', command], {
@@ -175,6 +190,10 @@ test('registry output resolves aliases to canonical installed files and verifier
     const release = new URL(item.registryDependencies[0]).pathname.split('/')[2]
     for (const framework of ['react', 'svelte']) {
       const folder = path.join(dir, 'public/r', release, framework)
+      const theme = JSON.parse(fs.readFileSync(path.join(folder, 'spark-theme-probe.json'), 'utf8'))
+      const prefix = framework === 'react' ? '@ui/' : ''
+      assert.equal(theme.files[0].target, `${prefix}themes/probe/index.css`)
+      assert.equal(theme.files[0].content, "@import './tokens.css';")
       const entries = fs
         .readdirSync(folder)
         .flatMap((file) => JSON.parse(fs.readFileSync(path.join(folder, file), 'utf8')).files)
@@ -200,6 +219,16 @@ test('registry output resolves aliases to canonical installed files and verifier
       }
     }
     assert.ok(catalog.items.length > 0)
+    put(themeTokens, ':root { --probe: blue; }')
+    run('registry')
+    const updated = JSON.parse(
+      fs.readFileSync(path.join(dir, 'public/r/react/sample-react.json'), 'utf8'),
+    )
+    assert.notEqual(updated.registryDependencies[0], item.registryDependencies[0])
+    put(themeEntry, "@import './missing.css';")
+    assert.throws(() => run('verify'), /Unresolved theme import/)
+    assert.throws(() => run('registry'), /Unresolved theme import/)
+    put(themeEntry, "@import './tokens.css';")
     put(
       'packages/shared/src/common/helper.ts',
       "export { value } from '@spark/shared/react/zag/index.ts'",

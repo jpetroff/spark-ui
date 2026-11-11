@@ -1,0 +1,20 @@
+@layer spark.base {
+  :where(
+    :root,
+    [data-spark-layer='0'],
+    [data-spark-layer='1'],
+    [data-spark-layer='2'],
+    [data-spark-layer='3']
+  ) {
+    background-color: var(--color-background-surface);
+    color: var(--color-text-primary);
+  }
+
+  :root {
+    font-family: var(--font-family-ui);
+  }
+
+  :where(code, kbd, pre, samp) {
+    font-family: var(--font-family-mono);
+  }
+}

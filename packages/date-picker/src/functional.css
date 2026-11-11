@@ -5,4 +5,10 @@
   .spark-date-picker-positioner {
     z-index: var(--z-index, var(--spark-overlay-base));
   }
+  :where(.spark-date-picker-content) {
+    box-sizing: border-box;
+    max-inline-size: var(--available-width, 100vw);
+    max-block-size: var(--available-height, 100dvh);
+    overflow: auto;
+  }
 }

@@ -4,13 +4,13 @@ import assert from 'node:assert/strict'
 import { build } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
 import { root } from './import.ts'
-import { configureStyling, type StylingMode } from './styling-fixture.ts'
+import { configureStyling, stylingModes } from './styling-fixture.ts'
 
 // Run after test:registry. Build the same installed APIs in each styling mode.
 for (const framework of ['react', 'svelte']) {
   const dir = path.join(root, '.vendor-tests/consumers', framework)
-  for (const mode of ['functional', 'sample', 'tailwind'] satisfies StylingMode[]) {
-    const restore = configureStyling(dir, framework, mode)
+  for (const mode of stylingModes) {
+    const restore = configureStyling(dir, mode)
     try {
       const outDir = `dist-${mode}`
       await build({

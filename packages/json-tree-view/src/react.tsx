@@ -2,9 +2,6 @@
 
 import './styles.css'
 
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
-
 import type { ComponentProps } from 'react'
 import { JsonTreeView as ComponentParts } from './react/ark/index.ts'
 export * from './react/ark/index.ts'

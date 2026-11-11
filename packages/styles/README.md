@@ -1,37 +1,36 @@
 # Spark styling and editable APIs
 
-Spark installs functional components by default. Ordinary CSS preserves positioning, overlay stacking, scrolling, and hidden content. There is no default palette, visual reset, Tailwind compiler, theme provider, or application-level stylesheet setup. React and Svelte share the same CSS.
+Component installs include the CSS required for positioning, overlay stacking, scrolling, and hidden content. Each public index imports its own `styles.css`, which loads that component's functional rules and the shared `styles/index.css` foundation. React and Svelte share the same CSS.
 
-Adding a component copies its sources, an editable public `index.tsx` (React) or `index.ts` (Svelte), and an **inactive design-system sample**. The public index is the customization point. The repository calls these files `react.tsx` and `svelte.ts`; the registry renames them on installation.
+## Install and select a theme
 
-## Default and sample imports
+Use the registry URL for your framework. The commands below use the local canvas server.
 
-Every visual component index follows this pattern:
-
-```tsx
-import './styles.css'
-
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
+```sh
+pnpm dlx shadcn add http://localhost:5173/r/react/spark-theme-default.json
+pnpm dlx shadcn-svelte add http://localhost:5173/r/svelte/spark-theme-default.json
 ```
 
-`styles.css` loads the shared functional foundation and the component's `functional.css`. Keep these enabled when writing a design system. Components automatically import the foundation; importing another component never enables its recipe.
+The theme installs under `<ui alias>/themes/default/`. Add one import near the top of your global stylesheet, adjusting the path to your UI directory:
 
-To try the sample, uncomment `import './recipe.css'` in that component's index. The recipe imports shared `styles/sample.css`, which supplies the dark palette, visual tokens, and Fieldset sample. It then styles the component's stable `.spark-*` classes or Ark's `data-scope`/`data-part` attributes for the newly imported components. The sample is ordinary CSS, not a CSS Module. Edit, replace, or delete its appearance rules freely.
+```css
+@import './components/ui/themes/default/index.css';
+```
 
-A project can also opt in centrally by importing selected component recipes from application CSS. The workshop and Storybook do this explicitly; that choice is not distributed in component indexes.
+To make a project theme, copy the `default` folder as a sibling and point the import at its `index.css`. Edit `tokens.css` for shared values such as color, density, or typography. Edit `components/button.css` to change Button alone. Use the existing `.spark-*` classes and Ark's `data-scope`, `data-part`, and state attributes. Keep the theme import global so elements rendered through portals inherit its tokens. The canvas and Storybook both select their theme in `src/sample-styles.css`.
 
-| File                                      | Purpose                                                              |
-| ----------------------------------------- | -------------------------------------------------------------------- |
-| Shared `styles/index.css`                 | Functional entry: layers, functional variables, visibility helpers   |
-| Shared `styles/functional-tokens.css`     | `--spark-overlay-base` and `--spark-visually-hidden-size`            |
-| Component `styles.css` / `functional.css` | Required component behavior                                          |
-| Component `recipe.css`                    | Optional editable appearance, including its shared sample dependency |
-| Shared `styles/sample.css`                | Optional sample entry                                                |
-| Shared `styles/tokens.css`                | Semantic colors, density, typography, and effects                    |
-| Shared `styles/colors.css`                | Raw palette used by the dark sample                                  |
-| Shared `styles/fieldset.css`              | Sample styles for composed Fieldset markup; no public Fieldset API   |
-| Shared `styles/tailwind.css`              | Optional adapter for applications that already use Tailwind v4       |
+| File within the theme   | Purpose                                                    |
+| ----------------------- | ---------------------------------------------------------- |
+| `index.css`             | Cascade layer order and theme imports                      |
+| `colors.css`            | Primitive color palette                                    |
+| `tokens.css`            | Semantic colors, density, typography, and effects          |
+| `base.css`              | Document typography and surfaces                           |
+| `components/<name>.css` | Visual rules for each component, including Fieldset markup |
+| `tailwind.css`          | Optional Tailwind v4 adapter                               |
+
+To distribute another theme from Spark, list its CSS files in a `spark-theme-<folder>` item in `registry.json`. The registry builder creates the React and Svelte items from that list.
+
+If your project enabled individual `recipe.css` imports, install the theme first and copy over edits from those recipes and any shared token edits. Remove the old recipe and sample imports, then add the global theme import. The Tailwind adapter has also moved into the theme folder.
 
 ## Customize the API in the index
 
@@ -65,9 +64,9 @@ The additional imported samples cover:
 | `Toast`                      | Notification region backed by a stable `createToaster()` store                            |
 | `Format`                     | Callable number formatter with attached byte, time, and relative-time formatters          |
 
-Each sample has Storybook stories using its public index. Visual recipes remain opt-in; Format, Highlight, and Portal use their existing primitive presentation. Highlight and Portal indexes include usage examples without an extra assembly. Toast stores should be created once per region; React content uses nodes and Svelte content uses snippets.
+The visual components have Storybook stories using their public indexes. Format, Highlight, and Portal use their existing primitive presentation. Highlight and Portal indexes include usage examples without an extra assembly. Toast stores should be created once per region; React content uses nodes and Svelte content uses snippets.
 
-Locale and Environment indexes document their provider APIs; they have no visual recipe. Locale supplies language/direction, and Environment supplies the document or root node.
+Locale and Environment indexes document their provider APIs. Locale supplies language/direction, and Environment supplies the document or root node.
 
 For example, the React Popover wrapper supports both part props and composition with your own button:
 
@@ -142,7 +141,7 @@ You can style the stable `spark-<component>-<part>` classes and Ark state attrib
 
 ## Dark tokens, surfaces, and density
 
-Override semantic variables in application-owned CSS loaded after the sample. Use `tokens.css` to find the role for each override.
+Override semantic variables in application-owned CSS loaded after the theme. Use `tokens.css` to find the role for each override.
 
 ```css
 :root {
@@ -152,7 +151,7 @@ Override semantic variables in application-owned CSS loaded after the sample. Us
 }
 ```
 
-When upgrading, remove imports of `theme.css` and any code that toggles `.dark` on the document. Rename visual overrides by role. For example, `--spark-action` becomes `--color-background-action`, `--spark-focus` becomes `--color-outline-focus`, and `--spark-control-height` becomes `--size-row-min`. Existing Tailwind utilities such as `bg-spark-action` use the new variables through the adapter.
+When upgrading from the legacy `theme.css`, remove its imports and any code that toggles `.dark` on the document. Rename visual overrides by role. For example, `--spark-action` becomes `--color-background-action`, `--spark-focus` becomes `--color-outline-focus`, and `--spark-control-height` becomes `--size-row-min`. Existing Tailwind utilities such as `bg-spark-action` use the new variables through the adapter.
 
 Use `data-spark-layer="0"` for a canvas, `"1"` for a panel, and `"2"` for a nested panel. Floating recipes default to layer `3`. Each layer paints a distinct surface, and translucent state fills respond to the surface behind them.
 
@@ -178,16 +177,16 @@ Nothing in the default component setup imports Tailwind, uses utility classes, o
 /* Your application's CSS entry. Configure Tailwind in your application build. */
 @layer theme, base, spark.tokens, spark.base, spark.components, components, utilities;
 @import 'tailwindcss';
-/* Optional mapping from Spark sample variables to Tailwind utilities: */
-@import './components/ui/styles/tailwind.css';
+@import './components/ui/themes/default/index.css';
+@import './components/ui/themes/default/tailwind.css';
 ```
 
-You can then add literal utility strings to `className` / `class` in the public wrappers, or through `parts`. Include those installed source files in your Tailwind source scanning. With this order, normal utilities override Spark's sample component layer. Utilities referencing sample variables require either the sample or your own definitions for those variables. The adapter does not enable recipes or provide a palette. Tailwind's optional reset is the application's choice.
+You can then add literal utility strings to `className` / `class` in the public wrappers, or through `parts`. Include those installed source files in your Tailwind source scanning. With this order, normal utilities override Spark's component layer. Utilities that reference Spark tokens use the selected theme's values or your own definitions. Tailwind's optional reset is the application's choice.
 
 ## Maintenance and verification
 
 Keep functional positioning, layer indices, presence behavior, native focus indicators, and hidden inputs intact when customizing. For machine-managed element IDs, configure `parts.root.ids` where supported instead of overriding an individual part's `id`; the positioning and dismissal code queries those IDs. Dialog scrolling belongs to its fixed positioner, allowing nested inline popovers to overflow the content correctly.
 
-Normal registry installations preserve edited files when overwrite is declined. Explicit overwrite can replace public indexes and samples; keep project-specific overrides in application-owned files when they must survive reinstalls.
+Normal registry installations preserve edited files when overwrite is declined. A component reinstall leaves theme folders alone. Keep customized themes in a project-named folder so you can reinstall the default theme independently.
 
-After distributed-source edits, run `pnpm registry:build`. `pnpm verify-imports` checks consumer-compatible imports. `pnpm test:registry` installs and builds actual React/Svelte consumers without Tailwind; `pnpm test:styling` checks functional defaults, enabled samples, and optional Tailwind; `pnpm test:browser` exercises the same installed APIs across those modes. Run those three suites sequentially because they share consumer fixtures. The latter two toggle the commented recipe imports and restore files afterward; component import paths never change. Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` for the available browser if needed.
+After distributed-source edits, run `pnpm registry:build`. `pnpm verify-imports` checks consumer-compatible imports. `pnpm test:registry` installs and builds actual React/Svelte consumers without Tailwind; `pnpm test:styling` checks functional defaults, both test themes, and optional Tailwind; `pnpm test:browser` exercises the same installed APIs across those modes. Run those three suites sequentially because they share consumer fixtures. The latter two change the theme import in each consumer's global CSS and restore the file afterward. Set `PLAYWRIGHT_CHROMIUM_EXECUTABLE` for the available browser if needed.

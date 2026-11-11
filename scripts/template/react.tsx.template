@@ -1,7 +1,6 @@
 'use client'
 
 import './styles.css'
-{{recipeImport}}
 import type { ComponentProps } from 'react'
 import { {{componentName}} as ComponentParts } from '{{entryImport}}'
 export * from '{{entryImport}}'

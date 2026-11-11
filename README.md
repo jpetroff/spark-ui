@@ -8,7 +8,7 @@ Use Node.js 22.18+ and pnpm 12.16.1 (pinned in `package.json`). Install pnpm usi
 
 ```sh
 pnpm install
-pnpm dev        # Vite playground and registry: http://localhost:5173
+pnpm dev        # Component canvas and registry: http://localhost:5173
 pnpm storybook  # All component stories: http://localhost:6006
 ```
 
@@ -22,7 +22,7 @@ packages/
     src/
       react.tsx              Public React entry point
       svelte.ts              Public Svelte entry point
-      styles.css             Functional component stylesheet; optional recipe.css is shipped inactive
+      styles.css             Functional component stylesheet
       react/button.tsx       Native React implementation
       svelte/button.svelte   Native Svelte implementation
       common/variants.ts     Shared classes, variants, and sizes
@@ -55,7 +55,7 @@ Start `pnpm dev`, then run this from a consumer project already initialized with
 pnpm dlx shadcn@latest add http://localhost:5173/r/button.json
 ```
 
-Button uses the same framework layout as the other components: `button/index.tsx` for React or `button/index.ts` for Svelte, plus its framework implementation, shared variants, and stylesheet. The registry also includes `utils/spark-utils.ts`, installs `clsx`, and resolves the shared `spark-styles` dependency. Imports are rewritten to relative paths; consumers need no Spark aliases. The existing `button.json` URL remains a React alias for `button-react.json`. Components load only functional CSS by default. Each public index documents editable wrapper props and contains a commented recipe import for the sample design system; Tailwind is optional. See [styling and customization](packages/styles/README.md) for sample opt-in, native CSS cascade layers, wrapper customization, CSS Modules, and optional Tailwind integration.
+Button uses the same framework layout as the other components: `button/index.tsx` for React or `button/index.ts` for Svelte, plus its framework implementation, shared variants, and stylesheet. The registry also includes `utils/spark-utils.ts`, installs `clsx`, and resolves the shared `spark-styles` dependency. Imports are rewritten to relative paths; consumers need no Spark aliases. The existing `button.json` URL remains a React alias for `button-react.json`. Components load their functional CSS automatically. Install `spark-theme-default` separately and import its stylesheet to use the dark theme. See [styling and customization](packages/styles/README.md) for theme installation, customization, and optional Tailwind integration.
 
 Registry JSON is also served by Storybook at `http://localhost:6006/r/button.json`. To publish, set `homepage` in `registry.json` to your production URL, run a build, and host either `dist/` or `storybook-static/` as static files. Consumers can then use the deployed item URL or configure their own namespace:
 
@@ -88,9 +88,9 @@ Native framework items declare `meta.framework` (`react` or `svelte`) in `regist
 
 | Command                | Purpose                                                                  |
 | ---------------------- | ------------------------------------------------------------------------ |
-| `pnpm dev`             | Build registry JSON and start the Vite playground                        |
+| `pnpm dev`             | Build registry JSON and start the component canvas                       |
 | `pnpm storybook`       | Build registry JSON and start all component stories                      |
-| `pnpm build`           | Typecheck, build registry JSON, and build the playground into `dist/`    |
+| `pnpm build`           | Typecheck, build registry JSON, and build the canvas into `dist/`        |
 | `pnpm storybook:build` | Build registry JSON and static Storybook into `storybook-static/`        |
 | `pnpm registry:build`  | Rebuild installable JSON in `public/r/` after source or metadata changes |
 | `pnpm typecheck`       | Check playground, config, stories, and workspace packages                |
@@ -118,7 +118,7 @@ pnpm registry:build
 
 Node 22.18+ with built-in TypeScript stripping is required for importer commands (the development environment uses Node 26). `package.json` pins pnpm. The private `vendor-tools` workspace supplies TypeScript 6 for Svelte's language tools; the app remains on TypeScript 7.
 
-Each component has editable `react.tsx`, `svelte.ts`, and `styles.css` entry files under `packages/<name>/src`. Visual entries export assembled components and their props under their actual names (for example, `DatePicker` and `DatePickerProps`), with nested `parts` props for customization. Subcomponents remain available on the same export, such as `DatePicker.Root` and `DatePicker.Input`; the native Button primitive is `Button.Root`. React compositions are editable in `react.tsx`; Svelte compositions are attached in `svelte.ts`, with editable markup in `svelte/<component>-composition.svelte`. Functional styles are automatic; uncomment the local `recipe.css` import to enable its design-system sample. Ark implementation lives in the framework folders; Zag machines live in `common/zag`. Framework adapters, providers, and shared utilities live in `packages/shared/src`. Provider entrypoints reference those same shared context modules. Internal cross-component sources, such as Presence, are included automatically without forcing a public styled component installation.
+Each component has editable `react.tsx`, `svelte.ts`, and `styles.css` entry files under `packages/<name>/src`. Visual entries export assembled components and their props under their actual names (for example, `DatePicker` and `DatePickerProps`), with nested `parts` props for customization. Subcomponents remain available on the same export, such as `DatePicker.Root` and `DatePicker.Input`; the native Button primitive is `Button.Root`. React compositions are editable in `react.tsx`; Svelte compositions are attached in `svelte.ts`, with editable markup in `svelte/<component>-composition.svelte`. Functional styles load automatically. Select a theme from your project's global stylesheet. Ark implementation lives in the framework folders; Zag machines live in `common/zag`. Framework adapters, providers, and shared utilities live in `packages/shared/src`. Provider entrypoints reference those same shared context modules. Internal cross-component sources, such as Presence, are included automatically without forcing a public styled component installation.
 
 Public entry files and CSS are seeded once. Add wrappers and exports there, or edit implementation files directly. The importer rejects direct regeneration over locally modified/deleted implementation files; use the merge workflow below. Keep registered source paths stable. The registry verifier rejects unregistered file imports: register additional source files in the import tooling before publishing new local modules. Installed consumer copies are entirely owned by the consumer and have no such generation constraint.
 

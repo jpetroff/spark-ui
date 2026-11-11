@@ -1,0 +1,7 @@
+/* Change this theme import to update both the canvas and Storybook. */
+@import '../packages/themes/src/default/index.css';
+@import './fonts/fonts.css';
+
+body {
+  margin: 0;
+}

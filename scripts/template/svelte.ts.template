@@ -1,5 +1,4 @@
 import './styles.css'
-{{recipeImport}}
 import type { ComponentProps } from 'svelte'
 import { {{componentName}} as ComponentParts } from '{{entryImport}}'
 import AssembledComponent from '{{compositionImport}}'

@@ -1,8 +1,5 @@
 import './styles.css'
 
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
-
 import type { ComponentProps, Snippet } from 'svelte'
 import { FloatingPanel as ComponentParts } from './svelte/ark/index.ts'
 import AssembledComponent from './svelte/floating-panel-composition.svelte'

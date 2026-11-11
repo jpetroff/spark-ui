@@ -2,9 +2,6 @@
 
 import './styles.css'
 
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
-
 import type { ComponentProps } from 'react'
 import { Toast as ComponentParts, Toaster } from './react/ark/index.ts'
 

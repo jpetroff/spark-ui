@@ -1,75 +1,73 @@
-/* Workshop presentation only. Distributed components enable none of these recipes by default. */
-@import '../packages/styles/src/sample.css';
-@import '../packages/button/src/recipe.css';
-@import '../packages/checkbox/src/recipe.css';
-@import '../packages/field/src/recipe.css';
-@import '../packages/dialog/src/recipe.css';
-@import '../packages/popover/src/recipe.css';
-@import '../packages/date-picker/src/recipe.css';
-@import '../packages/number-input/src/recipe.css';
-@import '../packages/switch/src/recipe.css';
-@import '../packages/radio-group/src/recipe.css';
-@import '../packages/segment-group/src/recipe.css';
-@import '../packages/menu/src/recipe.css';
-@import '../packages/select/src/recipe.css';
-@import '../packages/hover-card/src/recipe.css';
-@import '../packages/floating-panel/src/recipe.css';
-@import '../packages/scroll-area/src/recipe.css';
-@import '../packages/swap/src/recipe.css';
-@import '../packages/toggle/src/recipe.css';
-@import '../packages/tabs/src/recipe.css';
-@import '../packages/tree-view/src/recipe.css';
-@import '../packages/json-tree-view/src/recipe.css';
-@import '../packages/toast/src/recipe.css';
+@import './sample-styles.css';
 
-body {
-  margin: 0;
-  font-family: var(--font-family-ui);
-  background: var(--color-background-surface);
-  color: var(--color-text-primary);
-}
-.workshop {
+.canvas {
   box-sizing: border-box;
-  margin-inline: auto;
   display: flex;
-  min-height: 100vh;
-  max-width: 48rem;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: center;
-  gap: var(--space-section-gap);
-  padding: var(--space-section-gap);
+  gap: clamp(2rem, 5vw, 5rem);
+  max-inline-size: 100rem;
+  min-block-size: 100vh;
+  margin-inline: auto;
+  padding: 6rem clamp(1rem, 4vw, 4rem) 4rem;
 }
-.workshop header,
-.workshop-install {
+
+.canvas-sample {
+  flex: 0 1 var(--sample-width, 18rem);
+  min-inline-size: 0;
+  max-inline-size: 100%;
+}
+
+.canvas-sample:nth-child(3n + 2) {
+  margin-block-start: 3rem;
+}
+
+.canvas-sample--wide {
+  --sample-width: 26rem;
+}
+
+.canvas-sample--small {
+  --sample-width: 14rem;
+}
+
+.canvas-stack {
   display: grid;
   gap: var(--space-stack-gap);
+  min-inline-size: 0;
 }
-.workshop h1,
-.workshop h2,
-.workshop p {
-  margin: 0;
-}
-.workshop h1 {
-  font-size: 2.5rem;
-  letter-spacing: -0.025em;
-}
-.workshop h2 {
-  font-size: var(--font-size-title);
-}
-.workshop-muted {
-  color: var(--color-text-secondary);
-}
-.workshop-buttons {
+
+.canvas-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-stack-gap);
 }
-.workshop pre {
-  overflow-x: auto;
-  border: var(--size-border) solid var(--color-border-divider);
-  border-radius: var(--radius-control);
-  background: var(--color-background-neutral);
-  padding: var(--space-panel-inset);
-  font-size: var(--font-size-control);
+
+.canvas-outline-toggle {
+  position: fixed;
+  inset-block-start: 1rem;
+  inset-inline-end: 1rem;
+  z-index: 1;
+}
+
+div[data-canvas-outline]:not(:focus-visible, [data-focus-visible]) {
+  outline: 1px dotted var(--color-outline-focus);
+  outline-offset: -1px;
+}
+
+@media (width < 40rem) {
+  .canvas {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .canvas-sample {
+    flex-basis: auto;
+    inline-size: 100%;
+  }
+
+  .canvas-sample:nth-child(3n + 2) {
+    margin-block-start: 0;
+  }
 }

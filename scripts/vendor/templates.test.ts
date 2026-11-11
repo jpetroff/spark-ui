@@ -23,7 +23,6 @@ test('compound detection uses namespace syntax and preserves provider and utilit
       framework: 'svelte',
       entry: 'packages/sample/src/svelte/ark/index.ts',
       content,
-      hasRecipe: false,
       assemble: true,
     })
     assert.equal(Object.keys(files).length, 2)

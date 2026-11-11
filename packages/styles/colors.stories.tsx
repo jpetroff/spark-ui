@@ -3,8 +3,8 @@ import { HoverCard } from '@spark/hover-card/react.tsx'
 import { Portal } from '@spark/portal/react.tsx'
 import { Popover } from '@spark/popover/react.tsx'
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import paletteSource from './src/colors.css?raw'
-import tokenSource from './src/tokens.css?raw'
+import paletteSource from '../themes/src/default/colors.css?raw'
+import tokenSource from '../themes/src/default/tokens.css?raw'
 import './colors.css'
 
 // Read the default theme declarations, before density/layer and accessibility overrides.
@@ -363,8 +363,9 @@ function ColorsPage() {
         </div>
       </section>
       <footer>
-        Palette: <code>packages/styles/src/colors.css</code> · Semantic tokens:{' '}
-        <code>packages/styles/src/tokens.css</code>. This page reads both files directly.
+        Default theme reference from <code>packages/themes/src/default/colors.css</code> and{' '}
+        <code>packages/themes/src/default/tokens.css</code>. Swatches use the selected preview
+        theme.
       </footer>
     </main>
   )

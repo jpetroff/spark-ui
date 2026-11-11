@@ -8,4 +8,11 @@
   [data-scope='hover-card'][data-part='content'] {
     z-index: calc(var(--spark-overlay-base) + var(--layer-index, 0));
   }
+  :where([data-scope='hover-card'][data-part='content']) {
+    box-sizing: border-box;
+    max-inline-size: min(
+      var(--spark-hover-card-max-inline-size, 100vw),
+      var(--available-width, 100vw)
+    );
+  }
 }

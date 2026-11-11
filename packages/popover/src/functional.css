@@ -5,4 +5,8 @@
   .spark-popover-positioner {
     z-index: var(--z-index, var(--spark-overlay-base));
   }
+  :where(.spark-popover-content) {
+    box-sizing: border-box;
+    max-inline-size: var(--available-width, 100vw);
+  }
 }

@@ -1,0 +1,106 @@
+@layer spark.components {
+  :where([data-scope='switch']) {
+    box-sizing: border-box;
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
+  }
+
+  :where([data-scope='switch'][data-part='root']) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+
+  :where([data-scope='switch'][data-part='control']) {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    inline-size: calc(2 * var(--size-indicator) + 2 * var(--size-border) + var(--space-unit));
+    padding: calc(var(--space-unit) / 2);
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-pill);
+    background-color: var(--color-background-neutral);
+    color: var(--color-icon-default);
+  }
+
+  :where([data-scope='switch'][data-part='root']):where(:hover):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where([data-scope='switch'][data-part='control']) {
+    background-color: var(--color-background-neutral-hover);
+  }
+
+  :where([data-scope='switch'][data-part='root']):where(:active):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where([data-scope='switch'][data-part='control']) {
+    background-color: var(--color-background-neutral-pressed);
+  }
+
+  :where([data-scope='switch'][data-part='control']):where([data-state='checked']) {
+    background-color: var(--color-background-selected);
+    border-color: var(--color-border-selected);
+  }
+
+  :where([data-scope='switch'][data-part='root']):where(:hover):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where([data-scope='switch'][data-part='control']):where([data-state='checked']) {
+    background-color: var(--color-background-selected-hover);
+  }
+
+  :where([data-scope='switch'][data-part='root']):where(:active):not(
+      :where([readonly], [data-readonly], [aria-readonly='true'])
+    )
+    :where([data-scope='switch'][data-part='control']):where([data-state='checked']) {
+    background-color: var(--color-background-selected-pressed);
+  }
+
+  :where([data-scope='switch'][data-part='thumb']) {
+    flex: none;
+    inline-size: var(--size-indicator);
+    block-size: var(--size-indicator);
+    border-radius: 50%;
+    background-color: currentColor;
+    transition: transform var(--duration-interaction) var(--ease-interaction);
+  }
+
+  :where([data-scope='switch'][data-part='thumb']):where([data-state='checked']) {
+    transform: translateX(var(--size-indicator));
+  }
+
+  :where([data-scope='switch'][data-part='thumb']):where([dir='rtl'][data-state='checked']) {
+    transform: translateX(calc(-1 * var(--size-indicator)));
+  }
+
+  :where([data-scope='switch'][data-part='control']):where([data-invalid]) {
+    border-color: var(--color-border-danger);
+  }
+
+  :where([data-scope='switch'][data-part='control']):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where([data-scope='switch'][data-part='root']):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+
+  :where([data-scope='switch'][data-part='root']):where(
+      :disabled,
+      [data-disabled],
+      [aria-disabled='true']
+    )
+    :where([data-scope='switch'][data-part='control']) {
+    background-color: var(--color-background-disabled);
+    color: var(--color-icon-disabled);
+    border-color: var(--color-border-disabled);
+  }
+}

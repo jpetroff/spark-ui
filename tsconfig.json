@@ -50,6 +50,7 @@
       "@spark/swap/*": ["./packages/swap/src/*"],
       "@spark/switch/*": ["./packages/switch/src/*"],
       "@spark/tabs/*": ["./packages/tabs/src/*"],
+      "@spark/themes/*": ["./packages/themes/src/*"],
       "@spark/toast/*": ["./packages/toast/src/*"],
       "@spark/toggle/*": ["./packages/toggle/src/*"],
       "@spark/tree-view/*": ["./packages/tree-view/src/*"],

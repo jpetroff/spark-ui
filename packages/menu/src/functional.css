@@ -8,4 +8,8 @@
   [data-scope='menu'][data-part='content'] {
     z-index: calc(var(--spark-overlay-base) + var(--layer-index, 0));
   }
+  :where([data-scope='menu'][data-part='content']) {
+    box-sizing: border-box;
+    max-inline-size: var(--available-width, 100vw);
+  }
 }

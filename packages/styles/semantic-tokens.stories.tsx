@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import { Button } from '@spark/button/react.tsx'
 import { Checkbox } from '@spark/checkbox/react.tsx'
 import { Field } from '@spark/field/react.tsx'
-import tokenSource from './src/tokens.css?raw'
+import tokenSource from '../themes/src/default/tokens.css?raw'
 import './semantic-tokens.css'
 
 const densities = ['sm', 'md', 'lg'] as const
@@ -139,6 +139,7 @@ const typography: TokenTable[] = [
   {
     tokens: [
       ['--font-family-ui', 'Font stack for interface text.'],
+      ['--font-family-mono', 'Font stack for code and JSON.'],
       ['--font-size-caption', 'Small supporting text and captions.'],
       ['--font-size-control', 'Text size inside controls.'],
       ['--line-height-control', 'Line height inside controls.'],
@@ -523,7 +524,7 @@ function SemanticTokensPage() {
         <MotionDemo />
       </TokenGroup>
       <footer>
-        Values read from <code>packages/styles/src/tokens.css</code>. Surface scopes and
+        Values read from <code>packages/themes/src/default/tokens.css</code>. Surface scopes and
         accessibility preferences can override defaults. Primitive palette and internal functional
         variables are documented separately.
       </footer>

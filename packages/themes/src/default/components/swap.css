@@ -1,0 +1,25 @@
+@layer spark.components {
+  :where([data-scope='swap']) {
+    box-sizing: border-box;
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
+  }
+
+  :where([data-scope='swap'][data-part='indicator']) {
+    align-items: center;
+    justify-content: center;
+  }
+
+  :where([data-scope='swap'][data-part='root']):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where([data-scope='swap'][data-part='root']):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    cursor: not-allowed;
+  }
+}

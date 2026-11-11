@@ -1,2 +1,5 @@
 @layer spark.base {
+  :where(.spark-field-textarea) {
+    resize: vertical;
+  }
 }

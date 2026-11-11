@@ -8,4 +8,14 @@
   [data-scope='select'][data-part='content'] {
     z-index: calc(var(--spark-overlay-base) + var(--layer-index, 0));
   }
+  :where([data-scope='select'][data-part='content']) {
+    box-sizing: border-box;
+    max-inline-size: var(--available-width, 100vw);
+    /* The Select machine scrolls the content element on keyboard navigation. */
+    max-block-size: min(
+      var(--available-height, 100dvh),
+      var(--spark-select-max-block-size, 100dvh)
+    );
+    overflow: auto;
+  }
 }

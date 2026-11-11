@@ -1,0 +1,90 @@
+@layer spark.components {
+  :where([class*='spark-dialog-']) {
+    box-sizing: border-box;
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
+  }
+
+  :where(.spark-dialog-content):not(:where([data-spark-layer])) {
+    --color-background-surface: var(--color-background-layer-3);
+  }
+
+  :where(.spark-dialog-content) {
+    border: var(--size-border) solid var(--color-border-divider);
+    border-radius: var(--radius-overlay);
+    background-color: var(--color-background-surface);
+    color: var(--color-text-primary);
+    box-shadow: var(--shadow-overlay);
+    display: grid;
+    gap: var(--space-stack-gap);
+    padding: var(--space-panel-inset);
+    inline-size: min(100%, 28rem);
+  }
+
+  :where(.spark-dialog-title) {
+    margin: 0;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+  }
+
+  :where(.spark-dialog-description) {
+    margin: 0;
+    color: var(--color-text-secondary);
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):not(:where(.spark-button)) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
+    justify-content: center;
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-neutral);
+    color: var(--color-text-primary);
+    cursor: pointer;
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):not(:where(.spark-button)):where(
+      :hover
+    ) {
+    background-color: var(--color-background-neutral-hover);
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):not(:where(.spark-button)):where(
+      :active
+    ) {
+    background-color: var(--color-background-neutral-pressed);
+  }
+
+  :where(.spark-dialog-close-trigger) {
+    justify-self: start;
+  }
+
+  :where(.spark-dialog-positioner) {
+    padding: var(--space-panel-inset);
+  }
+
+  :where(.spark-dialog-backdrop) {
+    background-color: var(--color-background-scrim);
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger, .spark-dialog-content):is(
+    :focus-visible,
+    [data-focus-visible]
+  ) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where(.spark-dialog-trigger, .spark-dialog-close-trigger):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
+  }
+}

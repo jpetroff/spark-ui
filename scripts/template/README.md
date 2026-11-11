@@ -10,7 +10,6 @@
 | `svelte-composition.svelte.template`                        | `packages/<component>/src/svelte/<component>-composition.svelte`                 |
 | `react-exports.tsx.template` / `svelte-exports.ts.template` | Public barrels for providers and utilities without a matching compound namespace |
 | `styles.css.template`                                       | `packages/<component>/src/styles.css`                                            |
-| `recipe-import.ts.template`                                 | Optional commented import when that component already has `recipe.css`           |
 
 Compound entries export the component as `Object.assign(AssembledComponent, ComponentParts)`. Initially the assembly forwards Root props and children. Add labels, controls, layout, and typed part props to the generated assembly as needed. All upstream subcomponents remain attached, for example `Accordion.Item`. React markup lives in the public index; Svelte markup lives in its composition file. Root props may require additional component-specific content before the component is useful.
 
@@ -24,7 +23,6 @@ Templates use literal `{{name}}` placeholders with no spaces. Available values:
 | `{{compositionImport}}` | Relative import from the Svelte index to its composition           |
 | `{{partsImport}}`       | Relative import from the Svelte composition to the upstream barrel |
 | `{{propsImport}}`       | Relative import from the Svelte composition to its public props    |
-| `{{recipeImport}}`      | Optional recipe import comment, or an empty string                 |
 
 Unknown placeholders fail generation before source writes. Keep `tsconfig.json` valid JSON; it is copied and formatted without substitutions. Template filenames and output paths are mapped in `scripts/vendor/templates.ts`; the template bodies contain the editable file contents. `.template` files are text inputs rather than compiled TypeScript/Svelte files.
 

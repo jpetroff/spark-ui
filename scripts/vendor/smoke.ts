@@ -156,6 +156,7 @@ try {
       'locale',
       'environment',
       'date-picker',
+      'select',
     ]
     const urls = names.map(
       (name) => `${process.env.REGISTRY_BASE_URL}/${framework}/${name}-${framework}.json`,
@@ -163,21 +164,18 @@ try {
     await run(process.execPath, [
       cli,
       'add',
-      urls[0]!,
+      urls.at(-1)!,
       '--cwd',
       dir,
       '--yes',
       ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
     ])
-    assert.ok(
-      fs.existsSync(path.join(dir, 'src/components/ui/styles/tokens.css')),
-      'First component installs shared visual tokens',
-    )
-    assert.ok(
-      fs.existsSync(path.join(dir, 'src/components/ui/styles/colors.css')),
-      'First component installs the palette',
-    )
-    assert.ok(!fs.existsSync(path.join(dir, 'src/components/ui/styles/theme.css')))
+    const ui = path.join(dir, 'src/components/ui')
+    const themeDir = path.join(ui, 'themes/default')
+    assert.ok(fs.existsSync(path.join(ui, 'styles/functional-tokens.css')))
+    assert.ok(!fs.existsSync(path.join(ui, 'styles/tokens.css')))
+    assert.ok(!fs.existsSync(themeDir))
+    const globalStyles = fs.readFileSync(path.join(dir, 'src/app.css'), 'utf8')
     const override = ':root { --color-outline-focus: rebeccapurple; }\n'
     write(dir, 'src/project-theme.css', override)
     await run(process.execPath, [
@@ -205,8 +203,8 @@ try {
         dir,
         `src/components/ui/${name}/index.${framework === 'react' ? 'tsx' : 'ts'}`,
       )
-      assert.match(fs.readFileSync(index, 'utf8'), /\/\/ import '\.\/recipe\.css'/)
-      assert.ok(fs.existsSync(path.join(dir, `src/components/ui/${name}/recipe.css`)))
+      assert.doesNotMatch(fs.readFileSync(index, 'utf8'), /recipe\.css|spark-theme-/)
+      assert.ok(!fs.existsSync(path.join(ui, name, 'recipe.css')))
     }
     const before = new Map(files.map((file) => [file, hash(fs.readFileSync(file, 'utf8'))]))
     await run(process.execPath, [
@@ -231,7 +229,20 @@ try {
         /from\s+['"](?:@ark-ui\/|@zag-js\/|\$lib\/|@spark-ui\/|@spark\/)/,
       )
     }
-    const tokensFile = path.join(dir, 'src/components/ui/styles/tokens.css')
+    assert.ok(!fs.existsSync(themeDir))
+    await run(process.execPath, [
+      cli,
+      'add',
+      `${process.env.REGISTRY_BASE_URL}/${framework}/spark-theme-default.json`,
+      '--cwd',
+      dir,
+      '--yes',
+      ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
+    ])
+    assert.equal(fs.readFileSync(path.join(dir, 'src/app.css'), 'utf8'), globalStyles)
+    assert.ok(fs.existsSync(path.join(themeDir, 'index.css')))
+    assert.ok(fs.existsSync(path.join(themeDir, 'components/fieldset.css')))
+    const tokensFile = path.join(themeDir, 'tokens.css')
     const originalTokens = fs.readFileSync(tokensFile, 'utf8')
     const customizedTokens = originalTokens + '\n/* project customization */\n'
     fs.writeFileSync(tokensFile, customizedTokens)
@@ -242,12 +253,13 @@ try {
       '--cwd',
       dir,
       '--yes',
+      '--overwrite',
       ...(framework === 'svelte' ? ['--no-deps-install', '--skip-preflight'] : []),
     ])
     assert.equal(
       fs.readFileSync(tokensFile, 'utf8'),
       customizedTokens,
-      'Normal installs preserve customized shared files',
+      'Component reinstalls preserve customized themes',
     )
     fs.writeFileSync(tokensFile, originalTokens)
     assert.equal(fs.readFileSync(path.join(dir, 'src/project-theme.css'), 'utf8'), override)
@@ -257,12 +269,18 @@ try {
         (name) => name.startsWith('@ark-ui/') || name.startsWith('@zag-js/'),
       ),
     )
+    const selectItems = JSON.stringify(
+      Array.from({ length: 30 }, (_, index) => ({
+        value: `option-${index + 1}`,
+        label: `Option ${index + 1}`,
+      })),
+    )
     if (framework === 'react') {
       write(
         dir,
         'src/App.tsx',
-        `import './app.css'; import custom from './custom.module.css'; import { useState } from 'react'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { DatePicker } from './components/ui/date-picker/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';
-export default function App(){const [count,setCount]=useState(0);return <EnvironmentProvider><Button parts={{button:{variant:"secondary",size:"lg",className:custom.custom,ref:(node)=>{if(node) node.dataset.refReady="true"},onClick:()=>setCount(count+1)}}}>Native clicks {count}</Button><Button parts={{button:{disabled:true}}}>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox label="Accept terms" parts={{root:{name:"terms"}}}/><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Field label="Email" helperText="Use your work email." errorText="Enter a valid email." parts={{root:{invalid:true},input:{type:"email",name:"email"}}}/><Dialog title="Settings" description="Settings dialog"><Popover title="Details" description="Details popup" parts={{content:{className:"custom-popover"}}}><button>Inner action</button></Popover></Dialog><DatePicker label="Appointment"/><button>Outside action</button></LocaleProvider></EnvironmentProvider>}`,
+        `import './app.css'; import custom from './custom.module.css'; import { useState } from 'react'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { DatePicker } from './components/ui/date-picker/index'; import { Select } from './components/ui/select/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';
+export default function App(){const [count,setCount]=useState(0);return <EnvironmentProvider><Button parts={{button:{variant:"secondary",size:"lg",className:custom.custom,ref:(node)=>{if(node) node.dataset.refReady="true"},onClick:()=>setCount(count+1)}}}>Native clicks {count}</Button><Button parts={{button:{disabled:true}}}>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox label="Accept terms" parts={{root:{name:"terms"}}}/><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Field label="Email" helperText="Use your work email." errorText="Enter a valid email." parts={{root:{invalid:true},input:{type:"email",name:"email"}}}/><Dialog title="Settings" description="Settings dialog"><Popover title="Details" description="Details popup" parts={{content:{className:"custom-popover"}}}><button>Inner action</button></Popover></Dialog><DatePicker label="Appointment"/><Select label="Long list" items={${selectItems}}/><button>Outside action</button></LocaleProvider></EnvironmentProvider>}`,
       )
       write(
         dir,
@@ -278,8 +296,8 @@ export default function App(){const [count,setCount]=useState(0);return <Environ
       write(
         dir,
         'src/App.svelte',
-        `<script lang="ts">import './app.css'; import custom from './custom.module.css'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { DatePicker } from './components/ui/date-picker/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';let count=$state(0);let buttonRef=$state<HTMLButtonElement|null>(null);$effect(()=>{if(buttonRef) buttonRef.dataset.refReady='true'});</script>
-<EnvironmentProvider><Button.Root variant="secondary" size="lg" class={custom.custom} bind:ref={buttonRef} onclick={()=>count++}>Native clicks {count}</Button.Root><Button parts={{button:{disabled:true}}}>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox parts={{root:{name:'terms'}}}>{#snippet label()}Accept terms{/snippet}</Checkbox><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Field parts={{root:{invalid:true},input:{type:'email',name:'email'}}}>{#snippet label()}Email{/snippet}{#snippet helperText()}Use your work email.{/snippet}{#snippet errorText()}Enter a valid email.{/snippet}</Field><Dialog>{#snippet title()}Settings{/snippet}{#snippet description()}Settings dialog{/snippet}<Popover parts={{content:{class:'custom-popover'}}}>{#snippet title()}Details{/snippet}{#snippet description()}Details popup{/snippet}<button>Inner action</button></Popover></Dialog><DatePicker>{#snippet label()}Appointment{/snippet}</DatePicker><button>Outside action</button></LocaleProvider></EnvironmentProvider>`,
+        `<script lang="ts">import './app.css'; import custom from './custom.module.css'; import { Button } from './components/ui/button/index'; import { Checkbox } from './components/ui/checkbox/index'; import { Field } from './components/ui/field/index'; import { Dialog } from './components/ui/dialog/index'; import { Popover } from './components/ui/popover/index'; import { DatePicker } from './components/ui/date-picker/index'; import { Select } from './components/ui/select/index'; import { LocaleProvider } from './components/ui/locale/index'; import { EnvironmentProvider } from './components/ui/environment/index';let count=$state(0);let buttonRef=$state<HTMLButtonElement|null>(null);$effect(()=>{if(buttonRef) buttonRef.dataset.refReady='true'});</script>
+<EnvironmentProvider><Button.Root variant="secondary" size="lg" class={custom.custom} bind:ref={buttonRef} onclick={()=>count++}>Native clicks {count}</Button.Root><Button parts={{button:{disabled:true}}}>Native disabled</Button><LocaleProvider locale="ar"><Field.Root invalid><Field.Label>Preferences</Field.Label><Checkbox parts={{root:{name:'terms'}}}>{#snippet label()}Accept terms{/snippet}</Checkbox><Field.ErrorText>Required choice</Field.ErrorText></Field.Root><Field parts={{root:{invalid:true},input:{type:'email',name:'email'}}}>{#snippet label()}Email{/snippet}{#snippet helperText()}Use your work email.{/snippet}{#snippet errorText()}Enter a valid email.{/snippet}</Field><Dialog>{#snippet title()}Settings{/snippet}{#snippet description()}Settings dialog{/snippet}<Popover parts={{content:{class:'custom-popover'}}}>{#snippet title()}Details{/snippet}{#snippet description()}Details popup{/snippet}<button>Inner action</button></Popover></Dialog><DatePicker>{#snippet label()}Appointment{/snippet}</DatePicker><Select items={${selectItems}}>{#snippet label()}Long list{/snippet}</Select><button>Outside action</button></LocaleProvider></EnvironmentProvider>`,
       )
       write(
         dir,

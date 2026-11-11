@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { createServer } from 'vite'
 import { chromium, expect } from '@playwright/test'
 import { root } from './import.ts'
-import { configureStyling, type StylingMode } from './styling-fixture.ts'
+import { configureStyling, stylingModes } from './styling-fixture.ts'
 
 const browser = await chromium.launch({
   headless: true,
@@ -13,9 +13,9 @@ const browser = await chromium.launch({
 })
 try {
   for (const framework of ['react', 'svelte'])
-    for (const mode of ['functional', 'sample', 'tailwind'] satisfies StylingMode[]) {
+    for (const mode of stylingModes) {
       const dir = path.join(root, '.vendor-tests/consumers', framework)
-      const restore = configureStyling(dir, framework, mode)
+      const restore = configureStyling(dir, mode)
       const extension = framework === 'react' ? 'tsx' : 'ts'
       const server = await createServer({
         root: dir,
@@ -81,6 +81,9 @@ try {
         await expect(
           page.getByRole('button', { name: 'Native disabled', exact: true }),
         ).toBeDisabled()
+        await page.keyboard.press('Tab')
+        await nativeButton.focus()
+        await expect(nativeButton).not.toHaveCSS('outline-style', 'none')
         if (mode !== 'functional') {
           if (mode === 'tailwind') {
             await nativeButton.evaluate((node) => {
@@ -94,9 +97,10 @@ try {
             })
           }
           await expect(page.locator('html')).toHaveCSS('color-scheme', 'dark')
-          await expect(page.locator('html')).toHaveCSS('background-color', 'rgb(17, 16, 15)')
-          await page.keyboard.press('Tab')
-          await nativeButton.focus()
+          await expect(page.locator('html')).toHaveCSS(
+            'background-color',
+            mode === 'alternate' ? 'rgb(33, 46, 64)' : 'rgb(17, 16, 15)',
+          )
           await expect(nativeButton).toHaveCSS('outline-style', 'solid')
           await page.emulateMedia({ reducedMotion: 'reduce' })
           await expect(nativeButton).toHaveCSS('transition-duration', '0s')
@@ -116,7 +120,9 @@ try {
         const popover = page.getByRole('dialog', { name: 'Details', exact: true })
         await expect(popover).toBeVisible()
         await expect(popover).toHaveClass(/custom-popover/)
-        if (mode === 'sample') await page.screenshot({ path: path.join(dir, 'styled-overlay.png') })
+        if (mode === 'alternate') await expect(popover).toHaveCSS('border-radius', '2px')
+        if (mode === 'default')
+          await page.screenshot({ path: path.join(dir, 'styled-overlay.png') })
         await page.keyboard.press('Escape')
         await expect(popover).toBeHidden()
         await expect(dialog).toBeVisible()
@@ -147,9 +153,26 @@ try {
         await page.locator('.spark-date-picker-trigger').click()
         await page.keyboard.press('Escape')
         await expect(page.locator('.spark-date-picker-next-trigger')).toBeHidden()
+        await page.setViewportSize({ width: 320, height: 420 })
+        const select = page.getByRole('combobox', { name: 'Long list' })
+        const selectContent = page.locator('[data-scope="select"][data-part="content"]')
+        await expect(selectContent).toBeHidden()
+        await select.focus()
+        await page.keyboard.press('ArrowDown')
+        await expect(selectContent).toBeVisible()
+        await page.keyboard.press('End')
+        const lastOption = page.getByRole('option', { name: 'Option 30', exact: true })
+        await expect(lastOption).toBeInViewport()
+        await expect.poll(() => selectContent.evaluate((node) => node.scrollTop)).toBeGreaterThan(0)
+        const bounds = await selectContent.boundingBox()
+        assert.ok(bounds && bounds.x >= 0 && bounds.x + bounds.width <= 320)
+        await page.keyboard.press('Enter')
+        await expect(select).toHaveText(/Option 30/)
+        await expect(selectContent).toBeHidden()
+        await expect(select).toBeFocused()
         assert.deepEqual(errors, [], `${framework} SSR/hydration/browser errors`)
         console.log(
-          `${framework} (${mode}): SSR/hydration, Field context, RTL, nested dismissal, focus restoration, and scroll restoration passed`,
+          `${framework} (${mode}): SSR/hydration, Field context, RTL, nested dismissal, focus restoration, scroll restoration, and Select keyboard scrolling passed`,
         )
       } catch (error) {
         console.error({

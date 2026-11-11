@@ -1,8 +1,5 @@
 import './styles.css'
 
-// Optional sample design system; uncomment and edit recipe.css to adopt it.
-// import './recipe.css'
-
 import type { ComponentProps } from 'svelte'
 import { JsonTreeView as ComponentParts } from './svelte/ark/index.ts'
 import AssembledComponent from './svelte/json-tree-view-composition.svelte'

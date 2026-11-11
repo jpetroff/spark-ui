@@ -1,5 +1,0 @@
-/* Optional dark design, loaded by component recipe.css files. */
-@import './index.css';
-@import './colors.css' layer(spark.tokens);
-@import './tokens.css';
-@import './fieldset.css';

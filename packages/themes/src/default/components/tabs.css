@@ -1,0 +1,89 @@
+@layer spark.components {
+  :where([data-scope='tabs']) {
+    box-sizing: border-box;
+    font: var(--font-size-control)/var(--line-height-control) var(--font-family-ui);
+  }
+
+  :where([data-scope='tabs'][data-part='root']) {
+    min-inline-size: 0;
+  }
+
+  :where([data-scope='tabs'][data-part='list']) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-list-inset);
+    border-block-end: var(--size-border) solid var(--color-border-divider);
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']) {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-content-gap);
+    min-block-size: var(--size-row-min);
+    padding-inline: var(--space-row-inline);
+    justify-content: center;
+    border: var(--size-border) solid var(--color-border-control);
+    border-radius: var(--radius-control);
+    background-color: var(--color-background-neutral);
+    color: var(--color-text-primary);
+    cursor: pointer;
+    border-radius: var(--radius-control) var(--radius-control) 0 0;
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):where(:hover) {
+    background-color: var(--color-background-neutral-hover);
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):where(:active) {
+    background-color: var(--color-background-neutral-pressed);
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):where([data-selected]) {
+    background-color: var(--color-background-selected);
+    border-color: var(--color-border-selected);
+    text-decoration: underline;
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):where([data-selected]):where(:hover) {
+    background-color: var(--color-background-selected-hover);
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):where([data-selected]):where(:active) {
+    background-color: var(--color-background-selected-pressed);
+  }
+
+  :where([data-scope='tabs'][data-part='content']) {
+    padding: var(--space-stack-gap);
+  }
+
+  :where([data-scope='tabs'][data-part='root']):where([data-orientation='vertical']) {
+    display: flex;
+  }
+
+  :where([data-scope='tabs'][data-part='list']):where([data-orientation='vertical']) {
+    flex-direction: column;
+    border-block-end: 0;
+    border-inline-end: var(--size-border) solid var(--color-border-divider);
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where([data-scope='tabs'][data-part='content']):is(:focus-visible, [data-focus-visible]) {
+    outline: var(--size-focus-ring) solid var(--color-outline-focus);
+    outline-offset: var(--space-focus-offset);
+  }
+
+  :where([data-scope='tabs'][data-part='trigger']):where(
+    :disabled,
+    [data-disabled],
+    [aria-disabled='true']
+  ) {
+    color: var(--color-text-disabled);
+    background-color: var(--color-background-disabled);
+    border-color: var(--color-border-disabled);
+    cursor: not-allowed;
+  }
+}
